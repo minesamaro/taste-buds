@@ -2,6 +2,7 @@ PRAGMA foreign_keys = ON;
 
 .headers on
 .mode column
+--heklo
 
 -- DROPS
 DROP TABLE IF EXISTS Person;
