@@ -39,7 +39,7 @@ DROP TABLE IF EXISTS PlanRecipe;
 
 -- Create the Person table
 CREATE TABLE Person (
-    id INT PRIMARY KEY,
+    id INT PRIMARY KEY AUTOINCREMENT ,
     username TEXT NOT NULL,
     first_name TEXT NOT NULL,
     surname TEXT NOT NULL,
@@ -49,13 +49,14 @@ CREATE TABLE Person (
     gender TEXT
 );
 
+
 -- Ensure uniqueness of usernames and emails
 CREATE UNIQUE INDEX idx_unique_username ON Person (username);
 CREATE UNIQUE INDEX idx_unique_email ON Person (email);
 
 -- Create the Message table
 CREATE TABLE Message (
-    id INT PRIMARY KEY,
+    id INT PRIMARY KEY AUTOINCREMENT,
     sending_date TEXT NOT NULL,
     TEXT_content TEXT NOT NULL,
     sender_id INT NOT NULL,
@@ -66,14 +67,19 @@ CREATE TABLE Message (
 
 -- Create the Chef and Nutritionist tables with references to Person
 CREATE TABLE Chef (
-    id INT PRIMARY KEY,
-    id REFERENCES Person(id)
+    chef_id INT PRIMARY KEY REFERENCES Person(id)
 );
+
+INSERT INTO Chef VALUES (1,1);
+INSERT INTO Chef VALUES (2,3);
+INSERT INTO Chef VALUES (3,5);
 
 CREATE TABLE Nutritionist (
     id INT PRIMARY KEY,
     id REFERENCES Person(id)
 );
+INSERT INTO Nutritionist VALUES (1,2);
+INSERT INTO Nutritionist VALUES (2,4);
 
 -- Create the Formation table
 CREATE TABLE Formation (
@@ -84,6 +90,22 @@ CREATE TABLE Formation (
     PRIMARY KEY (course_name, school_name)
 );
 
+INSERT INTO Formation (course_name, school_name, academic_level, graduation_date)
+VALUES ('Nutricionsim', 'International Nutricionism Institute', 'Bachelors Degree', '2022-05-25');
+
+INSERT INTO Formation (course_name, school_name, academic_level, graduation_date)
+VALUES ('Pastry and Baking', 'Le Cordon Bleu', 'Associate Degree', '2021-12-15');
+
+INSERT INTO Formation (course_name, school_name, academic_level, graduation_date)
+VALUES ('Nutricionism', 'Nutricionism Institute of America', 'Masters Degree', '2023-03-10');
+
+INSERT INTO Formation (course_name, school_name, academic_level, graduation_date)
+VALUES ('Food Science', 'University of Gastronomic Sciences', 'Bachelors Degree', '2020-08-30');
+
+INSERT INTO Formation (course_name, school_name, academic_level, graduation_date)
+VALUES ('Wine pairings', 'University of Gastronomic Sciences', 'Bachelors Degree', '2020-08-30');
+
+
 -- Create the ChefFormation and NutritionistFormation tables with references
 CREATE TABLE ChefFormation (
     chef_id INT,
@@ -92,6 +114,9 @@ CREATE TABLE ChefFormation (
     chef_id REFERENCES Chef(id),
     (course_name, school_name) REFERENCES Formation(course_name, school_name)
 );
+INSERT INTO ChefFormation VALUES (1,'Pastry and Baking', 'Le Cordon Bleu');
+INSERT INTO ChefFormation VALUES (2,'Food Science', 'University of Gastronomic Sciences');
+INSERT INTO ChefFormation VALUES (3,'Wine pairings', 'University of Gastronomic Sciences');
 
 CREATE TABLE NutritionistFormation (
     nutritionist_id INT,
@@ -100,6 +125,9 @@ CREATE TABLE NutritionistFormation (
     nutritionist_id REFERENCES Nutritionist(id),
     (course_name, school_name) REFERENCES Formation(course_name, school_name)
 );
+INSERT INTO NutritionistFormation VALUES (1, 'Nutricionsim', 'International Nutricionism Institute', 'Bachelors Degree');
+INSERT INTO NutritionistFormation VALUES (2,'Nutricionism', 'Nutricionism Institute of America', 'Masters Degree');
+
 
 -- Create the CommonUser table
 CREATE TABLE CommonUser (
@@ -112,6 +140,22 @@ CREATE TABLE CommonUser (
     CHECK (current_weight > 0 AND current_weight < 600),
     CHECK (ideal_weight > 0 AND ideal_weight < 600)
 );
+-- Insert Statements for CommonUser Table
+INSERT INTO CommonUser (id, height, current_weight, ideal_weight)
+VALUES (6, 1.75, 70.5, 68.0);
+
+INSERT INTO CommonUser (id, height, current_weight, ideal_weight)
+VALUES (7, 1.60, 55.0, 50.0);
+
+INSERT INTO CommonUser (id, height, current_weight, ideal_weight)
+VALUES (8, 1.80, 90.0, 85.0);
+
+INSERT INTO CommonUser (id, height, current_weight, ideal_weight)
+VALUES (9, 1.68, 63.5, 60.0);
+
+INSERT INTO CommonUser (id, height, current_weight, ideal_weight)
+VALUES (10, 1.90, 80.0, 75.0);
+
 
 -- Create the WeeklyPlan table
 CREATE TABLE WeeklyPlan (
@@ -305,3 +349,22 @@ CREATE TABLE PlanRecipe (
     CHECK (portion > 0),
     CHECK (time_meal IN ('Breakfast', 'Lunch', 'Dinner', 'Morning Snack', 'Afternoon Snack', 'Supper'))
 );
+
+-- Users
+INSERT INTO Person (username, first_name, surname, email, password, birth_date, gender)VALUES ('john_doe', 'John', 'Doe', 'john.doe@email.com', 'jdP@ssword123', '1990-05-20', 'male');
+INSERT INTO Person (username, first_name, surname, email, password, birth_date, gender)VALUES ('alice_smith', 'Alice', 'Smith', 'alice.smith@email.com', 'aS!789xyz', '1988-12-15', 'female');
+INSERT INTO Person (username, first_name, surname, email, password, birth_date, gender)VALUES ('robert_jones', 'Robert', 'Jones', 'robert.jones@email.com', 'Rj456pass', '1975-08-02', 'male');
+INSERT INTO Person (username, first_name, surname, email, password, birth_date, gender)VALUES ('sara_miller', 'Sara', 'Miller', 'sara.miller@email.com', 'saraPass!23', '1995-04-10', 'female');
+INSERT INTO Person (username, first_name, surname, email, password, birth_date, gender)VALUES ('michael_brown', 'Michael', 'Brown', 'michael.brown@email.com', 'Mb_987Pass', '1983-11-28', 'male');
+INSERT INTO Person (username, first_name, surname, email, password, birth_date, gender)VALUES ('emily_wilson', 'Emily', 'Wilson', 'emily.wilson@email.com', 'EwP@ss456', '1992-09-08', 'female');
+INSERT INTO Person (username, first_name, surname, email, password, birth_date, gender)VALUES ('alex_turner', 'Alex', 'Turner', 'alex.turner@email.com', 'ATurner_789', '1980-07-17', 'male');
+INSERT INTO Person (username, first_name, surname, email, password, birth_date, gender)VALUES ('laura_smith', 'Laura', 'Smith', 'laura.smith@email.com', 'lauraPass!321', '1998-03-25', 'female');
+INSERT INTO Person (username, first_name, surname, email, password, birth_date, gender) VALUES ('david_clark', 'David', 'Clark', 'david.clark@email.com', 'DcPass_567', '1978-06-12', 'male');
+INSERT INTO Person (username, first_name, surname, email, password, birth_date, gender) VALUES ('jessica_taylor', 'Jessica', 'Taylor', 'jessica.taylor@email.com', 'JTaylor@987', '1987-02-19', 'female');
+
+-- Messages
+INSERT INTO Message (id, sending_date, TEXT_content, sender_id, receiver_id) VALUES (1, '2023-01-15 08:30:00', 'Just tried a new recipe for pasta carbonara - it was delicious!', 2, 3);
+INSERT INTO Message (id, sending_date, TEXT_content, sender_id, receiver_id)VALUES (2, '2023-02-20 14:45:00', 'Thank you great sushi recipe', 4, 1);
+INSERT INTO Message (id, sending_date, TEXT_content, sender_id, receiver_id) VALUES (3, '2023-03-10 18:20:00', 'Thinking of making homemade pizza tonight. Any toppings suggestions?', 1, 5);
+
+-- Insert Statements for Formation Table
