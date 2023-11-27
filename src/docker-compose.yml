@@ -1,0 +1,9 @@
+version: '2'
+services:
+  myphp:
+    build: ./
+    container_name: myphp
+    ports:
+      - 8080:8080
+    volumes:
+      - .:/var/www/html
