@@ -1,5 +1,5 @@
 # Use the base image with PHP 7.3
-FROM quay.io/vesica/php73:dev
+FROM php:8.1-fpm
 
 # Set the working directory
 WORKDIR /var/www/html

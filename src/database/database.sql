@@ -1,4 +1,3 @@
-PRAGMA foreign_keys = ON;
 
 .headers on
 .mode column
@@ -6,7 +5,7 @@ PRAGMA foreign_keys = ON;
 
 -- DROPS
 DROP TABLE IF EXISTS Person;
-DROP TABLE IF EXISTS Message;
+DROP TABLE IF EXISTS Messages;
 DROP TABLE IF EXISTS Chef;
 DROP TABLE IF EXISTS Nutritionist;
 DROP TABLE IF EXISTS Formation;
@@ -39,7 +38,7 @@ DROP TABLE IF EXISTS PlanRecipe;
 
 -- Create the Person table
 CREATE TABLE Person (
-    id INT PRIMARY KEY AUTOINCREMENT ,
+    id INTEGER PRIMARY KEY AUTOINCREMENT ,
     username TEXT NOT NULL,
     first_name TEXT NOT NULL,
     surname TEXT NOT NULL,
@@ -54,13 +53,11 @@ CREATE TABLE Person (
 CREATE UNIQUE INDEX idx_unique_username ON Person (username);
 CREATE UNIQUE INDEX idx_unique_email ON Person (email);
 
--- Create the Message table
-CREATE TABLE Message (
-    id INT PRIMARY KEY AUTOINCREMENT,
+-- Create the Messages table
+CREATE TABLE Messages (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     sending_date TEXT NOT NULL,
     TEXT_content TEXT NOT NULL,
-    sender_id INT NOT NULL,
-    receiver_id INT NOT NULL,
     sender_id REFERENCES Person(id),
     receiver_id REFERENCES Person(id)
 );
@@ -70,16 +67,9 @@ CREATE TABLE Chef (
     chef_id INT PRIMARY KEY REFERENCES Person(id)
 );
 
-INSERT INTO Chef VALUES (1,1);
-INSERT INTO Chef VALUES (2,3);
-INSERT INTO Chef VALUES (3,5);
-
 CREATE TABLE Nutritionist (
-    id INT PRIMARY KEY,
     id REFERENCES Person(id)
 );
-INSERT INTO Nutritionist VALUES (1,2);
-INSERT INTO Nutritionist VALUES (2,4);
 
 -- Create the Formation table
 CREATE TABLE Formation (
@@ -90,48 +80,25 @@ CREATE TABLE Formation (
     PRIMARY KEY (course_name, school_name)
 );
 
-INSERT INTO Formation (course_name, school_name, academic_level, graduation_date)
-VALUES ('Nutricionsim', 'International Nutricionism Institute', 'Bachelors Degree', '2022-05-25');
-
-INSERT INTO Formation (course_name, school_name, academic_level, graduation_date)
-VALUES ('Pastry and Baking', 'Le Cordon Bleu', 'Associate Degree', '2021-12-15');
-
-INSERT INTO Formation (course_name, school_name, academic_level, graduation_date)
-VALUES ('Nutricionism', 'Nutricionism Institute of America', 'Masters Degree', '2023-03-10');
-
-INSERT INTO Formation (course_name, school_name, academic_level, graduation_date)
-VALUES ('Food Science', 'University of Gastronomic Sciences', 'Bachelors Degree', '2020-08-30');
-
-INSERT INTO Formation (course_name, school_name, academic_level, graduation_date)
-VALUES ('Wine pairings', 'University of Gastronomic Sciences', 'Bachelors Degree', '2020-08-30');
-
 
 -- Create the ChefFormation and NutritionistFormation tables with references
 CREATE TABLE ChefFormation (
-    chef_id INT,
     course_name TEXT,
     school_name TEXT,
     chef_id REFERENCES Chef(id),
-    (course_name, school_name) REFERENCES Formation(course_name, school_name)
+    FOREIGN KEY (course_name, school_name) REFERENCES Formation(course_name, school_name)
 );
-INSERT INTO ChefFormation VALUES (1,'Pastry and Baking', 'Le Cordon Bleu');
-INSERT INTO ChefFormation VALUES (2,'Food Science', 'University of Gastronomic Sciences');
-INSERT INTO ChefFormation VALUES (3,'Wine pairings', 'University of Gastronomic Sciences');
 
 CREATE TABLE NutritionistFormation (
-    nutritionist_id INT,
     course_name TEXT,
     school_name TEXT,
     nutritionist_id REFERENCES Nutritionist(id),
-    (course_name, school_name) REFERENCES Formation(course_name, school_name)
+    FOREIGN KEY (course_name, school_name) REFERENCES Formation(course_name, school_name)
 );
-INSERT INTO NutritionistFormation VALUES (1, 'Nutricionsim', 'International Nutricionism Institute', 'Bachelors Degree');
-INSERT INTO NutritionistFormation VALUES (2,'Nutricionism', 'Nutricionism Institute of America', 'Masters Degree');
 
 
 -- Create the CommonUser table
 CREATE TABLE CommonUser (
-    id INT,
     height REAL ,
     current_weight REAL,
     ideal_weight REAL,
@@ -140,30 +107,12 @@ CREATE TABLE CommonUser (
     CHECK (current_weight > 0 AND current_weight < 600),
     CHECK (ideal_weight > 0 AND ideal_weight < 600)
 );
--- Insert Statements for CommonUser Table
-INSERT INTO CommonUser (id, height, current_weight, ideal_weight)
-VALUES (6, 1.75, 70.5, 68.0);
-
-INSERT INTO CommonUser (id, height, current_weight, ideal_weight)
-VALUES (7, 1.60, 55.0, 50.0);
-
-INSERT INTO CommonUser (id, height, current_weight, ideal_weight)
-VALUES (8, 1.80, 90.0, 85.0);
-
-INSERT INTO CommonUser (id, height, current_weight, ideal_weight)
-VALUES (9, 1.68, 63.5, 60.0);
-
-INSERT INTO CommonUser (id, height, current_weight, ideal_weight)
-VALUES (10, 1.90, 80.0, 75.0);
-
 
 -- Create the WeeklyPlan table
 CREATE TABLE WeeklyPlan (
     id INT PRIMARY KEY,
     creation_date TEXT,
     total_kcal REAL, -- Total calories as a decimal
-    nutritionist_id INT,
-    common_user_id INT,
     nutritionist_id REFERENCES Nutritionist(id),
     common_user_id REFERENCES CommonUser(id)
 );
@@ -175,8 +124,6 @@ CREATE TABLE HealthGoal (
 
 -- Create the UserHealthGoal table
 CREATE TABLE UserHealthGoal (
-    user INT,
-    health_goal TEXT,
     user REFERENCES CommonUser(id),
     health_goal REFERENCES HealthGoal(name),
     PRIMARY KEY (user, health_goal)
@@ -189,8 +136,6 @@ CREATE TABLE AllergyIntolerance (
 
 -- Create the UserAllergy table
 CREATE TABLE UserAllergy (
-    allergy TEXT,
-    user INT,
     allergy REFERENCES AllergyIntolerance(name),
     user REFERENCES CommonUser(id),
     PRIMARY KEY (allergy, user)
@@ -203,8 +148,6 @@ CREATE TABLE DietaryPreference (
 
 -- Create the UserDietPreference table
 CREATE TABLE UserDietPreference (
-    pref TEXT,
-    user INT,
     pref REFERENCES DietaryPreference(name),
     user REFERENCES CommonUser(id),
     PRIMARY KEY (pref, user)
@@ -224,7 +167,6 @@ CREATE TABLE Recipe (
     carbohydrates REAL,  -- Total carbohydrates as a decimal
     protein REAL,  -- Total protein as a decimal
     fat REAL,  -- Total fat as a decimal
-    chef INT NOT NULL,
     chef REFERENCES Chef(id),
     CHECK (preparation_time > 0),
     CHECK (number_of_servings > 0),
@@ -233,17 +175,14 @@ CREATE TABLE Recipe (
 
 -- Create the NutritionistApproval table
 CREATE TABLE NutritionistApproval (
-    nutritionist_id INT,
     recipe_id INT,
     approval_date TEXT NOT NULL,
     nutritionist_id REFERENCES Nutritionist(id),
-     (recipe_id) REFERENCES Recipe(id)
+    FOREIGN KEY (recipe_id) REFERENCES Recipe(id)
 );
 
 -- Create the RecipeRanking table
 CREATE TABLE RecipeRanking (
-    user_id INT,
-    recipe_id INT,
     ranking_date TEXT NOT NULL,
     ranking_value INT NOT NULL,
     comment TEXT,
@@ -262,8 +201,6 @@ CREATE TABLE CookingTechnique (
 
 -- Create the RecipeCookingTechnique table
 CREATE TABLE RecipeCookingTechnique (
-    recipe_id INT,
-    cooking_technique TEXT,
     recipe_id REFERENCES Recipe(id),
     cooking_technique REFERENCES CookingTechnique(name),
     PRIMARY KEY (recipe_id, cooking_technique)
@@ -276,8 +213,6 @@ CREATE TABLE FoodCategory (
 
 -- Create the RecipeCategory table
 CREATE TABLE RecipeCategory (
-    category TEXT,
-    recipe_id INT,
     category REFERENCES FoodCategory(name),
     recipe_id REFERENCES Recipe(id),
     PRIMARY KEY (category, recipe_id)
@@ -285,8 +220,6 @@ CREATE TABLE RecipeCategory (
 
 -- Create the RecipeDietaryPref table
 CREATE TABLE RecipeDietaryPref (
-    dietary_pref TEXT,
-    recipe_id INT,
     dietary_pref REFERENCES DietaryPreference(name),
     recipe_id REFERENCES Recipe(id),
     PRIMARY KEY (dietary_pref, recipe_id)
@@ -308,8 +241,6 @@ CREATE TABLE Macronutrient (
 
 -- Create the IngredientMacronutrient table
 CREATE TABLE IngredientMacronutrient (
-    ingredient_id INT,
-    macronutrient TEXT,
     quantity_g REAL NOT NULL,
     ingredient_id REFERENCES Ingredient(id),
     macronutrient REFERENCES Macronutrient(name),
@@ -318,8 +249,6 @@ CREATE TABLE IngredientMacronutrient (
 
 -- Create the IngredientRecipe table
 CREATE TABLE IngredientRecipe (
-    ingredient_id INT,
-    recipe_id INT,
     quantity REAL NOT NULL,
     measurement_unit TEXT NOT NULL,
     ingredient_id REFERENCES Ingredient(id),
@@ -329,8 +258,6 @@ CREATE TABLE IngredientRecipe (
 
 -- Create the IngredientAllergyIntolerance table
 CREATE TABLE IngredientAllergyIntolerance (
-    ingredient_id INT,
-    allergy_intolerance TEXT,
     ingredient_id REFERENCES Ingredient(id),
     allergy_intolerance REFERENCES AllergyIntolerance(name),
     PRIMARY KEY (ingredient_id, allergy_intolerance)
@@ -338,8 +265,6 @@ CREATE TABLE IngredientAllergyIntolerance (
 
 -- Create the PlanRecipe table
 CREATE TABLE PlanRecipe (
-    plan_id INT,
-    recipe_id INT,
     day_week TEXT,
     portion REAL NOT NULL,
     time_meal TEXT,
@@ -362,9 +287,60 @@ INSERT INTO Person (username, first_name, surname, email, password, birth_date, 
 INSERT INTO Person (username, first_name, surname, email, password, birth_date, gender) VALUES ('david_clark', 'David', 'Clark', 'david.clark@email.com', 'DcPass_567', '1978-06-12', 'male');
 INSERT INTO Person (username, first_name, surname, email, password, birth_date, gender) VALUES ('jessica_taylor', 'Jessica', 'Taylor', 'jessica.taylor@email.com', 'JTaylor@987', '1987-02-19', 'female');
 
--- Messages
-INSERT INTO Message (id, sending_date, TEXT_content, sender_id, receiver_id) VALUES (1, '2023-01-15 08:30:00', 'Just tried a new recipe for pasta carbonara - it was delicious!', 2, 3);
-INSERT INTO Message (id, sending_date, TEXT_content, sender_id, receiver_id)VALUES (2, '2023-02-20 14:45:00', 'Thank you great sushi recipe', 4, 1);
-INSERT INTO Message (id, sending_date, TEXT_content, sender_id, receiver_id) VALUES (3, '2023-03-10 18:20:00', 'Thinking of making homemade pizza tonight. Any toppings suggestions?', 1, 5);
+-- Messagess
+INSERT INTO Messages (id, sending_date, TEXT_content, sender_id, receiver_id) VALUES (1, '2023-01-15 08:30:00', 'Just tried a new recipe for pasta carbonara - it was delicious!', 2, 3);
+INSERT INTO Messages (id, sending_date, TEXT_content, sender_id, receiver_id)VALUES (2, '2023-02-20 14:45:00', 'Thank you great sushi recipe', 4, 1);
+INSERT INTO Messages (id, sending_date, TEXT_content, sender_id, receiver_id) VALUES (3, '2023-03-10 18:20:00', 'Thinking of making homemade pizza tonight. Any toppings suggestions?', 1, 5);
 
--- Insert Statements for Formation Table
+-- Chefs
+INSERT INTO Chef VALUES (1);
+INSERT INTO Chef VALUES (2);
+INSERT INTO Chef VALUES (3);
+
+-- Nutritionist
+INSERT INTO Nutritionist VALUES (1);
+INSERT INTO Nutritionist VALUES (2);
+
+-- Weekly Plan
+INSERT INTO WeeklyPlan (id, creation_date, total_kcal, nutritionist_id, common_user_id) VALUES (1, '2023-01-15', 2000, 1, 6);
+
+-- Formations
+INSERT INTO Formation (course_name, school_name, academic_level, graduation_date)
+VALUES ('Nutricionsim', 'International Nutricionism Institute', 'Bachelors Degree', '2022-05-25');
+
+INSERT INTO Formation (course_name, school_name, academic_level, graduation_date)
+VALUES ('Pastry and Baking', 'Le Cordon Bleu', 'Associate Degree', '2021-12-15');
+
+INSERT INTO Formation (course_name, school_name, academic_level, graduation_date)
+VALUES ('Nutricionism', 'Nutricionism Institute of America', 'Masters Degree', '2023-03-10');
+
+INSERT INTO Formation (course_name, school_name, academic_level, graduation_date)
+VALUES ('Food Science', 'University of Gastronomic Sciences', 'Bachelors Degree', '2020-08-30');
+
+INSERT INTO Formation (course_name, school_name, academic_level, graduation_date)
+VALUES ('Wine pairings', 'University of Gastronomic Sciences', 'Bachelors Degree', '2020-08-30');
+
+-- Chef Formations
+INSERT INTO ChefFormation VALUES (1,'Pastry and Baking', 'Le Cordon Bleu');
+INSERT INTO ChefFormation VALUES (2,'Food Science', 'University of Gastronomic Sciences');
+INSERT INTO ChefFormation VALUES (3,'Wine pairings', 'University of Gastronomic Sciences');
+
+-- Nutritionist Formations
+INSERT INTO NutritionistFormation VALUES ('Nutricionsim', 'International Nutricionism Institute', 1);
+INSERT INTO NutritionistFormation VALUES ('Nutricionism', 'Nutricionism Institute of America', 2);
+
+-- Insert Statements for CommonUser Table
+INSERT INTO CommonUser (id, height, current_weight, ideal_weight)
+VALUES (6, 1.75, 70.5, 68.0);
+
+INSERT INTO CommonUser (id, height, current_weight, ideal_weight)
+VALUES (7, 1.60, 55.0, 50.0);
+
+INSERT INTO CommonUser (id, height, current_weight, ideal_weight)
+VALUES (8, 1.80, 90.0, 85.0);
+
+INSERT INTO CommonUser (id, height, current_weight, ideal_weight)
+VALUES (9, 1.68, 63.5, 60.0);
+
+INSERT INTO CommonUser (id, height, current_weight, ideal_weight)
+VALUES (10, 1.90, 80.0, 75.0);
