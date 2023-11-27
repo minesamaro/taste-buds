@@ -1,0 +1,41 @@
+/* Create Layout with grid (header, main, footer) */
+
+body {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+}
+
+header {
+  grid-row: 1;
+}
+
+main {
+  grid-row: 2;
+}
+
+footer {
+  grid-row: 3;
+}
+
+/* Create Flexbox layout for header */
+
+header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+/* Create Flexbox layout for footer */
+
+footer {
+  display: block;    
+}
+/* Display divs inside footer as flexbox */
+
+footer > div {
+  display: flex;
+  justify-content: space-between;
+}
+.footer__logo > p {
+  margin: 0 1rem;
+}
