@@ -5,6 +5,7 @@
     private static $db;
 
     public static function getDatabase() : PDO {
+      return self::getDatabaseConnection();
       if (!isset(self::$db)) {
         self::$db = self::getDatabaseConnection();
       }
