@@ -124,10 +124,11 @@ CREATE TABLE HealthGoal (
 
 -- Create the UserHealthGoal table
 CREATE TABLE UserHealthGoal (
-    user REFERENCES CommonUser(id),
-    health_goal REFERENCES HealthGoal(name),
-    PRIMARY KEY (user, health_goal)
+    user_id INT REFERENCES CommonUser,
+    health_goal_name TEXT REFERENCES HealthGoal,
+    PRIMARY KEY (user_id, health_goal_name)
 );
+
 
 -- Create the AllergyIntolerance table
 CREATE TABLE AllergyIntolerance (
@@ -136,8 +137,8 @@ CREATE TABLE AllergyIntolerance (
 
 -- Create the UserAllergy table
 CREATE TABLE UserAllergy (
-    allergy REFERENCES AllergyIntolerance(name),
-    user REFERENCES CommonUser(id),
+    allergy TEXT REFERENCES AllergyIntolerance,
+    user INT REFERENCES CommonUser,
     PRIMARY KEY (allergy, user)
 );
 
@@ -148,8 +149,8 @@ CREATE TABLE DietaryPreference (
 
 -- Create the UserDietPreference table
 CREATE TABLE UserDietPreference (
-    pref REFERENCES DietaryPreference(name),
-    user REFERENCES CommonUser(id),
+    pref TEXT REFERENCES DietaryPreference,
+    user INT REFERENCES CommonUser,
     PRIMARY KEY (pref, user)
 );
 
@@ -175,10 +176,11 @@ CREATE TABLE Recipe (
 
 -- Create the NutritionistApproval table
 CREATE TABLE NutritionistApproval (
-    recipe_id INT,
+    recipe_id INT REFERENCES Recipe,
     approval_date TEXT NOT NULL,
-    nutritionist_id REFERENCES Nutritionist(id),
-    FOREIGN KEY (recipe_id) REFERENCES Recipe(id)
+    nutritionist_id INT REFERENCES Nutritionist,
+    PRIMARY KEY (recipe_id, nutritionist_id)
+    
 );
 
 -- Create the RecipeRanking table
@@ -201,8 +203,8 @@ CREATE TABLE CookingTechnique (
 
 -- Create the RecipeCookingTechnique table
 CREATE TABLE RecipeCookingTechnique (
-    recipe_id REFERENCES Recipe(id),
-    cooking_technique REFERENCES CookingTechnique(name),
+    recipe_id INT REFERENCES Recipe(id),
+    cooking_technique TEXT REFERENCES CookingTechnique(name),
     PRIMARY KEY (recipe_id, cooking_technique)
 );
 
@@ -213,15 +215,15 @@ CREATE TABLE FoodCategory (
 
 -- Create the RecipeCategory table
 CREATE TABLE RecipeCategory (
-    category REFERENCES FoodCategory(name),
-    recipe_id REFERENCES Recipe(id),
+    category TEXT REFERENCES FoodCategory,
+    recipe_id INT REFERENCES Recipe,
     PRIMARY KEY (category, recipe_id)
 );
 
 -- Create the RecipeDietaryPref table
 CREATE TABLE RecipeDietaryPref (
-    dietary_pref REFERENCES DietaryPreference(name),
-    recipe_id REFERENCES Recipe(id),
+    dietary_pref TEXT REFERENCES DietaryPreference,
+    recipe_id INT REFERENCES Recipe,
     PRIMARY KEY (dietary_pref, recipe_id)
 );
 
@@ -242,8 +244,8 @@ CREATE TABLE Macronutrient (
 -- Create the IngredientMacronutrient table
 CREATE TABLE IngredientMacronutrient (
     quantity_g REAL NOT NULL,
-    ingredient_id REFERENCES Ingredient(id),
-    macronutrient REFERENCES Macronutrient(name),
+    ingredient_id INT REFERENCES Ingredient(id),
+    macronutrient TEXT REFERENCES Macronutrient(name),
     PRIMARY KEY (ingredient_id, macronutrient)
 );
 
@@ -303,6 +305,8 @@ INSERT INTO Nutritionist VALUES (2);
 
 -- Weekly Plan
 INSERT INTO WeeklyPlan (id, creation_date, total_kcal, nutritionist_id, common_user_id) VALUES (1, '2023-01-15', 2000, 1, 6);
+INSERT INTO WeeklyPlan (id, creation_date, total_kcal, nutritionist_id, common_user_id) VALUES (2, '2023-01-20', 1800, 2, 7);
+INSERT INTO WeeklyPlan (id, creation_date, total_kcal, nutritionist_id, common_user_id) VALUES (3, '2023-01-25', 2200,2, 8);
 
 -- Recipe
 INSERT INTO Recipe (id, name, preparation_time, difficulty, number_of_servings, image, preparation_method, submission_date, energy, carbohydrates, protein, fat, chef) VALUES (1, 'Pasta Carbonara', 30, 2, 4, 'https://www.recipetineats.com/wp-content/uploads/2019/08/Spaghetti-Carbonara_5-SQ.jpg', '1. Cook the pasta in a large pot of salted boiling water until al dente. Drain and reserve 1 cup of the pasta cooking water. 2. Meanwhile, place the pancetta in a large skillet and cook over medium heat until crispy, about 8 minutes. Remove the pancetta from the pan and set aside. 3. Add the olive oil to the pan with the pancetta drippings. Add the garlic and cook for 30 seconds. Add the cooked pasta to the pan, then add the eggs, cheese, salt and pepper. Toss well to coat evenly, adding the reserved pasta water a little at a time as needed to make a creamy sauce. Stir in the pancetta and parsley. Serve immediately.', '2023-01-15', 2000, 200, 100, 50, 1);
@@ -353,3 +357,137 @@ VALUES (9, 1.68, 63.5, 60.0);
 
 INSERT INTO CommonUser (id, height, current_weight, ideal_weight)
 VALUES (10, 1.90, 80.0, 75.0);
+
+INSERT INTO HealthGoal 
+VALUES ('Weight Loss');
+INSERT INTO HealthGoal 
+VALUES ('Weight Gain');
+INSERT INTO HealthGoal 
+VALUES ('Muscle Building');
+INSERT INTO HealthGoal 
+VALUES ('Cardiovascular Fitness');
+
+INSERT INTO UserHealthGoal (user_id, health_goal_name)
+VALUES (6, 'Weight Loss');
+
+INSERT INTO UserHealthGoal (user_id, health_goal_name)
+VALUES (7, 'Muscle Building');
+
+INSERT INTO UserHealthGoal (user_id, health_goal_name)
+VALUES (8, 'Cardiovascular Fitness');
+
+-- Insert Statements for AllergyIntolerance Table
+INSERT INTO AllergyIntolerance (name) VALUES ('Peanuts');
+INSERT INTO AllergyIntolerance (name) VALUES ('Shellfish');
+INSERT INTO AllergyIntolerance (name) VALUES ('Gluten');
+
+-- Insert Statements for UserAllergy Table
+INSERT INTO UserAllergy (allergy, user)
+VALUES ('Peanuts', 8);
+
+INSERT INTO UserAllergy (allergy, user)
+VALUES ('Shellfish', 9);
+
+INSERT INTO UserAllergy (allergy, user)
+VALUES ('Gluten', 10);
+
+-- Insert Statements for DietaryPreference Table
+INSERT INTO DietaryPreference (name) VALUES ('Vegetarian');
+INSERT INTO DietaryPreference (name) VALUES ('Vegan');
+INSERT INTO DietaryPreference (name) VALUES ('Paleo');
+
+
+-- Insert Statements for UserDietPreference Table
+INSERT INTO UserDietPreference (pref, user) VALUES ('Vegetarian', 6);
+INSERT INTO UserDietPreference (pref, user) VALUES ('Vegan', 8);
+INSERT INTO UserDietPreference (pref, user) VALUES ('Paleo', 9);
+
+-- Insert Statements for Recipe Table
+INSERT INTO Recipe (id, name, preparation_time, difficulty, number_of_servings, image, preparation_method, submission_date, energy, carbohydrates, protein, fat, chef)
+VALUES (1, 'Spaghetti Bolognese', 30, 3, 4, 'spaghetti_image.jpg', 'Cook spaghetti and prepare Bolognese sauce.', '2023-06-15', 500.5, 65.2, 30.0, 15.8, 1);
+
+INSERT INTO Recipe (id, name, preparation_time, difficulty, number_of_servings, image, preparation_method, submission_date, energy, carbohydrates, protein, fat, chef)
+VALUES (2, 'Grilled Salmon', 20, 2, 2, 'salmon_image.jpg', 'Season salmon and grill until cooked.', '2023-06-18', 350.2, 2.5, 40.8, 18.3, 2);
+
+INSERT INTO Recipe (id, name, preparation_time, difficulty, number_of_servings, image, preparation_method, submission_date, energy, carbohydrates, protein, fat, chef)
+VALUES (3, 'Vegetable Stir-Fry', 15, 1, 3, 'stir_fry_image.jpg', 'Stir-fry assorted vegetables in a wok.', '2023-06-20', 180.7, 20.0, 8.9, 9.5, 3);
+
+-- Insert Statements for NutritionistApproval Table
+INSERT INTO NutritionistApproval (recipe_id, approval_date, nutritionist_id) VALUES (1, '2023-06-16', 1);
+INSERT INTO NutritionistApproval (recipe_id, approval_date, nutritionist_id) VALUES (2, '2023-06-19', 2);
+INSERT INTO NutritionistApproval (recipe_id, approval_date, nutritionist_id) VALUES (3, '2023-06-21', 2);
+
+-- Insert Statements for RecipeRanking Table
+INSERT INTO RecipeRanking (ranking_date, ranking_value, comment, user_id, recipe_id)
+VALUES ('2023-06-25', 4, 'Delicious!', 8, 1);
+
+INSERT INTO RecipeRanking (ranking_date, ranking_value, comment, user_id, recipe_id)
+VALUES ('2023-06-26', 5, 'Amazing recipe!', 9, 2);
+
+INSERT INTO RecipeRanking (ranking_date, ranking_value, comment, user_id, recipe_id)
+VALUES ('2023-06-27', 3, 'Good, but could use more seasoning.', 10, 3);
+
+-- Insert Statements for CookingTechnique Table
+INSERT INTO CookingTechnique (name, difficulty, method_description)
+VALUES ('Grilling', 2, 'Cooking food directly over an open flame or heat source.');
+
+INSERT INTO CookingTechnique (name, difficulty, method_description)
+VALUES ('Sautéing', 3, 'Cooking food quickly in a small amount of oil over medium-high heat.');
+
+INSERT INTO CookingTechnique (name, difficulty, method_description)
+VALUES ('Braising', 4, 'Cooking food slowly in a covered pot with added liquid.');
+
+-- Insert Statements for RecipeCookingTechnique Table
+INSERT INTO RecipeCookingTechnique (recipe_id, cooking_technique)
+VALUES (1, 'Grilling');
+
+INSERT INTO RecipeCookingTechnique (recipe_id, cooking_technique)
+VALUES (2, 'Sautéing');
+
+INSERT INTO RecipeCookingTechnique (recipe_id, cooking_technique)
+VALUES (3, 'Braising');
+
+-- Insert Statements for FoodCategory Table
+INSERT INTO FoodCategory (name) VALUES ('Vegetables');
+INSERT INTO FoodCategory (name) VALUES ('Protein');
+INSERT INTO FoodCategory (name) VALUES ('Dairy');
+
+-- Insert Statements for RecipeCategory Table
+INSERT INTO RecipeCategory (category, recipe_id) VALUES ('Vegetables', 1);
+INSERT INTO RecipeCategory (category, recipe_id) VALUES ('Protein', 2);
+INSERT INTO RecipeCategory (category, recipe_id) VALUES ('Dairy', 3);
+
+-- Insert Statements for RecipeDietaryPref Table
+INSERT INTO RecipeDietaryPref (dietary_pref, recipe_id) VALUES ('Vegetarian', 1);
+INSERT INTO RecipeDietaryPref (dietary_pref, recipe_id) VALUES ('Vegan', 2);
+INSERT INTO RecipeDietaryPref (dietary_pref, recipe_id) VALUES ('Paleo', 3);
+
+-- Insert Statements for Ingredient Table
+INSERT INTO Ingredient (id, name) VALUES (1, 'Tomato');
+INSERT INTO Ingredient (id, name) VALUES (2, 'Chicken Breast');
+INSERT INTO Ingredient (id, name) VALUES (3, 'Quinoa');
+
+-- Insert Statements for Macronutrient Table
+INSERT INTO Macronutrient (name, kcal_per_gram) VALUES ('Protein', 4.0);
+INSERT INTO Macronutrient (name, kcal_per_gram) VALUES ('Carbohydrate', 4.0);
+INSERT INTO Macronutrient (name, kcal_per_gram) VALUES ('Fat', 9.0);
+
+-- Insert Statements for IngredientMacronutrient Table
+INSERT INTO IngredientMacronutrient (quantity_g, ingredient_id, macronutrient) VALUES (10, 1, 'Carbohydrate');
+INSERT INTO IngredientMacronutrient (quantity_g, ingredient_id, macronutrient) VALUES (150, 2, 'Protein');
+INSERT INTO IngredientMacronutrient (quantity_g, ingredient_id, macronutrient) VALUES (20, 3, 'Fat');
+
+-- Insert Statements for IngredientRecipe Table
+INSERT INTO IngredientRecipe (quantity, measurement_unit, ingredient_id, recipe_id) VALUES (200, 'grams', 1, 1);
+INSERT INTO IngredientRecipe (quantity, measurement_unit, ingredient_id, recipe_id) VALUES (300, 'grams', 2, 2);
+INSERT INTO IngredientRecipe (quantity, measurement_unit, ingredient_id, recipe_id) VALUES (150, 'grams', 3, 3);
+
+-- Insert Statements for IngredientAllergyIntolerance Table
+INSERT INTO IngredientAllergyIntolerance (ingredient_id, allergy_intolerance) VALUES (1, 'Peanuts');
+INSERT INTO IngredientAllergyIntolerance (ingredient_id, allergy_intolerance) VALUES (2, 'Shellfish');
+INSERT INTO IngredientAllergyIntolerance (ingredient_id, allergy_intolerance) VALUES (3, 'Gluten');
+
+-- Insert Statements for PlanRecipe Table
+INSERT INTO PlanRecipe (day_week, portion, time_meal, plan_id, recipe_id) VALUES ('Monday', 1.5, 'Lunch', 1, 1);
+INSERT INTO PlanRecipe (day_week, portion, time_meal, plan_id, recipe_id) VALUES ('Wednesday', 2.0, 'Dinner', 2, 2);
+INSERT INTO PlanRecipe (day_week, portion, time_meal, plan_id, recipe_id) VALUES ('Friday', 1.0, 'Breakfast', 3, 3);
