@@ -1,5 +1,4 @@
 <?php
-declare(strict_types=1);
 
 require_once(__DIR__ . '/../database/connection.db.php');
 require_once(__DIR__ . '/planRecipe.class.php');
@@ -98,34 +97,7 @@ class WeeklyPlan
    * @param PDO $db Database connection
    * @param int $id Id of the nutritionist
    */
-  static function getWeeklyPlansByNutritionist(int $id): array
-  {
-    $db = Database::getDatabase();
-    $stmt = $db->prepare(
-      'SELECT id, creationDate, totalKcal, idNutritionist, idCommonUser
-        FROM WeeklyPlan
-        WHERE idNutritionist = ?'
-    );
-
-    $stmt->execute(array($id));
-
-    $weeklyPlans = $stmt->fetchAll();
-
-    $weeklyPlansArray = array();
-
-    foreach ($weeklyPlans as $weeklyPlan) {
-      array_push($weeklyPlansArray, new WeeklyPlan(
-        intval($weeklyPlan['id']),
-        $weeklyPlan['creationDate'],
-        floatval($weeklyPlan['totalKcal']),
-        intval($weeklyPlan['idNutritionist']),
-        intval($weeklyPlan['idCommonUser'])
-      )
-      );
-    }
-
-    return $weeklyPlansArray;
-  }
+  
 }
 
 ?>

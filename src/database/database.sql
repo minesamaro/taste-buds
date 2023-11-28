@@ -156,7 +156,7 @@ CREATE TABLE UserDietPreference (
 
 -- Create the Recipe table
 CREATE TABLE Recipe (
-    id INT PRIMARY KEY,
+    id INT PRIMARY KEY AUTOINCREMENT,
     name TEXT NOT NULL,
     preparation_time INT NOT NULL,
     difficulty INT NOT NULL,
