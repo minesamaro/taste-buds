@@ -35,7 +35,6 @@
     /**
      * Get a weekly plan from the db by id
      * 
-     * @param PDO $db Database connection
      * @param int $id Id of the weekly plan
      */
     static function getRecipeById(int $id) : Recipe {

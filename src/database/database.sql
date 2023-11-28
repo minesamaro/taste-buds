@@ -156,7 +156,7 @@ CREATE TABLE UserDietPreference (
 
 -- Create the Recipe table
 CREATE TABLE Recipe (
-    id INT PRIMARY KEY,
+    id INT PRIMARY KEY AUTOINCREMENT,
     name TEXT NOT NULL,
     preparation_time INT NOT NULL,
     difficulty INT NOT NULL,
@@ -307,6 +307,15 @@ INSERT INTO Nutritionist VALUES (2);
 INSERT INTO WeeklyPlan (id, creation_date, total_kcal, nutritionist_id, common_user_id) VALUES (1, '2023-01-15', 2000, 1, 6);
 INSERT INTO WeeklyPlan (id, creation_date, total_kcal, nutritionist_id, common_user_id) VALUES (2, '2023-01-20', 1800, 2, 7);
 INSERT INTO WeeklyPlan (id, creation_date, total_kcal, nutritionist_id, common_user_id) VALUES (3, '2023-01-25', 2200,2, 8);
+
+-- Recipe
+INSERT INTO Recipe (id, name, preparation_time, difficulty, number_of_servings, image, preparation_method, submission_date, energy, carbohydrates, protein, fat, chef) VALUES (1, 'Pasta Carbonara', 30, 2, 4, 'https://www.recipetineats.com/wp-content/uploads/2019/08/Spaghetti-Carbonara_5-SQ.jpg', '1. Cook the pasta in a large pot of salted boiling water until al dente. Drain and reserve 1 cup of the pasta cooking water. 2. Meanwhile, place the pancetta in a large skillet and cook over medium heat until crispy, about 8 minutes. Remove the pancetta from the pan and set aside. 3. Add the olive oil to the pan with the pancetta drippings. Add the garlic and cook for 30 seconds. Add the cooked pasta to the pan, then add the eggs, cheese, salt and pepper. Toss well to coat evenly, adding the reserved pasta water a little at a time as needed to make a creamy sauce. Stir in the pancetta and parsley. Serve immediately.', '2023-01-15', 2000, 200, 100, 50, 1);
+INSERT INTO Recipe (id, name, preparation_time, difficulty, number_of_servings, image, preparation_method, submission_date, energy, carbohydrates, protein, fat, chef) VALUES (2, 'Sauteed Vegetables', 30, 2, 4, 'https://www.recipetineats.com/wp-content/uploads/2019/08/Spaghetti-Carbonara_5-SQ.jpg', '1. Cook the pasta in a large pot of salted boiling water until al dente. Drain and reserve 1 cup of the pasta cooking water. 2. Meanwhile, place the pancetta in a large skillet and cook over medium heat until crispy, about 8 minutes. Remove the pancetta from the pan and set aside. 3. Add the olive oil to the pan with the pancetta drippings. Add the garlic and cook for 30 seconds. Add the cooked pasta to the pan, then add the eggs, cheese, salt and pepper. Toss well to coat evenly, adding the reserved pasta water a little at a time as needed to make a creamy sauce. Stir in the pancetta and parsley. Serve immediately.', '2023-01-15', 2000, 200, 100, 50, 1);
+
+
+-- Plan Recipe
+INSERT INTO PlanRecipe (day_week, portion, time_meal, plan_id, recipe_id) VALUES ('Monday', 1.0, 'Breakfast', 1, 1);
+INSERT INTO PlanRecipe (day_week, portion, time_meal, plan_id, recipe_id) VALUES ('Monday', 1.0, 'Breakfast', 1, 2);
 
 -- Formations
 INSERT INTO Formation (course_name, school_name, academic_level, graduation_date)
