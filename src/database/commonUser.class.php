@@ -17,23 +17,24 @@
             $req = $db->prepare('SELECT * FROM Person WHERE id = ?');
             $req->execute(array($id));
             $user = $req->fetch();
-            
+
             if ($user != null){
-                parent::__construct($user->id,
-                $user->username,
-                $user->first_name,
-                $user->surname,
-                $user->email,
-                $user->password,
-                $user->birth_date,
-                $user->gender);
+                parent::__construct($user["id"],
+                $user["username"],
+                $user["first_name"],
+                $user["surname"],
+                $user["email"],
+                $user["password"],
+                $user["birth_date"],
+                $user["gender"]);
             }
             else {
-                parent::__construct($id, null, null, null, null, null, null, null);
+                parent::__construct(null, null, null, null, null, null, null, null);
             }
             $this->height = floatval($height);
             $this->current_weight = floatval($current_weight);
             $this->ideal_weight = floatval($ideal_weight);
+
         }
 
         public function getId() {
@@ -61,15 +62,21 @@
 
             // Include the Person attributes
             foreach($req->fetchAll() as $user) {
-                $userList.array_push($user, new CommonUser(
-                    intval($user['id']), 
-                    floatval($user['height']), 
-                    floatval($user['current_weight']), 
-                    floatval($user['ideal_weight']),
-                )); 
-                print_r($userList[-1]['id']);
+
+                // Create a new CommonUser object
+                $user = new CommonUser(
+                    intval($user["id"]), 
+                    floatval($user["height"]), 
+                    floatval($user["current_weight"]), 
+                    floatval($user["ideal_weight"]),
+                );
+                // Add the new CommonUser object to the array
+                array_push($userList, $user);
+
+                //var_dump($userList);
             }
             var_dump($userList);
+                
             return $userList;
         }
     }
