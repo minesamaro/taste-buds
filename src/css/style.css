@@ -1,3 +1,4 @@
+
 /* Save color pallette */
 :root {
     --contrast-color: #ed6a5aff;
@@ -10,7 +11,7 @@
 /* Global styles */
 html {
     background-color: var(--background-color);
-    font-family: 'Merriweather', serif;
+    font-family: 'Helvetica', serif;
     height: 100%;
     width: 100%;
     margin: 0;
@@ -61,6 +62,10 @@ footer {
     z-index: 4;
 }
 
+footer * {
+    margin: 0.2em;
+}
+
 .footer__logo > div {
     margin: 1rem;
 }
@@ -70,5 +75,41 @@ footer, .footer_contacts > a {
 }
 
 .footer_contacts > a:hover {
+    color: var(--contrast-color);
+}
+
+
+/* Plan page */
+.plan-subtitle {
+    color: var(--primary-color);
+    font-weight: 300;
+    display: flex;
+    gap: 0.3em;
+    font-style: italic;
+}
+
+.plan-subtitle h5 {
+    color: var(--primary-color);
+    font-weight: 300;
+}
+
+.recipe-card {
+    padding: 1em;
+    margin: 1em 0;
+    border-radius: 0.5em;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+}
+
+.recipe-card * {
+    margin: 0.4em 0;
+}
+
+.recipe-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.recipe-card-header h5 {
     color: var(--contrast-color);
 }

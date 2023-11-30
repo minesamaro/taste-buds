@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 require_once(__DIR__ . '/../database/connection.db.php');
 require_once(__DIR__ . '/planRecipe.class.php');
 
@@ -68,12 +70,11 @@ class WeeklyPlan
         WHERE plan_id = ?'
     );
 
+    //$stmt->bindParam(1, $id, PDO::PARAM_INT);
+    //$stmt->execute();
     $stmt->execute(array($id));
+
     $planRecipesResults = $stmt->fetchAll();
-    // Why is planRecipesResults an empty array?
-
-
-    var_dump($planRecipesResults);
 
     $planRecipes = array();
 
@@ -91,12 +92,6 @@ class WeeklyPlan
     return $planRecipes;
   }
 
-  /**
-   * Get all instances of WeeklyPlan from the db where the idNutritionist is the same as the one passed as parameter
-   * 
-   * @param PDO $db Database connection
-   * @param int $id Id of the nutritionist
-   */
   
 }
 

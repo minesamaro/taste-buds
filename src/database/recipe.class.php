@@ -39,7 +39,7 @@
     static function getRecipeById(int $id) : Recipe {
         $db = Database::getDatabase();
         $stmt = $db->prepare(
-            'SELECT id, name, preparationTime, difficulty, number_of_servings, image, preparation_method, submission_date, energy, protein, fat, carbohydrates, chef
+            'SELECT id, name, preparation_time, difficulty, number_of_servings, image, preparation_method, submission_date, energy, protein, fat, carbohydrates, chef
             FROM Recipe
             WHERE id = ?');
     

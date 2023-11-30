@@ -1,7 +1,7 @@
 <?php 
 // Create a basic layout that calls the footer function
 // Path: src/index.php
-require_once('pages/footer.php');
+require_once('/pages/footer.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">

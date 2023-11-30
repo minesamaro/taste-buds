@@ -39,3 +39,9 @@ footer > div {
 .footer__logo > p {
   margin: 0 1rem;
 }
+
+.content {
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+}

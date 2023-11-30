@@ -2,8 +2,8 @@
 <footer> 
     <div class="footer">
         <div class="footer__logo">
-            <span class="material-symbols-outlined">egg_alt</span>
-            <p>Taste Buds</p>
+            <span class="material-symbols-outlined" style="display:inline">egg_alt</span>
+            <p style="display:inline">Taste Buds</p>
         </div>
         <div class="footer_contacts">
             <p>Contactos</p>
