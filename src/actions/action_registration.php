@@ -2,6 +2,7 @@
 include 'enter_data_functions.php';
 session_start();      
 
+# check if username already exists
 function checkUsername($username) {
     global $db;
     $stmt = $db->prepare('SELECT * FROM Person WHERE username = ?'); #isto ou vem como 1 (max) ou 0 (vazio) se nao existir na base de dados
