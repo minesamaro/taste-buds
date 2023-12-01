@@ -17,7 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
     try {
-        $db = new PDO('sqlite:database.db');
+        $db = new PDO('sqlite:../database/database.db');
         $db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
         $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     
@@ -27,7 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           $_SESSION['msg'] = 'Invalid username or password!';
         }
 
-        header('Location: login.php');
+        header('Location: ../pages/login.php');
     
     } catch (PDOException $e) {
         $_SESSION['msg'] = 'Error: ' . $e->getMessage();

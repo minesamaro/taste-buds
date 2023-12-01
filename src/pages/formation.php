@@ -12,7 +12,7 @@
 
 <div class="register-container">        <!-- for css MUDAR DPS -->
     <h2>Add your formation:</h2>
-    <form class="register-form" action="action_formation.php" method="post">
+    <form class="register-form" action="../actions/action_formation.php" method="post">
 
         <div class="form-group">
             <label>Course Name:

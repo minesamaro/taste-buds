@@ -1,9 +1,9 @@
 <?php
-include 'enter_data_functions.php';
+include '../functions/enter_data_functions.php';
 
 session_start(); 
 
-$db = new PDO('sqlite:database.db');
+$db = new PDO('sqlite:../database/database.db');
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 # Ensure $_SESSION['user_id'] is available

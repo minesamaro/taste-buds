@@ -25,7 +25,7 @@ unset($_SESSION['msg']);
         <p><?php echo $msg ?></p> 
     <?php } ?>
     
-    <form class="login-form" action="action_login.php" method="post">
+    <form class="login-form" action="../actionsaction_login.php" method="post">
         <div class="form-group">
             <label>Username:
                 <input type="text" id="username" name="username" required>        <!-- required since it must be filled out -->
@@ -44,10 +44,10 @@ unset($_SESSION['msg']);
     </form>
     <?php } else { ?>
         <h2>You are already signed as </h2><?php echo " ".$_SESSION['username'];?>
-        <form id="logout" action="action_logout.php"> <!-- fazemos um mini form que é só o botão para log out, vamos ter que criar o ficheiro action_logout.php -->
+        <form id="logout" action="../actions/action_logout.php"> <!-- fazemos um mini form que é só o botão para log out, vamos ter que criar o ficheiro action_logout.php -->
           <button>Logout</button>
         </form>
-        <form id="homepage-redirect" action="action_homepage.php"> <!-- fazemos um mini form que é só o botão para log out, vamos ter que criar o ficheiro action_logout.php -->
+        <form id="homepage-redirect" action="../actions/action_homepage.php"> <!-- fazemos um mini form que é só o botão para log out, vamos ter que criar o ficheiro action_logout.php -->
           <button>Go back to homepage</button> <!-- ACABAR ISTO -->
         </form>
     <?php } ?>

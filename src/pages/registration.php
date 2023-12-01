@@ -24,7 +24,7 @@ unset($_SESSION['msg']);
         <p><?php echo $msg ?></p> 
     <?php } ?>
 
-    <form class="register-form" action="action_registration.php" method="post">
+    <form class="register-form" action="../actions/action_registration.php" method="post">
 
         <div class="form-group">
             <label>First Name:

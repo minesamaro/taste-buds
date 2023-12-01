@@ -1,9 +1,9 @@
 <?php
-include 'enter_data_functions.php';
+include '../functions/enter_data_functions.php';
 
 session_start(); 
 
-$db = new PDO('sqlite:database.db');
+$db = new PDO('sqlite:../database/database.db');
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 $user_id = $_SESSION['user_id'];
@@ -23,6 +23,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_SESSION['user_id']) && isset
 
 ?>
 
-<form id="homepage-redirect" action="action_homepage.php"> 
+<form id="homepage-redirect" action="../actions/action_homepage.php"> 
   <button>Go back to homepage</button> 
 </form>

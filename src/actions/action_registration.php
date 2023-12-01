@@ -1,5 +1,5 @@
 <?php
-include 'enter_data_functions.php';
+include '../functions/enter_data_functions.php';
 session_start();      
 
 # check if username already exists
@@ -23,43 +23,44 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {     # block will only be executed wh
     $gender = $_POST['gender'];
     $occupation = $_POST['occupation'];
 
-    $db = new PDO('sqlite:database.db');
+    #$db = new PDO('sqlite:database.db');
+    $db = new PDO('sqlite:../database/database.db');
     $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     # check if inserted info is correct
     if (strlen($first_name) == 0) { # temos que fazer checks. por ex, username não deve ser vazio
         $_SESSION['msg'] = 'Invalid name!'; 
-        header('Location: registration.php'); # !!! como o utilizador é reencamionhado para outra pag, so consigo mandar a msg de erro ao utilizador atraves da session ($S_SESSION).
+        header('Location: ../pages/registration.php'); # !!! como o utilizador é reencamionhado para outra pag, so consigo mandar a msg de erro ao utilizador atraves da session ($S_SESSION).
         die(); # para logo aqui a msg de erro tb podia ser dentro dos parentesis, mas nao se faz assim
     }
 
     if (strlen($surname) == 0) { # temos que fazer checks. por ex, username não deve ser vazio
         $_SESSION['msg'] = 'Invalid name!'; 
-        header('Location: registration.php'); # !!! como o utilizador é reencamionhado para outra pag, so consigo mandar a msg de erro ao utilizador atraves da session ($S_SESSION).
+        header('Location: ../pages/registration.php'); # !!! como o utilizador é reencamionhado para outra pag, so consigo mandar a msg de erro ao utilizador atraves da session ($S_SESSION).
         die(); # para logo aqui. a msg de erro tb podia ser dentro dos parentesis, mas nao se faz assim
     }
 
     if (checkUsername($username)) {
         $_SESSION['msg'] = 'Username already exists!'; 
-        header('Location: registration.php'); # !!! como o utilizador é reencamionhado para outra pag, so consigo mandar a msg de erro ao utilizador atraves da session ($S_SESSION).
+        header('Location: ../pages/registration.php'); # !!! como o utilizador é reencamionhado para outra pag, so consigo mandar a msg de erro ao utilizador atraves da session ($S_SESSION).
         die(); # para logo aqui. a msg de erro tb podia ser dentro dos parentesis, mas nao se faz assim
     }
 
     if (strlen($username) == 0) { # temos que fazer checks. por ex, username não deve ser vazio
         $_SESSION['msg'] = 'Invalid username!'; 
-        header('Location: registration.php'); # !!! como o utilizador é reencamionhado para outra pag, so consigo mandar a msg de erro ao utilizador atraves da session ($S_SESSION).
+        header('Location: ../pages/registration.php'); # !!! como o utilizador é reencamionhado para outra pag, so consigo mandar a msg de erro ao utilizador atraves da session ($S_SESSION).
         die(); # para logo aqui. a msg de erro tb podia ser dentro dos parentesis, mas nao se faz assim
     }
 
     if (strlen($password) < 8) {
         $_SESSION['msg'] = 'Password must have at least 8 characters.';
-        header('Location: registration.php');
+        header('Location: ../pages/registration.php');
         die();
     }
 
     if ($password !== $confirm_password) {
         $_SESSION['msg'] = "Passwords don't match!";
-        header('Location: registration.php');
+        header('Location: ../pages/registration.php');
         die();
     }
     
@@ -69,7 +70,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {     # block will only be executed wh
 
     if ($check_birth_date_time > $current_time) {
         $_SESSION['msg'] = 'Invalid date!';
-        header('Location: registration.php');
+        header('Location: ../pages/registration.php');
         die();
     }
 
@@ -78,9 +79,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {     # block will only be executed wh
 
     if ($occupation === 'chef' || $occupation === 'nutritionist') {
         // Redirect to the formation submission page
-        header("Location: formation.php");
+        header("Location: ../pages/formation.php");
     } elseif ($occupation === 'common_user') {
-       header("Location: common_user.php");
+       header("Location: ../pages/common_user.php");
     }
 
 }
