@@ -66,8 +66,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {     # block will only be executed wh
     
     $check_birth_date_time = strtotime($birth_date);
     $current_time = time();
-    var_dump($check_birth_date_time);
-    var_dump($current_time);
 
     if ($check_birth_date_time > $current_time) {
         $_SESSION['msg'] = 'Invalid date!';
