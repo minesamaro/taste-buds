@@ -12,7 +12,7 @@
 
 <div class="register-container">        <!-- for css MUDAR DPS -->
     <h2>Add your formation:</h2>
-    <form class="register-form" action="..actions//action_common_user.php" method="post">
+    <form class="register-form" action="..actions/action_common_user.php" method="post">
 
         <div class="form-group">
             <label>Height (m):

@@ -4,8 +4,8 @@
   require_once(__DIR__ . '/../views/header.php');
 
  //TODO Associate plan with nutri
-    
-  head("Plan");
+
+  head("Add Plan");
   planForm();
   footer();
   ?>

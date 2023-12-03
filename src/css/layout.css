@@ -25,6 +25,14 @@ header {
   justify-content: space-between;
 }
 
+.header__nav > ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: space-between;
+}
+
 /* Create Flexbox layout for footer */
 
 footer {
@@ -72,3 +80,5 @@ footer > div {
   align-items: center;
   margin: 0.5rem 0;
 }
+
+/* Header layout */
