@@ -1,10 +1,11 @@
 <?php
-// Add new plan to database with user id
 require_once(__DIR__ . '/../database/weeklyPlan.class.php');
 
-$userId = $_GET['id'];
 
-$planId = WeeklyPlan::addWeeklyPlan(1, $userId);
+$planId = $_POST['planId'];
+$recipeId = $_POST['recipeId'];
+
+WeeklyPlan::deleteRecipeFromWeeklyPlan($planId, $recipeId);
 
 header("Location: ../pages/addPlanRecipe.php?planId=$planId");
 

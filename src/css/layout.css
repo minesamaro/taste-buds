@@ -46,3 +46,29 @@ footer > div {
   margin: 0 auto;
 }
 
+
+/* Adding a new plan */
+.planBundle {
+  display: grid;
+  grid-template-columns: 1.4fr 0.6fr;
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.planBundle > #addPlanRecipe {
+  grid-column: 2;
+  overflow-y: auto;
+}
+
+.planBundle > #planState {
+  grid-column: 1;
+  overflow-y: auto;
+}
+
+.planRecipeOption{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0.5rem 0;
+}

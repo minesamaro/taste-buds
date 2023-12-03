@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 require_once(__DIR__ . '/../database/connection.db.php');
 require_once(__DIR__ . '/planRecipe.class.php');
+require_once(__DIR__ . '/recipe.class.php');
 
 class WeeklyPlan
 {
@@ -15,6 +16,7 @@ class WeeklyPlan
 
   public array $planRecipes;
 
+  
   public function __construct(int $id, string $creationDate, float $totalKcal, int $idNutritionist, int $idCommonUser)
   {
     $this->id = $id;
@@ -51,6 +53,7 @@ class WeeklyPlan
       intval($weeklyPlan['common_user_id'])
     );
     $plan->planRecipes = WeeklyPlan::getPlanRecipes($id);
+
     return $plan;
   }
 
@@ -70,8 +73,7 @@ class WeeklyPlan
         WHERE plan_id = ?'
     );
 
-    //$stmt->bindParam(1, $id, PDO::PARAM_INT);
-    //$stmt->execute();
+
     $stmt->execute(array($id));
 
     $planRecipesResults = $stmt->fetchAll();
@@ -79,19 +81,116 @@ class WeeklyPlan
     $planRecipes = array();
 
     foreach ($planRecipesResults as $planRecipe) {
-      array_push($planRecipes, new PlanRecipe(
-        intval($planRecipe['plan_id']),
-        intval($planRecipe['recipe_id']),
-        $planRecipe['day_week'],
-        floatval($planRecipe['portion']),
-        $planRecipe['time_meal'],
-      )
+      array_push(
+        $planRecipes,
+        new PlanRecipe(
+          intval($planRecipe['plan_id']),
+          intval($planRecipe['recipe_id']),
+          $planRecipe['day_week'],
+          floatval($planRecipe['portion']),
+          $planRecipe['time_meal'],
+        )
       );
     }
 
     return $planRecipes;
   }
 
+  function getPlanRecipesByDay(string $dayWeek): array
+  {
+    $db = Database::getDatabase();
+    $stmt = $db->prepare(
+      'SELECT recipe_id, plan_id, day_week, time_meal, portion
+        FROM PlanRecipe
+        WHERE plan_id = ? AND day_week = ?'
+    );
+    $stmt->execute(
+      array(
+        $this->id,
+        $dayWeek
+      )
+    );
+    $planRecipesResults = $stmt->fetchAll();
+
+    $planRecipes = array();
+    foreach ($planRecipesResults as $planRecipe) {
+      array_push(
+        $planRecipes,
+        new PlanRecipe(
+          intval($planRecipe['plan_id']),
+          intval($planRecipe['recipe_id']),
+          $planRecipe['day_week'],
+          floatval($planRecipe['portion']),
+          $planRecipe['time_meal'],
+        )
+      );
+    }
+    return $planRecipes;
+  }
+  
+
+  /**
+   * Add a weekly plan to the db
+   */
+  static function addWeeklyPlan(int $idNutritionist, int $idCommonUser): int
+  {
+    $db = Database::getDatabase();
+    $stmt = $db->prepare(
+      'INSERT INTO WeeklyPlan (creation_date, total_kcal, nutritionist_id, common_user_id)
+        VALUES (?, ?, ?, ?)'
+    );
+
+    $stmt->execute(array(date("Y-m-d"), 0, $idNutritionist, $idCommonUser));
+
+    // Return the id of the last inserted weekly plan by that nutritionist
+    $stmt = $db->prepare(
+      'SELECT id
+        FROM WeeklyPlan
+        WHERE nutritionist_id = ?
+        ORDER BY id DESC
+        LIMIT 1'
+    );
+
+    $stmt->execute(array($idNutritionist));
+
+    $weeklyPlan = $stmt->fetch();
+    return intval($weeklyPlan['id']);
+  }
+
+  /**
+   * Delete a Recipe from the WeeklyPlan
+   */
+  static function deleteRecipeFromWeeklyPlan(int $planId, int $recipeId)
+  {
+    $db = Database::getDatabase();
+    $stmt = $db->prepare(
+      'DELETE FROM PlanRecipe
+        WHERE plan_id = ? AND recipe_id = ?'
+    );
+
+    $stmt->execute(array($planId, $recipeId));
+  }
+
+  /**
+   * Update the total kcal of a weekly plan
+   */
+  static function updateWeeklyPlan(int $planId, int $recipeId, float $portion, bool $remove=False)
+  {
+    $energy = (Recipe::getRecipeById($recipeId))->energy;
+    $portion = (PlanRecipe::getPlanRecipe($planId, $recipeId))->portion;
+    $energyPortion = $energy * $portion;
+    if($remove) $energyPortion = -$energyPortion;
+    $totalKcal = (WeeklyPlan::getWeeklyPlan($planId))->totalKcal + $energyPortion;
+
+    $db = Database::getDatabase();
+    $stmt = $db->prepare(
+      'UPDATE WeeklyPlan
+        SET total_kcal = ?
+        WHERE id = ?'
+    );
+
+    $stmt->execute(array($totalKcal, $planId));
+  }
   
 }
 

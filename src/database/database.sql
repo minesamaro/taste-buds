@@ -110,7 +110,7 @@ CREATE TABLE CommonUser (
 
 -- Create the WeeklyPlan table
 CREATE TABLE WeeklyPlan (
-    id INT PRIMARY KEY,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     creation_date TEXT,
     total_kcal REAL, -- Total calories as a decimal
     nutritionist_id REFERENCES Nutritionist(id),
@@ -401,13 +401,13 @@ INSERT INTO UserDietPreference (pref, user) VALUES ('Paleo', 9);
 
 -- Insert Statements for Recipe Table
 INSERT INTO Recipe (id, name, preparation_time, difficulty, number_of_servings, image, preparation_method, submission_date, energy, carbohydrates, protein, fat, chef)
-VALUES (1, 'Spaghetti Bolognese', 30, 3, 4, 'spaghetti_image.jpg', 'Cook spaghetti and prepare Bolognese sauce.', '2023-06-15', 500.5, 65.2, 30.0, 15.8, 1);
+VALUES (1, 'Spaghetti Bolognese', 30, 3, 4, 'http://placekitten.com/200/200', 'Cook spaghetti and prepare Bolognese sauce.', '2023-06-15', 500.5, 65.2, 30.0, 15.8, 1);
 
 INSERT INTO Recipe (id, name, preparation_time, difficulty, number_of_servings, image, preparation_method, submission_date, energy, carbohydrates, protein, fat, chef)
-VALUES (2, 'Grilled Salmon', 20, 2, 2, 'salmon_image.jpg', 'Season salmon and grill until cooked.', '2023-06-18', 350.2, 2.5, 40.8, 18.3, 2);
+VALUES (2, 'Grilled Salmon', 20, 2, 2, 'http://placekitten.com/201/300', 'Season salmon and grill until cooked.', '2023-06-18', 350.2, 2.5, 40.8, 18.3, 2);
 
 INSERT INTO Recipe (id, name, preparation_time, difficulty, number_of_servings, image, preparation_method, submission_date, energy, carbohydrates, protein, fat, chef)
-VALUES (3, 'Vegetable Stir-Fry', 15, 1, 3, 'stir_fry_image.jpg', 'Stir-fry assorted vegetables in a wok.', '2023-06-20', 180.7, 20.0, 8.9, 9.5, 3);
+VALUES (3, 'Vegetable Stir-Fry', 15, 1, 3, 'http://placekitten.com/200/301', 'Stir-fry assorted vegetables in a wok.', '2023-06-20', 180.7, 20.0, 8.9, 9.5, 3);
 
 -- Insert Statements for NutritionistApproval Table
 INSERT INTO NutritionistApproval (recipe_id, approval_date, nutritionist_id) VALUES (1, '2023-06-16', 1);

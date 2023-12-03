@@ -41,6 +41,39 @@ class PlanRecipe
 
         return $recipes;
     }
+
+    static function addPlanRecipe(int $planId, int $recipeId, string $dayWeek, float $portion, string $timeMeal)
+    {
+        $db = Database::getDatabase();
+        $stmt = $db->prepare(
+            'INSERT INTO PlanRecipe (plan_id, recipe_id, day_week, portion, time_meal)
+            VALUES (?, ?, ?, ?, ?)'
+        );
+
+        $stmt->execute(array($planId, $recipeId, $dayWeek, $portion, $timeMeal));
+    }
+
+    static function getPlanRecipe(int $planId, int $recipeId): PlanRecipe
+    {
+        $db = Database::getDatabase();
+        $stmt = $db->prepare(
+            'SELECT recipe_id, plan_id, day_week, time_meal, portion
+        FROM PlanRecipe
+        WHERE plan_id = ? AND recipe_id = ?'
+        );
+
+        $stmt->execute(array($planId, $recipeId));
+
+        $planRecipe = $stmt->fetch();
+
+        return new PlanRecipe(
+            intval($planRecipe['plan_id']),
+            intval($planRecipe['recipe_id']),
+            $planRecipe['day_week'],
+            floatval($planRecipe['portion']),
+            $planRecipe['time_meal'],
+        );
+    }
 }
 
 ?>

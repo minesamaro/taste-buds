@@ -1,4 +1,5 @@
 <?php function footer() { ?>
+</main>
 <footer> 
     <div class="footer">
         <div class="footer__logo">
@@ -14,5 +15,6 @@
         </div>
     </div>
 </footer>
+    </body>
 <?php } ?>
 

@@ -5,7 +5,7 @@
     --primary-color: #1c3144ff;
     --background-color: #fffffcff;
     --background-color-dark: #72a98fff;
-    --background-color-light: #e6ebe0ff;
+    --background-color-light: rgb(236, 240, 232);
 }
 
 /* Global styles */
@@ -78,6 +78,73 @@ footer, .footer_contacts > a {
     color: var(--contrast-color);
 }
 
+.card {
+    padding: 1em;
+    margin: 1em;
+    border-radius: 0.5em;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+}
+.card:hover {
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 12px;
+}
+
+.card-small {
+    padding: 0.5em;
+    margin: 0.5em;
+    border-radius: 0.5em;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+}
+
+.card-small:hover {
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 12px;
+}
+
+.card-small > p {
+    color: var(--primary-color);
+    font-size: 0.8em;
+
+}
+
+.card-with-img {
+    display: flex;
+    padding: 0em;
+}
+
+.card-img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 0.5em 0 0 0.5em;
+}
+
+.card-with-img > div {
+    flex-grow: 1;
+}
+
+input[type="radio"]:checked + label .card, #planRecipeOptions{
+    background-color: var(--background-color-light);
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card-header h4 {
+    color: var(--background-color-dark);
+}
+.card-header h5 {
+    color: var(--contrast-color);
+}
+
+.card-header *, .card-body * {
+    margin: 0.4em;
+}
+
+.card-small {
+    margin: 0.2em;
+}
 
 /* Plan page */
 .plan-subtitle {
@@ -93,41 +160,83 @@ footer, .footer_contacts > a {
     font-weight: 300;
 }
 
-.recipe-card {
-    padding: 1em;
-    margin: 1em 0;
-    border-radius: 0.5em;
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
-}
-
-.recipe-card * {
-    margin: 0.4em 0;
-}
-
-.recipe-card-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.recipe-card-header h5 {
-    color: var(--contrast-color);
-}
-
 /* Select with user info */
-.userSelect {
-    width: 200px;
-  }
-  
-/* Add Plan Select User */
-#addRecipeBt{
-    align-items: center;
-    justify-content: center;
+select, input[type="number"] {
+    appearance: none;
+    padding: 10px 30px 10px 10px;
+
+    border: 1px solid #e0e0e0;
+    border-radius: 3px;
+
+    margin: 0 0 10px 0;
+    text-align: right;
+    width: 15em;
 }
 
-#addRecipeBt:hover{
-    background-color: var(--contrast-color);
-    color: var(--background-color);
-    border: 1px solid var(--contrast-color);
+select::-ms-expand {
+  display: none;
 }
 
+/* Delete Button */
+
+/* Buttons */
+button {
+  appearance: button;
+  background-color: var(--primary-color);
+  border: solid transparent;
+  border-radius: 16px;
+  border-width: 0 0 2px;
+  box-sizing: border-box;
+  color: #FFFFFF;
+  cursor: pointer;
+  display: inline-block;
+  font-family: din-round,sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .8px;
+  line-height: 20px;
+  margin: 0;
+  outline: none;
+  overflow: visible;
+  padding: 10px 13px;
+  text-align: center;
+  text-transform: uppercase;
+  touch-action: manipulation;
+  transform: translateZ(0);
+  transition: filter .2s;
+  user-select: none;
+  -webkit-user-select: none;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+button :after {
+  background-clip: padding-box;
+  background-color: var(--primary-color);
+  border: solid transparent;
+  border-radius: 16px;
+  border-width: 0 0 4px;
+  bottom: -4px;
+  content: "";
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: -1;
+}
+
+
+button:hover{
+  filter: brightness(1.1);
+  -webkit-filter: brightness(1.1);
+  background-color: var(--contrast-color);
+}
+
+button:disabled {
+  cursor: auto;
+}
+
+button:active {
+  border-width: 4px 0 0;
+  background: none;
+}
