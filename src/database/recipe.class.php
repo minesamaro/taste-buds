@@ -3,6 +3,8 @@
 declare(strict_types=1);
 
 require_once(__DIR__ . '/../database/connection.db.php');
+require_once(__DIR__ . '/chef.class.php');
+
 
 class Recipe
 {
@@ -102,5 +104,20 @@ class Recipe
     }
     return $recipesArray;
   }
+
+
+  public function getChefName(): string
+    {
+        $chef = Chef::getId($this->id);
+
+        // Check if the chef was found
+        if ($chef) {
+            return $chef->name;
+        }
+
+        // Return a default value or handle the case where the chef is not found
+        return 'Unknown Chef';
+    }
+
 }
 ?>

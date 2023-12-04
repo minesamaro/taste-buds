@@ -65,12 +65,11 @@ footer > div {
 }
 
 .planBundle > #addPlanRecipe {
-  grid-column: 2;
-  overflow-y: auto;
+  grid-column: 1;
 }
 
 .planBundle > #planState {
-  grid-column: 1;
+  grid-column: 2;
   overflow-y: auto;
 }
 
