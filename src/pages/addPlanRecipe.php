@@ -14,12 +14,12 @@ $recipes = Recipe::getAllRecipes();
 
 head("Add Recipe");
 ?>
-<div class="planBundle">
+<main class="planBundle">
 <?php
     addPlanRecipe($recipes, $planId);
     showPlanState($plan);
 ?>
-</div>
+</main>
 <?php
 footer();
 ?>
