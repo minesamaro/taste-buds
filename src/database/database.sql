@@ -110,7 +110,7 @@ CREATE TABLE CommonUser (
 
 -- Create the WeeklyPlan table
 CREATE TABLE WeeklyPlan (
-    id INT PRIMARY KEY,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     creation_date TEXT,
     total_kcal REAL, -- Total calories as a decimal
     nutritionist_id REFERENCES Nutritionist(id),
@@ -156,7 +156,7 @@ CREATE TABLE UserDietPreference (
 
 -- Create the Recipe table
 CREATE TABLE Recipe (
-    id INT PRIMARY KEY AUTOINCREMENT,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     name TEXT NOT NULL,
     preparation_time INT NOT NULL,
     difficulty INT NOT NULL,
@@ -270,8 +270,10 @@ CREATE TABLE PlanRecipe (
     day_week TEXT,
     portion REAL NOT NULL,
     time_meal TEXT,
-    plan_id REFERENCES WeeklyPlan(id),
-    recipe_id REFERENCES Recipe(id),
+    plan_id INT,
+    recipe_id INT,
+    FOREIGN KEY (plan_id) REFERENCES WeeklyPlan(id),
+    FOREIGN KEY (recipe_id) REFERENCES Recipe(id),
     CHECK (day_week IN ('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday')),
     CHECK (portion > 0),
     CHECK (time_meal IN ('Breakfast', 'Lunch', 'Dinner', 'Morning Snack', 'Afternoon Snack', 'Supper'))
@@ -304,14 +306,9 @@ INSERT INTO Nutritionist VALUES (1);
 INSERT INTO Nutritionist VALUES (2);
 
 -- Weekly Plan
-INSERT INTO WeeklyPlan (id, creation_date, total_kcal, nutritionist_id, common_user_id) VALUES (1, '2023-01-15', 2000, 1, 6);
+INSERT INTO WeeklyPlan (id, creation_date, total_kcal, nutritionist_id, common_user_id) VALUES (1, '2023-01-15', 2123, 1, 6);
 INSERT INTO WeeklyPlan (id, creation_date, total_kcal, nutritionist_id, common_user_id) VALUES (2, '2023-01-20', 1800, 2, 7);
 INSERT INTO WeeklyPlan (id, creation_date, total_kcal, nutritionist_id, common_user_id) VALUES (3, '2023-01-25', 2200,2, 8);
-
--- Recipe
-INSERT INTO Recipe (id, name, preparation_time, difficulty, number_of_servings, image, preparation_method, submission_date, energy, carbohydrates, protein, fat, chef) VALUES (1, 'Pasta Carbonara', 30, 2, 4, 'https://www.recipetineats.com/wp-content/uploads/2019/08/Spaghetti-Carbonara_5-SQ.jpg', '1. Cook the pasta in a large pot of salted boiling water until al dente. Drain and reserve 1 cup of the pasta cooking water. 2. Meanwhile, place the pancetta in a large skillet and cook over medium heat until crispy, about 8 minutes. Remove the pancetta from the pan and set aside. 3. Add the olive oil to the pan with the pancetta drippings. Add the garlic and cook for 30 seconds. Add the cooked pasta to the pan, then add the eggs, cheese, salt and pepper. Toss well to coat evenly, adding the reserved pasta water a little at a time as needed to make a creamy sauce. Stir in the pancetta and parsley. Serve immediately.', '2023-01-15', 2000, 200, 100, 50, 1);
-INSERT INTO Recipe (id, name, preparation_time, difficulty, number_of_servings, image, preparation_method, submission_date, energy, carbohydrates, protein, fat, chef) VALUES (2, 'Sauteed Vegetables', 30, 2, 4, 'https://www.recipetineats.com/wp-content/uploads/2019/08/Spaghetti-Carbonara_5-SQ.jpg', '1. Cook the pasta in a large pot of salted boiling water until al dente. Drain and reserve 1 cup of the pasta cooking water. 2. Meanwhile, place the pancetta in a large skillet and cook over medium heat until crispy, about 8 minutes. Remove the pancetta from the pan and set aside. 3. Add the olive oil to the pan with the pancetta drippings. Add the garlic and cook for 30 seconds. Add the cooked pasta to the pan, then add the eggs, cheese, salt and pepper. Toss well to coat evenly, adding the reserved pasta water a little at a time as needed to make a creamy sauce. Stir in the pancetta and parsley. Serve immediately.', '2023-01-15', 2000, 200, 100, 50, 1);
-
 
 -- Plan Recipe
 INSERT INTO PlanRecipe (day_week, portion, time_meal, plan_id, recipe_id) VALUES ('Monday', 1.0, 'Breakfast', 1, 1);
@@ -404,13 +401,13 @@ INSERT INTO UserDietPreference (pref, user) VALUES ('Paleo', 9);
 
 -- Insert Statements for Recipe Table
 INSERT INTO Recipe (id, name, preparation_time, difficulty, number_of_servings, image, preparation_method, submission_date, energy, carbohydrates, protein, fat, chef)
-VALUES (1, 'Spaghetti Bolognese', 30, 3, 4, 'spaghetti_image.jpg', 'Cook spaghetti and prepare Bolognese sauce.', '2023-06-15', 500.5, 65.2, 30.0, 15.8, 1);
+VALUES (1, 'Spaghetti Bolognese', 30, 3, 4, 'http://placekitten.com/200/200', 'Cook spaghetti and prepare Bolognese sauce.', '2023-06-15', 500.5, 65.2, 30.0, 15.8, 1);
 
 INSERT INTO Recipe (id, name, preparation_time, difficulty, number_of_servings, image, preparation_method, submission_date, energy, carbohydrates, protein, fat, chef)
-VALUES (2, 'Grilled Salmon', 20, 2, 2, 'salmon_image.jpg', 'Season salmon and grill until cooked.', '2023-06-18', 350.2, 2.5, 40.8, 18.3, 2);
+VALUES (2, 'Grilled Salmon', 20, 2, 2, 'http://placekitten.com/201/300', 'Season salmon and grill until cooked.', '2023-06-18', 350.2, 2.5, 40.8, 18.3, 2);
 
 INSERT INTO Recipe (id, name, preparation_time, difficulty, number_of_servings, image, preparation_method, submission_date, energy, carbohydrates, protein, fat, chef)
-VALUES (3, 'Vegetable Stir-Fry', 15, 1, 3, 'stir_fry_image.jpg', 'Stir-fry assorted vegetables in a wok.', '2023-06-20', 180.7, 20.0, 8.9, 9.5, 3);
+VALUES (3, 'Vegetable Stir-Fry', 15, 1, 3, 'http://placekitten.com/200/301', 'Stir-fry assorted vegetables in a wok.', '2023-06-20', 180.7, 20.0, 8.9, 9.5, 3);
 
 -- Insert Statements for NutritionistApproval Table
 INSERT INTO NutritionistApproval (recipe_id, approval_date, nutritionist_id) VALUES (1, '2023-06-16', 1);

@@ -1,19 +1,23 @@
+
 /* Save color pallette */
 :root {
     --contrast-color: #ed6a5aff;
     --primary-color: #1c3144ff;
     --background-color: #fffffcff;
     --background-color-dark: #72a98fff;
-    --background-color-light: #e6ebe0ff;
+    --background-color-light: rgb(236, 240, 232);
 }
 
 /* Global styles */
 html {
     background-color: var(--background-color);
-    font-family: 'Merriweather', serif;
+    font-family: 'Helvetica', serif;
     height: 100%;
     width: 100%;
     margin: 0;
+    scrollbar-gutter: stable;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 body {
@@ -28,6 +32,30 @@ a {
   
 h1{
 font-family: 'Libre Franklin', sans-serif;
+}
+
+#title{
+    font-family: 'Poppins';font-size: 42px;
+    font-weight: bolder;
+    color: var(--primary-color);
+}
+
+#title:after {
+    color: var(--primary-color);
+}
+
+.main__img {
+    height: auto;
+    width: fit-content;
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1em;
+    z-index: 5;
 }
   
   
@@ -61,6 +89,10 @@ footer {
     z-index: 4;
 }
 
+footer * {
+    margin: 0.2em;
+}
+
 .footer__logo > div {
     margin: 1rem;
 }
@@ -71,4 +103,183 @@ footer, .footer_contacts > a {
 
 .footer_contacts > a:hover {
     color: var(--contrast-color);
+}
+
+.card {
+    padding: 1em;
+    margin: 1em;
+    border-radius: 0.5em;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+}
+.card:hover {
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 12px;
+}
+
+.card-small {
+    padding: 0.5em;
+    margin: 0.5em;
+    border-radius: 0.5em;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+}
+
+.card-small:hover {
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 12px;
+}
+
+.card-small > p {
+    color: var(--primary-color);
+    font-size: 0.8em;
+
+}
+
+.card-with-img {
+    display: flex;
+    padding: 0em;
+}
+
+.card-img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 0.5em 0 0 0.5em;
+}
+
+.card-with-img > div {
+    flex-grow: 1;
+}
+
+input[type="radio"]:checked + label .card, #planRecipeOptions{
+    background-color: var(--background-color-light);
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card-header h4 {
+    color: var(--background-color-dark);
+}
+.card-header h5 {
+    color: var(--contrast-color);
+}
+
+.card-header *, .card-body * {
+    margin: 0.4em;
+}
+
+.card-small {
+    margin: 0.2em;
+}
+
+/* Plan page */
+.plan-subtitle {
+    color: var(--primary-color);
+    font-weight: 300;
+    display: flex;
+    gap: 0.3em;
+    font-style: italic;
+}
+
+.plan-subtitle h5 {
+    color: var(--primary-color);
+    font-weight: 300;
+}
+
+/* Select with user info */
+select, input[type="number"] {
+    appearance: none;
+    padding: 10px 30px 10px 10px;
+
+    border: 1px solid #e0e0e0;
+    border-radius: 3px;
+
+    margin: 0 0 10px 0;
+    text-align: right;
+    width: 15em;
+}
+
+select::-ms-expand {
+  display: none;
+}
+
+/* Delete Button */
+
+/* Buttons */
+button {
+  appearance: button;
+  background-color: var(--primary-color);
+  border: solid transparent;
+  border-radius: 16px;
+  border-width: 0 0 2px;
+  box-sizing: border-box;
+  color: #FFFFFF;
+  cursor: pointer;
+  display: inline-block;
+  font-family: din-round,sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .8px;
+  line-height: 20px;
+  margin: 0;
+  outline: none;
+  overflow: visible;
+  padding: 10px 13px;
+  text-align: center;
+  text-transform: uppercase;
+  touch-action: manipulation;
+  transform: translateZ(0);
+  transition: filter .2s;
+  user-select: none;
+  -webkit-user-select: none;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+button :after {
+  background-clip: padding-box;
+  background-color: var(--primary-color);
+  border: solid transparent;
+  border-radius: 16px;
+  border-width: 0 0 4px;
+  bottom: -4px;
+  content: "";
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: -1;
+}
+
+
+button:hover{
+  filter: brightness(1.1);
+  -webkit-filter: brightness(1.1);
+  background-color: var(--contrast-color);
+}
+
+button:disabled {
+  cursor: auto;
+}
+
+button:active {
+  border-width: 4px 0 0;
+  background: none;
+}
+
+/* Scrollbar */
+html::-webkit-scrollbar {
+    width: 10px;
+  }
+   
+html::-webkit-scrollbar-track {
+    background: var(--background-color-light);
+    border-radius: 8px;
+    border: 1px solid #e7e7e7;
+  }
+   
+html::-webkit-scrollbar-thumb {
+    background-color: var(--primary-color);
+    border-radius: 8px;
 }

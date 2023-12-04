@@ -25,6 +25,14 @@ header {
   justify-content: space-between;
 }
 
+.header__nav > ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: space-between;
+}
+
 /* Create Flexbox layout for footer */
 
 footer {
@@ -39,3 +47,38 @@ footer > div {
 .footer__logo > p {
   margin: 0 1rem;
 }
+
+.content {
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+
+/* Adding a new plan */
+.planBundle {
+  display: grid;
+  grid-template-columns: 1.4fr 0.6fr;
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.planBundle > #addPlanRecipe {
+  grid-column: 2;
+  overflow-y: auto;
+}
+
+.planBundle > #planState {
+  grid-column: 1;
+  overflow-y: auto;
+}
+
+.planRecipeOption{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0.5rem 0;
+}
+
+/* Header layout */
