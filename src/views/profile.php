@@ -2,7 +2,10 @@
 require_once(__DIR__ . '/../database/person.class.php');
 
 function Profile(){
+    session_start();
+    $person = Person::getPersonByID($_SESSION['id']);
     ?>
+
     <article class="content">
         <h2>Profile</h2>
         </div>
