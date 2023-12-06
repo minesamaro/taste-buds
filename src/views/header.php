@@ -27,6 +27,12 @@ function head($title)
                 <li><a href="#">About</a></li>
             </ul>
         </div>
+        <div id="login-signup">
+        <a href="#login">Log in</a>
+        <!-- <a href="#logout">Log out</a> -->
+        <a href="#signin">Sign in</a>
+        
+    </div>
     </header>
 <?php
 }
