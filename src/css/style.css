@@ -387,7 +387,6 @@ background: var(--contrast-color);
     margin-right: 0.5rem;
     outline: none;
     position: relative;
-    z-index: 1000;
   }
   .radio-btn:hover {
     background: #9faab7;
