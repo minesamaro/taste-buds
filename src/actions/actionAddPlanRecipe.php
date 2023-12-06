@@ -1,7 +1,8 @@
 <?php
 require_once(__DIR__ . '/../database/planRecipe.class.php');
 require_once(__DIR__ . '/../database/weeklyPlan.class.php');
-// Lacks recipe id
+
+
 $planId = intval($_POST['planId']);
 $recipeId = intval($_POST['recipeId']);
 $dayWeek = $_POST['dayWeek'];

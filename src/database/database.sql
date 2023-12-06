@@ -453,6 +453,8 @@ INSERT INTO FoodCategory (name) VALUES ('Dairy');
 INSERT INTO RecipeCategory (category, recipe_id) VALUES ('Vegetables', 1);
 INSERT INTO RecipeCategory (category, recipe_id) VALUES ('Protein', 2);
 INSERT INTO RecipeCategory (category, recipe_id) VALUES ('Dairy', 3);
+INSERT INTO RecipeCategory (category, recipe_id) VALUES ('Dairy', 2);
+
 
 -- Insert Statements for RecipeDietaryPref Table
 INSERT INTO RecipeDietaryPref (dietary_pref, recipe_id) VALUES ('Vegetarian', 1);

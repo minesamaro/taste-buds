@@ -1,5 +1,5 @@
 <?php
-    require_once(__DIR__ . '/../database/database.class.php');
+    require_once(__DIR__ . '/../database/connection.db.php');
 
     class Chef {
         private $id;
