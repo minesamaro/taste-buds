@@ -84,7 +84,7 @@ head("Recipe");
                 if ($nutritionist_approval) {
                     echo 'Verified by Nutritionist ' . $nutritionist->first_name . ' ' . $nutritionist->surname . ' on ' . (new DateTime($nutritionist_approval->approval_date))->format('d-m-Y');
                         } else {
-                            echo 'Not nutritionist verified yet';
+                            echo 'Not Nutritionist Verified';
                         }
                     ?>
 
