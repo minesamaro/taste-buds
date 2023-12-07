@@ -13,6 +13,13 @@ class CookingTechnique {
         $this->methodDescription = $methodDescription;
     }
 
+    # nao sei se isto deva ficar aqui ou no ficheiro das funcoes (o msm para as outras classes)
+    static function addCookingTechnique(string $name, int $difficulty, string $methodDescription) : CookingTechnique {
+        $db = Database::getDatabase();
+        $stmt = $db->prepare('INSERT INTO CoookingTechnique (name, difficulty, method_description) VALUES (?, ?, ?)');
+        $stmt->execute(array($name, $difficulty, $methodDescription));
+    }
+
     /**
      * Get all cooking techniques
      * @return array
