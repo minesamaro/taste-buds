@@ -514,6 +514,12 @@ fieldset>label{
   justify-content: center;
 }
 
+/* Profile*/
+.profile-info>div{
+    display: flex;
+    flex-direction: row;
+}
+
 /* Error Page */
 .error {
     display: flex;

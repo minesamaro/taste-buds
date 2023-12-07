@@ -106,3 +106,22 @@ footer > div {
   grid-row: 1;
   grid-column: 1 / span 2;
 }
+
+/** Profile layout*/
+#profile{
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-template-columns: 0.4fr 0.6fr;
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+.profile-photo{
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.profile-info{
+  grid-column: 2;
+  grid-row: 1;
+}

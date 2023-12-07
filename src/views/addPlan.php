@@ -5,7 +5,6 @@ function planForm(){
     ?>
     <article class="content">
         <h2>Add New Plan</h2>
-        </div>
         <div class="addPlan__form">
             <form method="GET" action="../actions/actionAddPlan.php">
                 <div class="addPlan__form__username">
