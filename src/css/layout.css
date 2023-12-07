@@ -107,6 +107,26 @@ footer > div {
   grid-column: 1 / span 2;
 }
 
+
+/* Recipe Page */
+.recipe-practicalinfo {
+  position: static;
+  text-align: center;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* Four columns, evenly spaced */
+  gap: 10px; /* Adjust the gap between elements as needed */
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.recipe-practicalinfo > #recipe-title {
+  text-align: center;
+  width: 100%;
+  margin: 0 auto;
+}
+.recipe-details {}
+
 /** Profile layout*/
 #profile{
   display: grid;

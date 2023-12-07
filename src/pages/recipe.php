@@ -19,6 +19,7 @@
     // Get recipe id from the URL or wherever you have it
     $recipeId = $_GET['recipe_id'] ?? 1; // gets the id from the url
 
+
     // Get recipe details
     $recipe = Recipe::getRecipeById($recipeId);
     $ingredients = IngredientRecipe::getIngredientsForRecipe($recipeId);
@@ -30,7 +31,7 @@
     $nutritionist_approval = NutritionistApproval::getNutritionistApprovalForRecipe($recipeId);
 
     if($nutritionist_approval) {
-        $nutritionist=Person::getPersonById($nutritionist_approval->nutritionist);
+        $nutritionist=Person::getPersonById($nutritionist_approval->nutritionist_id);
     }
 
 
@@ -44,13 +45,13 @@ head("Recipe");
     <body>
 
         <!-- Recipe Header Section -->
-        <div class="recipe-practicalinfo">
-            <h1><?php echo $recipe->name; ?></h1>
+        <section class="recipe-practicalinfo">
+            <h1 id="recipe-title"><?php echo $recipe->name; ?></h1>
             <div class="recipe-details">
-                <span class="recipe-detail_item">Time: <?php echo $recipe->preparationTime; ?> min</span>
-                <span class="recipe-detail_item">Difficulty: <?php echo $recipe->difficulty; ?></span>
-                <span class="recipe-detail_item">Servings: <?php echo $recipe->numberOfServings; ?></span>
-                <span class="recipe-detail_item">Rating: 
+                <span id="recipe-detail_time">Time: <?php echo $recipe->preparationTime; ?> min</span>
+                <span id="recipe-detail_difficulty">Difficulty: <?php echo $recipe->difficulty; ?></span>
+                <span id="recipe-detail_serving">Servings: <?php echo $recipe->numberOfServings; ?></span>
+                <span id="recipe-detail_rating">Rating: 
                     <?php            
                         if ($recipe_mean_rating == 0) {
                             echo "There are no ratings for this recipe yet.";
@@ -60,7 +61,7 @@ head("Recipe");
                     ?>
                 </span>
             </div>
-        </div>
+        </section>
 
         <!-- Recipe Photo Section -->
         <section class="recipe-photo">
@@ -82,19 +83,20 @@ head("Recipe");
             <div class="recipe-nutritionist_verified"> <!-- ver isto!!!! -->
             <?php
                 if ($nutritionist_approval) {
-                    echo 'Verified by nutritionist ' . $nutritionist->name . ' on ' . (new DateTime($nutritionist_approval->approval_date))->format('d-m-Y');
-                        } else {
-                            echo 'Not nutritionist verified yet';
-                        }
-                    ?>
+                    echo 'Verified by Nutritionist ' . $nutritionist->first_name . ' ' . $nutritionist->surname . ' on ' . (new DateTime($nutritionist_approval->approval_date))->format('d-m-Y');
+                } else {
+                    echo 'Not Nutritionist Verified';
+                }
+            ?>
 
             <!-- Ingredients List -->
             <div class="recipe-ingredients">
                 <h2>Ingredients</h2>
                 <ul>
-                    <?php foreach ($ingredients as $i): ?>
-                        <li><?php echo $i->ingredient->name . ' ' . $i->quantity . ' ' . $i->measurementUnit; ?></li>
-                    <?php endforeach; ?>
+                    <?php foreach ($ingredients as $ig) { ?>
+                        <li><?php echo $ig->ingredient->name . ' ' . $ig->quantity . ' ' . $ig->measurementUnit; ?></li>
+                    <?php } ; ?>
+                    <li>Ola</li>
                 </ul>
             </div>
 
