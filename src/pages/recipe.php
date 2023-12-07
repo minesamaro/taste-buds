@@ -4,8 +4,8 @@
 
 <?php
     // Include necessary classes and retrieve recipe details
-    require_once 'recipe.class.php';
-    require_once 'ingredient_recipe.class.php';
+    require_once '../database/recipe.class.php';
+    require_once '../database/ingredient_recipe.class.php';
     
     // Get recipe id from the URL or wherever you have it
     $recipeId = $_GET['recipe_id'] ?? 1; // gets the id from the url

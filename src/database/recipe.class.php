@@ -252,7 +252,43 @@ class Recipe
 
         return $result['average_ranking'] ?? null;
     }
+
+  /**
+   * Insert a new recipe into the database
+   * 
+   * @param array $recipeData Associative array containing recipe data
+   * @return bool True if successful, false otherwise
+   */
+  public static function insertRecipe(array $recipeData): bool
+  {
+    $db = Database::getDatabase();
+
+    $stmt = $db->prepare(
+      'INSERT INTO Recipe 
+       (name, preparation_time, difficulty, number_of_servings, image, preparation_method, submission_date, energy, protein, fat, carbohydrates, chef)
+       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'
+    );
+
+    $values = [
+      $recipeData['name'],
+      $recipeData['preparationTime'],
+      $recipeData['difficulty'],
+      $recipeData['numberOfServings'],
+      $recipeData['image'],
+      $recipeData['preparationMethod'],
+      $recipeData['submissionDate'],
+      $recipeData['energy'],
+      $recipeData['protein'],
+      $recipeData['fat'],
+      $recipeData['carbohydrates'],
+      $recipeData['idChef'],
+    ];
+
+    return $stmt->execute($values);
   }
+
+}
+
    
   
 ?>

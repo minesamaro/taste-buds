@@ -8,7 +8,4 @@
   head("Add Plan");
   planForm();
   footer();
-  ?>
-<?php 
-
 ?>

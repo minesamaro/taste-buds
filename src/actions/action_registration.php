@@ -79,10 +79,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {     # block will only be executed wh
 
     if ($occupation === 'chef' || $occupation === 'nutritionist') {
         // Redirect to the formation submission page
-        header("Location: ../pages/formation.php");
+        $_SESSION['reg_page'] = "formation";
     } elseif ($occupation === 'common_user') {
-       header("Location: ../pages/common_user.php");
+        // Use session variable to store the occupation to register
+        $_SESSION['reg_page'] = "common_user";
     }
+    header("Location: ../pages/registration.php");
+        exit();
 
 }
 ?>

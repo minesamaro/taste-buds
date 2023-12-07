@@ -187,8 +187,25 @@ input[type="radio"]:checked + label .card, #planRecipeOptions{
     font-weight: 300;
 }
 
+/* Login Form*/
+.login-container, .register-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1em;
+}
+
+/* Register Form */
+.form-group {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
 /* Select with user info */
-select, input[type="number"] {
+select, input[type="number"], input {
     appearance: none;
     padding: 10px 30px 10px 10px;
 
@@ -196,8 +213,8 @@ select, input[type="number"] {
     border-radius: 3px;
 
     margin: 0 0 10px 0;
-    text-align: right;
-    width: 15em;
+    text-align: left;
+    min-width: 15em;
 }
 
 select::-ms-expand {
@@ -273,6 +290,62 @@ button:active {
     display: flex;
     align-items: center;
 
+}
+/* Add Recipe Form */
+.addRecipe__form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 1em;
+    width: 100%;
+}
+
+.addRecipe__form > form>div>div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.addRecipe__form >div>input, .addRecipe__form >div> textarea {
+    width: 100%;
+}
+
+#preparation-method>label, #preparation-method>textarea{ 
+    display: block;
+    flex-direction: column;
+}
+
+#preparation-method>label{
+    margin-bottom: 1em;
+}
+
+#preparation-method{
+    width: 100%;
+    margin-top: 2em;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+textarea {
+    width: 100%;
+    min-height: 20em;
+    padding: 12px 20px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 1em;
+    background-color: #f8f8f8;
+    font-size: 16px;
+    font-family: 'Courier New', Courier, monospace;
+    resize: none;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  }
+
+textarea:focus {
+    outline: none;
+    background-color: #fafafa;
 }
 
 /* Checkboxes */
@@ -375,8 +448,8 @@ background: var(--contrast-color);
     right: 0;
     bottom: 0;
     left: 0;
-    height: 1.5em;
-    width: 1.5em;
+    height: 0.7rem;
+    width: 0.7rem;
     border-radius: 50%;
     transition: all 0.15s ease-out 0s;
     background: #cbd1d8;
@@ -423,6 +496,23 @@ background: var(--contrast-color);
   .radio-btn.radio::after {
     border-radius: 50%;
   }
+
+/* Fieldset */
+fieldset
+{
+  background-color: var(--background-color);
+  max-width:500px;
+  padding:16px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+fieldset>label{
+    display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
 
 /* Scrollbar */
 html::-webkit-scrollbar {

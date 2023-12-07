@@ -6,6 +6,11 @@ function recipeIndex($recipes) {
 <article class="content">
 <h2>Recipes</h2>
 <?php
+
+if (count($recipes) == 0) { ?>
+    <h4>No recipes found</h4>
+<?php }
+else{
 foreach ($recipes as $recipe) { 
     $recipeId = $recipe->id;
     ?>
@@ -40,4 +45,4 @@ foreach ($recipes as $recipe) {
 </article>
 </div>
 
-<?php } ?>
+<?php } }?>

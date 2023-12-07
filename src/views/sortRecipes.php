@@ -8,6 +8,7 @@ function sortRecipes()
     $selectedCategories = isset($_SESSION['selectedCategories']) ? $_SESSION['selectedCategories'] : [];
     $selectedTechniques = isset($_SESSION['selectedTechniques']) ? $_SESSION['selectedTechniques'] : [];
     $selectedPreferences = isset($_SESSION['selectedPreferences']) ? $_SESSION['selectedPreferences'] : [];
+    $_SESSION['orderBy'] = isset($_SESSION['orderBy']) ? $_SESSION['orderBy'] : 'recent';
     ?>
 <div item="sort">
 
