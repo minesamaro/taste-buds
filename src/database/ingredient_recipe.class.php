@@ -34,12 +34,11 @@ class IngredientRecipe
             FROM IngredientRecipe
             WHERE recipe_id = ?'
         );
-
         $stmt->execute(array($recipeId));
-
-
         $ingredientsResults = $stmt->fetchAll();
 
+        var_dump($stmt);
+        var_dump($stmt->fetchAll());
         var_dump($ingredientsResults);
 
         $ingredientRecipes = array();

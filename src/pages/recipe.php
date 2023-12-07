@@ -17,9 +17,8 @@
     require_once(__DIR__ . '/../database/nutritionist_approval.class.php');
     
     // Get recipe id from the URL or wherever you have it
-    #$recipeId = $_GET['recipe_id'] ?? 1; // gets the id from the url
+    $recipeId = $_GET['recipe_id'] ?? 1; // gets the id from the url
 
-$recipeId=1;
 
     // Get recipe details
     $recipe = Recipe::getRecipeById($recipeId);
