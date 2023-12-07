@@ -45,13 +45,13 @@ head("Recipe");
     <body>
 
         <!-- Recipe Header Section -->
-        <div class="recipe-practicalinfo">
-            <h1><?php echo $recipe->name; ?></h1>
+        <section class="recipe-practicalinfo">
+            <h1 id="recipe-title"><?php echo $recipe->name; ?></h1>
             <div class="recipe-details">
-                <span class="recipe-detail_item">Time: <?php echo $recipe->preparationTime; ?> min</span>
-                <span class="recipe-detail_item">Difficulty: <?php echo $recipe->difficulty; ?></span>
-                <span class="recipe-detail_item">Servings: <?php echo $recipe->numberOfServings; ?></span>
-                <span class="recipe-detail_item">Rating: 
+                <span id="recipe-detail_time">Time: <?php echo $recipe->preparationTime; ?> min</span>
+                <span id="recipe-detail_difficulty">Difficulty: <?php echo $recipe->difficulty; ?></span>
+                <span id="recipe-detail_serving">Servings: <?php echo $recipe->numberOfServings; ?></span>
+                <span id="recipe-detail_rating">Rating: 
                     <?php            
                         if ($recipe_mean_rating == 0) {
                             echo "There are no ratings for this recipe yet.";
@@ -61,7 +61,7 @@ head("Recipe");
                     ?>
                 </span>
             </div>
-        </div>
+        </section>
 
         <!-- Recipe Photo Section -->
         <section class="recipe-photo">
