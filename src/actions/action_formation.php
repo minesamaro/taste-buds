@@ -17,12 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_SESSION['user_id']) && isset
     $school_name = $_POST['school_name'];
 
     addFormation($user_id, $course_name,$school_name, $occupation);
-
-    echo "Successful Registration!";
+    header('Location: ../'); // To be changed to the profile
 }
 
 ?>
-
-<form id="homepage-redirect" action="../actions/action_homepage.php"> 
-  <button>Go back to homepage</button> 
-</form>

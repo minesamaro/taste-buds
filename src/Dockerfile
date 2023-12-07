@@ -1,4 +1,4 @@
-# Use the base image with PHP 7.3
+# Use the base image with PHP 8.1
 FROM php:8.1-fpm
 
 # Set the working directory

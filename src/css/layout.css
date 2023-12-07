@@ -80,4 +80,29 @@ footer > div {
   margin: 0.5rem 0;
 }
 
-/* Header layout */
+/* Index */
+/* index with 2 columns (one just for the applied filters and 2 rows (filters occupy first row) */
+.indexBundle {
+  display: grid;
+  grid-template-rows: 0.2fr 1fr;
+  grid-template-columns: 0.4fr 0.6fr;
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.indexBundle > #sort {
+  grid-column: 1;
+  grid-row: 2;
+}
+
+.indexBundle > #recipeIndex {
+  grid-column: 2;
+  grid-row: 2;
+  overflow-y: auto;
+}
+
+#filters{
+  grid-row: 1;
+  grid-column: 1 / span 2;
+}

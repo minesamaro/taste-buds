@@ -22,12 +22,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     
         if (loginSuccess($username, $password)) {
-          $_SESSION['username'] = $username; 
+          $_SESSION['username'] = $username;
+          $_SESSION['user_id'] = loginSuccess($username, $password)['id'];
+          header('Location: ../'); 
+          exit();
         } else {
           $_SESSION['msg'] = 'Invalid username or password!';
+          header('Location: ../pages/login.php'); 
+          exit();
         }
 
-        header('Location: ../pages/login.php');
+        
     
     } catch (PDOException $e) {
         $_SESSION['msg'] = 'Error: ' . $e->getMessage();

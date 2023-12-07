@@ -1,6 +1,7 @@
 <?php
 function head($title)
 {
+    require_once(__DIR__ . '/../database/person.class.php');
     ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -22,17 +23,48 @@ function head($title)
         </div>
         <div class="header__nav">
             <ul>
-                <li><a href="#">Home</a></li>
+                <li><a href="../pages/recipeIndex.php">Recipes</a></li>
                 <li><a href="#">Menu</a></li>
                 <li><a href="#">About</a></li>
             </ul>
         </div>
+
+        <div class="user-specific header__nav">
+            <ul>
+                <?php
+                    // Check if the username is set in the session
+                    if (isset($_SESSION['username'])) {
+                        echo '<li><a href="#">Profile</a></li>';
+                        var_dump($_SESSION['user_id']);
+                        var_dump(Person::isChef($_SESSION['user_id']));
+                        var_dump(Person::isNutritionist($_SESSION['user_id']));
+                        var_dump(Person::isCommonUser($_SESSION['user_id']));
+                    }
+                    if (isset($_SESSION['user_id'])) {
+                        if (Person::isChef($_SESSION['user_id'])) {
+                            echo '<li><a href="../pages/addRecipe.php">Create Recipe</a></li>';
+                        } elseif (Person::isNutritionist($_SESSION['user_id'])) {
+                            echo '<li><a href="../pages/recipeIndex.php">Add Plan </a></li>';
+                        } elseif (Person::isCommonUser($_SESSION['user_id'])) {
+                            echo '<li><a href="../pages/recipeIndex.php">My Plans </a></li>';
+                        }
+                    }
+                ?> 
+            </ul>
+        </div>
+
+
         <div id="login-signup">
-        <a href="#login">Log in</a>
-        <!-- <a href="#logout">Log out</a> -->
-        <a href="#signin">Sign in</a>
-        
-    </div>
+        <?php
+            // Check if the username is set in the session
+            if (isset($_SESSION['user_id'])) {
+                echo '<a href="../actions/action_logout.php">Log out</a>';
+            } else {
+                echo '<a href="../pages/login.php">Log in</a>';
+                echo '<a href="../pages/registration.php">Sign up</a>';
+            }
+            ?>        
+        </div>
     </header>
 <?php
 }

@@ -26,12 +26,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_SESSION['user_id'])) {     #
     addCommonUser($user_id, $height, $current_weight, $ideal_weight);
     addHealthGoal($user_id,$health_goal);
 
-echo "Successful Registration!";
+    header('Location: ../'); // To be changed to the profile
+
 }
 ?>
-
-
-<form id="homepage-redirect" action="action_homepage.php"> 
-  <button>Go back to homepage</button> 
-</form>
 
