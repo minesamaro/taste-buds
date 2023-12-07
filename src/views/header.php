@@ -1,6 +1,7 @@
 <?php
 function head($title)
 {
+    require_once(__DIR__ . '/../database/person.class.php');
     ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -34,6 +35,19 @@ function head($title)
                     // Check if the username is set in the session
                     if (isset($_SESSION['username'])) {
                         echo '<li><a href="#">Profile</a></li>';
+                        var_dump($_SESSION['user_id']);
+                        var_dump(Person::isChef($_SESSION['user_id']));
+                        var_dump(Person::isNutritionist($_SESSION['user_id']));
+                        var_dump(Person::isCommonUser($_SESSION['user_id']));
+                    }
+                    if (isset($_SESSION['user_id'])) {
+                        if (Person::isChef($_SESSION['user_id'])) {
+                            echo '<li><a href="../pages/addRecipe.php">Create Recipe</a></li>';
+                        } elseif (Person::isNutritionist($_SESSION['user_id'])) {
+                            echo '<li><a href="../pages/recipeIndex.php">Add Plan </a></li>';
+                        } elseif (Person::isCommonUser($_SESSION['user_id'])) {
+                            echo '<li><a href="../pages/recipeIndex.php">My Plans </a></li>';
+                        }
                     }
                 ?> 
             </ul>

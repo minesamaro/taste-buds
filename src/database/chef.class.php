@@ -29,9 +29,7 @@
                 echo "Error: " . $e->getMessage();
             }
         } 
-
-       # acho que n precisamos de nenhum get chef pq o unico atributo é chef_id e vai ser o msm que é da person
-
+        
 
         
     }

@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 require_once(__DIR__ . '/../database/connection.db.php');
 require_once(__DIR__ . '/chef.class.php');
+require_once(__DIR__ . '/cooking_technique.class.php');
+require_once(__DIR__ . '/chef.class.php');
+require_once(__DIR__ . '/cooking_technique.class.php');
 require_once(__DIR__ . '/recipe.category.class.php');
 
 
@@ -107,8 +110,7 @@ class Recipe
   }
 
 
-  public function getChefName(): string
-    {
+  static function getChefName(int $chef_id): string {
         $chef = Chef::getId($this->id);
 
         // Check if the chef was found
@@ -121,174 +123,171 @@ class Recipe
       }
 
       public static function getRecipesWithDetailsAndOrder($categories, $techniques, $preferences, $order)
+        {
+          if ($order == 'recent') {
+            $order = 'submission_date';
+          } else if ($order == 'review') {
+            $order = 'average_ranking';
+          } else {
+            $order = 'submission_date'; 
+          }
+  
+          $sql = 'SELECT r.*, AVG(rr.ranking_value) AS average_ranking
+          FROM Recipe r
+          JOIN RecipeCategory rc ON r.id = rc.recipe_id
+          JOIN RecipeDietaryPref rdp ON r.id = rdp.recipe_id
+          JOIN RecipeCookingTechnique rct ON r.id = rct.recipe_id
+          JOIN RecipeRanking rr ON r.id = rr.recipe_id
+          WHERE 1 ';
+  
+          $params = array();
+  
+          if (!empty($categories)) {
+            $sql .= 'AND rc.category IN (' . implode(',', array_fill(0, count($categories), '?')) . ') ';
+            $params = array_merge($params, $categories);
+        }
+    
+        if (!empty($techniques)) {
+            $sql .= 'AND rct.cooking_technique IN (' . implode(',', array_fill(0, count($techniques), '?')) . ') ';
+            $params = array_merge($params, $techniques);
+        }
+    
+        if (!empty($preferences)) {
+            $sql .= 'AND rdp.dietary_pref IN (' . implode(',', array_fill(0, count($preferences), '?')) . ') ';
+            $params = array_merge($params, $preferences);
+        }
+    
+        $sql .= 'ORDER BY ' . $order . ' DESC';
+    
+        $db = Database::getDatabase();
+        $stmt = $db->prepare($sql);
+        $stmt->execute($params);
+        
+        $recipes = $stmt->fetchAll(); // this is returning less parametrs than it should
+       
+        $recipesArray = array();
+        if (isset($recipes)){
+        foreach ($recipes as $recipe) {
+          if (isset($recipe['id'])){
+          array_push($recipesArray, new Recipe(
+            intval($recipe['id']),
+            $recipe['name'],
+            intval($recipe['preparation_time']),
+            intval($recipe['difficulty']),
+            intval($recipe['number_of_servings']),
+            $recipe['image'],
+            $recipe['preparation_method'],
+            $recipe['submission_date'],
+            floatval($recipe['energy']),
+            floatval($recipe['protein']),
+            floatval($recipe['fat']),
+            floatval($recipe['carbohydrates']),
+            intval($recipe['chef'])
+          )
+          );
+        }
+      }
+  
+          return $recipesArray;
+        }
+      }
+  
+      public function getCategories(): array
       {
-        if ($order == 'recent') {
-          $order = 'submission_date';
-        } else if ($order == 'review') {
-          $order = 'average_ranking';
-        } else {
-          $order = 'submission_date'; 
-        }
-
-        $sql = 'SELECT r.*, AVG(rr.ranking_value) AS average_ranking
-        FROM Recipe r
-        JOIN RecipeCategory rc ON r.id = rc.recipe_id
-        JOIN RecipeDietaryPref rdp ON r.id = rdp.recipe_id
-        JOIN RecipeCookingTechnique rct ON r.id = rct.recipe_id
-        JOIN RecipeRanking rr ON r.id = rr.recipe_id
-        WHERE 1 ';
-
-        $params = array();
-
-        if (!empty($categories)) {
-          $sql .= 'AND rc.category IN (' . implode(',', array_fill(0, count($categories), '?')) . ') ';
-          $params = array_merge($params, $categories);
+          $db = Database::getDatabase();
+          $stmt = $db->prepare(
+              'SELECT category
+              FROM RecipeCategory
+              WHERE recipe_id = ?'
+          );
+          $stmt->execute(array($this->id));
+          $category = $stmt->fetchAll();
+          $categoriesArray = array();
+          foreach ($category as $category) {
+              array_push($categoriesArray, $category['category']);
+          }
+          return $category; 
+      }
+      public function getTechniques(): array
+      {
+          $db = Database::getDatabase();
+          $stmt = $db->prepare(
+              'SELECT cooking_technique
+              FROM RecipeCookingTechnique
+              WHERE recipe_id = ?'
+          );
+          $stmt->execute(array($this->id));
+          $techniques = $stmt->fetchAll();
+          $techniquesArray = array();
+          foreach ($techniques as $technique) {
+              array_push($techniquesArray, $technique['cooking_technique']);
+          }
+          return $techniquesArray;
+      }
+      public function getPreferences(): array
+      {
+          $db = Database::getDatabase();
+          $stmt = $db->prepare(
+              'SELECT dietary_pref
+              FROM RecipeDietaryPref
+              WHERE recipe_id = ?'
+          );
+          $stmt->execute(array($this->id));
+          $preferences = $stmt->fetchAll();
+          $preferencesArray = array();
+          foreach ($preferences as $preference) {
+              array_push($preferencesArray, $preference['dietary_pref']);
+          }
+          return $preferencesArray;
       }
   
-      if (!empty($techniques)) {
-          $sql .= 'AND rct.cooking_technique IN (' . implode(',', array_fill(0, count($techniques), '?')) . ') ';
-          $params = array_merge($params, $techniques);
+      public static function getAverageRankingForRecipe($recipeId)
+      {
+          $db = Database::getDatabase();
+  
+          $stmt = $db->prepare('SELECT AVG(ranking_value) AS average_ranking
+                                FROM RecipeRanking
+                                WHERE recipe_id = ?');
+          $stmt->execute([$recipeId]);
+  
+          $result = $stmt->fetch(PDO::FETCH_ASSOC);
+  
+          return $result['average_ranking'] ?? null;
       }
   
-      if (!empty($preferences)) {
-          $sql .= 'AND rdp.dietary_pref IN (' . implode(',', array_fill(0, count($preferences), '?')) . ') ';
-          $params = array_merge($params, $preferences);
-      }
-  
-      $sql .= 'ORDER BY ' . $order . ' DESC';
-  
+    /**
+     * Insert a new recipe into the database
+     * 
+     * @param array $recipeData Associative array containing recipe data
+     * @return bool True if successful, false otherwise
+     */
+    public static function insertRecipe(array $recipeData): bool
+    {
       $db = Database::getDatabase();
-      $stmt = $db->prepare($sql);
-      $stmt->execute($params);
-      
-      $recipes = $stmt->fetchAll(); // this is returning less parametrs than it should
-     
-      $recipesArray = array();
-      if (isset($recipes)){
-      foreach ($recipes as $recipe) {
-        if (isset($recipe['id'])){
-        array_push($recipesArray, new Recipe(
-          intval($recipe['id']),
-          $recipe['name'],
-          intval($recipe['preparation_time']),
-          intval($recipe['difficulty']),
-          intval($recipe['number_of_servings']),
-          $recipe['image'],
-          $recipe['preparation_method'],
-          $recipe['submission_date'],
-          floatval($recipe['energy']),
-          floatval($recipe['protein']),
-          floatval($recipe['fat']),
-          floatval($recipe['carbohydrates']),
-          intval($recipe['chef'])
-        )
-        );
-      }
-    }
-
-        return $recipesArray;
-      }
-    }
-
-    public function getCategories(): array
-    {
-        $db = Database::getDatabase();
-        $stmt = $db->prepare(
-            'SELECT category
-            FROM RecipeCategory
-            WHERE recipe_id = ?'
-        );
-        $stmt->execute(array($this->id));
-        $category = $stmt->fetchAll();
-        $categoriesArray = array();
-        foreach ($category as $category) {
-            array_push($categoriesArray, $category['category']);
-        }
-        return $category; 
-    }
-    public function getTechniques(): array
-    {
-        $db = Database::getDatabase();
-        $stmt = $db->prepare(
-            'SELECT cooking_technique
-            FROM RecipeCookingTechnique
-            WHERE recipe_id = ?'
-        );
-        $stmt->execute(array($this->id));
-        $techniques = $stmt->fetchAll();
-        $techniquesArray = array();
-        foreach ($techniques as $technique) {
-            array_push($techniquesArray, $technique['cooking_technique']);
-        }
-        return $techniquesArray;
-    }
-    public function getPreferences(): array
-    {
-        $db = Database::getDatabase();
-        $stmt = $db->prepare(
-            'SELECT dietary_pref
-            FROM RecipeDietaryPref
-            WHERE recipe_id = ?'
-        );
-        $stmt->execute(array($this->id));
-        $preferences = $stmt->fetchAll();
-        $preferencesArray = array();
-        foreach ($preferences as $preference) {
-            array_push($preferencesArray, $preference['dietary_pref']);
-        }
-        return $preferencesArray;
-    }
-
-    public static function getAverageRankingForRecipe($recipeId)
-    {
-        $db = Database::getDatabase();
-
-        $stmt = $db->prepare('SELECT AVG(ranking_value) AS average_ranking
-                              FROM RecipeRanking
-                              WHERE recipe_id = ?');
-        $stmt->execute([$recipeId]);
-
-        $result = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        return $result['average_ranking'] ?? null;
-    }
-
-  /**
-   * Insert a new recipe into the database
-   * 
-   * @param array $recipeData Associative array containing recipe data
-   * @return bool True if successful, false otherwise
-   */
-  public static function insertRecipe(array $recipeData): bool
-  {
-    $db = Database::getDatabase();
-
-    $stmt = $db->prepare(
-      'INSERT INTO Recipe 
-       (name, preparation_time, difficulty, number_of_servings, image, preparation_method, submission_date, energy, protein, fat, carbohydrates, chef)
-       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'
-    );
-
-    $values = [
-      $recipeData['name'],
-      $recipeData['preparationTime'],
-      $recipeData['difficulty'],
-      $recipeData['numberOfServings'],
-      $recipeData['image'],
-      $recipeData['preparationMethod'],
-      $recipeData['submissionDate'],
-      $recipeData['energy'],
-      $recipeData['protein'],
-      $recipeData['fat'],
-      $recipeData['carbohydrates'],
-      $recipeData['idChef'],
-    ];
-
-    return $stmt->execute($values);
-  }
-
-}
-
-   
   
+      $stmt = $db->prepare(
+        'INSERT INTO Recipe 
+         (name, preparation_time, difficulty, number_of_servings, image, preparation_method, submission_date, energy, protein, fat, carbohydrates, chef)
+         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'
+      );
+  
+      $values = [
+        $recipeData['name'],
+        $recipeData['preparationTime'],
+        $recipeData['difficulty'],
+        $recipeData['numberOfServings'],
+        $recipeData['image'],
+        $recipeData['preparationMethod'],
+        $recipeData['submissionDate'],
+        $recipeData['energy'],
+        $recipeData['protein'],
+        $recipeData['fat'],
+        $recipeData['carbohydrates'],
+        $recipeData['idChef'],
+      ];
+  
+      return $stmt->execute($values);
+    }
+  
+  }
 ?>

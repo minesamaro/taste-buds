@@ -183,14 +183,14 @@ CREATE TABLE NutritionistApproval (
     
 );
 
--- Create the RecipeRanking table
-CREATE TABLE RecipeRanking (
-    ranking_date TEXT NOT NULL,
-    ranking_value INT NOT NULL,
+-- Create the RecipeRating table
+CREATE TABLE RecipeRating (
+    rating_date TEXT NOT NULL,
+    rating_value INT NOT NULL,
     comment TEXT,
     user_id REFERENCES CommonUser(id),
     recipe_id REFERENCES Recipe(id),
-    CHECK (ranking_value >= 0 AND ranking_value <= 5)
+    CHECK (rating_value >= 0 AND rating_value <= 5)
 );
 
 -- Create the CookingTechnique table
@@ -280,16 +280,16 @@ CREATE TABLE PlanRecipe (
 );
 
 -- Users
-INSERT INTO Person (username, first_name, surname, email, password, birth_date, gender)VALUES ('john_doe', 'John', 'Doe', 'john.doe@email.com', 'jdP@ssword123', '1990-05-20', 'male');
-INSERT INTO Person (username, first_name, surname, email, password, birth_date, gender)VALUES ('alice_smith', 'Alice', 'Smith', 'alice.smith@email.com', 'aS!789xyz', '1988-12-15', 'female');
-INSERT INTO Person (username, first_name, surname, email, password, birth_date, gender)VALUES ('robert_jones', 'Robert', 'Jones', 'robert.jones@email.com', 'Rj456pass', '1975-08-02', 'male');
-INSERT INTO Person (username, first_name, surname, email, password, birth_date, gender)VALUES ('sara_miller', 'Sara', 'Miller', 'sara.miller@email.com', 'saraPass!23', '1995-04-10', 'female');
-INSERT INTO Person (username, first_name, surname, email, password, birth_date, gender)VALUES ('michael_brown', 'Michael', 'Brown', 'michael.brown@email.com', 'Mb_987Pass', '1983-11-28', 'male');
-INSERT INTO Person (username, first_name, surname, email, password, birth_date, gender)VALUES ('emily_wilson', 'Emily', 'Wilson', 'emily.wilson@email.com', 'EwP@ss456', '1992-09-08', 'female');
-INSERT INTO Person (username, first_name, surname, email, password, birth_date, gender)VALUES ('alex_turner', 'Alex', 'Turner', 'alex.turner@email.com', 'ATurner_789', '1980-07-17', 'male');
-INSERT INTO Person (username, first_name, surname, email, password, birth_date, gender)VALUES ('laura_smith', 'Laura', 'Smith', 'laura.smith@email.com', 'lauraPass!321', '1998-03-25', 'female');
-INSERT INTO Person (username, first_name, surname, email, password, birth_date, gender) VALUES ('david_clark', 'David', 'Clark', 'david.clark@email.com', 'DcPass_567', '1978-06-12', 'male');
-INSERT INTO Person (username, first_name, surname, email, password, birth_date, gender) VALUES ('jessica_taylor', 'Jessica', 'Taylor', 'jessica.taylor@email.com', 'JTaylor@987', '1987-02-19', 'female');
+INSERT INTO Person (username, first_name, surname, email, password, birth_date, gender)VALUES ('john_doe', 'John', 'Doe', 'john.doe@email.com', 'ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f', '1990-05-20', 'male');
+INSERT INTO Person (username, first_name, surname, email, password, birth_date, gender)VALUES ('alice_smith', 'Alice', 'Smith', 'alice.smith@email.com', 'ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f', '1988-12-15', 'female');
+INSERT INTO Person (username, first_name, surname, email, password, birth_date, gender)VALUES ('robert_jones', 'Robert', 'Jones', 'robert.jones@email.com', 'ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f', '1975-08-02', 'male');
+INSERT INTO Person (username, first_name, surname, email, password, birth_date, gender)VALUES ('sara_miller', 'Sara', 'Miller', 'sara.miller@email.com', 'ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f', '1995-04-10', 'female');
+INSERT INTO Person (username, first_name, surname, email, password, birth_date, gender)VALUES ('michael_brown', 'Michael', 'Brown', 'michael.brown@email.com', 'ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f', '1983-11-28', 'male');
+INSERT INTO Person (username, first_name, surname, email, password, birth_date, gender)VALUES ('emily_wilson', 'Emily', 'Wilson', 'emily.wilson@email.com', 'ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f', '1992-09-08', 'female');
+INSERT INTO Person (username, first_name, surname, email, password, birth_date, gender)VALUES ('alex_turner', 'Alex', 'Turner', 'alex.turner@email.com', 'ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f', '1980-07-17', 'male');
+INSERT INTO Person (username, first_name, surname, email, password, birth_date, gender)VALUES ('laura_smith', 'Laura', 'Smith', 'laura.smith@email.com', 'ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f', '1998-03-25', 'female');
+INSERT INTO Person (username, first_name, surname, email, password, birth_date, gender) VALUES ('david_clark', 'David', 'Clark', 'david.clark@email.com', 'ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f', '1978-06-12', 'male');
+INSERT INTO Person (username, first_name, surname, email, password, birth_date, gender) VALUES ('jessica_taylor', 'Jessica', 'Taylor', 'jessica.taylor@email.com', 'ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f', '1987-02-19', 'female');
 
 -- Messagess
 INSERT INTO Messages (id, sending_date, TEXT_content, sender_id, receiver_id) VALUES (1, '2023-01-15 08:30:00', 'Just tried a new recipe for pasta carbonara - it was delicious!', 2, 3);
@@ -302,13 +302,13 @@ INSERT INTO Chef VALUES (2);
 INSERT INTO Chef VALUES (3);
 
 -- Nutritionist
-INSERT INTO Nutritionist VALUES (1);
-INSERT INTO Nutritionist VALUES (2);
+INSERT INTO Nutritionist VALUES (4);
+INSERT INTO Nutritionist VALUES (5);
 
 -- Weekly Plan
-INSERT INTO WeeklyPlan (id, creation_date, total_kcal, nutritionist_id, common_user_id) VALUES (1, '2023-01-15', 2123, 1, 6);
-INSERT INTO WeeklyPlan (id, creation_date, total_kcal, nutritionist_id, common_user_id) VALUES (2, '2023-01-20', 1800, 2, 7);
-INSERT INTO WeeklyPlan (id, creation_date, total_kcal, nutritionist_id, common_user_id) VALUES (3, '2023-01-25', 2200,2, 8);
+INSERT INTO WeeklyPlan (id, creation_date, total_kcal, nutritionist_id, common_user_id) VALUES (1, '2023-01-15', 2123, 4, 6);
+INSERT INTO WeeklyPlan (id, creation_date, total_kcal, nutritionist_id, common_user_id) VALUES (2, '2023-01-20', 1800, 4, 7);
+INSERT INTO WeeklyPlan (id, creation_date, total_kcal, nutritionist_id, common_user_id) VALUES (3, '2023-01-25', 2200,5, 8);
 
 -- Plan Recipe
 INSERT INTO PlanRecipe (day_week, portion, time_meal, plan_id, recipe_id) VALUES ('Monday', 1.0, 'Breakfast', 1, 1);
@@ -336,8 +336,8 @@ INSERT INTO ChefFormation VALUES (2,'Food Science', 'University of Gastronomic S
 INSERT INTO ChefFormation VALUES (3,'Wine pairings', 'University of Gastronomic Sciences');
 
 -- Nutritionist Formations
-INSERT INTO NutritionistFormation VALUES ('Nutricionsim', 'International Nutricionism Institute', 1);
-INSERT INTO NutritionistFormation VALUES ('Nutricionism', 'Nutricionism Institute of America', 2);
+INSERT INTO NutritionistFormation VALUES ('Nutricionsim', 'International Nutricionism Institute', 4);
+INSERT INTO NutritionistFormation VALUES ('Nutricionism', 'Nutricionism Institute of America', 5);
 
 -- Insert Statements for CommonUser Table
 INSERT INTO CommonUser (id, height, current_weight, ideal_weight)
@@ -415,13 +415,13 @@ INSERT INTO NutritionistApproval (recipe_id, approval_date, nutritionist_id) VAL
 INSERT INTO NutritionistApproval (recipe_id, approval_date, nutritionist_id) VALUES (3, '2023-06-21', 2);
 
 -- Insert Statements for RecipeRanking Table
-INSERT INTO RecipeRanking (ranking_date, ranking_value, comment, user_id, recipe_id)
+INSERT INTO RecipeRating (rating_date, rating_value, comment, user_id, recipe_id)
 VALUES ('2023-06-25', 4, 'Delicious!', 8, 1);
 
-INSERT INTO RecipeRanking (ranking_date, ranking_value, comment, user_id, recipe_id)
+INSERT INTO RecipeRating (rating_date, rating_value, comment, user_id, recipe_id)
 VALUES ('2023-06-26', 5, 'Amazing recipe!', 9, 2);
 
-INSERT INTO RecipeRanking (ranking_date, ranking_value, comment, user_id, recipe_id)
+INSERT INTO RecipeRating (rating_date, rating_value, comment, user_id, recipe_id)
 VALUES ('2023-06-27', 3, 'Good, but could use more seasoning.', 10, 3);
 
 -- Insert Statements for CookingTechnique Table
