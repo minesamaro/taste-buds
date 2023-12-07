@@ -22,17 +22,35 @@ function head($title)
         </div>
         <div class="header__nav">
             <ul>
-                <li><a href="#">Home</a></li>
+                <li><a href="../pages/recipeIndex.php">Recipes</a></li>
                 <li><a href="#">Menu</a></li>
                 <li><a href="#">About</a></li>
             </ul>
         </div>
+
+        <div class="user-specific header__nav">
+            <ul>
+                <?php
+                    // Check if the username is set in the session
+                    if (isset($_SESSION['username'])) {
+                        echo '<li><a href="#">Profile</a></li>';
+                    }
+                ?> 
+            </ul>
+        </div>
+
+
         <div id="login-signup">
-        <a href="#login">Log in</a>
-        <!-- <a href="#logout">Log out</a> -->
-        <a href="#signin">Sign in</a>
-        
-    </div>
+        <?php
+            // Check if the username is set in the session
+            if (isset($_SESSION['user_id'])) {
+                echo '<a href="../actions/action_logout.php">Log out</a>';
+            } else {
+                echo '<a href="../pages/login.php">Log in</a>';
+                echo '<a href="../pages/registration.php">Sign up</a>';
+            }
+            ?>        
+        </div>
     </header>
 <?php
 }

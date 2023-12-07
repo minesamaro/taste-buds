@@ -1,6 +1,7 @@
 <?php 
 // Create a basic layout that calls the footer function
 // Path: src/index.php
+session_start();
 require_once(__DIR__ . '/views/footer.php');
 require_once(__DIR__ . '/views/header.php');
 
