@@ -136,7 +136,61 @@
             return null; # meter que se for null e meter a msg de erro de $_SESSION
         }
 
+        public static function isChef($user_id)
+        {
+            $db = Database::getDatabase();
+            try {
+                // Assuming 'chefs' is the table name for chefs
+                $query = 'SELECT COUNT(*) FROM Chef WHERE chef_id = ?';
+                $stmt = $db->prepare($query);
+                $stmt->execute([$user_id]);
 
+                $count = $stmt->fetchColumn();
+                // If count is greater than 0, the user_id exists in the Chef table
+                return $count > 0;
+            } catch (PDOException $e) {
+                // Handle database errors appropriately
+                return false;
+            }
+        }
+
+        public static function isCommonUser($user_id)
+        {
+            $db = Database::getDatabase();
+            try {
+                // Assuming 'common_users' is the table name for common users
+                $query = 'SELECT COUNT(*) FROM CommonUser WHERE id = ?';
+                $stmt = $db->prepare($query);
+                $stmt->execute([$user_id]);
+
+                $count = $stmt->fetchColumn();
+                //var_dump($query, [$user_id]);  // Add this line for debugging
+                //var_dump($count);  // Add this line for debugging
+                // If length count is greater than 0, the user_id exists in the CommonUser table
+                return $count > 0;
+            } catch (PDOException $e) {
+                // Handle database errors appropriately
+                return false;
+            }
+        }
+
+        public static function isNutritionist($user_id)
+        {
+            $db = Database::getDatabase();
+            try {
+                // Assuming 'nutritionists' is the table name for nutritionists
+                $query = 'SELECT COUNT(*) FROM Nutritionist WHERE id = ?';
+                $stmt = $db->prepare($query);
+                $stmt->execute([$user_id]);
+
+                $count = $stmt->fetchColumn();
+                // If count is greater than 0, the user_id exists in the Nutritionist table
+                return $count > 0;
+            } catch (PDOException $e) {
+                // Handle database errors appropriately
+                return false;
+            }
+        }
 
     }
 
