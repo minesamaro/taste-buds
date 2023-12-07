@@ -17,7 +17,9 @@
     require_once(__DIR__ . '/../database/nutritionist_approval.class.php');
     
     // Get recipe id from the URL or wherever you have it
-    $recipeId = $_GET['recipe_id'] ?? 1; // gets the id from the url
+    #$recipeId = $_GET['recipe_id'] ?? 1; // gets the id from the url
+
+$recipeId=1;
 
     // Get recipe details
     $recipe = Recipe::getRecipeById($recipeId);
@@ -83,18 +85,19 @@ head("Recipe");
             <?php
                 if ($nutritionist_approval) {
                     echo 'Verified by Nutritionist ' . $nutritionist->first_name . ' ' . $nutritionist->surname . ' on ' . (new DateTime($nutritionist_approval->approval_date))->format('d-m-Y');
-                        } else {
-                            echo 'Not Nutritionist Verified';
-                        }
-                    ?>
+                } else {
+                    echo 'Not Nutritionist Verified';
+                }
+            ?>
 
             <!-- Ingredients List -->
             <div class="recipe-ingredients">
                 <h2>Ingredients</h2>
                 <ul>
-                    <?php foreach ($ingredients as $i): ?>
-                        <li><?php echo $i->ingredient->name . ' ' . $i->quantity . ' ' . $i->measurementUnit; ?></li>
-                    <?php endforeach; ?>
+                    <?php foreach ($ingredients as $ig) { ?>
+                        <li><?php echo $ig->ingredient->name . ' ' . $ig->quantity . ' ' . $ig->measurementUnit; ?></li>
+                    <?php } ; ?>
+                    <li>Ola</li>
                 </ul>
             </div>
 

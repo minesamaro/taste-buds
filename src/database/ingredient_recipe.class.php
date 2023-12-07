@@ -36,7 +36,11 @@ class IngredientRecipe
         );
 
         $stmt->execute(array($recipeId));
+
+
         $ingredientsResults = $stmt->fetchAll();
+
+        var_dump($ingredientsResults);
 
         $ingredientRecipes = array();
 

@@ -21,7 +21,7 @@ DROP TABLE IF EXISTS DietaryPreference;
 DROP TABLE IF EXISTS UserDietPreference;
 DROP TABLE IF EXISTS Recipe;
 DROP TABLE IF EXISTS NutritionistApproval;
-DROP TABLE IF EXISTS RecipeRanking;
+DROP TABLE IF EXISTS RecipeRating;
 DROP TABLE IF EXISTS CookingTechnique;
 DROP TABLE IF EXISTS RecipeCookingTechnique;
 DROP TABLE IF EXISTS FoodCategory;
