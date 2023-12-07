@@ -49,6 +49,14 @@
         public function getIdealWeight() {
             return $this->ideal_weight;
         }
+
+        # nao sei se isto deva ficar aqui ou no ficheiro das funcoes (o msm para as outras classes)
+        static function addCommonUser($id, $height, $currentWeight, $idealWeight) : CommonUser {
+            $db = Database::getDatabase();
+            $stmt = $db->prepare('INSERT INTO CommonUser (id, height, current_weight, ideal_weight) VALUES (?, ?, ?, ?)');
+            $stmt->execute(array($id, $height, $currentWeight, $idealWeight));
+        }
+        
         /* Get array of Users 
         *
         * @return array of Users
@@ -78,13 +86,6 @@
             var_dump($userList);
                 
             return $userList;
-        }
-
-        # nao sei se isto deva ficar aqui ou no ficheiro das funcoes (o msm para as outras classes)
-        static function addCommonUser($id, $height, $currentWeight, $idealWeight) : CommonUser {
-            $db = Database::getDatabase();
-            $stmt = $db->prepare('INSERT INTO CommonUser (id, height, current_weight, ideal_weight) VALUES (?, ?, ?, ?)');
-            $stmt->execute(array($id, $height, $currentWeight, $idealWeight));
         }
        
     }
