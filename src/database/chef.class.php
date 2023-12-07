@@ -1,5 +1,5 @@
 <?php
-    require_once(__DIR__ . '/../database/database.class.php');
+    require_once(__DIR__ . '/../database/connection.db.php');
 
     class Chef {
         private $id;
@@ -29,9 +29,7 @@
                 echo "Error: " . $e->getMessage();
             }
         } 
-
-       # acho que n precisamos de nenhum get chef pq o unico atributo é chef_id e vai ser o msm que é da person
-
+        
 
         
     }

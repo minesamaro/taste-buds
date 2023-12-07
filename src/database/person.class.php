@@ -91,7 +91,7 @@
             );
         }
 
-        static function getPersonById(intg $user_id) : Person {
+        static function getPersonById(int $user_id) : Person {
             $db = Database::getDatabase();
             $stmt = $db->prepare(
                 'SELECT id, username, first_name, surname, email, password, birth_date, gender

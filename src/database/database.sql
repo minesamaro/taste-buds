@@ -183,14 +183,14 @@ CREATE TABLE NutritionistApproval (
     
 );
 
--- Create the RecipeRanking table
-CREATE TABLE RecipeRanking (
-    ranking_date TEXT NOT NULL,
-    ranking_value INT NOT NULL,
+-- Create the RecipeRating table
+CREATE TABLE RecipeRating (
+    rating_date TEXT NOT NULL,
+    rating_value INT NOT NULL,
     comment TEXT,
     user_id REFERENCES CommonUser(id),
     recipe_id REFERENCES Recipe(id),
-    CHECK (ranking_value >= 0 AND ranking_value <= 5)
+    CHECK (rating_value >= 0 AND rating_value <= 5)
 );
 
 -- Create the CookingTechnique table
@@ -415,13 +415,13 @@ INSERT INTO NutritionistApproval (recipe_id, approval_date, nutritionist_id) VAL
 INSERT INTO NutritionistApproval (recipe_id, approval_date, nutritionist_id) VALUES (3, '2023-06-21', 2);
 
 -- Insert Statements for RecipeRanking Table
-INSERT INTO RecipeRanking (ranking_date, ranking_value, comment, user_id, recipe_id)
+INSERT INTO RecipeRating (rating_date, rating_value, comment, user_id, recipe_id)
 VALUES ('2023-06-25', 4, 'Delicious!', 8, 1);
 
-INSERT INTO RecipeRanking (ranking_date, ranking_value, comment, user_id, recipe_id)
+INSERT INTO RecipeRating (rating_date, rating_value, comment, user_id, recipe_id)
 VALUES ('2023-06-26', 5, 'Amazing recipe!', 9, 2);
 
-INSERT INTO RecipeRanking (ranking_date, ranking_value, comment, user_id, recipe_id)
+INSERT INTO RecipeRating (rating_date, rating_value, comment, user_id, recipe_id)
 VALUES ('2023-06-27', 3, 'Good, but could use more seasoning.', 10, 3);
 
 -- Insert Statements for CookingTechnique Table

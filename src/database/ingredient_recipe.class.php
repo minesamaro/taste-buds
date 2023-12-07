@@ -44,6 +44,7 @@ class IngredientRecipe
             $ingredient = Ingredient::getIngredientById(intval($ingredientResult['ingredient_id']));
             $recipe = Recipe::getRecipeById(intval($ingredientResult['recipe_id']));
 
+
             array_push($ingredientRecipes, new IngredientRecipe(
                 floatval($ingredientResult['quantity']),
                 $ingredientResult['measurement_unit'],
