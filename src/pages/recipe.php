@@ -30,7 +30,7 @@
     $nutritionist_approval = NutritionistApproval::getNutritionistApprovalForRecipe($recipeId);
 
     if($nutritionist_approval) {
-        $nutritionist=Person::getPersonById($nutritionist_approval->nutritionist);
+        $nutritionist=Person::getPersonById($nutritionist_approval->nutritionist_id);
     }
 
 
@@ -82,7 +82,7 @@ head("Recipe");
             <div class="recipe-nutritionist_verified"> <!-- ver isto!!!! -->
             <?php
                 if ($nutritionist_approval) {
-                    echo 'Verified by nutritionist ' . $nutritionist->name . ' on ' . (new DateTime($nutritionist_approval->approval_date))->format('d-m-Y');
+                    echo 'Verified by Nutritionist ' . $nutritionist->first_name . ' ' . $nutritionist->surname . ' on ' . (new DateTime($nutritionist_approval->approval_date))->format('d-m-Y');
                         } else {
                             echo 'Not nutritionist verified yet';
                         }

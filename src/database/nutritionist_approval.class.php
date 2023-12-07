@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 require_once(__DIR__ . '/../database/connection.db.php');
 require_once(__DIR__ . '/nutritionist.class.php');
+require_once(__DIR__ . '/person.class.php');
 
 class NutritionistApproval
 {
@@ -37,11 +38,11 @@ class NutritionistApproval
         $approvalData = $stmt->fetch();
 
         if ($approvalData) {
-            $nutritionist_id = Nutritionist::getNutritionistById(intval($approvalData['nutritionist_id']));
+            $nutritionist_id = $approvalData['nutritionist_id'];
             return new NutritionistApproval(
                 intval($approvalData['recipe_id']),
                 $approvalData['approval_date'],
-                $nutritionist
+                $nutritionist_id
             );
         }
 
