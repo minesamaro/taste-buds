@@ -1,4 +1,6 @@
 <?php
+    session_start();
+
 function head($title)
 {
     require_once(__DIR__ . '/../database/person.class.php');
@@ -44,7 +46,7 @@ function head($title)
                         if (Person::isChef($_SESSION['user_id'])) {
                             echo '<li><a href="../pages/addRecipe.php">Create Recipe</a></li>';
                         } elseif (Person::isNutritionist($_SESSION['user_id'])) {
-                            echo '<li><a href="../pages/recipeIndex.php">Add Plan </a></li>';
+                            echo '<li><a href="../pages/addPlan.php">Add Plan </a></li>';
                         } elseif (Person::isCommonUser($_SESSION['user_id'])) {
                             echo '<li><a href="../pages/recipeIndex.php">My Plans </a></li>';
                         }
