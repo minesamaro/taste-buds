@@ -112,7 +112,7 @@ footer > div {
 .recipe-practicalinfo {
   position: static;
   text-align: center;
-  display: grid;
+  display: block;
   grid-template-columns: repeat(4, 1fr); /* Four columns, evenly spaced */
   gap: 10px; /* Adjust the gap between elements as needed */
   width: 100%;
@@ -121,11 +121,22 @@ footer > div {
 }
 
 .recipe-practicalinfo > #recipe-title {
+  display: block;
   text-align: center;
   width: 100%;
   margin: 0 auto;
 }
-.recipe-details {}
+
+.recipe-practicalinfo > #recipe-details {
+  display: block;
+  text-align: center;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.recipe-photo {
+  display: block;
+}
 
 /** Profile layout*/
 #profile{

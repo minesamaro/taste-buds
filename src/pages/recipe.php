@@ -47,7 +47,7 @@ head("Recipe");
         <!-- Recipe Header Section -->
         <section class="recipe-practicalinfo">
             <h1 id="recipe-title"><?php echo $recipe->name; ?></h1>
-            <div class="recipe-details">
+            <div id="recipe-details">
                 <span id="recipe-detail_time">Time: <?php echo $recipe->preparationTime; ?> min</span>
                 <span id="recipe-detail_difficulty">Difficulty: <?php echo $recipe->difficulty; ?></span>
                 <span id="recipe-detail_serving">Servings: <?php echo $recipe->numberOfServings; ?></span>
