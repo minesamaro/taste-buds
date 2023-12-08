@@ -94,9 +94,11 @@ head("Recipe");
                 <h2>Ingredients</h2>
                 <ul>
                     <?php foreach ($ingredients as $ig) { ?>
-                        <li><?php echo $ig->ingredient->name . ' ' . $ig->quantity . ' ' . $ig->measurementUnit; ?></li>
+                        <li class="recipe-ingredient">
+                            <span class="ingredient-name"><?php echo $ig->ingredient->name; ?></span>
+                            <span class="ingredient-quantity"><?php echo $ig->quantity . ' ' . $ig->measurementUnit; ?></span>
+                        </li>
                     <?php } ; ?>
-                    <li>Ola</li>
                 </ul>
             </div>
 
