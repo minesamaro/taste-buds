@@ -44,32 +44,33 @@ head("Recipe");
 
     <body>
 
-        <!-- Recipe Header Section -->
-        <section class="recipe-practicalinfo">
-            <h1 id="recipe-title"><?php echo $recipe->name; ?></h1>
-            <div id="recipe-details">
-                <span id="recipe-detail_time">Time: <?php echo $recipe->preparationTime; ?> min</span>
-                <span id="recipe-detail_difficulty">Difficulty: <?php echo $recipe->difficulty; ?></span>
-                <span id="recipe-detail_serving">Servings: <?php echo $recipe->numberOfServings; ?></span>
-                <span id="recipe-detail_rating">Rating: 
-                    <?php            
-                        if ($recipe_mean_rating == 0) {
-                            echo "There are no ratings for this recipe yet.";
-                        } else {
-                            echo $recipe_mean_ratings;
-                        }
-                    ?>
-                </span>
-            </div>
-        </section>
+    <div class="recipe-content_container">
 
-        <!-- Recipe Photo Section -->
-        <section class="recipe-photo">
-            <img src="<?php echo $recipe->image; ?>" alt="<?php echo $recipe->name.' photo '; ?>">
-        </section>
+        <section class="recipe-initial_info">
 
-        <!-- Recipe Main Content Section -->
-        <section class="recipe-content">
+            <!-- Recipe Header Section -->
+            <section class="recipe-practicalinfo">
+                <h1 id="recipe-title"><?php echo $recipe->name; ?></h1>
+                <div id="recipe-details">
+                    <span id="recipe-detail_time">Time: <?php echo $recipe->preparationTime; ?> min</span>
+                    <span id="recipe-detail_difficulty">Difficulty: <?php echo $recipe->difficulty; ?></span>
+                    <span id="recipe-detail_serving">Servings: <?php echo $recipe->numberOfServings; ?></span>
+                    <span id="recipe-detail_rating">Rating: 
+                        <?php            
+                            if ($recipe_mean_rating == 0) {
+                                echo "No ratings yet";
+                            } else {
+                                echo $recipe_mean_ratings;
+                            }
+                        ?>
+                    </span>
+                </div>
+            </section>
+
+            <!-- Recipe Photo Section -->
+            <section class="recipe-photo">
+                <img src="<?php echo $recipe->image; ?>" alt="<?php echo $recipe->name.' photo '; ?>">
+            </section>
 
             <!-- Chef Info and Nutritionist Verification -->
             <div class="recipe-chef_info">
@@ -89,6 +90,11 @@ head("Recipe");
                 }
             ?>
 
+        </section>
+
+        <!-- Recipe Main Content Section -->
+        <section class="recipe-main_content">
+
             <!-- Ingredients List -->
             <div class="recipe-ingredients">
                 <h2>Ingredients</h2>
@@ -104,9 +110,13 @@ head("Recipe");
 
             <!-- Preparation Method -->
             <div class="recipe-preparation">
-                <h2>Preparation Method</h2>
+                <h2>Preparation</h2>
                 <p><?php echo $recipe->preparationMethod; ?></p>
             </div>
+
+        </section>
+
+        <section class="recipe-final_info">
 
             <!-- Nutritional Info -->
             <div class="recipe-nutritional_info">
@@ -146,6 +156,8 @@ head("Recipe");
 
             </div>
         </section>
+
+    </div>
 
         <!-- Include your CSS file -->
     </body>

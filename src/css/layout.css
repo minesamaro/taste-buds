@@ -109,33 +109,48 @@ footer > div {
 
 
 /* Recipe Page */
+/* ver se na primeira part eé melhor usar grid ou blocks */ 
+
+.recipe-content_container {
+  width: 80%; /* Adjust this to the width you want */
+  margin: 0 auto;
+}
+
 .recipe-practicalinfo {
-  position: static;
-  text-align: center;
   display: block;
+  margin: 0 auto;
+  text-align: center;
   grid-template-columns: repeat(4, 1fr); /* Four columns, evenly spaced */
   gap: 10px; /* Adjust the gap between elements as needed */
   width: 100%;
   max-width: 1000px;
-  margin: 0 auto;
+  
 }
 
 .recipe-practicalinfo > #recipe-title {
   display: block;
+  margin: 0 auto;
   text-align: center;
   width: 100%;
-  margin: 0 auto;
 }
 
 .recipe-practicalinfo > #recipe-details {
-  display: block;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  margin: 0 auto;
   text-align: center;
   width: 100%;
-  margin: 0 auto;
 }
 
-.recipe-photo {
+
+
+.recipe-photo img {
+  padding: 10px;  /** ver se isto assim se adapta a ecrãs ou se é melhor adaptar */
   display: block;
+  margin: 0 auto;
+  width: 50%;
+  max-width: 100%; /** ver melhor esta parte de como ajustar o tamanho da imagem */
+  height: auto;
 }
 
 /** Profile layout*/
