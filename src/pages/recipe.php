@@ -49,42 +49,44 @@ head("Recipe");
         <section class="recipe-initial_info">
 
             <!-- Recipe Header Section -->
-            <section class="recipe-practicalinfo">
+            <div class="recipe-title">
                 <h1 id="recipe-title"><?php echo $recipe->name; ?></h1>
-                <div id="recipe-details">
-                    <span id="recipe-detail_time">Time: <?php echo $recipe->preparationTime; ?> min</span>
-                    <span id="recipe-detail_difficulty">Difficulty: <?php echo $recipe->difficulty; ?></span>
-                    <span id="recipe-detail_serving">Servings: <?php echo $recipe->numberOfServings; ?></span>
-                    <span id="recipe-detail_rating">Rating: 
-                        <?php            
-                            if ($recipe_mean_rating == 0) {
-                                echo "No ratings yet";
-                            } else {
-                                echo $recipe_mean_ratings;
-                            }
-                        ?>
-                    </span>
-                </div>
-            </section>
-
-            <!-- Recipe Photo Section -->
-            <section class="recipe-photo">
-                <img src="<?php echo $recipe->image; ?>" alt="<?php echo $recipe->name.' photo '; ?>">
-            </section>
-
-            <!-- Chef Info and Nutritionist Verification -->
-            <div class="recipe-chef_submission_info">
-                <p>Chef: <?php echo 'Published on ' . (new DateTime($recipe->submissionDate))->format('d-m-Y'). ' by ' . $chef->first_name . ' ' . $chef->surname; ?></p>
             </div>
 
-            <div class="recipe-nutritionist_verified"> <!-- ver isto!!!! -->
+            <span id="recipe-detail_time">Time: <?php echo $recipe->preparationTime; ?> min</span>
+            <span id="recipe-detail_difficulty">Difficulty: <?php echo $recipe->difficulty; ?></span>
+            <span id="recipe-detail_serving">Servings: <?php echo $recipe->numberOfServings; ?></span>
+            <span id="recipe-detail_rating">Rating: 
+                <?php            
+                    if ($recipe_mean_rating == 0) {
+                        echo "No ratings yet";
+                    } else {
+                        echo $recipe_mean_ratings;
+                    }
+                ?>
+            </span>
+            
+            
+
+            <!-- Recipe Photo Section -->
+            <div class="recipe-photo">
+                <img src="<?php echo $recipe->image; ?>" alt="<?php echo $recipe->name.' photo '; ?>">
+                </div>
+
+            <!-- Chef Info and Nutritionist Verification -->
+            <span class="recipe-chef_submission_info">
+                <p><?php echo 'By Chef ' . $chef->first_name . ' ' . $chef->surname . ' on ' . (new DateTime($recipe->submissionDate))->format('d-m-Y'); ?></p>
+            </span>
+
+            <span class="recipe-nutritionist_verified"> <!-- ver isto!!!! -->
             <?php
                 if ($nutritionist_approval) {
-                    echo 'Verified by Nutritionist ' . $nutritionist->first_name . ' ' . $nutritionist->surname . ' on ' . (new DateTime($nutritionist_approval->approval_date))->format('d-m-Y');
+                    echo 'Verified by Nutritionist ' . $nutritionist->first_name . ' ' . $nutritionist->surname;
                 } else {
                     echo 'Not Nutritionist Verified';
                 }
             ?>
+            </span>
 
         </section>
 
@@ -92,8 +94,8 @@ head("Recipe");
         <section class="recipe-main_content">
 
             <!-- Ingredients List -->
-            <div class="recipe-ingredients">
-                <h2>Ingredients</h2>
+            <h2 id="recipe-ingredients_title">Ingredients</h2>
+            <aside class="recipe-ingredients">
                 <ul>
                     <?php foreach ($ingredients as $ig) { ?>
                         <li class="recipe-ingredient">
@@ -102,11 +104,12 @@ head("Recipe");
                         </li>
                     <?php } ; ?>
                 </ul>
-            </div>
+                    </aside>
 
             <!-- Preparation Method -->
+            <h2 id="recipe-preparation_title">Preparation</h2>
             <div class="recipe-preparation">
-                <h2>Preparation</h2>
+                
                 <p><?php echo $recipe->preparationMethod; ?></p>
             </div>
 
@@ -115,8 +118,10 @@ head("Recipe");
         <section class="recipe-final_info">
 
             <!-- Nutritional Info -->
+            <h2 id="recipe-nutri_info_title">Nutritional Information</h2>
+
             <div class="recipe-nutritional_info">
-                <h2>Nutritional Information</h2>
+                
                 <div class="recipe-nutrient">
                     <span>Energy: <?php echo $recipe->energy; ?> kcal</span>
                     <span>Protein: <?php echo $recipe->protein; ?> g</span>
@@ -126,8 +131,10 @@ head("Recipe");
             </div>
 
             <!-- Additional Info - Recipe Tags -->
-            <div class="additional-info">
-                <h2>Additional Information</h2>  <!-- ver nome melhor para aqui!!!!!! -->
+            <h2 id="recipe-tags_title">Tags</h2>  <!-- ver nome melhor para aqui!!!!!! -->
+            
+            <div class="recipe-tags">
+                
                
                 <!-- Cooking Techniques -->
                 <div class="recipe-tag_item">Cooking Techniques:
