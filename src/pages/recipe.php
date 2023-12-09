@@ -121,12 +121,23 @@ head("Recipe");
             <h2 id="recipe-nutri_info_title">Nutritional Information</h2>
 
             <div class="recipe-nutritional_info">
-                
                 <div class="recipe-nutrient">
-                    <span>Energy: <?php echo $recipe->energy; ?> kcal</span>
-                    <span>Protein: <?php echo $recipe->protein; ?> g</span>
-                    <span>Fat: <?php echo $recipe->fat; ?> g</span>
-                    <span>Carbohydrates: <?php echo $recipe->carbohydrates; ?> g</span>
+                    <div class="nutrient-item" id="recipe-energy">
+                        <span class="nutrient-label">Energy:</span>
+                        <span class="vnutrient-alue"><?php echo $recipe->energy; ?> kcal</span>
+                    </div>
+                    <div class="nutrient-item" id="recipe-protein">
+                        <span class="nutrient-label">Protein:</span>
+                        <span class="nutrient-value"><?php echo $recipe->protein; ?> g</span>
+                    </div>
+                    <div class="nutrient-item" id="recipe-fat">
+                        <span class="nutrient-label">Fat:</span>
+                        <span class="nutrient-value"><?php echo $recipe->fat; ?> g</span>
+                    </div>
+                    <div class="nutrient-item" id="recipe-carbs">
+                        <span class="nutrient-label">Carbohydrates:</span>
+                        <span class="nutrient-value"><?php echo $recipe->carbohydrates; ?> g</span>
+                    </div>
                 </div>
             </div>
 
@@ -144,14 +155,14 @@ head("Recipe");
                 </div>
 
                 <!-- Food Categories -->
-                <div class="recipetag-item">Food Categories:
+                <div class="recipe-tag_item">Food Categories:
                     <?php foreach ($food_categories as $fc) {
                         echo $fc->category . '<br>';
                     } ?>
                 </div>
 
                 <!-- Dietary Preferences -->
-                <div class="recipetag-item">Dietary Preferences:
+                <div class="recipe-tag_item">Dietary Preferences:
                     <?php foreach ($dietary_prefs as $dp) {
                         echo $dp->dietaryPref . '<br>';
                     } ?>

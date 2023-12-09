@@ -247,11 +247,53 @@ footer > div {
 
   #recipe-nutri_info_title {
     grid-area: recipe-nutri_info_title;
+    display: flex;
+    flex-direction: column ;
   }
 
   .recipe-nutritional_info {
     grid-area: recipe-nutritional_info;
   }
+
+/** ver se há algo redundante nos 6 seguintes */
+  .recipe-nutrient {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-template-areas: 
+      "recipe-energy recipe-fat"
+      "recipe-carbs recipe-protein";
+    gap: 10px; /* Adjust the gap between spans as needed */
+    text-align: center;
+  }
+
+  .nutrient-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    align-self: center;
+    margin-bottom: 5%;
+  }
+
+  #recipe-energy {
+    grid-area: recipe-energy;
+  }
+
+  #recipe-fat {
+    grid-area: recipe-fat;
+  }
+
+  #recipe-carbs {
+    grid-area: recipe-carbs;
+  }
+
+  #recipe-protein {
+    grid-area: recipe-protein;
+  }
+
+  
+
 
 
 
