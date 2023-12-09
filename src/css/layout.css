@@ -112,45 +112,90 @@ footer > div {
 /* ver se na primeira part eé melhor usar grid ou blocks */ 
 
 .recipe-content_container {
-  width: 80%; /* Adjust this to the width you want */
+  width: 90%; /* Adjust this to the width you want */
   margin: 0 auto;
 }
 
-.recipe-practicalinfo {
+.recipe-initial_info {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: 2fr 1fr 5fr 1fr;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  grid-template-areas: "recipe-title recipe-title recipe-title recipe-title"
+                      " recipe-detail_time recipe-detail_difficulty recipe-detail_serving recipe-detail_rating"
+                      "recipe-photo recipe-photo recipe-photo recipe-photo"
+                      "recipe-chef_submission_info" "recipe-chef_submission_info" "recipe-nutritionist_verified" "recipe-nutritionist_verified";
+}
+
+/* .recipe-practicalinfo {
   display: block;
   margin: 0 auto;
   text-align: center;
   grid-template-columns: repeat(4, 1fr); /* Four columns, evenly spaced */
-  gap: 10px; /* Adjust the gap between elements as needed */
-  width: 100%;
+  /* gap: 10px; /* Adjust the gap between elements as needed */
+ /*  width: 100%;
   max-width: 1000px;
-  
-}
+   */
+/* } */ 
 
 .recipe-practicalinfo > #recipe-title {
-  display: block;
+  grid-area: recipe-title;
   margin: 0 auto;
   text-align: center;
   width: 100%;
 }
 
-.recipe-practicalinfo > #recipe-details {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
+.recipe-practicalinfo > #recipe-details > #recipe-detail_time {
+  grid-area: recipe-detail_time;
+  margin: 0 auto;
+  text-align: center;
+  width: 100%;
+}
+
+.recipe-practicalinfo > #recipe-details > #recipe-detail_difficulty {
+  grid-area: recipe-detail_difficulty;
+  margin: 0 auto;
+  text-align: center;
+  width: 100%;
+}
+
+.recipe-practicalinfo > #recipe-details > #recipe-detail_serving {
+  grid-area: recipe-detail_serving;
+  margin: 0 auto;
+  text-align: center;
+  width: 100%;
+}
+
+.recipe-practicalinfo > #recipe-details > #recipe-detail_rating {
+  grid-area: recipe-detail_rating;
   margin: 0 auto;
   text-align: center;
   width: 100%;
 }
 
 
+
+.recipe-photo {
+  grid-area: recipe-photo;
+}
 
 .recipe-photo img {
+  display: block;
   padding: 10px;  /** ver se isto assim se adapta a ecrãs ou se é melhor adaptar */
   display: block;
   margin: 0 auto;
-  width: 50%;
+  width: 40%;
   max-width: 100%; /** ver melhor esta parte de como ajustar o tamanho da imagem */
   height: auto;
+}
+
+.recipe-chef_submission_info {
+  grid-area: recipe-chef_submission_info;
+}
+
+.recipe-nutritionist_verified {
+  grid-area: recipe-nutritionist_verified;
 }
 
 /** Profile layout*/

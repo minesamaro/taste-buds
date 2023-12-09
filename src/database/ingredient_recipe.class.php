@@ -36,16 +36,16 @@ class IngredientRecipe
         );
         
         $stmt->bindParam(':recipeId', $recipeId, PDO::PARAM_INT);
-    
+        $stmt->execute();
         
         #$stmt->execute([$recipeId]);
         #$stmt->execute(array($recipeId));
         #$stmt->execute();
         $ingredientsResults = $stmt->fetchAll();
 
-        var_dump($recipeId);
-        var_dump($stmt);
-        var_dump($ingredientsResults);
+        #var_dump($recipeId);
+        #var_dump($stmt);
+        #var_dump($ingredientsResults);
 
         $ingredientRecipes = array();
 

@@ -73,12 +73,8 @@ head("Recipe");
             </section>
 
             <!-- Chef Info and Nutritionist Verification -->
-            <div class="recipe-chef_info">
-                <p>Chef: <?php echo $chef->first_name . ' ' . $chef->surname; ?></p>
-            </div>
-
-            <div class="recipe-submission_date">
-                <p><?php echo 'Published on ' . (new DateTime($recipe->submissionDate))->format('d-m-Y'); ?></p>
+            <div class="recipe-chef_submission_info">
+                <p>Chef: <?php echo 'Published on ' . (new DateTime($recipe->submissionDate))->format('d-m-Y'). ' by ' . $chef->first_name . ' ' . $chef->surname; ?></p>
             </div>
 
             <div class="recipe-nutritionist_verified"> <!-- ver isto!!!! -->
