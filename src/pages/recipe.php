@@ -1,7 +1,3 @@
-<!-- recipe_page.php; INACABADA -->
-
-
-
 <?php
     // Include necessary classes and retrieve recipe details
     require_once(__DIR__ . '/../views/footer.php');
@@ -211,14 +207,6 @@ head($recipe->name);
             </form>
         
         </section>
-
-      
-
-
-            
-
-
-
 
     </div>
 </body>
