@@ -11,6 +11,15 @@ class RecipeRating
     public int $recipeId;
 
     // Constructor and other methods as needed
+    public function __construct(string $ratingDate, int $ratingValue, ?string $comment, int $userId, int $recipeId)
+    {
+        // Initialize properties in the constructor
+        $this->ratingDate = $ratingDate;
+        $this->ratingValue = $ratingValue;
+        $this->comment = $comment;
+        $this->userId = $userId;
+        $this->recipeId = $recipeId;
+    }
 
     /**
      * Get RecipeRating by recipe ID - all ratings for one recipe
@@ -21,7 +30,7 @@ class RecipeRating
     static function getRecipeRatingsByRecipeId(int $recipeId): ?RecipeRating  // "?" in case the result is null (no ratings in database)
     {
         $db = Database::getDatabase();
-        $stmt = $db->prepare('SELECT * FROM RecipeRating WHERE recipe_id = ?');
+        $stmt = $db->prepare('SELECT * FROM RecipeRating WHERE recipe_id = ? ORDER BY rating_date DESC ');
         $stmt->execute([$recipeId]);
         $recipeRatingData = $stmt->fetch();
 
@@ -95,6 +104,45 @@ class RecipeRating
         }
 
         return $result;
+    }
+
+
+    /**
+     * Get the three most recent ratings for a specific recipe
+     *
+     * @param int $recipeId
+     * @return array
+     */
+    static function getRecentRatingsForRecipe(int $recipeId): array
+    {
+        $db = Database::getDatabase();
+        $stmt = $db->prepare(
+            'SELECT * FROM RecipeRating 
+            WHERE recipe_id = :recipeId 
+            ORDER BY rating_date DESC 
+            LIMIT 3'
+        );
+
+        $stmt->bindParam(':recipeId', $recipeId, PDO::PARAM_INT);
+        $stmt->execute();
+
+        $recentRatingsData = $stmt->fetchAll();
+
+        $recentRatings = array();
+        foreach ($recentRatingsData as $r) {
+            array_push(
+                $recentRatings,
+                new RecipeRating(
+                    $r['rating_date'],
+                    intval($r['rating_value']),
+                    $r['comment'],
+                    intval($r['user_id']),
+                    intval($r['recipe_id'])
+                )
+            );
+        }
+
+        return $recentRatings;
     }
 }
 

@@ -18,6 +18,8 @@
     
     // Get recipe id from the URL or wherever you have it
     $recipeId = $_GET['recipe_id'] ?? 1; // gets the id from the url
+    $userId = $_SESSION['user_id'] ?? 1; // gets the id from the session
+    $session_user = Person::getPersonById($userId);
 
 
     // Get recipe details
@@ -29,10 +31,10 @@
     $dietary_prefs=RecipeDietaryPref::getRecipeDietaryPreferences($recipeId);
     $recipe_mean_rating=RecipeRating::getMeanRatingForRecipe($recipeId);
     $nutritionist_approval = NutritionistApproval::getNutritionistApprovalForRecipe($recipeId);
-
     if($nutritionist_approval) {
         $nutritionist=Person::getPersonById($nutritionist_approval->nutritionist_id);
     }
+    $ratings=RecipeRating::getRecentRatingsForRecipe($recipeId);
 
 
 head("Recipe");
@@ -41,8 +43,7 @@ head("Recipe");
 <!DOCTYPE html>
 <html lang="en">
     
-
-    <body>
+<body>
 
     <div class="recipe-content_container">
 
@@ -171,8 +172,54 @@ head("Recipe");
             </div>
         </section>
 
-    </div>
+        <section class="recipe-ratings">
 
-        <!-- Include your CSS file -->
-    </body>
+            <div class="recipe-write_rating">
+                <h2 id="recipe-write_rating_title">Rate this recipe</h2>
+            
+                <form id="recipe_write_rating" action="../actions/action_write_recipe_rating.php"> 
+                    <div class="recipe-rating_username"> <? echo $session_user->username; ?> </div>
+
+                    <div class="form-group" id="form-recipe_rating_value">
+                    <label>Rating:
+                        <input type="n" id="recipe-write_rating_value" name="recipe-form_rating_value" value="0" min="0" max="5" step="1" required>        
+                    </label>
+
+                    <div class="form-group" id="form-recipe_rating_comment">
+                        <input type="text" id="recipe-write_rating_comment" name="recipe-form_rating_comment" placeholder="Write your comment here...">       
+                     </div>
+
+                    <button>Submit rating</button>
+                </form>
+            </div>
+
+            <div class="recipe-see_ratings">
+                <h2 id="recipe-see_ratings_title">Ratings from other users</h2>
+                
+                <?php foreach ($ratings as $rt) { 
+                    $rating_user=Person::getPersonById($rt->userId); ?>
+                    <!-- meter aqui profile photo -->
+                    <span class="recipe-rating_username"> <? echo $rating_user->username; ?> </span>
+                    <span class="recipe-rating_date"> <? echo $rt->ratingDate; ?> </span>
+                    <span class="recipe-rating_value"> <? echo $rt->ratingValue; ?> </span> <!-- meter dps com estrelinhas -->
+                    <span class="recipe-rating_comment"> <? echo $rt->comment; ?> </span>
+                <? } ?>
+            </div>
+
+            <form id="recipe_all_ratings" action="../actions/action_all_recipe_ratings.php"> <!-- fazemos um mini form que é só o botão para log out, vamos ter que criar o ficheiro action_logout.php -->
+                <button>See all ratings</button>
+            </form>
+        
+        </section>
+
+      
+
+
+            
+
+
+
+
+    </div>
+</body>
 </html>
