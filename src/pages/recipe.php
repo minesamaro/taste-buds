@@ -37,7 +37,7 @@
     $ratings=RecipeRating::getRecentRatingsForRecipe($recipeId);
 
 
-head("Recipe");
+head($recipe->name);
 ?>
 
 <!DOCTYPE html>
@@ -187,7 +187,7 @@ head("Recipe");
 
                     <div class="form-group" id="form-recipe_rating_comment">
                         <input type="text" id="recipe-write_rating_comment" name="recipe-form_rating_comment" placeholder="Write your comment here...">       
-                     </div>
+                    </div>
 
                     <button>Submit rating</button>
                 </form>
