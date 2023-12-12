@@ -72,7 +72,7 @@ class RecipeRating
             return null;
         }
 
-        return new RecipeRanking(
+        return new RecipeRating(
             $recipeRatingData['rating_date'],
             intval($recipeRatingData['rating_value']),
             $recipeRatingData['comment'],
@@ -165,6 +165,23 @@ class RecipeRating
       ];
   
       return $stmt->execute($values);
+    }
+
+    /**
+     * Check if a user has already rated a specific recipe
+     *
+     * @param int $userId
+     * @param int $recipeId
+     * @return bool
+     */
+    static function checkUserRecipeRating(int $userId, int $recipeId): bool
+    {
+        $db = Database::getDatabase();
+        $stmt = $db->prepare('SELECT COUNT(*) FROM RecipeRating WHERE user_id = ? AND recipe_id = ?');
+        $stmt->execute([$userId, $recipeId]);
+        $count = $stmt->fetchColumn();
+
+        return $count > 0;
     }
 }
 

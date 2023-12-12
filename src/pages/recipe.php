@@ -74,7 +74,7 @@ head($recipe->name);
                     if ($recipe_mean_rating == 0) {
                         echo "No ratings yet";
                     } else {
-                        echo $recipe_mean_ratings;
+                        echo $recipe_mean_rating;
                     }
                 ?>
             </span>
@@ -186,24 +186,39 @@ head($recipe->name);
 
         <section class="recipe-ratings">
 
-            <div class="recipe-write_rating">
-                <h2 id="recipe-write_rating_title">Rate this recipe</h2>
-            
-                <form id="recipe_write_rating" action="../actions/action_write_recipe_rating.php" method="post"> 
-                    <div class="recipe-rating_username"> <? echo $session_user->username; ?> </div>
+            <?php  if (!RecipeRating::checkUserRecipeRating($userId, $recipeId)) { ?>
+                <div class="recipe-write_rating">
+                    <h2 id="recipe-write_rating_title">Rate this recipe</h2>
+                
+                    <form id="recipe_write_rating" action="../actions/action_write_recipe_rating.php" method="post"> 
+                        <div class="recipe-rating_username"> <? echo $session_user->username; ?> </div>
 
-                    <div class="form-group" id="form-recipe_rating_value">
-                    <label>Rating:
-                        <input type="n" id="recipe-write_rating_value" name="recipe-write_rating_value" min="0" max="5" step="1" required>        
-                    </label>
+                        <div class="form-group" id="form-recipe_rating_value">
+                        <label>Rating:
+                            <input type="n" id="recipe-write_rating_value" name="recipe-write_rating_value" min="0" max="5" step="1" required>        
+                        </label>
 
-                    <div class="form-group" id="form-recipe_rating_comment">
-                        <input type="text" id="recipe-write_rating_comment" name="recipe-write_rating_comment" placeholder="Write your comment here...">       
-                    </div>
+                        <div class="form-group" id="form-recipe_rating_comment">
+                            <input type="text" id="recipe-write_rating_comment" name="recipe-write_rating_comment" placeholder="Write your comment here...">       
+                        </div>
 
-                    <button>Submit rating</button>
-                </form>
-            </div>
+                        <button>Submit rating</button>
+                    </form>
+                </div>
+            <?php } else { ?>
+
+                <div class="recipe-already_user_rated">
+                    <h2 id="recipe-already_user_rated_title">Your rating for this recipe</h2>
+
+                    <?php $session_user_rating=RecipeRating::getRecipeRatingByRecipeAndUser($recipeId, $userId); ?>
+
+                    <span class="recipe-rating_username"> <? echo $session_user->username; ?> </span>
+                    <span class="recipe-rating_date"> <? echo $session_user_rating->ratingDate; ?> </span>
+                    <span class="recipe-rating_value"> <? echo $session_user_rating->ratingValue; ?> </span> 
+                    <span class="recipe-rating_comment"> <? echo $session_user_rating->comment; ?> </span>
+
+                </div>
+            <?php } ?>
 
             <div class="recipe-see_ratings">
                 <h2 id="recipe-see_ratings_title">Ratings from other users</h2>
