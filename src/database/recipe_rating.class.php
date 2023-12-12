@@ -144,6 +144,28 @@ class RecipeRating
 
         return $recentRatings;
     }
+
+
+    public static function addRating(array $ratingData): bool
+    {
+      $db = Database::getDatabase();
+  
+      $stmt = $db->prepare(
+        'INSERT INTO RecipeRating 
+         (rating_date, rating_value, comment, user_id, recipe_id)
+         VALUES (?, ?, ?, ?, ?)'
+      );
+  
+      $values = [
+        $ratingData['rating_date'],
+        $ratingData['rating_value'],
+        $ratingData['comment'],
+        $ratingData['user_id'],
+        $ratingData['recipe_id'],
+      ];
+  
+      return $stmt->execute($values);
+    }
 }
 
 ?>

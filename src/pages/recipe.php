@@ -1,4 +1,6 @@
 <?php
+ session_start();
+ 
     // Include necessary classes and retrieve recipe details
     require_once(__DIR__ . '/../views/footer.php');
     require_once(__DIR__ . '/../views/header.php');
@@ -11,6 +13,20 @@
     require_once (__DIR__ . '/../database/recipe_dietarypref.class.php');
     require_once(__DIR__ . '/../database/recipe_rating.class.php');
     require_once(__DIR__ . '/../database/nutritionist_approval.class.php');
+    require_once(__DIR__ . '/../actions/action_write_recipe_rating.php');
+
+    
+    
+    if (isset($_SESSION['msg'])){
+        $msg = $_SESSION['msg'];
+        unset($_SESSION['msg']);
+        echo $msg;
+    }
+    else {
+        $msg = null;
+    }
+    
+
     
     // Get recipe id from the URL or wherever you have it
     $recipeId = $_GET['recipe_id'] ?? 1; // gets the id from the url
@@ -173,16 +189,16 @@ head($recipe->name);
             <div class="recipe-write_rating">
                 <h2 id="recipe-write_rating_title">Rate this recipe</h2>
             
-                <form id="recipe_write_rating" action="../actions/action_write_recipe_rating.php"> 
+                <form id="recipe_write_rating" action="../actions/action_write_recipe_rating.php" method="post"> 
                     <div class="recipe-rating_username"> <? echo $session_user->username; ?> </div>
 
                     <div class="form-group" id="form-recipe_rating_value">
                     <label>Rating:
-                        <input type="n" id="recipe-write_rating_value" name="recipe-form_rating_value" value="0" min="0" max="5" step="1" required>        
+                        <input type="n" id="recipe-write_rating_value" name="recipe-write_rating_value" min="0" max="5" step="1" required>        
                     </label>
 
                     <div class="form-group" id="form-recipe_rating_comment">
-                        <input type="text" id="recipe-write_rating_comment" name="recipe-form_rating_comment" placeholder="Write your comment here...">       
+                        <input type="text" id="recipe-write_rating_comment" name="recipe-write_rating_comment" placeholder="Write your comment here...">       
                     </div>
 
                     <button>Submit rating</button>
