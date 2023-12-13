@@ -217,10 +217,11 @@ class RecipeRating
     {
         $db = Database::getDatabase();
         $stmt = $db->prepare(
-            'SELECT AVG(rating_value) AS mean_rating 
+            'SELECT ROUND(AVG(rating_value), 1) AS mean_rating 
             FROM RecipeRating 
-            WHERE recipe_id = ?');
-        $stmt->execute([$recipeId]);
+            WHERE recipe_id = :recipeId');
+        $stmt->bindParam(':recipeId', $recipeId, PDO::PARAM_INT);
+        $stmt->execute();
         $result = $stmt->fetch();
 
         if (!$result) {
