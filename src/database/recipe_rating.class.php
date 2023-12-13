@@ -32,7 +32,8 @@ class RecipeRating
     {
         $db = Database::getDatabase();
 
-        $ratings=array();
+        $ratings = array();
+        $recipeRatingData = array();
 
         // Check if the user is logged in
         if ($userId) {
@@ -41,8 +42,8 @@ class RecipeRating
 
             if ($userRating) {
                 // If the user has submitted a rating, add it to the list
-                array_push($ratings, $userRating);
-            }
+                array_push($ratings, $userRating);}
+            
 
             $stmt = $db->prepare(
                 'SELECT * FROM RecipeRating 
@@ -52,40 +53,34 @@ class RecipeRating
 
             $stmt->bindParam(':recipeId', $recipeId, PDO::PARAM_INT);
             $stmt->bindParam(':userId', $userId, PDO::PARAM_INT);
-
+            $stmt->execute();
+            $recipeRatingData = $stmt->fetchAll(PDO::FETCH_ASSOC);
         } else {
-            $userRating = null; 
-        
+            $userRating = null;
+
             $stmt = $db->prepare(
                 'SELECT * FROM RecipeRating 
                 WHERE recipe_id = :recipeId
                 ORDER BY rating_date DESC '
             );
-
             $stmt->bindParam(':recipeId', $recipeId, PDO::PARAM_INT);
+            $stmt->execute();
+            
+            $recipeRatingData = $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
 
-            $stmt->execute();
-            var_dump($stmt->execute());
-
-            $recipeRatingData = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-
-        if (!$recipeRatingData && !$userRating) {
+        if (empty($recipeRatingData) && !$userRating) {
             return null;
         }
 
         foreach ($recipeRatingData as $rrs) {
-        array_push(
-            $ratings,
-            new RecipeRating(
+            array_push( $ratings, new RecipeRating(
                 $rrs['rating_date'],
                 intval($rrs['rating_value']),
                 $rrs['comment'],
                 intval($rrs['user_id']),
                 intval($rrs['recipe_id'])
-            )
-        );
+            ));
         }
         return $ratings;
     }
@@ -100,8 +95,10 @@ class RecipeRating
     static function getRecipeRatingByRecipeAndUser(int $recipeId, int $userId): ?RecipeRating
     {
         $db = Database::getDatabase();
-        $stmt = $db->prepare('SELECT * FROM RecipeRating WHERE recipe_id = ? AND user_id = ?');
-        $stmt->execute([$recipeId, $userId]);
+        $stmt = $db->prepare('SELECT * FROM RecipeRating WHERE recipe_id = :recipeId AND user_id = :userId');
+        $stmt->bindParam(':recipeId', $recipeId, PDO::PARAM_INT);
+        $stmt->bindParam(':userId', $userId, PDO::PARAM_INT);
+        $stmt->execute();
         $recipeRatingData = $stmt->fetch();
 
         if (!$recipeRatingData) {
@@ -129,6 +126,7 @@ class RecipeRating
         $db = Database::getDatabase();
 
         $ratings = array();
+        $recentRatingsData = array();
 
         // Check if the user is logged in
         if ($userId) {
@@ -138,30 +136,60 @@ class RecipeRating
             if ($userRating) {
                 // If the user has submitted a rating, add it to the list
                 array_push($ratings, $userRating);
+
+                $remainingLimit = 2;
+
+                 // Retrieve additional recent ratings to complete the list
+                $stmt = $db->prepare(
+                    'SELECT * FROM RecipeRating 
+                    WHERE recipe_id = :recipeId AND user_id != :userId
+                    ORDER BY rating_date DESC 
+                    LIMIT :limit'
+                );
+
+                $stmt->bindParam(':recipeId', $recipeId, PDO::PARAM_INT);
+                $stmt->bindParam(':userId', $userId, PDO::PARAM_INT);
+                $stmt->bindValue(':limit', $remainingLimit, PDO::PARAM_INT);
+                $stmt->execute();
+                $recentRatingsData = $stmt->fetchAll(PDO::FETCH_ASSOC);
             }
+            else {
+                $remainingLimit = 3;
+
+                 // Retrieve additional recent ratings to complete the list
+                $stmt = $db->prepare(
+                    'SELECT * FROM RecipeRating 
+                    WHERE recipe_id = :recipeId
+                    ORDER BY rating_date DESC 
+                    LIMIT :limit'
+                );
+
+                $stmt->bindParam(':recipeId', $recipeId, PDO::PARAM_INT);
+                $stmt->bindValue(':limit', $remainingLimit, PDO::PARAM_INT);
+                $stmt->execute();
+                $recentRatingsData = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            }
+        } else {
+
+            $remainingLimit = 3;
+        
+            // Retrieve additional recent ratings to complete the list
+            $stmt = $db->prepare(
+                'SELECT * FROM RecipeRating 
+                WHERE recipe_id = :recipeId
+                ORDER BY rating_date DESC 
+                LIMIT :limit'
+            );
+
+            $stmt->bindParam(':recipeId', $recipeId, PDO::PARAM_INT);
+            $stmt->bindValue(':limit', $remainingLimit, PDO::PARAM_INT);
+            $stmt->execute();
+            $recentRatingsData = $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
-        else {
-            $userRating = null; }
 
-        // Calculate the remaining limit based on whether the user has submitted a rating - 2 if yes, 3 if no
-        $remainingLimit = $userRating ? 2 : 3;
 
-        // Retrieve additional recent ratings to complete the list
-        $stmt = $db->prepare(
-            'SELECT * FROM RecipeRating 
-            WHERE recipe_id = :recipeId AND user_id != :userId
-            ORDER BY rating_date DESC 
-            LIMIT :limit'
-        );
 
-        $stmt->bindParam(':recipeId', $recipeId, PDO::PARAM_INT);
-        $stmt->bindParam(':userId', $userId, PDO::PARAM_INT);
-        $stmt->bindValue(':limit', $remainingLimit, PDO::PARAM_INT);
-        $stmt->execute();
-
-        $recentRatingsData = $stmt->fetchAll();
-
-        if (!$recentRatingsData && !$userRating) {
+        if (empty($recentRatingsData) && !$userRating) {
             return null; // No ratings for this recipe 
         }
 
@@ -174,7 +202,6 @@ class RecipeRating
                 intval($r['recipe_id'])
             ));
         }
-
         return $ratings;
     }
 
@@ -209,23 +236,23 @@ class RecipeRating
 
     public static function addRating(array $ratingData): bool
     {
-      $db = Database::getDatabase();
-  
-      $stmt = $db->prepare(
-        'INSERT INTO RecipeRating 
-         (rating_date, rating_value, comment, user_id, recipe_id)
-         VALUES (?, ?, ?, ?, ?)'
-      );
-  
-      $values = [
-        $ratingData['rating_date'],
-        $ratingData['rating_value'],
-        $ratingData['comment'],
-        $ratingData['user_id'],
-        $ratingData['recipe_id'],
-      ];
-  
-      return $stmt->execute($values);
+        $db = Database::getDatabase();
+    
+        $stmt = $db->prepare(
+            'INSERT INTO RecipeRating 
+            (rating_date, rating_value, comment, user_id, recipe_id)
+            VALUES (:rating_date, :rating_value, :comment, :user_id, :recipe_id)'
+        );
+    
+        // Bind parameters
+        $stmt->bindParam(':rating_date', $ratingData['rating_date'], PDO::PARAM_STR);
+        $stmt->bindParam(':rating_value', $ratingData['rating_value'], PDO::PARAM_INT);
+        $stmt->bindParam(':comment', $ratingData['comment'], PDO::PARAM_STR);
+        $stmt->bindParam(':user_id', $ratingData['user_id'], PDO::PARAM_INT);
+        $stmt->bindParam(':recipe_id', $ratingData['recipe_id'], PDO::PARAM_INT);
+    
+        // Execute the query
+        return $stmt->execute();
     }
 
     /**
@@ -238,8 +265,10 @@ class RecipeRating
     static function checkUserRecipeRating(int $userId, int $recipeId): bool
     {
         $db = Database::getDatabase();
-        $stmt = $db->prepare('SELECT COUNT(*) FROM RecipeRating WHERE user_id = ? AND recipe_id = ?');
-        $stmt->execute([$userId, $recipeId]);
+        $stmt = $db->prepare('SELECT COUNT(*) FROM RecipeRating WHERE user_id = :userId AND recipe_id = :recipeId');
+        $stmt->bindParam(':userId', $userId, PDO::PARAM_INT);
+        $stmt->bindParam(':recipeId', $recipeId, PDO::PARAM_INT);
+        $stmt->execute();
         $count = $stmt->fetchColumn();
 
         return $count > 0;

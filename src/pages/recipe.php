@@ -51,7 +51,6 @@
     // Get most recent ratings and count all the ratings for the specific recipe
     $ratings=RecipeRating::getRecentRatingsForRecipe($recipeId, $userId);
     $all_ratings = RecipeRating::getRecipeRatingsByRecipeId($recipeId, $userId);
-    var_dump($all_ratings);
 
 head($recipe->name);
 ?>
@@ -195,7 +194,12 @@ head($recipe->name);
         <!-- Ratings Section -->
         <section class="recipe-ratings">
             
-            <h2 id="recipe-see_ratings_title">Ratings (<?php echo count($all_ratings) ?? 0; ?>)</h2>
+            <h2 id="recipe-see_ratings_title">Ratings (<?php
+                if ($all_ratings) { 
+                    echo count($all_ratings); 
+                } else {
+                    echo 0;
+                } ?>)</h2>
 
             <?php if($userId) {
 

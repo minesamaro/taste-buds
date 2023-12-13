@@ -1,5 +1,5 @@
 <?php
-//session_start(); ver esta parte, dá-me um warning se nao estiver comentado
+session_start(); //ver esta parte, dá-me um warning se nao estiver comentado
 
 // Include the RecipeRating class
 require_once(__DIR__ . '/../database/recipe_rating.class.php');
