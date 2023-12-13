@@ -91,7 +91,12 @@
             );
         }
 
-        static function getPersonById(int $user_id) : Person {
+        static function getPersonById(?int $user_id) : Person {
+
+            if(!$user_id) {
+                return null;
+            }
+
             $db = Database::getDatabase();
             $stmt = $db->prepare(
                 'SELECT id, username, first_name, surname, email, password, birth_date, gender

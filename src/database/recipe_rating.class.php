@@ -27,21 +27,57 @@ class RecipeRating
      * @param int $recipeId
      * @return RecipeRating|null
      */
-    static function getRecipeRatingsByRecipeId(int $recipeId): ?RecipeRating  // "?" in case the result is null (no ratings in database)
+    
+    static function getRecipeRatingsByRecipeId(int $recipeId, ?int $userId): ?array  // "?" in case the result is null (no ratings in database)
     {
         $db = Database::getDatabase();
-        $stmt = $db->prepare('SELECT * FROM RecipeRating WHERE recipe_id = ? ORDER BY rating_date DESC ');
-        $stmt->execute([$recipeId]);
-        $recipeRatingData = $stmt->fetch();
 
-        if (!$recipeRatingData) {
+        $ratings=array();
+
+        // Check if the user is logged in
+        if ($userId) {
+            // Retrieve the user's rating for the recipe, if any
+            $userRating = self::getRecipeRatingByRecipeAndUser($recipeId, $userId);
+
+            if ($userRating) {
+                // If the user has submitted a rating, add it to the list
+                array_push($ratings, $userRating);
+            }
+
+            $stmt = $db->prepare(
+                'SELECT * FROM RecipeRating 
+                WHERE recipe_id = :recipeId AND user_id != :userId
+                ORDER BY rating_date DESC '
+            );
+
+            $stmt->bindParam(':recipeId', $recipeId, PDO::PARAM_INT);
+            $stmt->bindParam(':userId', $userId, PDO::PARAM_INT);
+
+        } else {
+            $userRating = null; 
+        
+            $stmt = $db->prepare(
+                'SELECT * FROM RecipeRating 
+                WHERE recipe_id = :recipeId
+                ORDER BY rating_date DESC '
+            );
+
+            $stmt->bindParam(':recipeId', $recipeId, PDO::PARAM_INT);
+        }
+
+            $stmt->execute();
+            var_dump($stmt->execute());
+
+            $recipeRatingData = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+
+        if (!$recipeRatingData && !$userRating) {
             return null;
         }
 
-        $recipeRatings = array();
         foreach ($recipeRatingData as $rrs) {
         array_push(
-            $recipeRatings,
+            $ratings,
             new RecipeRating(
                 $rrs['rating_date'],
                 intval($rrs['rating_value']),
@@ -51,7 +87,7 @@ class RecipeRating
             )
         );
         }
-        return $recipeRatings;
+        return $ratings;
     }
 
     /**
@@ -81,6 +117,69 @@ class RecipeRating
         );
     }
 
+
+     /**
+     * Get the three most recent ratings for a specific recipe
+     *
+     * @param int $recipeId
+     * @return array
+     */
+    static function getRecentRatingsForRecipe(int $recipeId, ?int $userId): ?array // "?" in case the result is null (no ratings in database)
+    {
+        $db = Database::getDatabase();
+
+        $ratings = array();
+
+        // Check if the user is logged in
+        if ($userId) {
+            // Retrieve the user's rating for the recipe, if any
+            $userRating = self::getRecipeRatingByRecipeAndUser($recipeId, $userId);
+
+            if ($userRating) {
+                // If the user has submitted a rating, add it to the list
+                array_push($ratings, $userRating);
+            }
+        }
+        else {
+            $userRating = null; }
+
+        // Calculate the remaining limit based on whether the user has submitted a rating - 2 if yes, 3 if no
+        $remainingLimit = $userRating ? 2 : 3;
+
+        // Retrieve additional recent ratings to complete the list
+        $stmt = $db->prepare(
+            'SELECT * FROM RecipeRating 
+            WHERE recipe_id = :recipeId AND user_id != :userId
+            ORDER BY rating_date DESC 
+            LIMIT :limit'
+        );
+
+        $stmt->bindParam(':recipeId', $recipeId, PDO::PARAM_INT);
+        $stmt->bindParam(':userId', $userId, PDO::PARAM_INT);
+        $stmt->bindValue(':limit', $remainingLimit, PDO::PARAM_INT);
+        $stmt->execute();
+
+        $recentRatingsData = $stmt->fetchAll();
+
+        if (!$recentRatingsData && !$userRating) {
+            return null; // No ratings for this recipe 
+        }
+
+        foreach ($recentRatingsData as $r) {
+            array_push( $ratings, new RecipeRating(
+                $r['rating_date'],
+                intval($r['rating_value']),
+                $r['comment'],
+                intval($r['user_id']),
+                intval($r['recipe_id'])
+            ));
+        }
+
+        return $ratings;
+    }
+
+
+
     /**
      * Get the mean ranking for a specific recipe
      *
@@ -106,44 +205,6 @@ class RecipeRating
         return $result;
     }
 
-
-    /**
-     * Get the three most recent ratings for a specific recipe
-     *
-     * @param int $recipeId
-     * @return array
-     */
-    static function getRecentRatingsForRecipe(int $recipeId): array
-    {
-        $db = Database::getDatabase();
-        $stmt = $db->prepare(
-            'SELECT * FROM RecipeRating 
-            WHERE recipe_id = :recipeId 
-            ORDER BY rating_date DESC 
-            LIMIT 3'
-        );
-
-        $stmt->bindParam(':recipeId', $recipeId, PDO::PARAM_INT);
-        $stmt->execute();
-
-        $recentRatingsData = $stmt->fetchAll();
-
-        $recentRatings = array();
-        foreach ($recentRatingsData as $r) {
-            array_push(
-                $recentRatings,
-                new RecipeRating(
-                    $r['rating_date'],
-                    intval($r['rating_value']),
-                    $r['comment'],
-                    intval($r['user_id']),
-                    intval($r['recipe_id'])
-                )
-            );
-        }
-
-        return $recentRatings;
-    }
 
 
     public static function addRating(array $ratingData): bool

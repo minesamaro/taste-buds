@@ -16,7 +16,7 @@
     require_once(__DIR__ . '/../actions/action_write_recipe_rating.php');
 
     
-    
+    // messages - ex. when a person submits a rating
     if (isset($_SESSION['msg'])){
         $msg = $_SESSION['msg'];
         unset($_SESSION['msg']);
@@ -26,13 +26,14 @@
         $msg = null;
     }
     
-
-    
     // Get recipe id from the URL or wherever you have it
     $recipeId = $_GET['recipe_id'] ?? 1; // gets the id from the url
-    $userId = $_SESSION['user_id'] ?? 1; // gets the id from the session
-    $session_user = Person::getPersonById($userId);
+    $userId = $_SESSION['user_id'] ?? null; // gets the id from the session
 
+    // Will be used later for checking whether user (if logged in) has commented
+    if ($userId) {
+        $session_user = Person::getPersonById($userId);
+    }
 
     // Get recipe details
     $recipe = Recipe::getRecipeById($recipeId);
@@ -46,8 +47,11 @@
     if($nutritionist_approval) {
         $nutritionist=Person::getPersonById($nutritionist_approval->nutritionist_id);
     }
-    $ratings=RecipeRating::getRecentRatingsForRecipe($recipeId);
 
+    // Get most recent ratings and count all the ratings for the specific recipe
+    $ratings=RecipeRating::getRecentRatingsForRecipe($recipeId, $userId);
+    $all_ratings = RecipeRating::getRecipeRatingsByRecipeId($recipeId, $userId);
+    var_dump($all_ratings);
 
 head($recipe->name);
 ?>
@@ -57,15 +61,18 @@ head($recipe->name);
     
 <body>
 
+    <!-- Recipe Page Main -->
     <div class="recipe-content_container">
 
+        <!-- Recipe Header Section - general info -->
         <section class="recipe-initial_info">
 
-            <!-- Recipe Header Section -->
+            <!-- Title -->
             <div class="recipe-title">
                 <h1 id="recipe-title"><?php echo $recipe->name; ?></h1>
             </div>
 
+            <!-- General Info -->
             <span id="recipe-detail_time">Time: <?php echo $recipe->preparationTime; ?> min</span>
             <span id="recipe-detail_difficulty">Difficulty: <?php echo $recipe->difficulty; ?></span>
             <span id="recipe-detail_serving">Servings: <?php echo $recipe->numberOfServings; ?></span>
@@ -128,6 +135,7 @@ head($recipe->name);
 
         </section>
 
+        <!-- Final Details - tags, nutri  info -->
         <section class="recipe-final_info">
 
             <!-- Nutritional Info -->
@@ -183,10 +191,16 @@ head($recipe->name);
 
             </div>
         </section>
-
+ 
+        <!-- Ratings Section -->
         <section class="recipe-ratings">
+            
+            <h2 id="recipe-see_ratings_title">Ratings (<?php echo count($all_ratings) ?? 0; ?>)</h2>
 
-            <?php  if (!RecipeRating::checkUserRecipeRating($userId, $recipeId)) { ?>
+            <?php if($userId) {
+
+
+              if (!RecipeRating::checkUserRecipeRating($userId, $recipeId)) { ?>
                 <div class="recipe-write_rating">
                     <h2 id="recipe-write_rating_title">Rate this recipe</h2>
                 
@@ -205,7 +219,11 @@ head($recipe->name);
                         <button>Submit rating</button>
                     </form>
                 </div>
-            <?php } else { ?>
+            <?php }} else {
+                echo "Log in to rate this recipe";
+            }
+
+           /*  else { ?>
 
                 <div class="recipe-already_user_rated">
                     <h2 id="recipe-already_user_rated_title">Your rating for this recipe</h2>
@@ -218,10 +236,9 @@ head($recipe->name);
                     <span class="recipe-rating_comment"> <? echo $session_user_rating->comment; ?> </span>
 
                 </div>
-            <?php } ?>
+            <?php } ?> */ ?>
 
             <div class="recipe-see_ratings">
-                <h2 id="recipe-see_ratings_title">Ratings from other users</h2>
                 
                 <?php foreach ($ratings as $rt) { 
                     $rating_user=Person::getPersonById($rt->userId); ?>
@@ -230,10 +247,15 @@ head($recipe->name);
                     <span class="recipe-rating_date"> <? echo $rt->ratingDate; ?> </span>
                     <span class="recipe-rating_value"> <? echo $rt->ratingValue; ?> </span> <!-- meter dps com estrelinhas -->
                     <span class="recipe-rating_comment"> <? echo $rt->comment; ?> </span>
-                <? } ?>
+                <? } 
+
+                if(!$ratings) {
+                    echo "No ratings yet";
+                } ?>
+
             </div>
 
-            <form id="recipe_all_ratings" action="../actions/action_all_recipe_ratings.php"> <!-- fazemos um mini form que é só o botão para log out, vamos ter que criar o ficheiro action_logout.php -->
+            <form id="recipe_all_ratings" action="../actions/action_seeAllRatings.php"> <!-- fazemos um mini form que é só o botão para log out, vamos ter que criar o ficheiro action_logout.php -->
                 <button>See all ratings</button>
             </form>
         
