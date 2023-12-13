@@ -145,7 +145,7 @@
         {
             $db = Database::getDatabase();
             try {
-                // Assuming 'chefs' is the table name for chefs
+                // Assuming 'chef' is the table name for chefs
                 $query = 'SELECT COUNT(*) FROM Chef WHERE chef_id = ?';
                 $stmt = $db->prepare($query);
                 $stmt->execute([$user_id]);
@@ -184,7 +184,7 @@
             $db = Database::getDatabase();
             try {
                 // Assuming 'nutritionists' is the table name for nutritionists
-                $query = 'SELECT COUNT(*) FROM Nutritionist WHERE id = ?';
+                $query = 'SELECT COUNT(*) FROM Nutritionist WHERE nutri_id = ?';
                 $stmt = $db->prepare($query);
                 $stmt->execute([$user_id]);
 
