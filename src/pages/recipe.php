@@ -55,8 +55,6 @@
 head($recipe->name);
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
     
 <body>
 
@@ -268,3 +266,7 @@ head($recipe->name);
     </div>
 </body>
 </html>
+
+<?php
+// footer(); está a aparecer em cima, why?
+?> 

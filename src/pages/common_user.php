@@ -1,13 +1,9 @@
-<!DOCTYPE html>
+<?php
+require_once('../views/header.php');
+require_once('../views/footer.php');
 
-<html lang="en">
-<head>
-    <title>Add personal details and goals:</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">      <!-- for device adaptation -->
-    <!-- Link your CSS file here -->
-    <link rel="stylesheet" href="login.css">
-</head>
+head('Common User - Add Personal Details');
+?>
 <body>
 
 <div class="register-container">        <!-- for css MUDAR DPS -->
@@ -51,3 +47,7 @@
 
 </body>
 </html>
+
+<?php
+footer();
+?>
