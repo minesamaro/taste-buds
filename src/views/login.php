@@ -1,17 +1,25 @@
 <?php
-function login($msg){ ?>
+function login(){ ?>
 
 <article class="content login-container">
-<?php if (!isset($_SESSION['username'])) { ?>
-    <h2>Log in to your account</h2>
-    <?php if (isset($msg)) { ?>
+
+<?php 
+    if (isset($_SESSION['msg'])){
+        $msg = $_SESSION['msg'];
+        unset($_SESSION['msg']); ?>
         <p><?php echo $msg ?></p> 
-    <?php } ?>
+    <?php } else {
+        $msg = null;
+    } 
+
+    if (!isset($_SESSION['username'])) { ?>
+    <h2>Log in to your account</h2>
+
     
     <form class="login-form" action="../actions/action_login.php" method="post">
         <div class="form-group">
             <label>Username:
-                <input type="text" id="username" name="username" required>        <!-- required since it must be filled out -->
+                <input type="text" id="username" name="username" required>      
             </label>
         </div>
 

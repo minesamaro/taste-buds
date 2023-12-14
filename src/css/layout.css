@@ -106,3 +106,215 @@ footer > div {
   grid-row: 1;
   grid-column: 1 / span 2;
 }
+
+
+/* Recipe Page */
+/* ver se na primeira part eé melhor usar grid ou blocks */ 
+
+.recipe-content_container {
+  width: 75%; /* Adjust this to the width you want */
+  margin: 0 auto;
+}
+
+.recipe-initial_info {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: 0.5fr 0.5fr 3fr 0.5fr;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  grid-template-areas: 
+    "recipe-title recipe-title recipe-title recipe-title"
+    "recipe-detail_time recipe-detail_difficulty recipe-detail_serving recipe-detail_rating" 
+    "recipe-photo recipe-photo recipe-photo recipe-photo"
+    "recipe-chef_submission_info recipe-chef_submission_info recipe-nutritionist_verified recipe-nutritionist_verified";
+}
+
+.recipe-title {
+  grid-area: recipe-title;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  align-self: flex-end;
+}
+
+#recipe-detail_time {
+  grid-area: recipe-detail_time;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  align-self: center;
+}
+
+#recipe-detail_difficulty {
+  grid-area: recipe-detail_difficulty;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  align-self: center;
+}
+
+#recipe-detail_serving {
+  grid-area: recipe-detail_serving;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  align-self: center;
+}
+
+#recipe-detail_rating {
+  grid-area: recipe-detail_rating;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  align-self: center;
+}
+
+.recipe-photo {
+  grid-area: recipe-photo;
+}
+
+.recipe-photo img {
+  display: block;
+  margin: 0 auto;
+  width: 40%;
+  max-width: 100%; /** ver melhor esta parte de como ajustar o tamanho da imagem */
+}
+
+.recipe-chef_submission_info {
+  grid-area: recipe-chef_submission_info;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  align-self: center;
+}
+
+.recipe-nutritionist_verified {
+  grid-area: recipe-nutritionist_verified;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  align-self: center;
+}
+
+
+.recipe-main_content {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 2.5fr;
+  grid-template-rows: 1fr auto;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  grid-template-areas: 
+    "recipe-ingredients_title . recipe-preparation_title"
+    "recipe-ingredients . recipe-preparation";
+  margin-top: 5%;
+  margin-bottom: 10%;
+}
+
+#recipe-ingredients_title {
+  grid-area: recipe-ingredients_title;
+}
+
+.recipe-ingredients {
+  grid-area: recipe-ingredients;
+}
+
+#recipe-preparation_title {
+  grid-area: recipe-preparation_title;
+}
+
+.recipe-preparation {
+  grid-area: recipe-preparation;
+}
+
+.recipe-final_info {
+  display: grid;
+  grid-template-columns: repeat(2, 2.5fr);
+  grid-template-rows: 0.5fr 2fr;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  grid-template-areas: 
+    "recipe-tags_title recipe-nutri_info_title"
+    "recipe-tags recipe-nutritional_info" ;
+  }
+
+  #recipe-tags_title {
+    grid-area: recipe-tags_title;
+  }
+
+  .recipe-tags {
+    grid-area: recipe-tags;
+  }
+
+  #recipe-nutri_info_title {
+    grid-area: recipe-nutri_info_title;
+    display: flex;
+    flex-direction: column ;
+  }
+
+  .recipe-nutritional_info {
+    grid-area: recipe-nutritional_info;
+  }
+
+/** ver se há algo redundante nos 6 seguintes */
+  .recipe-nutrient {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-template-areas: 
+      "recipe-energy recipe-fat"
+      "recipe-carbs recipe-protein";
+    gap: 10px; /* Adjust the gap between spans as needed */
+    text-align: center;
+  }
+
+  .nutrient-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    align-self: center;
+    margin-bottom: 5%;
+  }
+
+  #recipe-energy {
+    grid-area: recipe-energy;
+  }
+
+  #recipe-fat {
+    grid-area: recipe-fat;
+  }
+
+  #recipe-carbs {
+    grid-area: recipe-carbs;
+  }
+
+  #recipe-protein {
+    grid-area: recipe-protein;
+  }
+
+  
+
+
+
+
+
+
+
+/** Profile layout*/
+#profile{
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-template-columns: 0.4fr 0.6fr;
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+.profile-photo{
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.profile-info{
+  grid-column: 2;
+  grid-row: 1;
+}

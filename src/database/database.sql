@@ -21,7 +21,7 @@ DROP TABLE IF EXISTS DietaryPreference;
 DROP TABLE IF EXISTS UserDietPreference;
 DROP TABLE IF EXISTS Recipe;
 DROP TABLE IF EXISTS NutritionistApproval;
-DROP TABLE IF EXISTS RecipeRanking;
+DROP TABLE IF EXISTS RecipeRating;
 DROP TABLE IF EXISTS CookingTechnique;
 DROP TABLE IF EXISTS RecipeCookingTechnique;
 DROP TABLE IF EXISTS FoodCategory;
@@ -68,7 +68,7 @@ CREATE TABLE Chef (
 );
 
 CREATE TABLE Nutritionist (
-    id REFERENCES Person(id)
+    nutri_id INT PRIMARY KEY REFERENCES Person(id)
 );
 
 -- Create the Formation table
@@ -85,14 +85,14 @@ CREATE TABLE Formation (
 CREATE TABLE ChefFormation (
     course_name TEXT,
     school_name TEXT,
-    chef_id REFERENCES Chef(id),
+    chef_id REFERENCES Chef(chef_id),
     FOREIGN KEY (course_name, school_name) REFERENCES Formation(course_name, school_name)
 );
 
 CREATE TABLE NutritionistFormation (
     course_name TEXT,
     school_name TEXT,
-    nutritionist_id REFERENCES Nutritionist(id),
+    nutritionist_id REFERENCES Nutritionist(nutri_id),
     FOREIGN KEY (course_name, school_name) REFERENCES Formation(course_name, school_name)
 );
 
@@ -102,7 +102,7 @@ CREATE TABLE CommonUser (
     height REAL ,
     current_weight REAL,
     ideal_weight REAL,
-    id REFERENCES Person(id),
+    id INT PRIMARY KEY REFERENCES Person(id),
     CHECK (height > 0 AND height < 3),
     CHECK (current_weight > 0 AND current_weight < 600),
     CHECK (ideal_weight > 0 AND ideal_weight < 600)
@@ -113,7 +113,7 @@ CREATE TABLE WeeklyPlan (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     creation_date TEXT,
     total_kcal REAL, -- Total calories as a decimal
-    nutritionist_id REFERENCES Nutritionist(id),
+    nutritionist_id REFERENCES Nutritionist(nutri_id),
     common_user_id REFERENCES CommonUser(id)
 );
 
@@ -280,7 +280,7 @@ CREATE TABLE PlanRecipe (
 );
 
 -- Users
-INSERT INTO Person (username, first_name, surname, email, password, birth_date, gender)VALUES ('john_doe', 'John', 'Doe', 'john.doe@email.com', 'ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f', '1990-05-20', 'male');
+INSERT INTO Person (username, first_name, surname, email, password, birth_date, gender)VALUES ('john_doe', 'John', 'Doe', 'john.doe@email.com', '1', '1990-05-20', 'male');
 INSERT INTO Person (username, first_name, surname, email, password, birth_date, gender)VALUES ('alice_smith', 'Alice', 'Smith', 'alice.smith@email.com', 'ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f', '1988-12-15', 'female');
 INSERT INTO Person (username, first_name, surname, email, password, birth_date, gender)VALUES ('robert_jones', 'Robert', 'Jones', 'robert.jones@email.com', 'ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f', '1975-08-02', 'male');
 INSERT INTO Person (username, first_name, surname, email, password, birth_date, gender)VALUES ('sara_miller', 'Sara', 'Miller', 'sara.miller@email.com', 'ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f', '1995-04-10', 'female');
@@ -331,9 +331,9 @@ INSERT INTO Formation (course_name, school_name, academic_level, graduation_date
 VALUES ('Wine pairings', 'University of Gastronomic Sciences', 'Bachelors Degree', '2020-08-30');
 
 -- Chef Formations
-INSERT INTO ChefFormation VALUES (1,'Pastry and Baking', 'Le Cordon Bleu');
-INSERT INTO ChefFormation VALUES (2,'Food Science', 'University of Gastronomic Sciences');
-INSERT INTO ChefFormation VALUES (3,'Wine pairings', 'University of Gastronomic Sciences');
+INSERT INTO ChefFormation VALUES ('Pastry and Baking', 'Le Cordon Bleu',1);
+INSERT INTO ChefFormation VALUES ('Food Science', 'University of Gastronomic Sciences',2);
+INSERT INTO ChefFormation VALUES ('Wine pairings', 'University of Gastronomic Sciences',3);
 
 -- Nutritionist Formations
 INSERT INTO NutritionistFormation VALUES ('Nutricionsim', 'International Nutricionism Institute', 4);
@@ -344,7 +344,7 @@ INSERT INTO CommonUser (id, height, current_weight, ideal_weight)
 VALUES (6, 1.75, 70.5, 68.0);
 
 INSERT INTO CommonUser (id, height, current_weight, ideal_weight)
-VALUES (7, 1.60, 55.0, 50.0);
+VALUES (7, 1.90, 55.0, 50.0);
 
 INSERT INTO CommonUser (id, height, current_weight, ideal_weight)
 VALUES (8, 1.80, 90.0, 85.0);
@@ -410,9 +410,9 @@ INSERT INTO Recipe (id, name, preparation_time, difficulty, number_of_servings, 
 VALUES (3, 'Vegetable Stir-Fry', 15, 1, 3, 'http://placekitten.com/200/301', 'Stir-fry assorted vegetables in a wok.', '2023-06-20', 180.7, 20.0, 8.9, 9.5, 3);
 
 -- Insert Statements for NutritionistApproval Table
-INSERT INTO NutritionistApproval (recipe_id, approval_date, nutritionist_id) VALUES (1, '2023-06-16', 1);
-INSERT INTO NutritionistApproval (recipe_id, approval_date, nutritionist_id) VALUES (2, '2023-06-19', 2);
-INSERT INTO NutritionistApproval (recipe_id, approval_date, nutritionist_id) VALUES (3, '2023-06-21', 2);
+INSERT INTO NutritionistApproval (recipe_id, approval_date, nutritionist_id) VALUES (1, '2023-06-16', 4);
+INSERT INTO NutritionistApproval (recipe_id, approval_date, nutritionist_id) VALUES (2, '2023-06-19', 4);
+INSERT INTO NutritionistApproval (recipe_id, approval_date, nutritionist_id) VALUES (3, '2023-06-21', 5);
 
 -- Insert Statements for RecipeRating Table
 INSERT INTO RecipeRating (rating_date, rating_value, comment, user_id, recipe_id)

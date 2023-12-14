@@ -1,8 +1,6 @@
-<!-- recipe_page.php; INACABADA -->
-
-
-
 <?php
+ session_start();
+ 
     // Include necessary classes and retrieve recipe details
     require_once(__DIR__ . '/../views/footer.php');
     require_once(__DIR__ . '/../views/header.php');
@@ -15,9 +13,27 @@
     require_once (__DIR__ . '/../database/recipe_dietarypref.class.php');
     require_once(__DIR__ . '/../database/recipe_rating.class.php');
     require_once(__DIR__ . '/../database/nutritionist_approval.class.php');
+    require_once(__DIR__ . '/../actions/action_write_recipe_rating.php');
+
+    
+    // messages - ex. when a person submits a rating
+    if (isset($_SESSION['msg'])){
+        $msg = $_SESSION['msg'];
+        unset($_SESSION['msg']);
+        echo $msg;
+    }
+    else {
+        $msg = null;
+    }
     
     // Get recipe id from the URL or wherever you have it
     $recipeId = $_GET['recipe_id'] ?? 1; // gets the id from the url
+    $userId = $_SESSION['user_id'] ?? null; // gets the id from the session
+
+    // Will be used later for checking whether user (if logged in) has commented
+    if ($userId) {
+        $session_user = Person::getPersonById($userId);
+    }
 
     // Get recipe details
     $recipe = Recipe::getRecipeById($recipeId);
@@ -28,96 +44,128 @@
     $dietary_prefs=RecipeDietaryPref::getRecipeDietaryPreferences($recipeId);
     $recipe_mean_rating=RecipeRating::getMeanRatingForRecipe($recipeId);
     $nutritionist_approval = NutritionistApproval::getNutritionistApprovalForRecipe($recipeId);
-
     if($nutritionist_approval) {
-        $nutritionist=Person::getPersonById($nutritionist_approval->nutritionist);
+        $nutritionist=Person::getPersonById($nutritionist_approval->nutritionist_id);
     }
 
+    // Get most recent ratings and count all the ratings for the specific recipe
+    $ratings=RecipeRating::getRecentRatingsForRecipe($recipeId, $userId);
+    $all_ratings = RecipeRating::getRecipeRatingsByRecipeId($recipeId, $userId);
 
-head("Recipe");
+head($recipe->name);
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
     
+<body>
 
-    <body>
+    <!-- Recipe Page Main -->
+    <div class="recipe-content_container">
 
-        <!-- Recipe Header Section -->
-        <div class="recipe-practicalinfo">
-            <h1><?php echo $recipe->name; ?></h1>
-            <div class="recipe-details">
-                <span class="recipe-detail_item">Time: <?php echo $recipe->preparationTime; ?> min</span>
-                <span class="recipe-detail_item">Difficulty: <?php echo $recipe->difficulty; ?></span>
-                <span class="recipe-detail_item">Servings: <?php echo $recipe->numberOfServings; ?></span>
-                <span class="recipe-detail_item">Rating: 
-                    <?php            
-                        if ($recipe_mean_rating == 0) {
-                            echo "There are no ratings for this recipe yet.";
-                        } else {
-                            echo $recipe_mean_ratings;
-                        }
-                    ?>
-                </span>
+        <!-- Recipe Header Section - general info -->
+        <section class="recipe-initial_info">
+
+            <!-- Title -->
+            <div class="recipe-title">
+                <h1 id="recipe-title"><?php echo $recipe->name; ?></h1>
             </div>
-        </div>
 
-        <!-- Recipe Photo Section -->
-        <section class="recipe-photo">
-            <img src="<?php echo $recipe->image; ?>" alt="<?php echo $recipe->name.' photo '; ?>">
+            <!-- General Info -->
+            <span id="recipe-detail_time">Time: <?php echo $recipe->preparationTime; ?> min</span>
+            <span id="recipe-detail_difficulty">Difficulty: <?php echo $recipe->difficulty; ?></span>
+            <span id="recipe-detail_serving">Servings: <?php echo $recipe->numberOfServings; ?></span>
+            <span id="recipe-detail_rating">Rating: 
+                <?php            
+                    if ($recipe_mean_rating == 0) {
+                        echo "No ratings yet";
+                    } else {
+                        echo $recipe_mean_rating;
+                    }
+                ?>
+            </span>
+            
+            
+
+            <!-- Recipe Photo Section -->
+            <div class="recipe-photo">
+                <img src="<?php echo $recipe->image; ?>" alt="<?php echo $recipe->name.' photo '; ?>">
+                </div>
+
+            <!-- Chef Info and Nutritionist Verification -->
+            <span class="recipe-chef_submission_info">
+                <p><?php echo 'By Chef ' . $chef->first_name . ' ' . $chef->surname . ' on ' . (new DateTime($recipe->submissionDate))->format('d-m-Y'); ?></p>
+            </span>
+
+            <span class="recipe-nutritionist_verified"> <!-- ver isto!!!! -->
+            <?php
+                if ($nutritionist_approval) {
+                    echo 'Verified by Nutritionist ' . $nutritionist->first_name . ' ' . $nutritionist->surname;
+                } else {
+                    echo 'Not Nutritionist Verified';
+                }
+            ?>
+            </span>
+
         </section>
 
         <!-- Recipe Main Content Section -->
-        <section class="recipe-content">
-
-            <!-- Chef Info and Nutritionist Verification -->
-            <div class="recipe-chef_info">
-                <p>Chef: <?php echo $chef->first_name . ' ' . $chef->surname; ?></p>
-            </div>
-
-            <div class="recipe-submission_date">
-                <p><?php echo 'Published on ' . (new DateTime($recipe->submissionDate))->format('d-m-Y'); ?></p>
-            </div>
-
-            <div class="recipe-nutritionist_verified"> <!-- ver isto!!!! -->
-            <?php
-                if ($nutritionist_approval) {
-                    echo 'Verified by nutritionist ' . $nutritionist->name . ' on ' . (new DateTime($nutritionist_approval->approval_date))->format('d-m-Y');
-                        } else {
-                            echo 'Not nutritionist verified yet';
-                        }
-                    ?>
+        <section class="recipe-main_content">
 
             <!-- Ingredients List -->
-            <div class="recipe-ingredients">
-                <h2>Ingredients</h2>
+            <h2 id="recipe-ingredients_title">Ingredients</h2>
+            <aside class="recipe-ingredients">
                 <ul>
-                    <?php foreach ($ingredients as $i): ?>
-                        <li><?php echo $i->ingredient->name . ' ' . $i->quantity . ' ' . $i->measurementUnit; ?></li>
-                    <?php endforeach; ?>
+                    <?php foreach ($ingredients as $ig) { ?>
+                        <li class="recipe-ingredient">
+                            <span class="ingredient-name"><?php echo $ig->ingredient->name; ?></span>
+                            <span class="ingredient-quantity"><?php echo $ig->quantity . ' ' . $ig->measurementUnit; ?></span>
+                        </li>
+                    <?php } ; ?>
                 </ul>
-            </div>
+                    </aside>
 
             <!-- Preparation Method -->
+            <h2 id="recipe-preparation_title">Preparation</h2>
             <div class="recipe-preparation">
-                <h2>Preparation Method</h2>
+                
                 <p><?php echo $recipe->preparationMethod; ?></p>
             </div>
 
+        </section>
+
+        <!-- Final Details - tags, nutri  info -->
+        <section class="recipe-final_info">
+
             <!-- Nutritional Info -->
+            <h2 id="recipe-nutri_info_title">Nutritional Information</h2>
+
             <div class="recipe-nutritional_info">
-                <h2>Nutritional Information</h2>
                 <div class="recipe-nutrient">
-                    <span>Energy: <?php echo $recipe->energy; ?> kcal</span>
-                    <span>Protein: <?php echo $recipe->protein; ?> g</span>
-                    <span>Fat: <?php echo $recipe->fat; ?> g</span>
-                    <span>Carbohydrates: <?php echo $recipe->carbohydrates; ?> g</span>
+                    <div class="nutrient-item" id="recipe-energy">
+                        <span class="nutrient-label">Energy:</span>
+                        <span class="vnutrient-alue"><?php echo $recipe->energy; ?> kcal</span>
+                    </div>
+                    <div class="nutrient-item" id="recipe-protein">
+                        <span class="nutrient-label">Protein:</span>
+                        <span class="nutrient-value"><?php echo $recipe->protein; ?> g</span>
+                    </div>
+                    <div class="nutrient-item" id="recipe-fat">
+                        <span class="nutrient-label">Fat:</span>
+                        <span class="nutrient-value"><?php echo $recipe->fat; ?> g</span>
+                    </div>
+                    <div class="nutrient-item" id="recipe-carbs">
+                        <span class="nutrient-label">Carbohydrates:</span>
+                        <span class="nutrient-value"><?php echo $recipe->carbohydrates; ?> g</span>
+                    </div>
                 </div>
             </div>
 
             <!-- Additional Info - Recipe Tags -->
-            <div class="additional-info">
-                <h2>Additional Information</h2>  <!-- ver nome melhor para aqui!!!!!! -->
+            <h2 id="recipe-tags_title">Tags</h2>  <!-- ver nome melhor para aqui!!!!!! -->
+            
+            <div class="recipe-tags">
+                
                
                 <!-- Cooking Techniques -->
                 <div class="recipe-tag_item">Cooking Techniques:
@@ -127,14 +175,14 @@ head("Recipe");
                 </div>
 
                 <!-- Food Categories -->
-                <div class="recipetag-item">Food Categories:
+                <div class="recipe-tag_item">Food Categories:
                     <?php foreach ($food_categories as $fc) {
                         echo $fc->category . '<br>';
                     } ?>
                 </div>
 
                 <!-- Dietary Preferences -->
-                <div class="recipetag-item">Dietary Preferences:
+                <div class="recipe-tag_item">Dietary Preferences:
                     <?php foreach ($dietary_prefs as $dp) {
                         echo $dp->dietaryPref . '<br>';
                     } ?>
@@ -142,7 +190,81 @@ head("Recipe");
 
             </div>
         </section>
+ 
+        <!-- Ratings Section -->
+        <section class="recipe-ratings">
+            
+            <h2 id="recipe-see_ratings_title">Ratings (<?php
+                if ($all_ratings) { 
+                    echo count($all_ratings); 
+                } else {
+                    echo 0;
+                } ?>)</h2>
 
-        <!-- Include your CSS file -->
-    </body>
+            <?php if($userId) {
+
+
+              if (!RecipeRating::checkUserRecipeRating($userId, $recipeId)) { ?>
+                <div class="recipe-write_rating">
+                    <h2 id="recipe-write_rating_title">Rate this recipe</h2>
+                
+                    <form id="recipe_write_rating" action="../actions/action_write_recipe_rating.php" method="post"> 
+                        <div class="recipe-rating_username"> <? echo $session_user->username; ?> </div>
+
+                        <div class="form-group" id="form-recipe_rating_value">
+                        <label>Rating:
+                            <input type="n" id="recipe-write_rating_value" name="recipe-write_rating_value" min="0" max="5" step="1" required>        
+                        </label>
+
+                        <div class="form-group" id="form-recipe_rating_comment">
+                            <input type="text" id="recipe-write_rating_comment" name="recipe-write_rating_comment" placeholder="Write your comment here...">       
+                        </div>
+
+                        <button>Submit rating</button>
+                    </form>
+                </div>
+            <?php }} else {
+                echo "Log in to rate this recipe";
+            }
+
+           /*  else { ?>
+
+                <div class="recipe-already_user_rated">
+                    <h2 id="recipe-already_user_rated_title">Your rating for this recipe</h2>
+
+                    <?php $session_user_rating=RecipeRating::getRecipeRatingByRecipeAndUser($recipeId, $userId); ?>
+
+                    <span class="recipe-rating_username"> <? echo $session_user->username; ?> </span>
+                    <span class="recipe-rating_date"> <? echo $session_user_rating->ratingDate; ?> </span>
+                    <span class="recipe-rating_value"> <? echo $session_user_rating->ratingValue; ?> </span> 
+                    <span class="recipe-rating_comment"> <? echo $session_user_rating->comment; ?> </span>
+
+                </div>
+            <?php } ?> */ ?>
+
+            <div class="recipe-see_ratings">
+                
+                <?php foreach ($ratings as $rt) { 
+                    $rating_user=Person::getPersonById($rt->userId); ?>
+                    <!-- meter aqui profile photo -->
+                    <span class="recipe-rating_username"> <? echo $rating_user->username; ?> </span>
+                    <span class="recipe-rating_date"> <? echo $rt->ratingDate; ?> </span>
+                    <span class="recipe-rating_value"> <? echo $rt->ratingValue; ?> </span> <!-- meter dps com estrelinhas -->
+                    <span class="recipe-rating_comment"> <? echo $rt->comment; ?> </span>
+                <? } 
+
+                if(!$ratings) {
+                    echo "No ratings yet";
+                } ?>
+
+            </div>
+
+            <form id="recipe_all_ratings" action="../actions/action_seeAllRatings.php"> <!-- fazemos um mini form que é só o botão para log out, vamos ter que criar o ficheiro action_logout.php -->
+                <button>See all ratings</button>
+            </form>
+        
+        </section>
+
+    </div>
+</body>
 </html>

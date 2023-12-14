@@ -29,6 +29,31 @@
                 echo "Error: " . $e->getMessage();
             }
         } 
+        public static function getNutriFormation($user_id)
+        {
+            
+          $db = Database::getDatabase();
+          $query = 'SELECT Formation.course_name, Formation.school_name, Formation.academic_level , Formation.graduation_date, NutritionistFormation.nutritionist_id 
+          FROM Formation 
+          JOIN NutritionistFormation 
+          ON Formation.course_name=NutritionistFormation.course_name AND Formation.school_name=NutritionistFormation.school_name 
+          WHERE nutritionist_id = :nutritionist_id';
+          
+          $stmt = $db->prepare($query);
+          $stmt->bindParam(':nutritionist_id',$user_id,PDO::PARAM_INT);
+          //$stmt->execute([$user_id]);
+          $stmt->execute();
+
+
+          while ($nutriform = $stmt->fetch()) {
+            $values = [$nutriform['graduation_date'],
+            $nutriform['course_name'],
+            $nutriform['school_name'],
+            $nutriform['academic_level']];
+        }
+        return $values;
+          
+        }
 
     }
 

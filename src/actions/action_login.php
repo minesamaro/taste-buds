@@ -1,6 +1,8 @@
 <?php
 session_start();  // Start a new or resume an existing session
 
+require_once(__DIR__ . '/../database/connection.db.php');
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
     // get username and password from HTTP parameters
@@ -17,9 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
     try {
-        $db = new PDO('sqlite:../database/database.db');
-        $db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
-        $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $db = Database::getDatabase();
     
         if (loginSuccess($username, $password)) {
           $_SESSION['username'] = $username;

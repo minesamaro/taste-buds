@@ -30,13 +30,22 @@ class IngredientRecipe
     {
         $db = Database::getDatabase();
         $stmt = $db->prepare(
-            'SELECT quantity, measurement_unit, ingredient_id, recipe_id
-            FROM IngredientRecipe
-            WHERE recipe_id = ?'
+            'SELECT quantity, measurement_unit, ingredient_id, recipe_id 
+            FROM IngredientRecipe 
+            WHERE recipe_id = :recipeId'
         );
-
-        $stmt->execute(array($recipeId));
+        
+        $stmt->bindParam(':recipeId', $recipeId, PDO::PARAM_INT);
+        $stmt->execute();
+        
+        #$stmt->execute([$recipeId]);
+        #$stmt->execute(array($recipeId));
+        #$stmt->execute();
         $ingredientsResults = $stmt->fetchAll();
+
+        #var_dump($recipeId);
+        #var_dump($stmt);
+        #var_dump($ingredientsResults);
 
         $ingredientRecipes = array();
 

@@ -87,7 +87,27 @@
                 
             return $userList;
         }
-       
+        static function getCommonUserById($user_id): CommonUser {
+            $db = Database::getDatabase();
+            $stmt = $db->prepare(
+                'SELECT id, height, current_weight, ideal_weight
+                FROM CommonUser
+                WHERE id = ?');
+        
+            $stmt->execute(array($user_id));
+        
+            $commonUser = $stmt->fetch();
+        
+            return new CommonUser(
+                intval($commonUser['id']), 
+                $commonUser['height'],
+                $commonUser['current_weight'],
+                $commonUser['ideal_weight'],
+              
+                
+            );
+
+        }
     }
 
     ?>

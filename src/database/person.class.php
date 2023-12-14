@@ -91,7 +91,12 @@
             );
         }
 
-        static function getPersonById(int $user_id) : Person {
+        static function getPersonById(?int $user_id) : Person {
+
+            if(!$user_id) {
+                return null;
+            }
+
             $db = Database::getDatabase();
             $stmt = $db->prepare(
                 'SELECT id, username, first_name, surname, email, password, birth_date, gender
@@ -187,14 +192,9 @@
             $db = Database::getDatabase();
             try {
                 // Assuming 'nutritionists' is the table name for nutritionists
-                $query = 'SELECT COUNT(*) FROM Nutritionist WHERE id = :user_id';
-                $stmt = $db->prepare($query);  // Prepare the query
-
-                // Bind the parameter
-                $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
-
-                // Execute the query
-                $stmt->execute();
+                $query = 'SELECT COUNT(*) FROM Nutritionist WHERE id = ?';
+                $stmt = $db->prepare($query);
+                $stmt->execute([$user_id]);
 
                 $count = $stmt->fetchColumn();
                 // If count is greater than 0, the user_id exists in the Nutritionist table
