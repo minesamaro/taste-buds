@@ -143,6 +143,7 @@ class Recipe
         $params = array();
 
         if (!empty($categories)) {
+          // Using bindParams() to bind the array of parameters
           $sql .= 'AND rc.category IN (' . implode(',', array_fill(0, count($categories), '?')) . ') ';
           $params = array_merge($params, $categories);
       }
@@ -158,13 +159,18 @@ class Recipe
       }
 
       $sql .= 'ORDER BY ' . $order . ' DESC';
+      var_dump($sql);
+      var_dump($params);
 
       $db = Database::getDatabase();
+      // Run the query with binded parameters
       $stmt = $db->prepare($sql);
-      $stmt->execute($params);
-      var_dump($sql);
+      for ($i = 0; $i < count($params); $i++) {
+        $stmt->bindParam($i + 1, $params[$i]);
+      }
+      $stmt->execute();
       $recipes = $stmt->fetchAll(); // this is returning less parametrs than it should
-      
+      var_dump($recipes);
       $recipesArray = array();
       if (isset($recipes)){
       foreach ($recipes as $recipe) {

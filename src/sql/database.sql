@@ -280,7 +280,7 @@ CREATE TABLE PlanRecipe (
 );
 
 -- Users
-INSERT INTO Person (username, first_name, surname, email, password, birth_date, gender)VALUES ('john_doe', 'John', 'Doe', 'john.doe@email.com', '1', '1990-05-20', 'male');
+INSERT INTO Person (username, first_name, surname, email, password, birth_date, gender)VALUES ('john_doe', 'John', 'Doe', 'john.doe@email.com', 'ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f', '1990-05-20', 'male');
 INSERT INTO Person (username, first_name, surname, email, password, birth_date, gender)VALUES ('alice_smith', 'Alice', 'Smith', 'alice.smith@email.com', 'ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f', '1988-12-15', 'female');
 INSERT INTO Person (username, first_name, surname, email, password, birth_date, gender)VALUES ('robert_jones', 'Robert', 'Jones', 'robert.jones@email.com', 'ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f', '1975-08-02', 'male');
 INSERT INTO Person (username, first_name, surname, email, password, birth_date, gender)VALUES ('sara_miller', 'Sara', 'Miller', 'sara.miller@email.com', 'ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f', '1995-04-10', 'female');

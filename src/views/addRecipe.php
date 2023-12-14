@@ -8,7 +8,7 @@ function recipeForm(){
         </div>
         <div class="addRecipe__form">
             
-            <form class="addRecipe__form" action="../actionAddRecipe.php" method="post">
+            <form class="addRecipe__form" action="../actionAddRecipe.php" method="post" enctype="multipart/form-data">
 
             <div><!-- Recipe Name -->
             <label for="name">Recipe Title:</label>
