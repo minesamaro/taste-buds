@@ -16,16 +16,17 @@ function changeProfile(){
         <div class="profile-info">
             <h2>My Profile</h2>
             <div class="username">
-                <label for="username">Username:</label>
-                <input type="text" id="username" name="username" required>
+                <p>Username:</p>
+                <p> <?php echo $personUser->username ?></p>
             </div>
             <div class="name">
                 <label for="name">First name:</label>
-                <input type="text" id="name" name="name" required>
+                <input type="text" placeholder="<?php echo $personUser->first_name?>" id="name" name="name" required>
             </div>
             <div class="surname">
                 <label for="surname">Surname:</label>
-                <input type="text" id="surname" name="surname" required>
+                <input type="text" placeholder="<?php echo $personUser->surname?>" id="surname" name="surname" required >
+                
             </div>
 
             <?php
@@ -38,26 +39,27 @@ function changeProfile(){
                 $commonUser = CommonUser::getCommonUserById($user_id);?>
                 <div class="height">
                     <label for="height">Height:</label>
-                    <input type="number" id="height" name="height" required>
+                    <input type="number" placeholder="<?php echo $commonUser->height?>" id="height" name="height" required>
                 </div> 
                 <div class="curr_weight">
                     <label for="curr_weight">Current weight:</label>
-                    <input type="number" id="curr_weight" name="curr_weight" required>
+                    <input type="number" placeholder="<?php echo $commonUser->current_weight?>"id="curr_weight" name="curr_weight" required>
                 </div> 
                 <div class="ideal_weight">
                     <label for="ideal_weight">Ideal Weight:</label>
-                    <input type="number" id="ideal_weight" name="ideal_weight" required>
+                    <input type="number" placeholder="<?php echo $commonUser->ideal_weight?>" id="ideal_weight" name="ideal_weight" required>
                 </div> 
                 <button type="submit">Change Profile</button>
             <?php
                 //
             } elseif(Person::isChef($user_id)){
                 //
+                $chef = Chef::getCommonUserById($user_id)
                 $values= Chef::getChefFormation($user_id);
                 ?>
                 <div class="course">
                     <label for="course">Course name:</label>
-                    <input type="text" id="course" name="course" required>
+                    <input type="text" placeholder="<?php echo $commonUser->height?>"id="course" name="course" required>
                 </div> 
                 <div class="school">
                     <label for="school">School name:</label>
