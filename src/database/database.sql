@@ -414,7 +414,7 @@ INSERT INTO NutritionistApproval (recipe_id, approval_date, nutritionist_id) VAL
 INSERT INTO NutritionistApproval (recipe_id, approval_date, nutritionist_id) VALUES (2, '2023-06-19', 2);
 INSERT INTO NutritionistApproval (recipe_id, approval_date, nutritionist_id) VALUES (3, '2023-06-21', 2);
 
--- Insert Statements for RecipeRanking Table
+-- Insert Statements for RecipeRating Table
 INSERT INTO RecipeRating (rating_date, rating_value, comment, user_id, recipe_id)
 VALUES ('2023-06-25', 4, 'Delicious!', 8, 1);
 

@@ -1,6 +1,6 @@
 <?php
-require_once(__DIR__ . '/../views/header.php');
 require_once(__DIR__ . '/../database/recipe.class.php');
+require_once(__DIR__ . '/../views/header.php');
 require_once(__DIR__ . '/../views/footer.php');
 require_once(__DIR__ . '/../views/recipeIndex.php');
 require_once(__DIR__ . '/../views/sortRecipes.php');
