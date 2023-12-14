@@ -1,11 +1,11 @@
 <?php 
 // Create a basic layout that calls the footer function
 // Path: src/index.php
-session_start();
 require_once(__DIR__ . '/views/footer.php');
 require_once(__DIR__ . '/views/header.php');
 
-head("Home"); ?>
+head("Home");
+ ?>
 <article class="content">
         <div class="main">
             <div class="main__img"> 
@@ -23,6 +23,4 @@ head("Home"); ?>
         </div>
 </article>
 <?php footer(); ?>
-</body>
 </html>
-

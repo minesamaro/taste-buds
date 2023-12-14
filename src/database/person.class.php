@@ -91,12 +91,7 @@
             );
         }
 
-        static function getPersonById(?int $user_id) : Person {
-
-            if(!$user_id) {
-                return null;
-            }
-
+        static function getPersonById(int $user_id) : Person {
             $db = Database::getDatabase();
             $stmt = $db->prepare(
                 'SELECT id, username, first_name, surname, email, password, birth_date, gender
@@ -145,13 +140,18 @@
         {
             $db = Database::getDatabase();
             try {
-                // Assuming 'chef' is the table name for chefs
-                $query = 'SELECT COUNT(*) FROM Chef WHERE chef_id = ?';
-                $stmt = $db->prepare($query);
-                $stmt->execute([$user_id]);
+                // Assuming 'nutritionists' is the table name for nutritionists
+                $query = 'SELECT COUNT(*) FROM Chef WHERE chef_id = :user_id';
+                $stmt = $db->prepare($query);  // Prepare the query
+
+                // Bind the parameter
+                $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+
+                // Execute the query
+                $stmt->execute();
 
                 $count = $stmt->fetchColumn();
-                // If count is greater than 0, the user_id exists in the Chef table
+                // If count is greater than 0, the user_id exists in the Nutritionist table
                 return $count > 0;
             } catch (PDOException $e) {
                 // Handle database errors appropriately
@@ -163,15 +163,18 @@
         {
             $db = Database::getDatabase();
             try {
-                // Assuming 'common_users' is the table name for common users
-                $query = 'SELECT COUNT(*) FROM CommonUser WHERE id = ?';
-                $stmt = $db->prepare($query);
-                $stmt->execute([$user_id]);
+                // Assuming 'nutritionists' is the table name for nutritionists
+                $query = 'SELECT COUNT(*) FROM CommonUser WHERE id = :user_id';
+                $stmt = $db->prepare($query);  // Prepare the query
+
+                // Bind the parameter
+                $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+
+                // Execute the query
+                $stmt->execute();
 
                 $count = $stmt->fetchColumn();
-                //var_dump($query, [$user_id]);  // Add this line for debugging
-                //var_dump($count);  // Add this line for debugging
-                // If length count is greater than 0, the user_id exists in the CommonUser table
+                // If count is greater than 0, the user_id exists in the Nutritionist table
                 return $count > 0;
             } catch (PDOException $e) {
                 // Handle database errors appropriately
@@ -184,9 +187,14 @@
             $db = Database::getDatabase();
             try {
                 // Assuming 'nutritionists' is the table name for nutritionists
-                $query = 'SELECT COUNT(*) FROM Nutritionist WHERE nutri_id = ?';
-                $stmt = $db->prepare($query);
-                $stmt->execute([$user_id]);
+                $query = 'SELECT COUNT(*) FROM Nutritionist WHERE id = :user_id';
+                $stmt = $db->prepare($query);  // Prepare the query
+
+                // Bind the parameter
+                $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+
+                // Execute the query
+                $stmt->execute();
 
                 $count = $stmt->fetchColumn();
                 // If count is greater than 0, the user_id exists in the Nutritionist table

@@ -57,7 +57,7 @@ CREATE UNIQUE INDEX idx_unique_email ON Person (email);
 CREATE TABLE Messages (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     sending_date TEXT NOT NULL,
-    TEXT_content TEXT NOT NULL,
+    content TEXT NOT NULL,
     sender_id REFERENCES Person(id),
     receiver_id REFERENCES Person(id)
 );
@@ -292,9 +292,9 @@ INSERT INTO Person (username, first_name, surname, email, password, birth_date, 
 INSERT INTO Person (username, first_name, surname, email, password, birth_date, gender) VALUES ('jessica_taylor', 'Jessica', 'Taylor', 'jessica.taylor@email.com', 'ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f', '1987-02-19', 'female');
 
 -- Messagess
-INSERT INTO Messages (id, sending_date, TEXT_content, sender_id, receiver_id) VALUES (1, '2023-01-15 08:30:00', 'Just tried a new recipe for pasta carbonara - it was delicious!', 2, 3);
-INSERT INTO Messages (id, sending_date, TEXT_content, sender_id, receiver_id)VALUES (2, '2023-02-20 14:45:00', 'Thank you great sushi recipe', 4, 1);
-INSERT INTO Messages (id, sending_date, TEXT_content, sender_id, receiver_id) VALUES (3, '2023-03-10 18:20:00', 'Thinking of making homemade pizza tonight. Any toppings suggestions?', 1, 5);
+INSERT INTO Messages (id, sending_date, content, sender_id, receiver_id) VALUES (1, '2023-01-15 08:30:00', 'Just tried a new recipe for pasta carbonara - it was delicious!', 2, 3);
+INSERT INTO Messages (id, sending_date, content, sender_id, receiver_id)VALUES (2, '2023-02-20 14:45:00', 'Thank you great sushi recipe', 4, 1);
+INSERT INTO Messages (id, sending_date, content, sender_id, receiver_id) VALUES (3, '2023-03-10 18:20:00', 'Thinking of making homemade pizza tonight. Any toppings suggestions?', 1, 5);
 
 -- Chefs
 INSERT INTO Chef VALUES (1);
@@ -414,7 +414,7 @@ INSERT INTO NutritionistApproval (recipe_id, approval_date, nutritionist_id) VAL
 INSERT INTO NutritionistApproval (recipe_id, approval_date, nutritionist_id) VALUES (2, '2023-06-19', 4);
 INSERT INTO NutritionistApproval (recipe_id, approval_date, nutritionist_id) VALUES (3, '2023-06-21', 5);
 
--- Insert Statements for RecipeRanking Table
+-- Insert Statements for RecipeRating Table
 INSERT INTO RecipeRating (rating_date, rating_value, comment, user_id, recipe_id)
 VALUES ('2023-06-25', 4, 'Delicious!', 8, 1);
 

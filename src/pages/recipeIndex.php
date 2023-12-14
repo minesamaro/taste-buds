@@ -1,8 +1,7 @@
 <?php
 require_once(__DIR__ . '/../database/recipe.class.php');
-session_start(); // Weird bug where session_start() has to be called first but only after the recipe class import
-require_once(__DIR__ . '/../views/footer.php');
 require_once(__DIR__ . '/../views/header.php');
+require_once(__DIR__ . '/../views/footer.php');
 require_once(__DIR__ . '/../views/recipeIndex.php');
 require_once(__DIR__ . '/../views/sortRecipes.php');
 require_once(__DIR__ . '/../views/filters.php');

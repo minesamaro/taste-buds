@@ -41,5 +41,26 @@ class CookingTechnique
         return $techniqueNames;
     }
 
+    static function addCookingTechnique(string $name, int $difficulty, string $methodDescription) : CookingTechnique {
+        $db = Database::getDatabase();
+        $stmt = $db->prepare('INSERT INTO CoookingTechnique (name, difficulty, method_description) VALUES (?, ?, ?)');
+        $stmt->execute(array($name, $difficulty, $methodDescription));
+    }
+
+    /**
+     * Get all cooking techniques
+     * @return array
+     */
+    static function getAllCookingTechniques(): array
+    {
+        // TODO check if this can be eliminated
+        $db = Database::getDatabase();
+        $stmt = $db->prepare('SELECT * FROM CookingTechnique');
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+
+
+
 }
 ?>
