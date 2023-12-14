@@ -187,7 +187,7 @@
             $db = Database::getDatabase();
             try {
                 // Assuming 'nutritionists' is the table name for nutritionists
-                $query = 'SELECT COUNT(*) FROM Nutritionist WHERE id = :user_id';
+                $query = 'SELECT COUNT(*) FROM Nutritionist WHERE nutri_id = :user_id';
                 $stmt = $db->prepare($query);  // Prepare the query
 
                 // Bind the parameter
