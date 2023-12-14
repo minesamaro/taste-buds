@@ -48,6 +48,7 @@ function changeProfile(){
                     <label for="ideal_weight">Ideal Weight:</label>
                     <input type="number" id="ideal_weight" name="ideal_weight" required>
                 </div> 
+                <button type="submit">Change Profile</button>
             <?php
                 //
             } elseif(Person::isChef($user_id)){
@@ -68,6 +69,7 @@ function changeProfile(){
                     <label for="date">Graduation date:</label>
                     <input type="date" id="date" name="date" required>
                 </div> 
+                <button type="submit">Change Profile</button>
                 
             <?php } elseif( Person::isNutritionist($user_id)){
                 $values= Nutritionist::getNutriFormation($user_id);
@@ -86,6 +88,7 @@ function changeProfile(){
                     <p>Graduation Date:</p>
                     <p> <?php echo $values[0] ?></p>
                 </div> 
+                <button type="submit">Change Profile</button>
                 
             <?php 
 

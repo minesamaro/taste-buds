@@ -5,14 +5,17 @@ require_once(__DIR__ . '/../database/chef.class.php');
 require_once(__DIR__ . '/../database/nutritionist.class.php');
 
 function Profile(){ 
-    $user_id =7;
+    $user_id =1;
     $personUser = Person::getPersonById($user_id);
     ?>
     <article class="content" id="profile">
         <div class="profile-photo">
             <img src="profile.png" alt="Profle Picture" width=100px height=100px>
-            <a href="#changePassword">Change Password</a>
         </div>
+        <div class="profile-changepass">
+            <a href="changePassword.php">Change Password</a>
+        </div>
+
         <div class="profile-info">
             <h2>My Profile</h2>
             <div class="username">
