@@ -71,6 +71,75 @@ class Message
         }
 
         return $messages;
+    }public static function getUnreadMessagesForPerson(int $personId): array
+    {
+        $db = Database::getDatabase();
+    
+        $stmt = $db->prepare(
+            'SELECT * FROM Messages 
+            WHERE receiver_id = :personId AND is_read = 0
+            ORDER BY sending_date ASC'
+        );
+    
+        $stmt->bindParam(':personId', $personId, PDO::PARAM_INT);
+        $stmt->execute();
+    
+        $messageData = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    
+        $messages = [];
+        foreach ($messageData as $message) {
+            $messages[] = new Message(
+                $message['id'],
+                $message['sending_date'],
+                $message['content'],
+                intval($message['sender_id']),
+                intval($message['receiver_id'])
+            );
+        }
+    
+        return $messages;
     }
+
+    public static function getAllMessagesForPerson(int $personId): array
+{
+    $db = Database::getDatabase();
+
+    $stmt = $db->prepare(
+        'SELECT * FROM Messages 
+        WHERE sender_id = :personId OR receiver_id = :personId
+        ORDER BY sending_date ASC'
+    );
+
+    $stmt->bindParam(':personId', $personId, PDO::PARAM_INT);
+    $stmt->execute();
+
+    $messageData = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    $messages = [];
+    foreach ($messageData as $message) {
+        $messages[] = new Message(
+            $message['id'],
+            $message['sending_date'],
+            $message['content'],
+            intval($message['sender_id']),
+            intval($message['receiver_id'])
+        );
+    }
+
+    return $messages;
+}
+
+public static function markMessageAsRead(int $messageId): bool
+{
+    $db = Database::getDatabase();
+
+    $stmt = $db->prepare('UPDATE Messages SET is_read = 1 WHERE id = :messageId');
+    $stmt->bindParam(':messageId', $messageId, PDO::PARAM_INT);
+
+    return $stmt->execute();
+}
+
+
+
 }
 ?>
