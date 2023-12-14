@@ -1,6 +1,6 @@
 <?php
  session_start();
- 
+
     // Include necessary classes and retrieve recipe details
     require_once(__DIR__ . '/../views/footer.php');
     require_once(__DIR__ . '/../views/header.php');
@@ -14,7 +14,6 @@
     require_once(__DIR__ . '/../database/recipe_rating.class.php');
     require_once(__DIR__ . '/../database/nutritionist_approval.class.php');
     require_once(__DIR__ . '/../actions/action_write_recipe_rating.php');
-
     
     // messages - ex. when a person submits a rating
     if (isset($_SESSION['msg'])){
@@ -28,6 +27,7 @@
     
     // Get recipe id from the URL or wherever you have it
     $recipeId = $_GET['recipe_id'] ?? 1; // gets the id from the url
+    var_dump($recipeId);
     $userId = $_SESSION['user_id'] ?? null; // gets the id from the session
 
     // Will be used later for checking whether user (if logged in) has commented
@@ -52,11 +52,9 @@
     $ratings=RecipeRating::getRecentRatingsForRecipe($recipeId, $userId);
     $all_ratings = RecipeRating::getRecipeRatingsByRecipeId($recipeId, $userId);
 
-head($recipe->name);
+    head($recipe->name);
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
     
 <body>
 
@@ -268,3 +266,7 @@ head($recipe->name);
     </div>
 </body>
 </html>
+
+<?php
+// footer(); está a aparecer em cima, why?
+?> 
