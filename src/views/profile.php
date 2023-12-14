@@ -2,9 +2,10 @@
 require_once(__DIR__ . '/../database/person.class.php');
 require_once(__DIR__ . '/../database/commonUser.class.php');
 require_once(__DIR__ . '/../database/chef.class.php');
+require_once(__DIR__ . '/../database/nutritionist.class.php');
 
 function Profile(){ 
-    $user_id =1;
+    $user_id =7;
     $personUser = Person::getPersonById($user_id);
     ?>
     <article class="content" id="profile">
@@ -49,7 +50,7 @@ function Profile(){
                 </div> 
             <?php
                 //
-            } elseif(Person::isChef($user_id) || Person::isNutritionist($user_id)){
+            } elseif(Person::isChef($user_id)){
                 //
                 $values= Chef::getChefFormation($user_id);
                 ?>
@@ -68,7 +69,27 @@ function Profile(){
                     <p> <?php echo $values[0] ?></p>
                 </div> 
                 
-            <?php }
+            <?php } elseif( Person::isNutritionist($user_id)){
+                $values= Nutritionist::getNutriFormation($user_id);
+                ?>
+                <div class="Course">
+                    <p>Course:</p>
+                    <p> <?php echo $values[1] ?></p>
+                </div> 
+                <div class="School">
+                    <p>School:</p>
+                    <p> <?php echo $values[2] ?></p>
+                </div> <div class="Level">
+                    <p>Academic Level:</p>
+                    <p> <?php echo $values[3] ?></p>
+                </div> <div class="date">
+                    <p>Graduation Date:</p>
+                    <p> <?php echo $values[0] ?></p>
+                </div> 
+                
+            <?php 
+
+            }
 
 
             ?>
