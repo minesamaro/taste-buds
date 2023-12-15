@@ -1,6 +1,7 @@
 <?php
 // Include necessary classes and start session if not already started
 require_once(__DIR__ . '/../database/message.class.php');
+
 session_start();
 
 // Retrieve user ID from the session
@@ -10,7 +11,7 @@ $userId = $_SESSION['user_id'] ?? null;
 $message = new Message();
 
 // Get a list of people with whom the logged-in person has messages
-$peopleWithMessages = $messageDB->getPeopleWithMessages($userId);
+$peopleWithMessages = $message->getPeopleWithMessages($userId);
 
 // Get the ID of the person whose conversation to display (default to the most recent)
 $selectedPersonId = $_GET['person_id'] ?? null;
