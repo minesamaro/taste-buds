@@ -165,28 +165,32 @@ class Message
      * @param int $userId
      * @return array
      */
-    public function getPeopleWithMessages(int $userId): array
+    public static function getPeopleWithMessages(int $userId): array
     {
         $db = Database::getDatabase();
         $stmt = $db->prepare(
             'SELECT DISTINCT P.id, P.first_name, P.surname
-            FROM Person P
-            INNER JOIN Messages M1 ON P.id = M1.sender_id
-            WHERE M1.receiver_id = :userId
+            FROM Person AS P
+            JOIN Messages AS M1 ON P.id = M1.sender_id
+            WHERE M1.receiver_id = :userId   
             
             UNION
             
             SELECT DISTINCT P.id, P.first_name, P.surname
-            FROM Person P
-            INNER JOIN Messages M2 ON P.id = M2.receiver_id
-            WHERE M2.sender_id = :userId'
+            FROM Person AS P
+            JOIN Messages AS M2 ON P.id = M2.receiver_id
+            WHERE M2.sender_id = :userId'  
         );
         $stmt->bindParam(':userId', $userId, PDO::PARAM_INT);
-        $stmt->execute();
+        $peopleWithMessages = $stmt->execute();
 
-        $people = [];
-        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-            $people[] = new Person($row['id'], $row['first_name'], $row['surname']);
+        $people = array();
+        foreach ($peopleWithMessages as $p) {
+            array_push ($people, 
+                $p['id'], 
+                $p['first_name'], 
+                $p['surname']
+            );
         }
 
         return $people;
