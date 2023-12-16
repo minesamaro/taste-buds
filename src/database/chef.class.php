@@ -49,12 +49,12 @@
           FROM Formation 
           JOIN ChefFormation 
           ON Formation.course_name=ChefFormation.course_name AND Formation.school_name=ChefFormation.school_name 
-          WHERE chef_id = :chef_id';
+          WHERE chef_id = ?';
           
           $stmt = $db->prepare($query);
-          $stmt->bindParam(':chef_id',$user_id,PDO::PARAM_INT);
-          //$stmt->execute([$user_id]);
-          $stmt->execute();
+          //$stmt->bindParam(':chef_id',$user_id,PDO::PARAM_INT);
+          $stmt->execute([$user_id]);
+          //$stmt->execute();
 
 
           while ($chefform = $stmt->fetch()) {
