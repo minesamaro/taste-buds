@@ -1,9 +1,7 @@
 <?php
- session_start();
-
     // Include necessary classes and retrieve recipe details
-    require_once(__DIR__ . '/../views/footer.php');
     require_once(__DIR__ . '/../views/header.php');
+    require_once(__DIR__ . '/../views/footer.php');
     require_once (__DIR__ . '/../database/recipe.class.php');
     require_once (__DIR__ . '/../database/person.class.php');
     require_once (__DIR__ . '/../database/nutritionist.class.php');
@@ -13,7 +11,6 @@
     require_once (__DIR__ . '/../database/recipe_dietarypref.class.php');
     require_once(__DIR__ . '/../database/recipe_rating.class.php');
     require_once(__DIR__ . '/../database/nutritionist_approval.class.php');
-    require_once(__DIR__ . '/../actions/action_write_recipe_rating.php');
     
     // messages - ex. when a person submits a rating
     if (isset($_SESSION['msg'])){
@@ -57,6 +54,7 @@
 
     
 <body>
+    <main>
 
     <!-- Recipe Page Main -->
     <div class="recipe-content_container">
@@ -264,9 +262,6 @@
         </section>
 
     </div>
-</body>
-</html>
-
 <?php
-// footer(); está a aparecer em cima, why?
+footer();
 ?> 

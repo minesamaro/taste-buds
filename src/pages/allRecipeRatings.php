@@ -1,10 +1,8 @@
 <?php
-session_start();
-
+require_once(__DIR__ . '/../views/header.php');
 require_once(__DIR__ . '/../database/recipe_rating.class.php');
 require_once(__DIR__ . '/../database/person.class.php');
 require_once(__DIR__ . '/../database/recipe.class.php');
-require_once(__DIR__ . '/../views/header.php');
 
 
 // Retrieve recipe ID from the URL

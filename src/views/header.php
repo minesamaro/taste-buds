@@ -26,7 +26,6 @@ function head($title)
         <div class="header__nav">
             <ul>
                 <li><a href="../pages/recipeIndex.php">Recipes</a></li>
-                <li><a href="#">Menu</a></li>
                 <li><a href="#">About</a></li>
             </ul>
         </div>

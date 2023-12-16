@@ -58,8 +58,9 @@ CREATE TABLE Messages (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     sending_date TEXT NOT NULL,
     content TEXT NOT NULL,
-    sender_id REFERENCES Person(id),
-    receiver_id REFERENCES Person(id)
+    is_read BOOLEAN DEFAULT FALSE,
+    sender_id INT REFERENCES Person(id),
+    receiver_id INT REFERENCES Person(id)
 );
 
 -- Create the Chef and Nutritionist tables with references to Person
@@ -85,14 +86,14 @@ CREATE TABLE Formation (
 CREATE TABLE ChefFormation (
     course_name TEXT,
     school_name TEXT,
-    chef_id REFERENCES Chef(chef_id),
+    chef_id INT REFERENCES Chef(chef_id),
     FOREIGN KEY (course_name, school_name) REFERENCES Formation(course_name, school_name)
 );
 
 CREATE TABLE NutritionistFormation (
     course_name TEXT,
     school_name TEXT,
-    nutritionist_id REFERENCES Nutritionist(nutri_id),
+    nutritionist_id INT REFERENCES Nutritionist(nutri_id),
     FOREIGN KEY (course_name, school_name) REFERENCES Formation(course_name, school_name)
 );
 
@@ -113,8 +114,8 @@ CREATE TABLE WeeklyPlan (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     creation_date TEXT,
     total_kcal REAL, -- Total calories as a decimal
-    nutritionist_id REFERENCES Nutritionist(nutri_id),
-    common_user_id REFERENCES CommonUser(id)
+    nutritionist_id INT REFERENCES Nutritionist(nutri_id),
+    common_user_id INT REFERENCES CommonUser(id)
 );
 
 -- Create the HealthGoal table
@@ -168,7 +169,7 @@ CREATE TABLE Recipe (
     carbohydrates REAL,  -- Total carbohydrates as a decimal
     protein REAL,  -- Total protein as a decimal
     fat REAL,  -- Total fat as a decimal
-    chef REFERENCES Chef(id),
+    chef INT REFERENCES Chef(id),
     CHECK (preparation_time > 0),
     CHECK (number_of_servings > 0),
     CHECK (difficulty >= 0 AND difficulty <= 5)
@@ -188,8 +189,8 @@ CREATE TABLE RecipeRating (
     rating_date TEXT NOT NULL,
     rating_value INT NOT NULL,
     comment TEXT,
-    user_id REFERENCES CommonUser(id),
-    recipe_id REFERENCES Recipe(id),
+    user_id INT REFERENCES CommonUser(id),
+    recipe_id INT REFERENCES Recipe(id),
     CHECK (rating_value >= 0 AND rating_value <= 5)
 );
 
@@ -253,15 +254,15 @@ CREATE TABLE IngredientMacronutrient (
 CREATE TABLE IngredientRecipe (
     quantity REAL NOT NULL,
     measurement_unit TEXT NOT NULL,
-    ingredient_id REFERENCES Ingredient(id),
-    recipe_id REFERENCES Recipe(id),
+    ingredient_id INT REFERENCES Ingredient(id),
+    recipe_id INT REFERENCES Recipe(id),
     CHECK (quantity > 0)
 );
 
 -- Create the IngredientAllergyIntolerance table
 CREATE TABLE IngredientAllergyIntolerance (
-    ingredient_id REFERENCES Ingredient(id),
-    allergy_intolerance REFERENCES AllergyIntolerance(name),
+    ingredient_id INT REFERENCES Ingredient(id),
+    allergy_intolerance TEXT REFERENCES AllergyIntolerance(name),
     PRIMARY KEY (ingredient_id, allergy_intolerance)
 );
 
@@ -292,9 +293,9 @@ INSERT INTO Person (username, first_name, surname, email, password, birth_date, 
 INSERT INTO Person (username, first_name, surname, email, password, birth_date, gender) VALUES ('jessica_taylor', 'Jessica', 'Taylor', 'jessica.taylor@email.com', 'ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f', '1987-02-19', 'female');
 
 -- Messagess
-INSERT INTO Messages (id, sending_date, content, sender_id, receiver_id) VALUES (1, '2023-01-15 08:30:00', 'Just tried a new recipe for pasta carbonara - it was delicious!', 2, 3);
-INSERT INTO Messages (id, sending_date, content, sender_id, receiver_id)VALUES (2, '2023-02-20 14:45:00', 'Thank you great sushi recipe', 4, 1);
-INSERT INTO Messages (id, sending_date, content, sender_id, receiver_id) VALUES (3, '2023-03-10 18:20:00', 'Thinking of making homemade pizza tonight. Any toppings suggestions?', 1, 5);
+INSERT INTO Messages (id, sending_date, content, is_read, sender_id, receiver_id) VALUES (1, '2023-01-15 08:30:00', 'Just tried a new recipe for pasta carbonara - it was delicious!', 0, 2, 3);
+INSERT INTO Messages (id, sending_date, content, is_read, sender_id, receiver_id)VALUES (2, '2023-02-20 14:45:00', 'Thank you great sushi recipe', 1, 4, 1);
+INSERT INTO Messages (id, sending_date, content, is_read, sender_id, receiver_id) VALUES (3, '2023-03-10 18:20:00', 'Thinking of making homemade pizza tonight. Any toppings suggestions?', 0, 1, 5);
 
 -- Chefs
 INSERT INTO Chef VALUES (1);
