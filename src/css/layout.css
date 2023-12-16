@@ -303,8 +303,8 @@ footer > div {
 /** Profile layout*/
 #profile{
   display: grid;
-  grid-template-rows: 1fr 0.1fr;
-  grid-template-columns: 0.4fr 0.6fr;
+  grid-template-rows: max-content 0.1fr 0.1fr 0.1fr auto;
+  grid-template-columns: 0.2fr 0.6fr;
   width: 100%;
   max-width: 1000px;
   margin: 0 auto;
@@ -312,15 +312,60 @@ footer > div {
 .profile-photo{
   grid-column: 1;
   grid-row: 1;
+  
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .profile-changepass{
   grid-column: 1;
-  grid-row-end: row 2 start;
+  grid-row-start: 3;
+  grid-row-end: 4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
+.profile-myplans{
+  margin-top: 20px;
+  grid-column: 1;
+  grid-row-start: 2;
+  grid-row-end: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile-update{
+  grid-column: 1;
+  grid-row-start: 4;
+  grid-row-end: 5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
 .profile-info{
   grid-column: 2;
-  grid-row: 1;
+  grid-row-start: 1;
+  grid-row-end: 6;
+  padding-left: 30px;
+}
+#label{
+  padding-right: 5px;
 }
 
+#changeProfile{
+  display: grid;
+  grid-template-rows: max-content 0.1fr 0.1fr 0.1fr auto;
+  grid-template-columns: 0.2fr 0.6fr;
+  width: 100%;
+  max-width: 1000px;
+  margin: auto auto;
+}
+#changeProfile> .profile-info{
+  grid-column: 2;
+  grid-row-start: 1;
+  
+  padding-left: 30px;
+}

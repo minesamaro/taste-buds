@@ -13,22 +13,28 @@ function Profile(){
         <div class="profile-photo">
             <img src="profile.png" alt="Profle Picture" width=100px height=100px>
         </div>
-        <div class="profile-changepass">
+        <div class="card profile-changepass">
             <a href="changePassword.php">Change Password</a>
         </div>
+        <div class="card profile-myplans">
+         <a href="changePassword.php">My plans</a>
+        </div>
+        <div class="card profile-update">
+            <a href="changeProfile.php">Update Profile</a>
+        </div>
 
-        <div class="profile-info">
+        <div class="card profile-info">
             <h2>My Profile</h2>
             <div class="username">
-                <p>Username:</p>
+                <p id="label">Username:</p>
                 <p> <?php echo $personUser->username ?></p>
             </div>
             <div class="name">
-                <p>Name:</p>
+                <p id="label">Name:</p>
                 <p><?php echo $personUser->first_name ?></p>
             </div>
             <div class="surname">
-                <p>Surnname:</p>
+                <p id="label">Surnname:</p>
                 <p><?php echo $personUser->surname ?></p>
             </div>
 
@@ -41,15 +47,15 @@ function Profile(){
             if (Person::isCommonUser($user_id)){
                 $commonUser = CommonUser::getCommonUserById($user_id);?>
                 <div class="height">
-                    <p>Height:</p>
+                    <p id="label">Height:</p>
                     <p> <?php echo $commonUser->height ?></p>
                 </div> 
                 <div class="curr_weight">
-                    <p>Current Weight:</p>
+                    <p id="label">Current Weight:</p>
                     <p> <?php echo $commonUser->current_weight ?></p>
                 </div> 
                 <div class="ideal_weight">
-                    <p>Ideal weight:</p>
+                    <p id="label">Ideal weight:</p>
                     <p> <?php echo $commonUser->ideal_weight ?></p>
                 </div> 
             <?php
@@ -59,17 +65,17 @@ function Profile(){
                 $values= Chef::getChefFormation($user_id);
                 ?>
                 <div class="Course">
-                    <p>Course:</p>
+                    <p id="label">Course:</p>
                     <p> <?php echo $values[1] ?></p>
                 </div> 
                 <div class="School">
-                    <p>School:</p>
+                    <p id="label">School:</p>
                     <p> <?php echo $values[2] ?></p>
                 </div> <div class="Level">
-                    <p>Academic Level:</p>
+                    <p id="label">Academic Level:</p>
                     <p> <?php echo $values[3] ?></p>
                 </div> <div class="date">
-                    <p>Graduation Date:</p>
+                    <p id="label">Graduation Date:</p>
                     <p> <?php echo $values[0] ?></p>
                 </div> 
                 
@@ -77,17 +83,17 @@ function Profile(){
                 $values= Nutritionist::getNutriFormation($user_id);
                 ?>
                 <div class="Course">
-                    <p>Course:</p>
+                    <p id="label">Course:</p>
                     <p> <?php echo $values[1] ?></p>
                 </div> 
                 <div class="School">
-                    <p>School:</p>
+                    <p id="label">School:</p>
                     <p> <?php echo $values[2] ?></p>
                 </div> <div class="Level">
-                    <p>Academic Level:</p>
+                    <p id="label">Academic Level:</p>
                     <p> <?php echo $values[3] ?></p>
                 </div> <div class="date">
-                    <p>Graduation Date:</p>
+                    <p id="label">Graduation Date:</p>
                     <p> <?php echo $values[0] ?></p>
                 </div> 
                 
@@ -97,7 +103,6 @@ function Profile(){
 
 
             ?>
-             <a href="../pages/changeProfile.php">Change Profile</a>
         </div>
     </article>
 <?php
