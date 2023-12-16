@@ -7,10 +7,6 @@ function changePassword(){
     $personUser = Person::getPersonById($user_id);
     ?>
     <article class="content" id="change_password">
-        <div class=old_pass>
-            <label for="old_pass">Old password:</label>
-            <input type="text" id="old_pass" name="old_pass" required>
-        </div>
         <div class=new_pass>
             <label for="new_pass">New password:</label>
             <input type="text" id="new_pass" name="new_pass" required>

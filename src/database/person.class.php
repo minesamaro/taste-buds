@@ -205,6 +205,19 @@
             }
         }
 
+        public static function changeInfo(text $firstName, text $surname, int $user_id)
+        {
+            $db = Database::getDatabase();
+            $stmt = $db->prepare(
+              'UPDATE Person
+                SET first_name = ? 
+                AND SET surname = ?
+                WHERE id = ?'
+            );
+        
+            $stmt->execute(array($totalKcal, $user_id));
+        }
+
     }
 
 ?>

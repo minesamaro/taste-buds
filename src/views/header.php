@@ -36,7 +36,7 @@ function head($title)
                 <?php
                     // Check if the username is set in the session
                     if (isset($_SESSION['username'])) {
-                        echo '<li><a href="#">Profile</a></li>';
+                        echo '<li><a href="../pages/profile.php">Profile</a></li>';
                     }
                     if (isset($_SESSION['user_id'])) {
                         if (Person::isChef($_SESSION['user_id'])) {
