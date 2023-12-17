@@ -3,7 +3,6 @@ session_start();
 
 require_once(__DIR__ . '/../database/chef.class.php');
 require_once(__DIR__ . '/../database/nutritionist.class.php');
-include ('../functions/enter_data_functions.php');
 require_once(__DIR__ . '/../database/connection.db.php');
 
 $db=Database::getDatabase();
@@ -23,11 +22,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_SESSION['user_id']) && isset
         case 'chef':
             Chef::addChef($user_id, $course_name, $school_name, $graduation_date, $academic_level);
         case 'nutritionist':
-            $stmt = $db->prepare('INSERT INTO NutritionistFormation (course_name, school_name, nutritionist_id) VALUES (?,?,?)');
+            Nutritionist::addNutritionist($user_id, $course_name, $school_name, $graduation_date, $academic_level);
             break;
     }
             
-
     header('Location: ../index.php');
 }
 

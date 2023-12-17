@@ -12,29 +12,10 @@
 
         /* Constructor */
         public function __construct($id, $height, $current_weight, $ideal_weight) {
-            // Get parent information from database
-            $db = Database::getDatabase();
-            $req = $db->prepare('SELECT * FROM Person WHERE id = ?');
-            $req->execute(array($id));
-            $user = $req->fetch();
-
-            if ($user != null){
-                parent::__construct($user["id"],
-                $user["username"],
-                $user["first_name"],
-                $user["surname"],
-                $user["email"],
-                $user["password"],
-                $user["birth_date"],
-                $user["gender"]);
-            }
-            else {
-                parent::__construct(null, null, null, null, null, null, null, null);
-            }
-            $this->height = floatval($height);
-            $this->current_weight = floatval($current_weight);
-            $this->ideal_weight = floatval($ideal_weight);
-
+            $this->id = $id;
+            $this->height = $height;
+            $this->current_weight = $current_weight;
+            $this->ideal_weight = $ideal_weight;
         }
 
         public function getId() {
@@ -51,10 +32,34 @@
         }
 
         # nao sei se isto deva ficar aqui ou no ficheiro das funcoes (o msm para as outras classes)
-        static function addCommonUser($id, $height, $currentWeight, $idealWeight) : CommonUser {
+        static function addCommonUser($user_id, $height, $currentWeight, $idealWeight, $healthGoal) {
             $db = Database::getDatabase();
-            $stmt = $db->prepare('INSERT INTO CommonUser (id, height, current_weight, ideal_weight) VALUES (?, ?, ?, ?)');
-            $stmt->execute(array($id, $height, $currentWeight, $idealWeight));
+            
+            try {
+                $db->beginTransaction();
+                $stmt = $db->prepare('INSERT INTO CommonUser (id, height, current_weight, ideal_weight) VALUES (?, ?, ?, ?)');        
+                $stmt->execute(array($user_id, $height, $currentWeight, $idealWeight));
+            
+                $db->commit();
+            }
+        
+            catch (Exception $e) {
+                $db->rollBack();
+                echo "Error: " . $e->getMessage();
+            }
+
+            try {
+                $db->beginTransaction();
+                $stmt = $db->prepare('INSERT INTO UserHealthGoal (user_id, health_goal_name) VALUES (?, ?)');        
+                $stmt->execute(array($user_id, $healthGoal));
+            
+                $db->commit();
+            }
+        
+            catch (Exception $e) {
+                $db->rollBack();
+                echo "Error: " . $e->getMessage();
+            }
         }
         
         /* Get array of Users 
@@ -80,10 +85,7 @@
                 );
                 // Add the new CommonUser object to the array
                 array_push($userList, $user);
-
-                //var_dump($userList);
             }
-            var_dump($userList);
                 
             return $userList;
         }

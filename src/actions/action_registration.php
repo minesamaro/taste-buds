@@ -1,7 +1,6 @@
 <?php
 require_once(__DIR__ . '/../database/connection.db.php');
 require_once(__DIR__ . '/../database/person.class.php');
-require_once(__DIR__ . '/../functions/enter_data_functions.php');
 session_start();      
 
 # check if username already exists

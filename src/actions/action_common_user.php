@@ -1,10 +1,10 @@
 <?php
-include '../functions/enter_data_functions.php';
+require_once(__DIR__ . '/../database/connection.db.php');
+require_once(__DIR__ . '/../database/commonUser.class.php');
 
 session_start(); 
 
-$db = new PDO('sqlite:../database/database.db');
-$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+$db = Database::getDatabase();
 
 # Ensure $_SESSION['user_id'] is available
 if (!isset($_SESSION['user_id'])) {
@@ -23,11 +23,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_SESSION['user_id'])) {     #
     $ideal_weight = $_POST['ideal_weight'];
     $health_goal = $_POST['health_goal'];
 
-    addCommonUser($user_id, $height, $current_weight, $ideal_weight);
-    addHealthGoal($user_id,$health_goal);
+    CommonUser::addCommonUser($user_id, $height, $current_weight, $ideal_weight, $health_goal);
 
-    header('Location: ../'); // To be changed to the profile
-
+    header('Location: ../index.php');
 }
 ?>
 

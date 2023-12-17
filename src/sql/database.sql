@@ -78,7 +78,7 @@ CREATE TABLE Formation (
     school_name TEXT,
     academic_level TEXT NOT NULL,
     graduation_date TEXT NOT NULL, 
-    PRIMARY KEY (course_name, school_name)
+    PRIMARY KEY (course_name, school_name, graduation_date)
 );
 
 

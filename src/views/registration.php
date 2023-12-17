@@ -136,12 +136,12 @@ function common_user(){ ?>
         <div class="form-group">
             <label>Primary Health Goal:
                <select name="health_goal">
-                <option value="overall_health">Overall Health</option>
-                <option value="weight_loss">Weight Loss</option>
-                <option value="boosted_immunity">Boosted Immunity</option>
-                <option value="stress_reduction">Stress Reduction</option>
-                <option value="improved_sleep">Improved Sleep</option>
-                <option value="digestive_health">Digestive Health</option>
+                <option value="Overall Health">Overall Health</option>
+                <option value="Weight Loss">Weight Loss</option>
+                <option value="Boosted Immunity">Boosted Immunity</option>
+                <option value="Stress Reduction">Stress Reduction</option>
+                <option value="Improved Sleep">Improved Sleep</option>
+                <option value="Digestive Health">Digestive Health</option>
                 </select>
             </label>
         </div>
@@ -177,10 +177,10 @@ function formation(){ ?>
         <div class="form-group">
         <label>Academical Level:
                <select name="academic_level">
-                <option value="associate">Associate Degree</option>
-                <option value="bachelor">Bachelor's Degree</option>
-                <option value="master">Master's Degree</option>
-                <option value="doctoral">Doctoral Degree</option>
+                <option value="Associate Degree">Associate Degree</option>
+                <option value="Bachelors Degree">Bachelor's Degree</option>
+                <option value="Masters Degree">Master's Degree</option>
+                <option value="Doctoral Degree">Doctoral Degree</option>
                 </select>
             </label>
         </div>
