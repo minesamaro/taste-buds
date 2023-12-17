@@ -1,4 +1,6 @@
 <?php
+
+# Person Registration
 function registration($msg){ ?>
 
 <article class="content register-container">
@@ -104,8 +106,10 @@ function registration($msg){ ?>
 </article>
 <?php } 
 
-function common_user(){ ?>
 
+
+# Common User
+function common_user(){ ?>
 
 <article class="content register-container">    
     <h2>Add your formation:</h2>
@@ -149,8 +153,9 @@ function common_user(){ ?>
 
 <?php }
 
-function formation(){ ?>
 
+# Formation - Chef or Nutritionist
+function formation(){ ?>
 
 <article class="content register-container">
 <div class="register-container">        <!-- for css MUDAR DPS -->
@@ -166,6 +171,23 @@ function formation(){ ?>
         <div class="form-group">
             <label>School Name:
                 <input type="text" id="school_name" name="school_name" required>        <!-- required since it must be filled out -->
+            </label>
+        </div>
+
+        <div class="form-group">
+        <label>Academical Level:
+               <select name="academic_level">
+                <option value="associate">Associate Degree</option>
+                <option value="bachelor">Bachelor's Degree</option>
+                <option value="master">Master's Degree</option>
+                <option value="doctoral">Doctoral Degree</option>
+                </select>
+            </label>
+        </div>
+
+        <div class="form-date">
+            <label>Graduation Date:
+                <input type="date" id="graduation_date" name="graduation_date" required>
             </label>
         </div>
 
