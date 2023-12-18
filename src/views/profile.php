@@ -9,7 +9,7 @@ function Profile(){
     
     $personUser = Person::getPersonById($user_id);
     ?>
-    <article class="content" id="profile">
+    <article class="center-content" id="profile">
         <div class="profile-photo">
             <img src="profile.png" alt="Profle Picture" width=100px height=100px>
         </div>
@@ -30,11 +30,11 @@ function Profile(){
                 <p> <?php echo $personUser->username ?></p>
             </div>
             <div class="name">
-                <p id="label">Name:</p>
+                <p id="label">First name:</p>
                 <p><?php echo $personUser->first_name ?></p>
             </div>
             <div class="surname">
-                <p id="label">Surnname:</p>
+                <p id="label">Surname:</p>
                 <p><?php echo $personUser->surname ?></p>
             </div>
 
@@ -65,17 +65,17 @@ function Profile(){
                 $values= Chef::getChefFormation($user_id);
                 ?>
                 <div class="Course">
-                    <p id="label">Course:</p>
+                    <p id="label">Course name:</p>
                     <p> <?php echo $values[1] ?></p>
                 </div> 
                 <div class="School">
-                    <p id="label">School:</p>
+                    <p id="label">School name:</p>
                     <p> <?php echo $values[2] ?></p>
                 </div> <div class="Level">
                     <p id="label">Academic Level:</p>
                     <p> <?php echo $values[3] ?></p>
                 </div> <div class="date">
-                    <p id="label">Graduation Date:</p>
+                    <p id="label">Graduation date:</p>
                     <p> <?php echo $values[0] ?></p>
                 </div> 
                 
@@ -83,17 +83,17 @@ function Profile(){
                 $values= Nutritionist::getNutriFormation($user_id);
                 ?>
                 <div class="Course">
-                    <p id="label">Course:</p>
+                    <p id="label">Course name:</p>
                     <p> <?php echo $values[1] ?></p>
                 </div> 
                 <div class="School">
-                    <p id="label">School:</p>
+                    <p id="label">School name:</p>
                     <p> <?php echo $values[2] ?></p>
                 </div> <div class="Level">
                     <p id="label">Academic Level:</p>
                     <p> <?php echo $values[3] ?></p>
                 </div> <div class="date">
-                    <p id="label">Graduation Date:</p>
+                    <p id="label">Graduation date:</p>
                     <p> <?php echo $values[0] ?></p>
                 </div> 
                 
