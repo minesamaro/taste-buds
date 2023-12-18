@@ -139,13 +139,30 @@ footer, .footer_contacts > a {
 
 .card-img {
     width: 100px;
-    height: 100px;
+    height: 100%;
     object-fit: cover;
     border-radius: 0.5em 0 0 0.5em;
 }
 
 .card-with-img > div {
     flex-grow: 1;
+}
+
+.card-categories > div {
+    display: inline-block;
+}
+
+.card-categories > div > h6 {
+    margin: 4px 8px 4px 0;
+    line-height: 28px;
+    padding: 0 16px;
+    font-size: 12px;
+    font-weight: 700;
+    border: 1px solid #c4c4c4;
+    border-radius: 43px;
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    color: var(--background-color-light);
 }
 
 input[type="radio"]:checked + label .card, #planRecipeOptions{
@@ -171,6 +188,230 @@ input[type="radio"]:checked + label .card, #planRecipeOptions{
 
 .card-small {
     margin: 0.2em;
+}
+
+/* Recipe */
+.recipe-title {
+    color: var(--primary-color);
+    font-size: 2.5em;
+    font-weight: 700;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.recipe-details {
+    font-size: 1em;
+    font-weight: 400;
+    text-align: center;
+    margin-bottom: 1em;
+    color: var(--primary-color);
+    padding: 1.2em;
+    background-color: var(--background-color-light);
+    font-style: italic;
+}
+
+.recipe-chef_submission_info, .recipe-nutritionist_verified {
+    color: var(--primary-color);
+    font-size: 1em;
+    font-weight: 400;
+    text-align: center;
+}
+/*Titles*/
+#recipe-ingredients_title, #recipe-preparation_title, #recipe-nutri_info_title, #recipe-tags_title, #recipe-see_ratings_title, #recipe-write_rating_title{
+    color: var(--primary-color);
+    font-size: 1.5em;
+    font-weight: 700;
+    margin: 0;
+}
+
+.recipe-ingredients>ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.recipe-ingredient {
+    position: relative;
+    padding-left: 20px; /* Adjust the padding to make room for the arrow */
+    margin-bottom: 5px; /* Optional: Adjust margin as needed */
+    margin-right: 2em;
+    display: flex;
+    justify-content: space-between;
+}
+
+.recipe-ingredient::before {
+    content: ">"; 
+    position: absolute;
+    left: 0;
+    color: var(--contrast-color);
+    font-weight: 700;
+}
+
+.recipe-preparation, #recipe-preparation_title, #recipe-nutri_info_title, .recipe-nutritional_info {
+    border-left: 2px solid var(--contrast-color);
+    padding-left: 1em;
+    margin-block-start: 0;
+}
+
+.recipe-tags {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    margin: 1em 0;
+}
+.recipe-tags > div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.recipe-nutrient {
+    margin: 1em 0;
+}
+.ingredient-quantity {
+    color: var(--primary-color);
+    font-weight: 300;
+    font-style: italic;
+}
+
+.nutrient-label {
+    color: var(--primary-color);
+    font-weight: 300;
+    font-style: italic;
+    padding-bottom: 0.5em;
+}
+
+.nutrient-item {
+    max-width: 100%;
+    margin-inline-start: 2em;
+    margin-inline-end: 2em;
+}
+
+#recipe-energy {
+    border-right: 2px groove var(--primary-color);
+    border-bottom: 1px groove var(--primary-color);
+    padding-bottom: 0.5em;
+}
+#recipe-protein {
+    border-left: 2px groove var(--primary-color);
+    border-top: 1px groove var(--primary-color);
+    padding-top: 0.5em;
+}
+#recipe-fat {
+    border-left: 2px groove var(--primary-color);
+    border-bottom: 1px groove var(--primary-color);
+    padding-bottom: 0.5em;
+}
+#recipe-carbs {
+    border-right: 2px groove var(--primary-color);
+    border-top: 1px groove var(--primary-color);
+    padding-top: 0.5em;
+}
+
+.recipe-ratings, .recipe-write_rating {
+    margin-top: 3em;
+}
+
+.recipe-see_ratings {
+    display: flex;
+    flex-direction: column;
+}
+.rating-top, .rating-bottom {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.rating-stars {
+    display: inline-flex;
+    font-size: 2em;
+    color: var(--contrast-color);
+    padding: 0;
+}
+
+#rating-name {
+    color: var(--contrast-color);
+    font-weight: 700;
+    font-size: 1.2em;
+    margin: 0;
+}
+
+.rating-bottom{
+    font-size: 0.9em;
+    font-style: italic;
+}
+
+.rating-comment {
+    margin-top: 1em;
+    font-size: 1em;
+}
+
+.star-rating {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    border: 0;
+    margin: 0.3em 0;
+}
+
+#recipe-write_rating_comment{
+    border: 0;
+    font-family: 'Helvetica', serif;
+    min-height: 10em;
+}
+
+
+/* Rating Stars*/
+.hide-visually,
+.star-rating>input {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  position: absolute !important;
+  height: 1px; 
+  width: 1px;
+  overflow: hidden;
+}
+
+.star-rating {
+  font-size: 40px;
+  display: inline-flex;
+  padding: 0;
+}
+
+.star-rating label {
+  cursor: pointer;
+  line-height: 1em;
+  text-align: center;
+}
+
+.star-rating label .star {
+  height: 1em;
+  width: 1em;
+  display: inline-block;
+}
+
+.star-rating>label {
+  -webkit-text-stroke: 2px var(--contrast-color);
+}
+
+.star-rating input:checked~label>span.star,
+.star-rating>label:hover~input~label>span.star {
+  color: #fff;
+}
+
+.star-rating span.star,
+.star-rating:hover>input+label>span.star,
+.star-rating>input:checked+label>span.star,
+.star-rating>input~label:hover>span.star {
+  color: var(--contrast-color);
+}
+
+.star-rating>input~label:hover>span.star {
+  color: var(--contrast-color);
 }
 
 /* Plan page */
@@ -285,6 +526,17 @@ button:active {
   background: none;
 }
 
+/* Link styling */
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+a:hover {
+    color: var(--contrast-color);
+    font-style: italic;
+}
+
 /* Filters chosen */
 #filters{
     display: flex;
@@ -338,7 +590,7 @@ textarea {
     margin-bottom: 1em;
     background-color: #f8f8f8;
     font-size: 16px;
-    font-family: 'Courier New', Courier, monospace;
+    font-family: 'Helvetica', serif;    
     resize: none;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
   }

@@ -199,13 +199,13 @@ footer > div {
 
 .recipe-main_content {
   display: grid;
-  grid-template-columns: 1.5fr 1fr 2.5fr;
+  grid-template-columns: 1.2fr 2fr;
   grid-template-rows: 1fr auto;
   grid-column-gap: 0px;
   grid-row-gap: 0px;
   grid-template-areas: 
-    "recipe-ingredients_title . recipe-preparation_title"
-    "recipe-ingredients . recipe-preparation";
+    "recipe-ingredients_title recipe-preparation_title"
+    "recipe-ingredients recipe-preparation";
   margin-top: 5%;
   margin-bottom: 10%;
 }
@@ -228,7 +228,7 @@ footer > div {
 
 .recipe-final_info {
   display: grid;
-  grid-template-columns: repeat(2, 2.5fr);
+  grid-template-columns: 1.2fr 2fr;
   grid-template-rows: 0.5fr 2fr;
   grid-column-gap: 0px;
   grid-row-gap: 0px;
@@ -263,7 +263,6 @@ footer > div {
     grid-template-areas: 
       "recipe-energy recipe-fat"
       "recipe-carbs recipe-protein";
-    gap: 10px; /* Adjust the gap between spans as needed */
     text-align: center;
   }
 
@@ -273,7 +272,6 @@ footer > div {
     justify-content: center;
     width: 100%;
     align-self: center;
-    margin-bottom: 5%;
   }
 
   #recipe-energy {

@@ -67,10 +67,10 @@
             </div>
 
             <!-- General Info -->
-            <span id="recipe-detail_time">Time: <?php echo $recipe->preparationTime; ?> min</span>
-            <span id="recipe-detail_difficulty">Difficulty: <?php echo $recipe->difficulty; ?></span>
-            <span id="recipe-detail_serving">Servings: <?php echo $recipe->numberOfServings; ?></span>
-            <span id="recipe-detail_rating">Rating: 
+            <span class= "recipe-details" id="recipe-detail_time">Time: <?php echo $recipe->preparationTime; ?> min</span>
+            <span class= "recipe-details" id="recipe-detail_difficulty">Difficulty: <?php echo $recipe->difficulty; ?> / 5</span>
+            <span class= "recipe-details" id="recipe-detail_serving">Servings: <?php echo $recipe->numberOfServings; ?></span>
+            <span class= "recipe-details" id="recipe-detail_rating">Rating: 
                 <?php            
                     if ($recipe_mean_rating == 0) {
                         echo "No ratings yet";
@@ -89,13 +89,19 @@
 
             <!-- Chef Info and Nutritionist Verification -->
             <span class="recipe-chef_submission_info">
-                <p><?php echo 'By Chef ' . $chef->first_name . ' ' . $chef->surname . ' on ' . (new DateTime($recipe->submissionDate))->format('d-m-Y'); ?></p>
+                <p><?php
+                // Get link to chef profile
+                $chef_profile_link = '../pages/profile.php?person_id=' . $chef->id;
+                echo '<a href="' . $chef_profile_link . '"> Chef '. $chef->first_name . ' ' . $chef->surname . '</a>';
+                echo ' on ' . (new DateTime($recipe->submissionDate))->format('d-m-Y'); 
+                ?></p>
             </span>
 
             <span class="recipe-nutritionist_verified"> <!-- ver isto!!!! -->
             <?php
                 if ($nutritionist_approval) {
-                    echo 'Verified by Nutritionist ' . $nutritionist->first_name . ' ' . $nutritionist->surname;
+                    $nutritionist_profile_link = '../pages/profile.php?person_id=' . $nutritionist->id;
+                    echo 'Verified by <a href="' . $nutritionist_profile_link . '">  Nutritionist '.  $nutritionist->first_name. ' ' . $nutritionist->surname . '</a>';
                 } else {
                     echo 'Not Nutritionist Verified';
                 }
@@ -112,7 +118,7 @@
             <aside class="recipe-ingredients">
                 <ul>
                     <?php foreach ($ingredients as $ig) { ?>
-                        <li class="recipe-ingredient">
+                        <li class="recipe-ingredient arrow">
                             <span class="ingredient-name"><?php echo $ig->ingredient->name; ?></span>
                             <span class="ingredient-quantity"><?php echo $ig->quantity . ' ' . $ig->measurementUnit; ?></span>
                         </li>
@@ -159,27 +165,36 @@
             <!-- Additional Info - Recipe Tags -->
             <h2 id="recipe-tags_title">Tags</h2>  <!-- ver nome melhor para aqui!!!!!! -->
             
-            <div class="recipe-tags">
+            <div class="recipe-tags card-categories">
                 
                
                 <!-- Cooking Techniques -->
-                <div class="recipe-tag_item">Cooking Techniques:
+                <div class="recipe-tag_item category">
+                    <p>Cooking Techniques:</p>
                     <?php foreach ($cooking_techniques as $ct) {
+                        echo "<h6>";
                         echo $ct->cookingTechnique . '<br>';
+                        echo "</h6>";
                     } ?>
                 </div>
 
                 <!-- Food Categories -->
-                <div class="recipe-tag_item">Food Categories:
+                <div class="recipe-tag_item category">
+                    <p>Food Categories:</p>
                     <?php foreach ($food_categories as $fc) {
+                        echo "<h6>";
                         echo $fc->category . '<br>';
+                        echo "</h6>";
                     } ?>
                 </div>
 
                 <!-- Dietary Preferences -->
-                <div class="recipe-tag_item">Dietary Preferences:
+                <div class="recipe-tag_item category">
+                    <p>Dietary Preferences:</p>
                     <?php foreach ($dietary_prefs as $dp) {
+                        echo "<h6>";
                         echo $dp->dietaryPref . '<br>';
+                        echo "</h6>";
                     } ?>
                  </div>
 
@@ -196,27 +211,100 @@
                     echo 0;
                 } ?>)</h2>
 
-            <?php if($userId) {
+                
 
+            <?php if($userId) { ?>
 
-              if (!RecipeRating::checkUserRecipeRating($userId, $recipeId)) { ?>
+                <div class="recipe-see_ratings">
+                                
+                <?php foreach ($ratings as $rt) { 
+                    $rating_user=Person::getPersonById($rt->userId); ?>
+                    <div class="card">
+                        <!-- meter aqui profile photo -->
+                        <div class="rating-top">
+                            <a id="rating-name" href="../pages/profile.php?person_id=<?php echo $rating_user->id; ?>"><? echo $rating_user->first_name . " " . $rating_user->surname; ?></a>
+                            <div class="rating-stars">
+                                <?php for ($i = 0; $i < $rt->ratingValue; $i++) { ?>
+                                    <span class="">&#x2605</span>
+                                <?php } 
+                                for ($i = 0; $i < 5 - $rt->ratingValue; $i++) { ?>
+                                    <span class="">&#x2606</span>
+                                <?php } ?>
+                            </div>
+                        </div>
+                        <div class="rating-bottom">
+                            <span class="recipe-rating_username"> <? echo $rating_user->username; ?> </span>
+                            <span class="recipe-rating_date"> <? echo $rt->ratingDate; ?> </span>
+                        </div>
+                        <div class="rating-comment">
+                            <span class="recipe-rating_comment"> <? echo $rt->comment; ?> </span>
+                        </div>
+                    </div>
+                <? } 
+                if ($ratings) {?>
+                <a id="recipe_all_ratings" href="../pages/allRecipeRatings.php"><button>See all ratings</button></a> 
+                <?php }
+
+                if(!$ratings) {
+                    echo "No ratings yet";
+                } ?>
+
+                </div>
+
+                <?php if (!RecipeRating::checkUserRecipeRating($userId, $recipeId)) { ?>
                 <div class="recipe-write_rating">
                     <h2 id="recipe-write_rating_title">Rate this recipe</h2>
-                
-                    <form id="recipe_write_rating" action="../actions/action_write_recipe_rating.php" method="post"> 
-                        <div class="recipe-rating_username"> <? echo $session_user->username; ?> </div>
+                    <div class="card">
+                        <form id="recipe_write_rating" action="../actions/action_write_recipe_rating.php" method="post"> 
+                            <div id="rating-name"> <? echo $session_user->first_name . " " . $session_user->surname; ?> </div>
 
-                        <div class="form-group" id="form-recipe_rating_value">
-                        <label>Rating:
-                            <input type="n" id="recipe-write_rating_value" name="recipe-write_rating_value" min="0" max="5" step="1" required>        
-                        </label>
+                            <div class="form-group" id="form-recipe_rating">
+                            <fieldset class="star-rating">
+                                <input checked name="rating" value="0" type="radio" id="rating0">
+                                <label for="rating0">
+                                    <span class="hide-visually">0 Stars</span>
+                                </label>
 
-                        <div class="form-group" id="form-recipe_rating_comment">
-                            <input type="text" id="recipe-write_rating_comment" name="recipe-write_rating_comment" placeholder="Write your comment here...">       
-                        </div>
+                                <input name="rating" value="1" type="radio" id="rating1">
+                                <label for="rating1">
+                                    <span class="hide-visually">1 Star</span>
+                                    <span aria-hidden="true" class="star">★</span>
+                                </label>
 
-                        <button>Submit rating</button>
-                    </form>
+                                <input name="rating" value="2" type="radio" id="rating2">
+                                <label for="rating2">
+                                    <span class="hide-visually">2 Stars</span>
+                                    <span aria-hidden="true" class="star">★</span>
+                                </label>
+
+                                <input name="rating" value="3" type="radio" id="rating3">
+                                <label for="rating3">
+                                    <span class="hide-visually">3 Stars</span>
+                                    <span aria-hidden="true" class="star">★</span>
+                                </label>
+
+                                <input name="rating" value="4" type="radio" id="rating4">
+                                <label for="rating4">
+                                    <span class="hide-visually">4 Stars</span>
+                                    <span aria-hidden="true" class="star">★</span>
+                                </label>
+
+                                <input name="rating" value="5" type="radio" id="rating5">
+                                <label for="rating5">
+                                    <span class="hide-visually">5 Stars</span>
+                                    <span aria-hidden="true" class="star">★</span>
+                                </label>
+                            </fieldset>
+                            </div>
+
+                            <div class="form-group" id="form-recipe_rating_comment">
+                                <!-- create a text area for comments -->
+                                <textarea class="card-small" id="recipe-write_rating_comment" name="recipe-write_rating_comment" placeholder="Write your comment here..." cols="30" rows="5"></textarea>
+                            </div>
+
+                            <button>Submit rating</button>
+                        </form>
+                    </div>
                 </div>
             <?php }} else {
                 echo "Log in to rate this recipe";
@@ -236,28 +324,6 @@
 
                 </div>
             <?php } ?> */ ?>
-
-            <div class="recipe-see_ratings">
-                
-                <?php foreach ($ratings as $rt) { 
-                    $rating_user=Person::getPersonById($rt->userId); 
-                    $formattedDate = date("d-m-Y", strtotime($rt->ratingDate)); ?>
-                    <!-- meter aqui profile photo -->
-                    <span class="recipe-rating_username"> <? echo $rating_user->username; ?> </span>
-                    <span class="recipe-rating_date"> <? echo $formattedDate; ?> </span>
-                    <span class="recipe-rating_value"> <? echo $rt->ratingValue; ?> </span> <!-- meter dps com estrelinhas -->
-                    <span class="recipe-rating_comment"> <? echo $rt->comment; ?> </span>
-                <? } 
-
-                if(!$ratings) {
-                    echo "No ratings yet";
-                } ?>
-
-            </div>
-
-            <form id="recipe_all_ratings" action="../actions/action_seeAllRatings.php"> <!-- fazemos um mini form que é só o botão para log out, vamos ter que criar o ficheiro action_logout.php -->
-                <button>See all ratings</button>
-            </form>
         
         </section>
 
