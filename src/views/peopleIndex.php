@@ -43,13 +43,13 @@ foreach ($people as $person) {
 
                 <forms class="card-button">
                     <div class="card-footer">
-                        <a href="../pages/profile.php?personId?<?php echo $personId; ?>">View Profile</a>
+                        <h5><a href="../pages/profile.php?personId?=<?= $personId ?>">View Profile</a></h5>
                     </div>
                 </forms>
 
                 <forms class="card-button">
                     <div class="card-footer">
-                        <a href="../pages/messages.php?personId?<?php echo $personId; ?>">Send Message</a>  
+                        <h5><a href="../pages/messages.php?personId?=<?= $personId ?>">Send Message</a></h5>  
                     </div>
                 </forms>
 
