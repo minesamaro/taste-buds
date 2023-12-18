@@ -17,6 +17,7 @@ try {
 
         // Validate and sanitize inputs
         $rating_value = $_POST['recipe-write_rating_value'];
+        var_dump($rating_value);
         $rating_comment = isset($_POST['recipe-write_rating_comment']) ? $_POST['recipe-write_rating_comment'] : null; // optional input
 
 

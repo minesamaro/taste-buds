@@ -260,36 +260,36 @@
 
                             <div class="form-group" id="form-recipe_rating">
                             <fieldset class="star-rating">
-                                <input checked name="rating" value="0" type="radio" id="rating0">
+                                <input checked name="recipe-write_rating_value" value="0" type="radio" id="rating0">
                                 <label for="rating0">
                                     <span class="hide-visually">0 Stars</span>
                                 </label>
 
-                                <input name="rating" value="1" type="radio" id="rating1">
+                                <input name="recipe-write_rating_value" value="1" type="radio" id="rating1">
                                 <label for="rating1">
                                     <span class="hide-visually">1 Star</span>
                                     <span aria-hidden="true" class="star">★</span>
                                 </label>
 
-                                <input name="rating" value="2" type="radio" id="rating2">
+                                <input name="recipe-write_rating_value" value="2" type="radio" id="rating2">
                                 <label for="rating2">
                                     <span class="hide-visually">2 Stars</span>
                                     <span aria-hidden="true" class="star">★</span>
                                 </label>
 
-                                <input name="rating" value="3" type="radio" id="rating3">
+                                <input name="recipe-write_rating_value" value="3" type="radio" id="rating3">
                                 <label for="rating3">
                                     <span class="hide-visually">3 Stars</span>
                                     <span aria-hidden="true" class="star">★</span>
                                 </label>
 
-                                <input name="rating" value="4" type="radio" id="rating4">
+                                <input name="recipe-write_rating_value" value="4" type="radio" id="rating4">
                                 <label for="rating4">
                                     <span class="hide-visually">4 Stars</span>
                                     <span aria-hidden="true" class="star">★</span>
                                 </label>
 
-                                <input name="rating" value="5" type="radio" id="rating5">
+                                <input name="recipe-write_rating_value" value="5" type="radio" id="rating5">
                                 <label for="rating5">
                                     <span class="hide-visually">5 Stars</span>
                                     <span aria-hidden="true" class="star">★</span>
