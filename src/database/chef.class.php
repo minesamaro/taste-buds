@@ -40,8 +40,8 @@
 
             try {
                 $db->beginTransaction();
-                $stmt = $db->prepare('INSERT INTO Formation (course_name, school_name, academic_level, graduation_date) VALUES (?,?,?,?)');        
-                $stmt->execute(array($course_name, $school_name, $academic_level, $graduation_date));
+                $stmt = $db->prepare('INSERT INTO Formation (user_id,course_name, school_name, academic_level, graduation_date) VALUES (?,?,?,?)');        
+                $stmt->execute(array($user_id,$course_name, $school_name, $academic_level, $graduation_date));
                 $db->commit();
             }
         
@@ -65,29 +65,27 @@
 
         public static function getChefFormation($user_id)
         {
-            $graduation_date;
-            $course_name;
-          $db = Database::getDatabase();
-          $query = 'SELECT Formation.course_name, Formation.school_name, Formation.academic_level , Formation.graduation_date, ChefFormation.chef_id 
-          FROM Formation 
-          JOIN ChefFormation 
-          ON Formation.course_name=ChefFormation.course_name AND Formation.school_name=ChefFormation.school_name 
-          WHERE chef_id = ?';
+            $db = Database::getDatabase();
+            $query = 'SELECT course_name, school_name, academic_level , graduation_date
+            FROM Formation 
+            WHERE user_id = ?';
+
+            $stmt = $db->prepare($query);
+    
+            //$stmt->execute([$user_id]);
+            $stmt->execute([$user_id]);
+
+
+            while ($nutriform = $stmt->fetch()) {
+                $values = [$nutriform['graduation_date'],
+                $nutriform['course_name'],
+                $nutriform['school_name'],
+                $nutriform['academic_level']];
+            }
+            return $values;
           
-          $stmt = $db->prepare($query);
-          //$stmt->bindParam(':chef_id',$user_id,PDO::PARAM_INT);
-          $stmt->execute([$user_id]);
-          //$stmt->execute();
-
-
-          while ($chefform = $stmt->fetch()) {
-            $values = [$chefform['graduation_date'],
-            $chefform['course_name'],
-            $chefform['school_name'],
-            $chefform['academic_level']];
         }
-        return $values;
-        }
+        
         
          /* Get array of Chefs 
         *

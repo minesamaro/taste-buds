@@ -283,17 +283,26 @@
             }
         }
 
-        public static function changeInfo(text $firstName, text $surname, int $user_id)
+        public static function changePersonInfo( $firstName, $surname, int $user_id)
         {
-            $db = Database::getDatabase();
-            $stmt = $db->prepare(
-              'UPDATE Person
-                SET first_name = ? 
-                AND SET surname = ?
-                WHERE id = ?'
-            );
+            try {
+
+                #start transaction to the database
+                $db = Database::getDatabase();       
+            
+                $db->beginTransaction();
         
-            $stmt->execute(array($totalKcal, $user_id));
+                # Change the information on the Person table in the Database
+                $stmt = $db->prepare(
+                    'UPDATE Person
+                    SET first_name=?,surname=?
+                    WHERE id = ?');
+                $stmt->execute(array($firstName, $surname,$user_id));
+                $db->commit();
+            } catch (Exception $e) {
+                $db->rollBack();
+                echo "Error: " . $e->getMessage();
+            }
         }
 
     }
