@@ -58,16 +58,20 @@
         {
             
           $db = Database::getDatabase();
-          $query = 'SELECT Formation.course_name, Formation.school_name, Formation.academic_level , Formation.graduation_date, NutritionistFormation.nutritionist_id 
-          FROM Formation 
-          JOIN NutritionistFormation 
-          ON Formation.course_name=NutritionistFormation.course_name AND Formation.school_name=NutritionistFormation.school_name 
-          WHERE nutritionist_id = :nutritionist_id';
+        //   $query = 'SELECT Formation.course_name, Formation.school_name, Formation.academic_level , Formation.graduation_date, NutritionistFormation.nutritionist_id 
+        //   FROM Formation 
+        //   JOIN NutritionistFormation 
+        //   ON Formation.course_name=NutritionistFormation.course_name AND Formation.school_name=NutritionistFormation.school_name 
+        //   WHERE nutritionist_id = :nutritionist_id';
           
+        $query = 'SELECT course_name, school_name, academic_level , graduation_date
+        FROM Formation 
+        WHERE user_id = ?';
+
           $stmt = $db->prepare($query);
-          $stmt->bindParam(':nutritionist_id',$user_id,PDO::PARAM_INT);
+    
           //$stmt->execute([$user_id]);
-          $stmt->execute();
+          $stmt->execute([$user_id]);
 
 
           while ($nutriform = $stmt->fetch()) {
@@ -76,8 +80,33 @@
             $nutriform['school_name'],
             $nutriform['academic_level']];
         }
-        return $values;
+            return $values;
           
+        }
+        public static function changeNutriInfo($user_id,$course_name,$school_name,$academic_level,$graduation_date){
+       
+            try {
+
+                #start transaction to the database
+                $db = Database::getDatabase();       
+            
+                $db->beginTransaction();
+        
+                # insert Person - using post variables from forms (note that the id is automatically set with autoincremental)
+                $stmt = $db->prepare(
+                    'UPDATE Formation
+                    SET course_name = ? , school_name = ?,academic_level=?,graduation_date=?
+                    WHERE user_id = ?');
+                $stmt->execute(array($course_name, $school_name,$academic_level,$graduation_date,$user_id));
+                $db->commit();
+            } catch (Exception $e) {
+                $db->rollBack();
+                echo "Error: " . $e->getMessage();
+            }
+
+        
+        
+        
         }
 
     }

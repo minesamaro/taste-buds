@@ -74,11 +74,12 @@ CREATE TABLE Nutritionist (
 
 -- Create the Formation table
 CREATE TABLE Formation (
+    user_id INT PRIMARY KEY REFERENCES Person(id),
     course_name TEXT,
     school_name TEXT,
     academic_level TEXT NOT NULL,
-    graduation_date TEXT NOT NULL, 
-    PRIMARY KEY (course_name, school_name, graduation_date)
+    graduation_date TEXT NOT NULL 
+    
 );
 
 
@@ -316,20 +317,20 @@ INSERT INTO PlanRecipe (day_week, portion, time_meal, plan_id, recipe_id) VALUES
 INSERT INTO PlanRecipe (day_week, portion, time_meal, plan_id, recipe_id) VALUES ('Monday', 1.0, 'Breakfast', 1, 2);
 
 -- Formations
-INSERT INTO Formation (course_name, school_name, academic_level, graduation_date)
-VALUES ('Nutricionsim', 'International Nutricionism Institute', 'Bachelors Degree', '2022-05-25');
+INSERT INTO Formation (user_id,course_name, school_name, academic_level, graduation_date)
+VALUES (4,'Nutricionsim', 'International Nutricionism Institute', 'Bachelors Degree', '2022-05-25');
 
-INSERT INTO Formation (course_name, school_name, academic_level, graduation_date)
-VALUES ('Pastry and Baking', 'Le Cordon Bleu', 'Associate Degree', '2021-12-15');
+INSERT INTO Formation (user_id,course_name, school_name, academic_level, graduation_date)
+VALUES (1,'Pastry and Baking', 'Le Cordon Bleu', 'Associate Degree', '2021-12-15');
 
-INSERT INTO Formation (course_name, school_name, academic_level, graduation_date)
-VALUES ('Nutricionism', 'Nutricionism Institute of America', 'Masters Degree', '2023-03-10');
+INSERT INTO Formation (user_id,course_name, school_name, academic_level, graduation_date)
+VALUES (5,'Nutricionism', 'Nutricionism Institute of America', 'Masters Degree', '2023-03-10');
 
-INSERT INTO Formation (course_name, school_name, academic_level, graduation_date)
-VALUES ('Food Science', 'University of Gastronomic Sciences', 'Bachelors Degree', '2020-08-30');
+INSERT INTO Formation (user_id,course_name, school_name, academic_level, graduation_date)
+VALUES (2,'Food Science', 'University of Gastronomic Sciences', 'Bachelors Degree', '2020-08-30');
 
-INSERT INTO Formation (course_name, school_name, academic_level, graduation_date)
-VALUES ('Wine pairings', 'University of Gastronomic Sciences', 'Bachelors Degree', '2020-08-30');
+INSERT INTO Formation (user_id,course_name, school_name, academic_level, graduation_date)
+VALUES (3,'Wine pairings', 'University of Gastronomic Sciences', 'Bachelors Degree', '2020-08-30');
 
 -- Chef Formations
 INSERT INTO ChefFormation VALUES ('Pastry and Baking', 'Le Cordon Bleu',1);

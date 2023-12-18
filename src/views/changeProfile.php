@@ -50,15 +50,15 @@ function changeProfile(){
                     $commonUser = CommonUser::getCommonUserById($user_id);?>
                     <div class="height">
                         <label for="height" id="label">Height:</label>
-                        <input type="number" placeholder="<?php echo $commonUser->height?>" id="height" name="height" >
+                        <input type="number" placeholder="<?php echo $commonUser->height?>" id="height" name="height" step="any" >
                     </div> 
                     <div class="curr_weight">
                         <label for="curr_weight" id="label">Current weight:</label>
-                        <input type="number" placeholder="<?php echo $commonUser->current_weight?>"id="curr_weight" name="curr_weight" >
+                        <input type="number" placeholder="<?php echo $commonUser->current_weight?>"id="curr_weight" name="curr_weight" step="any" >
                     </div> 
                     <div class="ideal_weight">
                         <label for="ideal_weight" id="label">Ideal Weight:</label>
-                        <input type="number" placeholder="<?php echo $commonUser->ideal_weight?>" id="ideal_weight" name="ideal_weight" >
+                        <input type="number" placeholder="<?php echo $commonUser->ideal_weight?>" id="ideal_weight" name="ideal_weight" step="any" >
                     </div> 
                     <button type="submit">Change Profile</button>
                 <?php
@@ -68,37 +68,37 @@ function changeProfile(){
                     $values= Chef::getChefFormation($user_id);
                     ?>
                     <div class="course">
-                        <label for="course" id="label">Course name:</label>
-                        <input type="text" placeholder="<?php echo $values[1] ?> " id="course" name="course" >
+                        <label for="course_name" id="label">Course name:</label>
+                        <input type="text" placeholder="<?php echo $values[1] ?> " id="course_name" name="course_name" >
                     </div> 
                     <div class="school">
-                        <label for="school" id="label">School name:</label>
-                        <input type="text" placeholder="<?php echo $values[2] ?> " id="school" name="school" >
+                        <label for="school_name" id="label">School name:</label>
+                        <input type="text" placeholder="<?php echo $values[2] ?> " id="school_name" name="school_name" >
                     </div> <div class="Level">
-                        <label for="academic_lvl" id="label">Academic level:</label>
-                        <input type="text" placeholder="<?php echo $values[3] ?> " id="academic_lvl" name="academic_lvl" >
+                        <label for="academic_level" id="label">Academic level:</label>
+                        <input type="text" placeholder="<?php echo $values[3] ?> " id="academic_level" name="academic_level" >
                     </div> <div class="date">
-                        <label for="date" id="label">Graduation date:</label>
-                        <input type="date" placeholder="<?php echo $values[0] ?> " id="date" name="date" >
+                        <label for="graduation_date" id="label">Graduation date:</label>
+                        <input type="date" placeholder="<?php echo $values[0] ?> " id="graduation_date" name="graduation_date" >
                     </div> 
                     <button type="submit">Change Profile</button>
                     
                 <?php } elseif( Person::isNutritionist($user_id)){
                     $values= Nutritionist::getNutriFormation($user_id);
-                    ?>
+                    var_dump($values)?>
                 <div class="course">
-                        <label for="course" id="label">Course name:</label>
-                        <input type="text" placeholder="<?php echo $values[1] ?> " id="course" name="course" >
+                        <label for="course_name" id="label">Course name:</label>
+                        <input type="text" placeholder="<?php echo $values[1] ?> " id="course_name" name="course_name" >
                     </div> 
-                    <div class="school">
-                        <label for="school" id="label">School name:</label>
-                        <input type="text" placeholder="<?php echo $values[2] ?> " id="school" name="school" >
+                    <div class="school_name">
+                        <label for="school_name" id="label">School name:</label>
+                        <input type="text" placeholder="<?php echo $values[2] ?> " id="school_name" name="school_name" >
                     </div> <div class="Level">
-                        <label for="academic_lvl" id="label">Academic level:</label>
-                        <input type="text" placeholder="<?php echo $values[3] ?> " id="academic_lvl" name="academic_lvl" >
+                        <label for="academic_level" id="label">Academic level:</label>
+                        <input type="text" placeholder="<?php echo $values[3] ?> " id="academic_level" name="academic_level" >
                     </div> <div class="date">
-                        <label for="date" id="label">Graduation date:</label>
-                        <input type="date" placeholder="<?php echo $values[0] ?> " id="date" name="date" >
+                        <label for="graduation_date" id="label">Graduation date:</label>
+                        <input type="date" placeholder="<?php echo $values[0] ?> " id="graduation_date" name="graduation_date" >
                     </div> 
                     <button type="submit">Submit changes</button>
                     

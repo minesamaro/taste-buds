@@ -40,8 +40,8 @@
 
             try {
                 $db->beginTransaction();
-                $stmt = $db->prepare('INSERT INTO Formation (course_name, school_name, academic_level, graduation_date) VALUES (?,?,?,?)');        
-                $stmt->execute(array($course_name, $school_name, $academic_level, $graduation_date));
+                $stmt = $db->prepare('INSERT INTO Formation (user_id,course_name, school_name, academic_level, graduation_date) VALUES (?,?,?,?)');        
+                $stmt->execute(array($user_id,$course_name, $school_name, $academic_level, $graduation_date));
                 $db->commit();
             }
         
@@ -65,37 +65,53 @@
 
         public static function getChefFormation($user_id)
         {
-            $graduation_date;
-            $course_name;
-          $db = Database::getDatabase();
-          $query = 'SELECT Formation.course_name, Formation.school_name, Formation.academic_level , Formation.graduation_date, ChefFormation.chef_id 
-          FROM Formation 
-          JOIN ChefFormation 
-          ON Formation.course_name=ChefFormation.course_name AND Formation.school_name=ChefFormation.school_name 
-          WHERE chef_id = ?';
-          
-          $stmt = $db->prepare($query);
-          //$stmt->bindParam(':chef_id',$user_id,PDO::PARAM_INT);
-          $stmt->execute([$user_id]);
-          //$stmt->execute();
+            
+            
+            $db = Database::getDatabase();
+            $query = 'SELECT course_name, school_name, academic_level , graduation_date
+            FROM Formation 
+            WHERE user_id = ?';
+
+            $stmt = $db->prepare($query);
+    
+            //$stmt->execute([$user_id]);
+            $stmt->execute([$user_id]);
 
 
-          while ($chefform = $stmt->fetch()) {
-            $values = [$chefform['graduation_date'],
-            $chefform['course_name'],
-            $chefform['school_name'],
-            $chefform['academic_level']];
-        }
-        return $values;
-        
-        
-         /*  $stmt->execute(array($user_id));
-        
-          $chefform = $stmt->fetch();
-      
-           */
+            while ($nutriform = $stmt->fetch()) {
+                $values = [$nutriform['graduation_date'],
+                $nutriform['course_name'],
+                $nutriform['school_name'],
+                $nutriform['academic_level']];
+            }
+            return $values;
           
         }
+        
+        
+        public static function changeChefInfo($user_id,$course_name,$school_name,$academic_level,$graduation_date){
+       
+            try {
+
+                #start transaction to the database
+                $db = Database::getDatabase();       
+            
+                $db->beginTransaction();
+        
+                # insert Person - using post variables from forms (note that the id is automatically set with autoincremental)
+                $stmt = $db->prepare(
+                    'UPDATE Formation
+                    SET course_name = ? , school_name = ?,academic_level=?,graduation_date=?
+                    WHERE user_id = ?');
+                $stmt->execute(array($course_name, $school_name,$academic_level,$graduation_date,$user_id));
+                $db->commit();
+            } catch (Exception $e) {
+                $db->rollBack();
+                echo "Error: " . $e->getMessage();
+            }
+        
+        }
+
         
         
         

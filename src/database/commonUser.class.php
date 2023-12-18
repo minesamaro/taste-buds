@@ -110,6 +110,28 @@
             );
 
         }
+        public static function changeUserInfo($user_id,$height,$currentWeight,$idealWeight){
+       
+            try {
+
+                #start transaction to the database
+                $db = Database::getDatabase();       
+            
+                $db->beginTransaction();
+        
+                # insert Person - using post variables from forms (note that the id is automatically set with autoincremental)
+                $stmt = $db->prepare(
+                    'UPDATE CommonUser
+                    SET height = ? , current_weight = ?,ideal_weight=?
+                    WHERE id = ?');
+                $stmt->execute(array($height, $currentWeight,$idealWeight,$user_id));
+                $db->commit();
+            } catch (Exception $e) {
+                $db->rollBack();
+                echo "Error: " . $e->getMessage();
+            }
+        
+        }
     }
 
     ?>
