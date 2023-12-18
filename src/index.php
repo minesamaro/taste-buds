@@ -15,10 +15,10 @@ head("Home");
                 <h1>Your All Food Website</h1>
             </div>
             <div class="main__subtitle">
-                <p>Delicious food delivered to you</p>
+                <p>Delicious food and health at your fingertips.</p>
             </div>
             <div class="main__button">
-                <button>Order Now</button>
+                <a href="../pages/recipeIndex.php"><button>Start Browsing</button></a>
             </div>
         </div>
 </article>

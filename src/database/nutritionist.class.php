@@ -109,6 +109,32 @@
         
         }
 
+
+         /* Get array of Nutritionists
+        *
+        * @return array of Nutritionists
+        */
+        public static function getNutris() {
+            $nutriList = array();
+            $db = Database::getDatabase();
+            $req = $db->query('SELECT Person.*, Nutritionist.* 
+            FROM Person
+            JOIN Chef ON Person.id = Nutritionist.nutri_id');
+
+            // Include the Person attributes
+            foreach($req->fetchAll() as $n) {
+
+                // Create a new CommonUser object
+                $nutri = new Nutritionist(
+                    intval($n["nutri_id"]), 
+                );
+                // Add the new CommonUser object to the array
+                array_push($nutriList, $nutri);
+            }
+                
+            return $nutriList;
+        }
+
     }
 
 ?>

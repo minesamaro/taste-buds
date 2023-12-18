@@ -13,8 +13,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     function loginSuccess($username, $password) {
         global $db;
         $stmt = $db->prepare('SELECT * FROM Person WHERE username = ? AND password = ?'); #isto ou vem como 1 (max) ou 0 (vazio) se nao existir na base de dados
-        $stmt->execute(array($username, hash('sha256', $password))); 
-        return $stmt->fetch(); # se select vier vazio o fetch vai dar booleano falso
+        $stmt->execute(array($username, hash('sha256', $password)));
+        
+        $result = $stmt->fetch();
+        return $result; # se select vier vazio o fetch vai dar booleano falso
     }
 
 

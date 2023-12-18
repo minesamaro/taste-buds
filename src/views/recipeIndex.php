@@ -18,26 +18,34 @@ foreach ($recipes as $recipe) {
             <img class="card-img" src="<?= $recipe->image ?>" alt="<?= $recipe->name ?>" />
             <div>
                 <div class="card-header">
-                    <a href="../pages/recipe.php?recipe_id?<?php $recipeId ?>"><h4><?= $recipe->name ?></h4></a>
+                    <a href="../pages/recipe.php?recipe_id=<?php echo $recipe->id?>"><h4><?= $recipe->name ?></h4></a>
                 </div>
                 <div class="card-body">
                     <h6><?= $recipe->preparationTime ?> mins</h6>
-                    <h6>Categories: 
-                        <?php foreach ($recipe->getCategories() as $category) {
-                            echo $category ;
-                        }?>
-                    </h6>
-                    <h6>Techniques: 
-                        <?php foreach ($recipe->getTechniques() as $technique) {
-                            echo $technique ;
-                        }?>
-                    </h6>
-                    <h6>Preferences: 
-                        <?php foreach ($recipe->getPreferences() as $preference) {
-                            echo $preference ;
-                        }?>
-                    </h6>
-                    <h6>Difficulty: <?= $recipe->difficulty ?></h6>
+                    <h6>Difficulty: <?= $recipe->difficulty ?> /5</h6>
+                    <div class= "card-categories">
+                        <div class= "category">                             
+                            <?php foreach ($recipe->getCategories() as $category) {
+                                echo "<h6>";
+                                echo $category ;
+                                echo "</h6>";
+                            }?>                            
+                        </div>
+                        <div class= "technique">
+                            <?php foreach ($recipe->getTechniques() as $technique) {
+                                echo "<h6>";
+                                echo $technique ;
+                                echo "</h6>";
+                            }?>                            
+                        </div>
+                        <div class= "preference">                            
+                            <?php foreach ($recipe->getPreferences() as $preference) {
+                                echo "<h6>";
+                                echo $preference ;
+                                echo "</h6>";
+                            }?>                            
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

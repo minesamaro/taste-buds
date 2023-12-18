@@ -13,39 +13,45 @@ $userId = $_SESSION['user_id'] ?? 1;
 $peopleWithMessages = Message::getPeopleWithMessages($userId);
 
 // Get the ID of the person whose conversation to display (default to the most recent)
-$selectedPersonId = $_GET['person_id'] ?? null; # USAR ISTO PARA PASSAR AO CLICAR NO BOTAO DE ENVIAR MSG, E PARA MOSTRAR A CONVERSA COM A PESSOA QUE CLICOU
+$selectedPersonId = $_GET['person_id'] ?? null;
 
 if ($selectedPersonId) {
     $selectedPerson = Person::getPersonById($selectedPersonId);
-    $selectedperson_FullName = $selectedPerson->first_name . " " . $selectedPerson->surname;
+    $selectedPerson_FullName = $selectedPerson->first_name . " " . $selectedPerson->surname;
 
     // Get the messages for the selected person
     $conversation= Message::getMessagesBetweenPeople($userId, $selectedPersonId);
 
     // Mark all messages with this person as read
     Message::markMessagesWithPersonAsRead($userId, $selectedPersonId);
+
+    head("Messages: " . $selectedPerson->first_name . " " . $selectedPerson->surname);
 } else {
     $conversation = null;
+    head("Messages");
 };
 
-// Display HTML
-head("Messages: " . $selectedPerson->first_name . " " . $selectedPerson->surname);
 ?>
 
 
 
-<div style="display: flex;">
+<div class="messages">
 
     <!-- Left side: List of people with whom the logged-in person has messages -->
     <div class="messages-peopleWithMessages">
         <h2>Messages</h2>
         <ul>
-            <?php foreach ($peopleWithMessages as $person) { ?>
-                <li>
-                    <a href="?person_id=<?php echo $person->id; ?>">
-                        <?php echo $person->first_name . $person->surname; ?>
-                    </a>
-                </li>
+            <?php   
+                if(!empty($peopleWithMessages)) {
+                    foreach ($peopleWithMessages as $person) { ?>
+                        <li>
+                            <a href="?person_id=<?php echo $person->id; ?>">
+                                <?php echo $person->first_name . " " .  $person->surname; ?>
+                            </a>
+                        </li>
+            <?php   } 
+                } else { ?>
+                    <p>No messages yet.</p>
             <?php } ?>
         </ul>
     </div>
@@ -53,38 +59,43 @@ head("Messages: " . $selectedPerson->first_name . " " . $selectedPerson->surname
     <!-- Right side: Display messages for the selected person -->
     <div class="messages-conversation">
         <?php if ($selectedPersonId) { ?>
-            <a href="?person_id=<?php echo $selectedPerson_FullName; ?>"><?php echo $selectedPerson_FullName; ?></a>
+            <a href="profile.php?user_id=<?php echo $selectedPersonId; ?>"><?php echo $selectedPerson_FullName; ?> </a>
        
             <?php if ($conversation) { ?>
                 <ul>
                     <?php foreach ($conversation as $message) { ?>
+                        <?php 
+                            $formattedDate = date("d-m-Y", strtotime($message->sending_date)); 
+                            $formattedHour = date("H:i", strtotime($message->sending_date));
+                            $sender = Person::getPersonById($message->sender_id);
+                            $sender_FullName = $sender->first_name . " " . $sender->surname;
+                        ?>
                         <li>
                             <?php echo $message->content; ?>
                             <br>
-                            <small>Sent on <?php echo $message->sending_date; ?> by <?php echo $selectedPerson_FullName; ?></small>
+                            <small><?php echo $formattedDate . ", " . $formattedHour; ?> - by <?php echo $sender_FullName; ?></small>
                         </li>
                     <?php } ?>
                 </ul>
             <?php } else { ?>
                 <p>No messages with this person yet. Be the first to send a message.</p>
             <?php } ?>
-        <?php } else { ?>
+
+            <!-- Form to write and send a message to the selected person -->
+            <form action="../actions/action_sendMessage.php" method="post">
+
+                <input type="hidden" name="receiver_id" value="<?php echo $selectedPersonId; ?>">
+                <label for="message_content">Write a message:</label>
+                <textarea name="message_content" id="message_content" rows="3" required></textarea>
+                <br>
+                <button type="submit">Send</button>
+
+            </form> 
+
+        <?php } elseif (!empty($peopleWithMessages)) { ?>
             <p>Select a person to display the conversation.</p> <!-- PODEMOS MUDAR ISTO DEPOIS --> 
         <?php } ?>
 
-        <!-- Form to write and send a message -->
-        <?php if ($selectedPersonId) { ?>
-            
-            <form action="send_message.php" method="post">
-                <input type="hidden" name="receiver_id" value="<?php echo $selectedPersonId; ?>">
-
-                <label for="message-content">Write a message:</label>
-                <textarea name="message-content" id="message-content" rows="3" required></textarea>
-                <br>
-                <button type="submit">Send</button>
-            </form>
-
-        <?php } ?>
     </div>
 
 </div>

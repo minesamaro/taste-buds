@@ -82,6 +82,32 @@
 
         }
 
+        static function getAllPersons() {
+            $db = Database::getDatabase();
+
+            $persons = array();
+            $stmt = $db->prepare(
+                'SELECT *
+                FROM Person');
+            $stmt->execute();
+
+            $personsData = $stmt->fetchAll();
+            foreach ($personsData as $p) {
+                array_push ($persons, new Person(
+                    intval($p['id']),
+                    $p['username'],
+                    $p['first_name'],
+                    $p['surname'],
+                    $p['email'],
+                    $p['password'],
+                    $p['birth_date'],
+                    $p['gender']
+                ));
+            }
+
+            return $persons;
+        }
+
         static function getPersonByUsername(string $username) : Person {
             $db = Database::getDatabase();
             $stmt = $db->prepare(

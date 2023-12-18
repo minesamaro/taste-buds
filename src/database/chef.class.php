@@ -65,8 +65,6 @@
 
         public static function getChefFormation($user_id)
         {
-            
-            
             $db = Database::getDatabase();
             $query = 'SELECT course_name, school_name, academic_level , graduation_date
             FROM Formation 
@@ -89,31 +87,30 @@
         }
         
         
-        public static function changeChefInfo($user_id,$course_name,$school_name,$academic_level,$graduation_date){
-       
-            try {
+         /* Get array of Chefs 
+        *
+        * @return array of Chefs
+        */
+        public static function getChefs() {
+            $chefList = array();
+            $db = Database::getDatabase();
+            $req = $db->query('SELECT Person.*, Chef.* 
+            FROM Person
+            JOIN Chef ON Person.id = Chef.chef_id');
 
-                #start transaction to the database
-                $db = Database::getDatabase();       
-            
-                $db->beginTransaction();
-        
-                # insert Person - using post variables from forms (note that the id is automatically set with autoincremental)
-                $stmt = $db->prepare(
-                    'UPDATE Formation
-                    SET course_name = ? , school_name = ?,academic_level=?,graduation_date=?
-                    WHERE user_id = ?');
-                $stmt->execute(array($course_name, $school_name,$academic_level,$graduation_date,$user_id));
-                $db->commit();
-            } catch (Exception $e) {
-                $db->rollBack();
-                echo "Error: " . $e->getMessage();
+            // Include the Person attributes
+            foreach($req->fetchAll() as $c) {
+
+                // Create a new CommonUser object
+                $chef = new Chef(
+                    intval($c["chef_id"]), 
+                );
+                // Add the new CommonUser object to the array
+                array_push($chefList, $chef);
             }
-        
+                
+            return $chefList;
         }
-
-        
-        
         
 
         

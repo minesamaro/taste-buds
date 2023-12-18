@@ -19,8 +19,6 @@ try {
         $rating_value = $_POST['recipe-write_rating_value'];
         $rating_comment = isset($_POST['recipe-write_rating_comment']) ? $_POST['recipe-write_rating_comment'] : null; // optional input
 
-        
-        $rating_date = date("Y-m-d");
 
         // Create an array with rating data for adding to the database using addRating function
         $ratingData = array(
@@ -28,7 +26,6 @@ try {
             'recipe_id' => $recipe_id,
             'rating_value' => $rating_value,
             'comment' => $rating_comment,
-            'rating_date' => $rating_date
         );
 
         // Add the rating to the database
