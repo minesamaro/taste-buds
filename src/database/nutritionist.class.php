@@ -12,13 +12,12 @@
             return $this->id;
         }
 
-        static function addNutritionist($user_id) : Nutritionist {
+        static function addNutritionist($user_id, $course_name, $school_name, $graduation_date, $academic_level) {
             $db = Database::getDatabase();
-            $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             
             try {
                 $db->beginTransaction();
-                $stmt = $db->prepare('INSERT INTO Nutritionist (id) VALUES (?)');        
+                $stmt = $db->prepare('INSERT INTO Nutritionist (nutri_id) VALUES (?)');        
                 $stmt->execute(array($user_id));
             
                 $db->commit();
@@ -28,7 +27,33 @@
                 $db->rollBack();
                 echo "Error: " . $e->getMessage();
             }
+
+            try {
+                $db->beginTransaction();
+                $stmt = $db->prepare('INSERT INTO Formation (course_name, school_name, academic_level, graduation_date) VALUES (?,?,?,?)');        
+                $stmt->execute(array($course_name, $school_name, $academic_level, $graduation_date));
+                $db->commit();
+            }
+        
+            catch (Exception $e) {
+                $db->rollBack();
+                echo "Error: " . $e->getMessage();
+            }
+
+            try {
+                $db->beginTransaction();
+                $stmt = $db->prepare('INSERT INTO NutritionistFormation (nutritionist_id, course_name, school_name) VALUES (?,?,?)');        
+                $stmt->execute(array($user_id, $course_name, $school_name));
+                $db->commit();
+            }
+        
+            catch (Exception $e) {
+                $db->rollBack();
+                echo "Error: " . $e->getMessage();
+            }
         } 
+
+        
         public static function getNutriFormation($user_id)
         {
             

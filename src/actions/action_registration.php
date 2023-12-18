@@ -1,5 +1,6 @@
 <?php
-include '../functions/enter_data_functions.php';
+require_once(__DIR__ . '/../database/connection.db.php');
+require_once(__DIR__ . '/../database/person.class.php');
 session_start();      
 
 # check if username already exists
@@ -23,9 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {     # block will only be executed wh
     $gender = $_POST['gender'];
     $occupation = $_POST['occupation'];
 
-    #$db = new PDO('sqlite:database.db');
-    $db = new PDO('sqlite:../database/database.db');
-    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $db=Database::getDatabase(); 
 
     # check if inserted info is correct
     if (strlen($first_name) == 0) { # temos que fazer checks. por ex, username não deve ser vazio
@@ -75,11 +74,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {     # block will only be executed wh
     }
 
 
-    insertAccount($username, $first_name, $surname, $email, $password, $birth_date, $gender, $occupation);
+    $person=Person::addPerson($first_name, $surname, $username, $email, $password, $birth_date, $gender, $occupation);
+    $_SESSION['user_id'] = $person->id;
+    $_SESSION['occupation'] = $occupation;
 
     if ($occupation === 'chef' || $occupation === 'nutritionist') {
         // Redirect to the formation submission page
         $_SESSION['reg_page'] = "formation";
+
     } elseif ($occupation === 'common_user') {
         // Use session variable to store the occupation to register
         $_SESSION['reg_page'] = "common_user";

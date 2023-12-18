@@ -3,34 +3,57 @@
 
     class Chef {
         public $id;
-        //public $course_name;
-        //public $school_name;
-        //public $graduation_date;
-        //public $academic_level;
+        /* public $course_name;
+        public $school_name;
+        public $graduation_date;
+        public $academic_level; */
 
 
         /* Constructor */
         public function __construct($id) {
             $this->id = $id;
-            // $this->course_name;
-            // $this->$school_name;
-            // $this->$graduation_date;
-            // $this->$academic_level;
+            /* $this->course_name;
+            $this->$school_name;
+            $this->$graduation_date;
+            $this->$academic_level; */
 
         }
         public function getId() {
             return $this->id;
         }
 
-        static function addChef($user_id) : Chef {
+        static function addChef($user_id, $course_name, $school_name, $graduation_date, $academic_level) {
             $db = Database::getDatabase();
-            $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             
             try {
                 $db->beginTransaction();
                 $stmt = $db->prepare('INSERT INTO Chef (chef_id) VALUES (?)');        
                 $stmt->execute(array($user_id));
             
+                $db->commit();
+            }
+        
+            catch (Exception $e) {
+                $db->rollBack();
+                echo "Error: " . $e->getMessage();
+            }
+
+            try {
+                $db->beginTransaction();
+                $stmt = $db->prepare('INSERT INTO Formation (course_name, school_name, academic_level, graduation_date) VALUES (?,?,?,?)');        
+                $stmt->execute(array($course_name, $school_name, $academic_level, $graduation_date));
+                $db->commit();
+            }
+        
+            catch (Exception $e) {
+                $db->rollBack();
+                echo "Error: " . $e->getMessage();
+            }
+
+            try {
+                $db->beginTransaction();
+                $stmt = $db->prepare('INSERT INTO ChefFormation (chef_id, course_name, school_name) VALUES (?,?,?)');        
+                $stmt->execute(array($user_id, $course_name, $school_name));
                 $db->commit();
             }
         

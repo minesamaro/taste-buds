@@ -47,14 +47,16 @@ class RecipeRating
 
             $stmt = $db->prepare(
                 'SELECT * FROM RecipeRating 
-                WHERE recipe_id = :recipeId AND user_id != :userId
+                WHERE recipe_id = ? AND user_id != ?
                 ORDER BY rating_date DESC '
             );
 
-            $stmt->bindParam(':recipeId', $recipeId, PDO::PARAM_INT);
+            /* $stmt->bindParam(':recipeId', $recipeId, PDO::PARAM_INT);
             $stmt->bindParam(':userId', $userId, PDO::PARAM_INT);
-            $stmt->execute();
+            $stmt->arra */
+            $stmt->execute(array($recipeId, $userId));
             $recipeRatingData = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            var_dump($recipeRatingData);
         } else {
             $userRating = null;
 

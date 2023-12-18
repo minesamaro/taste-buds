@@ -21,6 +21,8 @@ elseif ($_SESSION['reg_page'] == "formation"){
     formation($msg);
 }
 
+$_SESSION['reg_page'] = null;
+
 
 footer();
 

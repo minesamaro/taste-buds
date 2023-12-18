@@ -66,6 +66,20 @@
                 $db->rollBack();
                 echo "Error: " . $e->getMessage();
             }
+
+            $new_person = new Person(
+                intval($db->lastInsertId()), 
+                $username,
+                $first_name,
+                $surname,
+                $email,
+                hash('sha256', $password),
+                $birth_date, 
+                $gender
+            );
+
+            return $new_person;
+
         }
 
         static function getPersonByUsername(string $username) : Person {

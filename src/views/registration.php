@@ -1,4 +1,6 @@
 <?php
+
+# Person Registration
 function registration($msg){ ?>
 
 <article class="content register-container">
@@ -104,8 +106,10 @@ function registration($msg){ ?>
 </article>
 <?php } 
 
-function common_user(){ ?>
 
+
+# Common User
+function common_user(){ ?>
 
 <article class="content register-container">    
     <h2>Add your formation:</h2>
@@ -132,12 +136,12 @@ function common_user(){ ?>
         <div class="form-group">
             <label>Primary Health Goal:
                <select name="health_goal">
-                <option value="overall_health">Overall Health</option>
-                <option value="weight_loss">Weight Loss</option>
-                <option value="boosted_immunity">Boosted Immunity</option>
-                <option value="stress_reduction">Stress Reduction</option>
-                <option value="improved_sleep">Improved Sleep</option>
-                <option value="digestive_health">Digestive Health</option>
+                <option value="Overall Health">Overall Health</option>
+                <option value="Weight Loss">Weight Loss</option>
+                <option value="Boosted Immunity">Boosted Immunity</option>
+                <option value="Stress Reduction">Stress Reduction</option>
+                <option value="Improved Sleep">Improved Sleep</option>
+                <option value="Digestive Health">Digestive Health</option>
                 </select>
             </label>
         </div>
@@ -149,8 +153,9 @@ function common_user(){ ?>
 
 <?php }
 
-function formation(){ ?>
 
+# Formation - Chef or Nutritionist
+function formation(){ ?>
 
 <article class="content register-container">
 <div class="register-container">        <!-- for css MUDAR DPS -->
@@ -166,6 +171,23 @@ function formation(){ ?>
         <div class="form-group">
             <label>School Name:
                 <input type="text" id="school_name" name="school_name" required>        <!-- required since it must be filled out -->
+            </label>
+        </div>
+
+        <div class="form-group">
+        <label>Academical Level:
+               <select name="academic_level">
+                <option value="Associate Degree">Associate Degree</option>
+                <option value="Bachelors Degree">Bachelor's Degree</option>
+                <option value="Masters Degree">Master's Degree</option>
+                <option value="Doctoral Degree">Doctoral Degree</option>
+                </select>
+            </label>
+        </div>
+
+        <div class="form-date">
+            <label>Graduation Date:
+                <input type="date" id="graduation_date" name="graduation_date" required>
             </label>
         </div>
 
