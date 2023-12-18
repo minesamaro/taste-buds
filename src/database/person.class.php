@@ -1,5 +1,8 @@
 <?php  
     require_once(__DIR__ . '/../database/connection.db.php');
+    require_once(__DIR__ . '/../database/chef.class.php');
+    require_once(__DIR__ . '/../database/nutritionist.class.php');
+    require_once(__DIR__ . '/../database/commonUser.class.php');
 
     class Person {
         public $id;
@@ -153,6 +156,41 @@
                 $person['gender']
             );
         }
+
+        public static function getPeopleByOccupations($selectedOccupations) {
+            $people_occupation = array();
+    
+            foreach ($selectedOccupations as $occupation) {
+                switch ($occupation) {
+                    case 'Chef':
+                        $chefPeople = Chef::getChefs();
+                        $people_occupation = array_merge($people_occupation, $chefPeople);
+                        break;
+    
+                    case 'Nutritionist':
+                        $nutritionistPeople = Nutritionist::getNutris();
+                        $people_occupation = array_merge($people_occupation, $nutritionistPeople);
+                        break;
+    
+                    case 'Common User':
+                        $commonUserPeople = CommonUser::getUsers();
+                        $people_occupation = array_merge($people_occupation, $commonUserPeople);
+                        break;
+                }
+            }
+
+            $people = array();
+
+            foreach ($people_occupation as $p) {
+                $person = self::getPersonById($p->id);
+                array_push ($people, $person);
+            }
+
+            return $people;
+        }
+
+
+
         
          # nao sei se isto deva ficar aqui ou no ficheiro das funcoes (o msm para as outras classes)
         static function checkPersonLogin(string $username, string $password) : Person {
@@ -245,17 +283,26 @@
             }
         }
 
-        public static function changeInfo(text $firstName, text $surname, int $user_id)
+        public static function changePersonInfo( $firstName, $surname, int $user_id)
         {
-            $db = Database::getDatabase();
-            $stmt = $db->prepare(
-              'UPDATE Person
-                SET first_name = ? 
-                AND SET surname = ?
-                WHERE id = ?'
-            );
+            try {
+
+                #start transaction to the database
+                $db = Database::getDatabase();       
+            
+                $db->beginTransaction();
         
-            $stmt->execute(array($totalKcal, $user_id));
+                # Change the information on the Person table in the Database
+                $stmt = $db->prepare(
+                    'UPDATE Person
+                    SET first_name=?,surname=?
+                    WHERE id = ?');
+                $stmt->execute(array($firstName, $surname,$user_id));
+                $db->commit();
+            } catch (Exception $e) {
+                $db->rollBack();
+                echo "Error: " . $e->getMessage();
+            }
         }
 
     }

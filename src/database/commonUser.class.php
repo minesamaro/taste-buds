@@ -73,20 +73,21 @@
             FROM Person
             JOIN CommonUser ON Person.id = CommonUser.id');
 
+            
+
             // Include the Person attributes
-            foreach($req->fetchAll() as $user) {
+            foreach($req->fetchAll() as $u) {
 
                 // Create a new CommonUser object
                 $user = new CommonUser(
-                    intval($user["id"]), 
-                    floatval($user["height"]), 
-                    floatval($user["current_weight"]), 
-                    floatval($user["ideal_weight"]),
+                    intval($u["id"]), 
+                    floatval($u["height"]), 
+                    floatval($u["current_weight"]), 
+                    floatval($u["ideal_weight"]),
                 );
                 // Add the new CommonUser object to the array
                 array_push($userList, $user);
             }
-                
             return $userList;
         }
         
@@ -110,6 +111,28 @@
                 
             );
 
+        }
+        public static function changeUserInfo($user_id,$height,$currentWeight,$idealWeight){
+       
+            try {
+
+                #start transaction to the database
+                $db = Database::getDatabase();       
+            
+                $db->beginTransaction();
+        
+                # insert Person - using post variables from forms (note that the id is automatically set with autoincremental)
+                $stmt = $db->prepare(
+                    'UPDATE CommonUser
+                    SET height = ? , current_weight = ?,ideal_weight=?
+                    WHERE id = ?');
+                $stmt->execute(array($height, $currentWeight,$idealWeight,$user_id));
+                $db->commit();
+            } catch (Exception $e) {
+                $db->rollBack();
+                echo "Error: " . $e->getMessage();
+            }
+        
         }
     }
 
