@@ -11,6 +11,13 @@ function checkUsername($username) {
     return $stmt->fetch(); # se select vier vazio o fetch vai dar booleano falso
 }
 
+function checkEmail($email) {
+    global $db;
+    $stmt = $db->prepare('SELECT * FROM Person WHERE email = ?'); #isto ou vem como 1 (max) ou 0 (vazio) se nao existir na base de dados
+    $stmt->execute(array($email)); 
+    return $stmt->fetch(); # se select vier vazio o fetch vai dar booleano falso
+}
+
 # turn inputs into variables
 if ($_SERVER["REQUEST_METHOD"] == "POST") {     # block will only be executed when the form is submitted using the POST method -> for security
     
@@ -41,6 +48,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {     # block will only be executed wh
 
     if (checkUsername($username)) {
         $_SESSION['msg'] = 'Username already exists!'; 
+        header('Location: ../pages/registration.php'); # !!! como o utilizador é reencamionhado para outra pag, so consigo mandar a msg de erro ao utilizador atraves da session ($S_SESSION).
+        die(); # para logo aqui. a msg de erro tb podia ser dentro dos parentesis, mas nao se faz assim
+    }
+    if (checkEmail($username)) {
+        $_SESSION['msg'] = 'Email already exists!'; 
         header('Location: ../pages/registration.php'); # !!! como o utilizador é reencamionhado para outra pag, so consigo mandar a msg de erro ao utilizador atraves da session ($S_SESSION).
         die(); # para logo aqui. a msg de erro tb podia ser dentro dos parentesis, mas nao se faz assim
     }
@@ -76,6 +88,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {     # block will only be executed wh
 
     $person=Person::addPerson($username, $first_name, $surname, $email, $password, $birth_date, $gender, $occupation);
     $_SESSION['user_id'] = $person->id;
+    $_SESSION['username'] = $person->username;
     $_SESSION['occupation'] = $occupation;
 
     if ($occupation === 'chef' || $occupation === 'nutritionist') {

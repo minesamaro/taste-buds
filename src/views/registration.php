@@ -1,5 +1,4 @@
 <?php
-
 # Person Registration
 function registration($msg){ ?>
 
@@ -107,52 +106,50 @@ function registration($msg){ ?>
 <?php } 
 
 
-
-# Common User
-function common_user(){ ?>
-
-<article class="content register-container">    
-    <h2>Add your formation:</h2>
-    <form class="register-form" action="../actions/action_common_user.php" method="post">
-
-        <div class="form-group">
-            <label>Height (m):
-                <input type="n" id="height" name="height" placeholder="1.60" min="0" max="3" step="0.05" required>      
-            </label>
-        </div>
-
-        <div class="form-group">
-            <label>Current Weight (kg):
-                <input type="n" id="current_weight" name="current_weight" placeholder="60" min="0" max="600" step="1" required>        
-            </label>
-        </div>
-
-        <div class="form-group">
-            <label>Ideal Weight (kg):
-                <input type="n" id="ideal_weight" name="ideal_weight" placeholder="60" min="0" max="600" step="1" required>        <!-- required since it must be filled out -->
-            </label>
-        </div>
-
-        <div class="form-group">
-            <label>Primary Health Goal:
-               <select name="health_goal">
-                <option value="Overall Health">Overall Health</option>
-                <option value="Weight Loss">Weight Loss</option>
-                <option value="Boosted Immunity">Boosted Immunity</option>
-                <option value="Stress Reduction">Stress Reduction</option>
-                <option value="Improved Sleep">Improved Sleep</option>
-                <option value="Digestive Health">Digestive Health</option>
-                </select>
-            </label>
-        </div>
-
-        <button type="submit">Save</button>
-    </form>
-</div>
-</article>
-
-<?php }
-
+// Common User Registration
+function commonUserRegistration() {
+    ?>
+    <article class="content register-container">    
+        <h2>Add your personal information:</h2>
+        <form class="register-form" action="../actions/action_common_user.php" method="post">
+    
+            <div class="form-group">
+                <label>Height (m):
+                    <input type="n" id="height" name="height" placeholder="1.60" min="0" max="3" step="0.05" required>      
+                </label>
+            </div>
+    
+            <div class="form-group">
+                <label>Current Weight (kg):
+                    <input type="n" id="current_weight" name="current_weight" placeholder="60" min="0" max="600" step="1" required>        
+                </label>
+            </div>
+    
+            <div class="form-group">
+                <label>Ideal Weight (kg):
+                    <input type="n" id="ideal_weight" name="ideal_weight" placeholder="60" min="0" max="600" step="1" required>        <!-- required since it must be filled out -->
+                </label>
+            </div>
+    
+            <div class="form-group">
+                <label>Primary Health Goal:
+                   <select name="health_goal">
+                    <option value="Overall Health">Overall Health</option>
+                    <option value="Weight Loss">Weight Loss</option>
+                    <option value="Boosted Immunity">Boosted Immunity</option>
+                    <option value="Stress Reduction">Stress Reduction</option>
+                    <option value="Improved Sleep">Improved Sleep</option>
+                    <option value="Digestive Health">Digestive Health</option>
+                    </select>
+                </label>
+            </div>
+    
+            <button type="submit">Save</button>
+        </form>
+    </div>
+    </article>
+    
+    <?php }
 
 # Formation - Chef or Nutritionist
 function formation(){ ?>

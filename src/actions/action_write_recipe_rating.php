@@ -13,11 +13,11 @@ try {
         $user_id = $_SESSION['user_id'];
 
         // Retrieve recipe ID from the URL
-        $recipe_id = $_GET['recipe_id'] ?? 1;
+        $recipe_id = $_POST['recipe-write_rating_recipe_id'] ?? 1;
 
         // Validate and sanitize inputs
-        $rating_value = $_POST['recipe-write_rating_value'];
-        var_dump($rating_value);
+        $rating_value = intval($_POST['recipe-write_rating_value']);
+
         $rating_comment = isset($_POST['recipe-write_rating_comment']) ? $_POST['recipe-write_rating_comment'] : null; // optional input
 
 
@@ -42,7 +42,7 @@ try {
     } else {
         // Redirect to the login page if the user is not logged in
         $_SESSION['msg'] = "Error: You must log in to submit a rating.";
-        header("Location: ../pages/recipe.php");
+        header("Location: ../pages/recipe.php?recipe_id=$recipe_id");
     }
 }
 

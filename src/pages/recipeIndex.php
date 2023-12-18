@@ -7,8 +7,6 @@ require_once(__DIR__ . '/../views/sortRecipes.php');
 require_once(__DIR__ . '/../views/filters.php');
 
 
-//var_dump($_SESSION);
-
 // If there is a cookie withthe recipes, use the recipes that match the filters
 if (isset($_SESSION["recipes"])) {
     $recipes = $_SESSION["recipes"];

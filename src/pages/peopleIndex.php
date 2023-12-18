@@ -26,8 +26,5 @@ head("All People");
 filters(); 
 sortRecipes();
 recipeIndex($recipes);
-?>
-</main>
-<?php
 footer();
 ?>

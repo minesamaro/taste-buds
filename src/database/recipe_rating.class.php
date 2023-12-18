@@ -245,6 +245,8 @@ class RecipeRating
             (rating_value, comment, user_id, recipe_id)
             VALUES (:rating_value, :comment, :user_id, :recipe_id)'
         );
+        // without the bindParams
+        $stmt->execute(array($ratingData['rating_value'], $ratingData['comment'], $ratingData['user_id'], $ratingData['recipe_id']));
     
         // Bind parameters
         $stmt->bindParam(':rating_value', $ratingData['rating_value'], PDO::PARAM_INT);
