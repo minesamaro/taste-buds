@@ -23,35 +23,33 @@ class Message
     }
 
     // Add a new message to the database - returns 1 if successful, 0 otherwise
-    public static function addMessage(array $messageData): bool
+    public static function addMessage(string $content, int $sender_id, int $receiver_id): bool
     {
         $db = Database::getDatabase();
 
         $stmt = $db->prepare(
             'INSERT INTO Messages 
-            (sending_date, content, sender_id, receiver_id)
-            VALUES :sending_date, :content, :sender_id, :receiver_id'
+            (content, sender_id, receiver_id)
+            VALUES (:content, :sender_id, :receiver_id)'
         );
         // is_read is set to 0 by default
 
 
         $values = [
-            $messageData['sending_date'],
-            $messageData['content'],
-            intval($messageData['sender_id']),
-            intval($messageData['receiver_id']),
+            $content,
+            $sender_id,
+            $receiver_id
         ];
 
-        $stmt->bindParam(':sending_date', $values[0], PDO::PARAM_STR);
-        $stmt->bindParam(':content', $values[1], PDO::PARAM_STR);
-        $stmt->bindParam(':sender_id', $values[2], PDO::PARAM_INT);
-        $stmt->bindParam(':receiver_id', $values[3], PDO::PARAM_INT);
+        $stmt->bindParam(':content', $values[0], PDO::PARAM_STR);
+        $stmt->bindParam(':sender_id', $values[1], PDO::PARAM_INT);
+        $stmt->bindParam(':receiver_id', $values[2], PDO::PARAM_INT);
 
         return $stmt->execute();
     }
 
     // Get messages between two persons - returns an array of Message objects if successful, empty array otherwise
-    public static function getMessagesBetweenPersons(int $userId, int $personId2): array
+    public static function getMessagesBetweenPeople(int $userId, int $personId2): array
     {
         $db = Database::getDatabase();
 
@@ -144,19 +142,19 @@ class Message
         return $messages;
     }
 
-    // Mark a message as read - returns 1 if successful, 0 otherwise
-    public static function markMessageAsRead(int $messageId): bool
+    // Mark all messages between 2 people as read - returns 1 if successful, 0 otherwise
+    public static function markMessagesWithPersonAsRead(int $userId, $selectedPersonId): bool
     {
         $db = Database::getDatabase();
 
         $stmt = $db->prepare(
             'UPDATE Messages 
             SET is_read = 1 
-            WHERE id = :messageId');
+            WHERE sender_id = ? AND receiver_id = ?
+            OR sender_id = ? AND receiver_id = ?'
+            );
 
-        $stmt->bindParam(':messageId', $messageId, PDO::PARAM_INT);
-
-        return $stmt->execute();
+        return $stmt->execute(array($userId, $selectedPersonId, $selectedPersonId, $userId));
     }
 
     /**
@@ -169,28 +167,35 @@ class Message
     {
         $db = Database::getDatabase();
         $stmt = $db->prepare(
-            'SELECT DISTINCT P.id, P.first_name, P.surname
+            'SELECT DISTINCT P.id
             FROM Person AS P
             JOIN Messages AS M1 ON P.id = M1.sender_id
             WHERE M1.receiver_id = :userId   
             
             UNION
             
-            SELECT DISTINCT P.id, P.first_name, P.surname
+            SELECT DISTINCT P.id
             FROM Person AS P
             JOIN Messages AS M2 ON P.id = M2.receiver_id
             WHERE M2.sender_id = :userId'  
         );
         $stmt->bindParam(':userId', $userId, PDO::PARAM_INT);
-        $peopleWithMessages = $stmt->execute();
+        $stmt->execute();
+        $peopleWithMessages = $stmt->fetchAll();
 
         $people = array();
         foreach ($peopleWithMessages as $p) {
-            array_push ($people, 
-                $p['id'], 
-                $p['first_name'], 
-                $p['surname']
-            );
+            $person = Person::getPersonById($p['id']);
+            array_push ($people, new Person (
+                $person->id,
+                $person->username,
+                $person->first_name,
+                $person->surname,
+                $person->email,
+                $person->password,
+                $person->birth_date,
+                $person->gender
+            ));
         }
 
         return $people;

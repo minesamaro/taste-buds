@@ -241,10 +241,11 @@
             <div class="recipe-see_ratings">
                 
                 <?php foreach ($ratings as $rt) { 
-                    $rating_user=Person::getPersonById($rt->userId); ?>
+                    $rating_user=Person::getPersonById($rt->userId); 
+                    $formattedDate = date("d-m-Y", strtotime($rt->ratingDate)); ?>
                     <!-- meter aqui profile photo -->
                     <span class="recipe-rating_username"> <? echo $rating_user->username; ?> </span>
-                    <span class="recipe-rating_date"> <? echo $rt->ratingDate; ?> </span>
+                    <span class="recipe-rating_date"> <? echo $formattedDate; ?> </span>
                     <span class="recipe-rating_value"> <? echo $rt->ratingValue; ?> </span> <!-- meter dps com estrelinhas -->
                     <span class="recipe-rating_comment"> <? echo $rt->comment; ?> </span>
                 <? } 
