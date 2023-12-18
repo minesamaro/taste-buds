@@ -13,10 +13,10 @@
     require_once(__DIR__ . '/../database/nutritionist_approval.class.php');
     
     // messages - ex. when a person submits a rating
+    $msg = $null;
     if (isset($_SESSION['msg'])){
         $msg = $_SESSION['msg'];
         unset($_SESSION['msg']);
-        echo $msg;
     }
     else {
         $msg = null;
@@ -24,7 +24,6 @@
     
     // Get recipe id from the URL or wherever you have it
     $recipeId = $_GET['recipe_id'] ?? 1; // gets the id from the url
-    var_dump($recipeId);
     $userId = $_SESSION['user_id'] ?? null; // gets the id from the session
 
     // Will be used later for checking whether user (if logged in) has commented
@@ -55,7 +54,7 @@
     
 <body>
     <main>
-
+    <?php echo $msg; ?>
     <!-- Recipe Page Main -->
     <div class="recipe-content_container">
 

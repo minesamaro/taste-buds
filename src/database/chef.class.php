@@ -87,17 +87,32 @@
             $chefform['academic_level']];
         }
         return $values;
-        
-        
-         /*  $stmt->execute(array($user_id));
-        
-          $chefform = $stmt->fetch();
-      
-           */
-          
         }
         
-        
+         /* Get array of Chefs 
+        *
+        * @return array of Chefs
+        */
+        public static function getChefs() {
+            $chefList = array();
+            $db = Database::getDatabase();
+            $req = $db->query('SELECT Person.*, Chef.* 
+            FROM Person
+            JOIN Chef ON Person.id = Chef.chef_id');
+
+            // Include the Person attributes
+            foreach($req->fetchAll() as $c) {
+
+                // Create a new CommonUser object
+                $chef = new Chef(
+                    intval($c["chef_id"]), 
+                );
+                // Add the new CommonUser object to the array
+                array_push($chefList, $chef);
+            }
+                
+            return $chefList;
+        }
         
 
         
