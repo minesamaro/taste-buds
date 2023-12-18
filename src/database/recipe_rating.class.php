@@ -56,7 +56,6 @@ class RecipeRating
             $stmt->arra */
             $stmt->execute(array($recipeId, $userId));
             $recipeRatingData = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            var_dump($recipeRatingData);
         } else {
             $userRating = null;
 

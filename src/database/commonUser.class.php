@@ -89,6 +89,7 @@
                 
             return $userList;
         }
+        
         static function getCommonUserById($user_id): CommonUser {
             $db = Database::getDatabase();
             $stmt = $db->prepare(
