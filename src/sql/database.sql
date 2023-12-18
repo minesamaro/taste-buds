@@ -56,7 +56,7 @@ CREATE UNIQUE INDEX idx_unique_email ON Person (email);
 -- Create the Messages table
 CREATE TABLE Messages (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    sending_date TEXT NOT NULL,
+    sending_date TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
     content TEXT NOT NULL,
     is_read BOOLEAN DEFAULT FALSE,
     sender_id INT REFERENCES Person(id),
@@ -186,7 +186,7 @@ CREATE TABLE NutritionistApproval (
 
 -- Create the RecipeRating table
 CREATE TABLE RecipeRating (
-    rating_date TEXT NOT NULL,
+    rating_date TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
     rating_value INT NOT NULL,
     comment TEXT,
     user_id INT REFERENCES CommonUser(id),

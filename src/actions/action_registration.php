@@ -74,7 +74,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {     # block will only be executed wh
     }
 
 
-    $person=Person::addPerson($first_name, $surname, $username, $email, $password, $birth_date, $gender, $occupation);
+    $person=Person::addPerson($username, $first_name, $surname, $email, $password, $birth_date, $gender, $occupation);
     $_SESSION['user_id'] = $person->id;
     $_SESSION['occupation'] = $occupation;
 

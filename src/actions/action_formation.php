@@ -21,6 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_SESSION['user_id']) && isset
     switch ($occupation) {
         case 'chef':
             Chef::addChef($user_id, $course_name, $school_name, $graduation_date, $academic_level);
+            break;
         case 'nutritionist':
             Nutritionist::addNutritionist($user_id, $course_name, $school_name, $graduation_date, $academic_level);
             break;

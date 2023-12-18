@@ -243,12 +243,11 @@ class RecipeRating
     
         $stmt = $db->prepare(
             'INSERT INTO RecipeRating 
-            (rating_date, rating_value, comment, user_id, recipe_id)
-            VALUES (:rating_date, :rating_value, :comment, :user_id, :recipe_id)'
+            (rating_value, comment, user_id, recipe_id)
+            VALUES (:rating_value, :comment, :user_id, :recipe_id)'
         );
     
         // Bind parameters
-        $stmt->bindParam(':rating_date', $ratingData['rating_date'], PDO::PARAM_STR);
         $stmt->bindParam(':rating_value', $ratingData['rating_value'], PDO::PARAM_INT);
         $stmt->bindParam(':comment', $ratingData['comment'], PDO::PARAM_STR);
         $stmt->bindParam(':user_id', $ratingData['user_id'], PDO::PARAM_INT);
