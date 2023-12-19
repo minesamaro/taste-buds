@@ -23,10 +23,15 @@ function filters(){
         echo is_array($preferences) ? implode(', ', $preferences) : $preferences;
         echo "</p>";
     }
-    if (isset($_SESSION['selectedOccupations']) && !empty($_SESSION['selectedOccupations'])) {
+    if (isset($_SESSION['isPeopleFiltered']) && !empty($_SESSION['selectedOccupations'])) {
         $occupations = $_SESSION['selectedOccupations'];
         echo  "<h4> >Occupation>   </h4> <p>";
         echo is_array($occupations) ? implode(', ', $occupations) : $occupations;
+        echo "</p>";
+    }
+    if (isset($_SESSION['isPeopleSearch'])) {
+        echo  "<h4> >Search>   </h4> <p>";
+        echo $_SESSION['isPeopleSearch']; 
         echo "</p>";
     }
     ?>

@@ -190,6 +190,33 @@
         }
 
 
+        public static function searchPeople($searchQuery)
+        {
+            $peopleList = array();
+            $db = Database::getDatabase();
+
+            // Use prepared statements to prevent SQL injection
+            $stmt = $db->prepare('SELECT * FROM Person WHERE username LIKE ? OR first_name LIKE ? OR surname LIKE ?');
+            $stmt->execute(["%$searchQuery%", "%$searchQuery%", "%$searchQuery%"]);
+
+            // Fetch the results
+            foreach ($stmt->fetchAll() as $person) {
+                $peopleList[] = new Person(
+                    intval($person["id"]),
+                    $person["username"],
+                    $person["first_name"],
+                    $person["surname"],
+                    $person["email"],
+                    $person["password"],
+                    $person["birth_date"],
+                    $person["gender"]
+                );
+            }
+
+            return $peopleList;
+        }
+
+
 
         
          # nao sei se isto deva ficar aqui ou no ficheiro das funcoes (o msm para as outras classes)

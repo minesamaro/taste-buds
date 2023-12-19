@@ -8,6 +8,7 @@ require_once(__DIR__ . '/../views/header.php');
 require_once(__DIR__ . '/../views/footer.php');
 require_once(__DIR__ . '/../views/peopleIndex.php');
 require_once(__DIR__ . '/../views/sortPeople.php');
+require_once(__DIR__ . '/../views/searchPeople.php');
 require_once(__DIR__ . '/../views/filters.php');
 
 
@@ -25,6 +26,7 @@ head("All People");
 <?php 
 filters(); 
 sortPeople();
+searchPeople();
 peopleIndex($people);
 ?>
 </main>

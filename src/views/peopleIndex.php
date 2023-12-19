@@ -6,7 +6,7 @@ require_once(__DIR__ . '/../database/nutritionist.class.php');
 
 function peopleIndex($people) { 
     ?>
-<div item="recipeIndex">
+<div item="peopleIndex">
 <article class="content">
 <h2>Find Someone</h2>
 <?php

@@ -123,7 +123,23 @@ footer > div {
   grid-row: 2;
 }
 
+.indexBundle > #sort_people {
+  grid-column: 1;
+  grid-row: 2;
+}
+
+.search > #search_people {
+  grid-column: 2;
+  grid-row: 2;
+}
+
 .indexBundle > #recipeIndex {
+  grid-column: 2;
+  grid-row: 2;
+  overflow-y: auto;
+}
+
+.indexBundle > #peopleIndex {
   grid-column: 2;
   grid-row: 2;
   overflow-y: auto;
