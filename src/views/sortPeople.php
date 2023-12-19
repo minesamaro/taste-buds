@@ -32,9 +32,11 @@ function sortPeople()
                         <p><?php echo $ocp ?></p>
                     </div>
                     <?php } ?>
-    </div>
+         </div>
 
 </form>
+    </div>
+
 </div>
 
 

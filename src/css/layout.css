@@ -102,6 +102,12 @@ footer > div {
   overflow-y: auto;
 }
 
+.indexBundle > #peopleIndex {
+  grid-column: 2;
+  grid-row: 2;
+  overflow-y: auto;
+}
+
 #filters{
   grid-row: 1;
   grid-column: 1 / span 2;
