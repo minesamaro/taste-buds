@@ -25,7 +25,7 @@ function filters(){
     }
     if (isset($_SESSION['selectedOccupations']) && !empty($_SESSION['selectedOccupations'])) {
         $occupations = $_SESSION['selectedOccupations'];
-        echo  "<h4> >Occupations>   </h4> <p>";
+        echo  "<h4> >Occupation>   </h4> <p>";
         echo is_array($occupations) ? implode(', ', $occupations) : $occupations;
         echo "</p>";
     }
