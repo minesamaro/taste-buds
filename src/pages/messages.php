@@ -13,7 +13,7 @@ $userId = $_SESSION['user_id'] ?? 1;
 $peopleWithMessages = Message::getPeopleWithMessages($userId);
 
 // Get the ID of the person whose conversation to display (default to the most recent)
-$selectedPersonId = $_GET['person_id'] ?? null;
+$selectedPersonId = $_GET['personId'] ?? null;
 var_dump($selectedPersonId);
 
 if ($selectedPersonId) {
