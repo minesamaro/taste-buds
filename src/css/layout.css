@@ -367,7 +367,7 @@ footer > div {
   justify-content: center;
 }
 
-.profile-myplans{
+.profile-myplans, .profile-myrecipes{
   margin-top: 20px;
   grid-column: 1;
   grid-row-start: 2;

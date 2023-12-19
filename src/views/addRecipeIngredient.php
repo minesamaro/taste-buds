@@ -19,7 +19,7 @@ function addRecipeIngredient($ingredients, $recipeId) {
         <input type="radio" style="display:none" required="true" id="ingredient_<?= $ingredient->id ?>" name="ingredientId"
             value="<?= $ingredient->id ?>" />
         <label for="ingredient_<?= $ingredient->id ?>">
-            <div class="card">
+            <div class="card-small" id="addRecipeCard">
                 <div>
                     <div class="card-header">
                         <h4><?= $ingredient->name ?></h4>
