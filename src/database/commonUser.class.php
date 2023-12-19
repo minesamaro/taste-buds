@@ -124,7 +124,7 @@
             
                 $db->beginTransaction();
         
-                # insert Person - using post variables from forms (note that the id is automatically set with autoincremental)
+                
                 $stmt = $db->prepare(
                     'UPDATE CommonUser
                     SET height = ? , current_weight = ?,ideal_weight=?
@@ -136,6 +136,34 @@
                 echo "Error: " . $e->getMessage();
             }
         
+        }
+        public static function getPlansByUserId($user_id){
+            try {
+
+                #start transaction to the database
+                $db = Database::getDatabase();       
+                $stmt = $db->prepare(
+                    'SELECT id, creation_date, total_kcal, nutritionist_id
+                    FROM WeeklyPlan
+                    WHERE common_user_id = ?');
+                $stmt->execute(array($user_id));
+     
+            } catch (Exception $e) {
+                $db->rollBack();
+                echo "Error: " . $e->getMessage();
+            }
+            //acho q isto so da se so houver um plano, podem haver muitos
+            $weeklyPlan = $stmt->fetch();
+
+            $plan = new WeeklyPlan(
+              intval($weeklyPlan['id']),
+              $weeklyPlan['creation_date'],
+              floatval($weeklyPlan['total_kcal']),
+              intval($weeklyPlan['nutritionist_id']),
+              $user_id
+            );
+
+            return $plan;
         }
     }
 

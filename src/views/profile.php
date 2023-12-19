@@ -5,7 +5,7 @@ require_once(__DIR__ . '/../database/chef.class.php');
 require_once(__DIR__ . '/../database/nutritionist.class.php');
 
 function Profile(){ 
-    $user_id=$_SESSION['user_id'] ?? 3;
+    $user_id=$_SESSION['user_id'] ;
     
     $personUser = Person::getPersonById($user_id);
     ?>
