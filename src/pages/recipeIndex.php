@@ -3,6 +3,7 @@ require_once(__DIR__ . '/../database/recipe.class.php');
 require_once(__DIR__ . '/../views/header.php');
 require_once(__DIR__ . '/../views/footer.php');
 require_once(__DIR__ . '/../views/recipeIndex.php');
+require_once(__DIR__ . '/../views/searchRecipes.php');
 require_once(__DIR__ . '/../views/sortRecipes.php');
 require_once(__DIR__ . '/../views/filters.php');
 
@@ -18,7 +19,8 @@ head("Recipes");
 ?>
 <main class="indexBundle">
 <?php 
-filters(); 
+filters();
+searchRecipes(); 
 sortRecipes();
 recipeIndex($recipes);
 ?>
