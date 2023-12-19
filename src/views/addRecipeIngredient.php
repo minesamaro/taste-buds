@@ -22,7 +22,7 @@ function addRecipeIngredient($ingredients, $recipeId) { ?>
                             $macronutrients = Ingredient:: getIngredientMacronutrients($ingredient->id);
                             foreach ($macronutrients as $macronutrient) { 
                                 ?>
-                                <h6><?= $macronutrient["name"] ?>: <?= $macronutrient["quantity"] ?> g</h6>
+                                <h6><?= $macronutrient["name"] ?>: <?= $macronutrient["quantity"] ?> g /100 g</h6>
                                 
                         <?php } ?>
                         <div id="ingredient-input-hidden">

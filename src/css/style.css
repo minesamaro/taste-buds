@@ -490,6 +490,31 @@ input[type="radio"]:checked + label #ingredient-input-hidden {
     font-weight: 300;
 }
 
+/* Recipe state */
+.recipe-subtitle {
+    display:flex;
+    flex-direction: column;
+    color: var(--primary-color);
+    font-weight: 300;
+    display: flex;
+    gap: 0.3em;
+    font-style: italic;
+}
+
+.recipe-subtitle h5 {
+    color: var(--primary-color);
+    font-weight: 300;
+    padding-left: 0.5em;
+}
+
+.recipe-macronutrients {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0.5em 0;
+}
+
 /* Login Form*/
 .login-container, .register-container {
     display: flex;

@@ -8,22 +8,24 @@ function showRecipeState($recipe){ ?>
 
         <h2 style="margin-bottom: 0.1em">Current Recipe:
         </h2>
-        <div class="plan-subtitle">
+        <div class="recipe-subtitle">
             <h5>Created on 
-                <?php echo $recipe->submissionDate ?>
+                <p><?php echo $recipe->submissionDate ?>
             </h5>
-            <h5>Total kcal:
-                <?php echo $recipe->energy ?>
-            </h5>
-            <h5>Total carbohydrates:
-                <?php echo $recipe->carbohydrate ?>
-            </h5>
-            <h5>Total proteins:
-                <?php echo $recipe->protein ?>
-            </h5>
-            <h5>Total fats:
-                <?php echo $recipe->fat ?>
-            </h5>
+            <div class="recipe-macronutrients">
+                <h5>Total kcal:
+                    <p><?php echo $recipe->energy ?></p>
+                </h5>
+                <h5>Total carbohydrates:
+                    <p><?php echo $recipe->carbohydrate ?></p>
+                </h5>
+                <h5>Total proteins:
+                    <p><?php echo $recipe->protein ?></p>
+                </h5>
+                <h5>Total fats:
+                    <p><?php echo $recipe->fat ?></p>
+                </h5>
+            </div>
         </div>
         <?php
         $ingredientRecipe = IngredientRecipe::getIngredientsForRecipe($recipe->id);

@@ -51,4 +51,3 @@ function showPlanState($plan){ ?>
 </div> 
 <?php 
 }?>
-

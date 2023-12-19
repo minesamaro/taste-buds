@@ -9,6 +9,7 @@
         public $height;
         public $current_weight;
         public $ideal_weight;
+        public Person $person;
 
         /* Constructor */
         public function __construct($id, $height, $current_weight, $ideal_weight) {
@@ -16,6 +17,8 @@
             $this->height = $height;
             $this->current_weight = $current_weight;
             $this->ideal_weight = $ideal_weight;
+
+            $this->person =parent::getPersonById($id);
         }
 
         public function getId() {

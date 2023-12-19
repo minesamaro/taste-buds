@@ -14,9 +14,9 @@ function planForm(){
                         <?php 
                         //TODO: get list of users from db
                         $users = CommonUser::getUsers();
+                        var_dump($users);
                         foreach ($users as $user) { ?>
-                             <option value="<?php echo $user->id ?>"><?php echo $user->first_name." ".$user->surname ?></option>
-                        </option> 
+                             <option value="<?php echo $user->id ?>"> <?php echo $user->person->first_name." ".$user->person->surname ?> </option> 
                         <?php } ?>
                     </select>
                 </div>
