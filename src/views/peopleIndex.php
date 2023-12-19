@@ -6,7 +6,7 @@ require_once(__DIR__ . '/../database/nutritionist.class.php');
 
 function peopleIndex($people) { 
     ?>
-<div item="recipeIndex">
+<div item="peopleIndex">
 <article class="content">
 <h2>Find Someone</h2>
 <?php
@@ -43,13 +43,13 @@ foreach ($people as $person) {
 
                 <forms class="card-button">
                     <div class="card-footer">
-                        <h5><a href="../pages/profile.php?personId?=<?= $personId ?>">View Profile</a></h5>
+                        <h5><a href="../pages/profile.php?personId=<?php echo $personId; ?>">View Profile</a></h5>
                     </div>
                 </forms>
 
                 <forms class="card-button">
                     <div class="card-footer">
-                        <h5><a href="../pages/messages.php?personId?=<?= $personId ?>">Send Message</a></h5>  
+                        <h5><a href="../pages/messages.php?personId=<?php echo $personId; ?>">Send Message</a></h5>  
                     </div>
                 </forms>
 

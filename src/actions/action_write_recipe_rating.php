@@ -26,7 +26,7 @@ try {
             'user_id' => $user_id,
             'recipe_id' => $recipe_id,
             'rating_value' => $rating_value,
-            'comment' => $rating_comment,
+            'comment' => nl2br($rating_comment),
         );
 
         // Add the rating to the database
@@ -36,7 +36,7 @@ try {
         $_SESSION['msg'] = "Rating added successfully!";
         
         // Redirect to the recipe page
-        header("Location: ../pages/recipe.php?recipe_id=$recipe_id");
+        header("Location: ../pages/recipe.php?recipe_id=$recipe_id#recipe-ratings");
 
     // If the user is not logged in    
     } else {

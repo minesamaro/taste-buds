@@ -1,4 +1,3 @@
-
 .headers on
 .mode column
 --heklo
@@ -165,7 +164,7 @@ CREATE TABLE Recipe (
     number_of_servings INT NOT NULL,
     image TEXT NOT NULL,
     preparation_method TEXT NOT NULL,
-    submission_date TEXT NOT NULL,
+    submission_date TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
     energy REAL,  -- Total energy as a decimal
     carbohydrates REAL,  -- Total carbohydrates as a decimal
     protein REAL,  -- Total protein as a decimal
@@ -231,7 +230,7 @@ CREATE TABLE RecipeDietaryPref (
 
 -- Create the Ingredient table
 CREATE TABLE Ingredient (
-    id INT PRIMARY KEY,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     name TEXT NOT NULL,
     UNIQUE (name)
 );
@@ -477,6 +476,7 @@ INSERT INTO Macronutrient (name, kcal_per_gram) VALUES ('Fat', 9.0);
 INSERT INTO IngredientMacronutrient (quantity_g, ingredient_id, macronutrient) VALUES (10, 1, 'Carbohydrate');
 INSERT INTO IngredientMacronutrient (quantity_g, ingredient_id, macronutrient) VALUES (150, 2, 'Protein');
 INSERT INTO IngredientMacronutrient (quantity_g, ingredient_id, macronutrient) VALUES (20, 3, 'Fat');
+INSERT INTO IngredientMacronutrient (quantity_g, ingredient_id, macronutrient) VALUES (15, 3, 'Protein');
 
 -- Insert Statements for IngredientRecipe Table
 INSERT INTO IngredientRecipe (quantity, measurement_unit, ingredient_id, recipe_id) VALUES (200, 'grams', 1, 1);

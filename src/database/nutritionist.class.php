@@ -30,8 +30,8 @@
 
             try {
                 $db->beginTransaction();
-                $stmt = $db->prepare('INSERT INTO Formation (course_name, school_name, academic_level, graduation_date) VALUES (?,?,?,?)');        
-                $stmt->execute(array($course_name, $school_name, $academic_level, $graduation_date));
+                $stmt = $db->prepare('INSERT INTO Formation (user_id,course_name, school_name, academic_level, graduation_date) VALUES (?,?,?,?,?)');        
+                $stmt->execute(array($user_id,$course_name, $school_name, $academic_level, $graduation_date));
                 $db->commit();
             }
         
