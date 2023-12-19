@@ -14,11 +14,11 @@ function recipeRatings($ratings, $all_ratings, $userId, $session_user, $recipeId
             <?php if($userId) { ?>
 
                 <div class="recipe-see_ratings">
+                    <?php var_dump($ratings); ?>
                                 
                 <?php foreach ($ratings as $rt) { 
                     $rating_user=Person::getPersonById($rt->userId); ?>
                     <div class="card">
-                        <!-- meter aqui profile photo -->
                         <div class="rating-top">
                             <img class="rating-profile_photo" src="<?php echo $rating_user->profile_photo; ?>" alt="<?php echo $rating_user->username; ?>'s profile photo">
 
