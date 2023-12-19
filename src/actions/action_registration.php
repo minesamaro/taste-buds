@@ -35,9 +35,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {     # block will only be executed wh
         $uploadDir = '../img/users/';
         // Get last saved recipe id in database
         $lastPersonId = Person::getLastPersonId();
+        $newId = $lastPersonId + 1;
         // Get the file extension
         $extension = pathinfo($_FILES['profile_photo']['name'], PATHINFO_EXTENSION);
-        $uploadFile = $uploadDir . $lastPersonId . '.' . $extension;
+        $uploadFile = $uploadDir . $newId . '.' . $extension;
         
         if (move_uploaded_file($_FILES['profile_photo']['tmp_name'], $uploadFile)) {
             // File was successfully uploaded
