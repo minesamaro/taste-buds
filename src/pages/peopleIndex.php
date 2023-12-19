@@ -24,7 +24,10 @@ head("All People");
 <main class="indexBundle">
 <?php 
 filters(); 
-sortRecipes();
-recipeIndex($recipes);
+sortPeople();
+peopleIndex($people);
+?>
+</main>
+<?php
 footer();
 ?>

@@ -5,8 +5,7 @@ require_once(__DIR__ . '/../database/cooking.technique.class.php');
 function sortPeople()
 {
     // Check if there are selected categories, techniques, and preferences
-    $selectedOccupations = isset($_SESSION['selectedOccupations']) ? $_SESSION['selectedOccupations'] : [];
-    #var_dump($selectedOccupations); ?>
+    $selectedOccupations = isset($_SESSION['selectedOccupations']) ? $_SESSION['selectedOccupations'] : [];?>
 <div item="sort">
 
 <!-- Clear filters for people -->
@@ -23,7 +22,6 @@ function sortPeople()
             <h4>Occupation</h4>
                     <?php 
                     $occupations = ['Chef', 'Nutritionist', 'Common User'];
-                    #var_dump($occupations);
                     foreach ($occupations as $ocp) { ?>
                     <div class="category">
                         <div class="checkbox-wrapper-6">

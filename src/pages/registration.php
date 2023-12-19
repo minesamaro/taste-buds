@@ -4,7 +4,7 @@ require_once('../views/footer.php');
 require_once('../views/registration.php');
 
 // Check if a user is not logged in
-if (isset($_SESSION['user_id'])){
+if (isset($_SESSION['user_id']) && !isset($_SESSION['reg_page'])){
     header("Location: ../pages/404.php");
 } else {
     if (isset($_SESSION['msg'])){
