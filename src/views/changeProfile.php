@@ -15,9 +15,15 @@ function changeProfile(){
         <div class="card profile-changepass">
             <a href="changePassword.php">Change Password</a>
         </div>
+        <?php if(!Person::isChef($user_id)) {?>
         <div class="card profile-myplans">
             <a href="changePassword.php">My plans</a>
         </div>
+        <?php }else { ?>
+            <div class="card profile-myrecipes">
+            <a href="changePassword.php">My Recipes</a>
+        </div>
+        <?php } ?>
         <div class="card profile-update">
             <a href="changeProfile.php">Update Profile</a>
         </div>
