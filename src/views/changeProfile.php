@@ -85,7 +85,7 @@ function changeProfile(){
                     
                 <?php } elseif( Person::isNutritionist($user_id)){
                     $values= Nutritionist::getNutriFormation($user_id);
-                    var_dump($values)?>
+                    ?>
                 <div class="course">
                         <label for="course_name" id="label">Course name:</label>
                         <input type="text" placeholder="<?php echo $values[1] ?> " id="course_name" name="course_name" >
