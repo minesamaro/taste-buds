@@ -17,7 +17,7 @@ function Profile(){
             <a href="changePassword.php">Change Password</a>
         </div>
         <div class="card profile-myplans">
-         <a href="changePassword.php">My plans</a>
+         <a href="profilePlans.php">My plans</a>
         </div>
         <div class="card profile-update">
             <a href="changeProfile.php">Update Profile</a>
