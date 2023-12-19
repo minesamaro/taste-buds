@@ -201,5 +201,38 @@ class Message
 
         return $people;
     }
+
+
+    static function checkLastMsgWithPersonWasReceived(int $userId, int $personId): bool
+        {
+            $db = Database::getDatabase();
+            $stmt = $db->prepare(
+            'SELECT id
+                FROM Messages
+                WHERE receiver_id = ? AND sender_id = ? 
+                ORDER BY id DESC
+                LIMIT 1'
+            );
+            $stmt->execute(array($userId, $personId));
+            $result = $stmt->fetch();
+
+            $stmt = $db->prepare(
+                'SELECT * FROM Messages 
+                WHERE (sender_id = ? AND receiver_id = ?)
+                OR (sender_id = ? AND receiver_id = ?)
+                ORDER BY id DESC
+                LIMIT 1'
+            );
+            $stmt->execute(array($userId, $personId, $personId, $userId));
+            $result2 = $stmt->fetch();
+
+            if (is_array($result) && is_array($result2) && $result['id'] == $result2['id']) {
+                return true;
+            } else {
+                return false;
+            }
+
+        
+        }
 }
 ?>

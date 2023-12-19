@@ -16,7 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {     # block will only be executed wh
 
     Message::addMessage($content, $user_id, $receiver_id);
 
-    header('Location: ../pages/messages.php' . '?person_id=' . $receiver_id);
+    header('Location: ../pages/messages.php' . '?personId=' . $receiver_id);
 //ter cuidado aqui que não sei se isto vai depois para o user que está log in ou receiver id
 
 

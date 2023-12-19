@@ -14,7 +14,6 @@ $peopleWithMessages = Message::getPeopleWithMessages($userId);
 
 // Get the ID of the person whose conversation to display (default to the most recent)
 $selectedPersonId = $_GET['personId'] ?? null;
-var_dump($selectedPersonId);
 
 if ($selectedPersonId) {
     $selectedPerson = Person::getPersonById($selectedPersonId);
@@ -24,7 +23,13 @@ if ($selectedPersonId) {
     $conversation= Message::getMessagesBetweenPeople($userId, $selectedPersonId);
 
     // Mark all messages with this person as read
-    Message::markMessagesWithPersonAsRead($userId, $selectedPersonId);
+    if($conversation) { 
+        if(Message::checkLastMsgWithPersonWasReceived($userId, $selectedPersonId)) 
+        {
+            Message::markMessagesWithPersonAsRead($userId, $selectedPersonId);
+        }
+    }
+    
 
     head("Messages: " . $selectedPerson->first_name . " " . $selectedPerson->surname);
 } else {
@@ -46,7 +51,7 @@ if ($selectedPersonId) {
                 if(!empty($peopleWithMessages)) {
                     foreach ($peopleWithMessages as $person) { ?>
                         <li>
-                            <a href="?person_id=<?php echo $person->id; ?>">
+                            <a href="?personId=<?php echo $person->id; ?>">
                                 <?php echo $person->first_name . " " .  $person->surname; ?>
                             </a>
                         </li>
