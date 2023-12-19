@@ -106,7 +106,7 @@ function recipeRatings($ratings, $all_ratings, $userId, $session_user, $recipeId
                     </div>
                 </div>
             <?php }} else {
-                echo "Log in to rate this recipe";
+                echo "Log in to see the ratings of this recipe";
             }
 
            /*  else { ?>
