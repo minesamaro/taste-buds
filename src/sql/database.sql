@@ -1,4 +1,3 @@
-
 .headers on
 .mode column
 --heklo

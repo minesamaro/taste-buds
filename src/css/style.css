@@ -34,7 +34,7 @@ h1{
 font-family: 'Libre Franklin', sans-serif;
 }
 
-#title{
+#title, #title:hover, #title:active, #title:visited, #title:focus{
     font-family: 'Poppins';font-size: 42px;
     font-weight: bolder;
     color: var(--primary-color);
@@ -396,6 +396,10 @@ input[type="radio"]:checked + label #ingredient-input-hidden {
     margin: 0;
 }
 
+#rating-name:hover {
+    font-style: italic;
+}
+
 .rating-bottom{
     font-size: 0.9em;
     font-style: italic;
@@ -592,7 +596,6 @@ a {
 
 a:hover {
     color: var(--contrast-color);
-    font-style: italic;
 }
 
 /* Filters chosen */
