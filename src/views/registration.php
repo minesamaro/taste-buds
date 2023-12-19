@@ -8,7 +8,7 @@ function registration($msg){ ?>
         <p><?php echo $msg ?></p> 
     <?php } ?>
 
-    <form class="register-form" action="../actions/action_registration.php" method="post">
+    <form class="register-form" action="../actions/action_registration.php" method="post" enctype="multipart/form-data">
 
         <div class="form-group">
             <label>First Name:

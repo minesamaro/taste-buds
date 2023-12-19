@@ -16,7 +16,7 @@
         public $profile_photo;
 
         /* Constructor */
-        public function __construct($id, $username, $first_name, $surname, $email, $password, $birth_date, $gender, $profile_photo = null) {
+        public function __construct($id, $username, $first_name, $surname, $email, $password, $birth_date, $gender, $profile_photo) {
             $this->id = $id;
             $this->username = $username;
             $this->first_name = $first_name;
