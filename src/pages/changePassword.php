@@ -7,7 +7,7 @@
  if (!isset($_SESSION['user_id'])) {
   header("Location: ../pages/404.php");
 } else {
-head("Change Password");
+head("Change Password");}
 if (isset($_SESSION['msg'])){
   $msg = $_SESSION['msg'];
   unset($_SESSION['msg']);
