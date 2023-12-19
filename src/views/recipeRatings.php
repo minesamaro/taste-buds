@@ -32,7 +32,7 @@ function recipeRatings($ratings, $all_ratings, $userId, $session_user, $recipeId
                         </div>
                         <div class="rating-bottom">
                             <span class="recipe-rating_username"> <? echo $rating_user->username; ?> </span>
-                            <span class="recipe-rating_date"> <? echo $rt->ratingDate; ?> </span>
+                            <span class="recipe-rating_date"> <? echo date("d-m-Y", strtotime($rt->ratingDate)); ?> </span>
                         </div>
                         <div class="rating-comment">
                             <span class="recipe-rating_comment"> <? echo $rt->comment; ?> </span>
