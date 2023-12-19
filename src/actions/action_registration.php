@@ -30,6 +30,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {     # block will only be executed wh
     $birth_date = $_POST['birth_date'];
     $gender = $_POST['gender'];
     $occupation = $_POST['occupation'];
+    // Get image and upload it to the server
+    if (isset($_FILES['profile_photo']) && $_FILES['profile_photo']['error'] == UPLOAD_ERR_OK) {
+        $uploadDir = '../img/users/';
+        // Get last saved recipe id in database
+        $lastPersonId = Person::getLastPersonId();
+        // Get the file extension
+        $extension = pathinfo($_FILES['profile_photo']['name'], PATHINFO_EXTENSION);
+        $uploadFile = $uploadDir . $lastPersonId . '.' . $extension;
+        
+        if (move_uploaded_file($_FILES['profile_photo']['tmp_name'], $uploadFile)) {
+            // File was successfully uploaded
+            $profile_photo = $uploadFile;
+        } else {
+            // Handle file upload error
+            $profile_photo = '../pages/profile.png';
+        }
+    } else {
+        // Handle file upload error by using a default image
+        $profile_photo = '../pages/profile.png';
+    }
 
     $db=Database::getDatabase(); 
 
@@ -86,7 +106,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {     # block will only be executed wh
     }
 
 
-    $person=Person::addPerson($username, $first_name, $surname, $email, $password, $birth_date, $gender, $occupation);
+    $person=Person::addPerson($username, $first_name, $surname, $email, $password, $birth_date, $gender, $occupation, $profile_photo);
     $_SESSION['user_id'] = $person->id;
     $_SESSION['username'] = $person->username;
     $_SESSION['occupation'] = $occupation;

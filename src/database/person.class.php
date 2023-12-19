@@ -13,9 +13,10 @@
         public $password;
         public $birth_date;
         public $gender;
+        public $profile_photo;
 
         /* Constructor */
-        public function __construct($id, $username, $first_name, $surname, $email, $password, $birth_date, $gender) {
+        public function __construct($id, $username, $first_name, $surname, $email, $password, $birth_date, $gender, $profile_photo = null) {
             $this->id = $id;
             $this->username = $username;
             $this->first_name = $first_name;
@@ -23,7 +24,8 @@
             $this->email = $email;
             $this->password = $password;
             $this->birth_date = $birth_date;
-            $this->gender = $gender;            
+            $this->gender = $gender;    
+            $this->profile_photo = $profile_photo;        
         }
         public function getId() {
             return $this->id;
@@ -50,7 +52,11 @@
             return $this->gender;
         }
 
-        static function addPerson($username, $first_name, $surname, $email, $password, $birth_date, $gender, $occupation) : Person {
+        public function getProfilePhoto() {
+            return $this->profile_photo;
+        }
+
+        static function addPerson($username, $first_name, $surname, $email, $password, $birth_date, $gender, $occupation, $profile_photo) : Person {
 
             try {
 
@@ -60,8 +66,8 @@
                 $db->beginTransaction();
         
                 # insert Person - using post variables from forms (note that the id is automatically set with autoincremental)
-                $stmt = $db->prepare('INSERT INTO Person (username,first_name,surname,email,password,birth_date,gender) VALUES (?,?,?,?,?,?,?)');
-                $stmt->execute(array($username, $first_name, $surname, $email, hash('sha256', $password), $birth_date, $gender));
+                $stmt = $db->prepare('INSERT INTO Person (username,first_name,surname,email,password,birth_date,gender,profile_photo) VALUES (?,?,?,?,?,?,?,?)');
+                $stmt->execute(array($username, $first_name, $surname, $email, hash('sha256', $password), $birth_date, $gender, $profile_photo));
                 
                 $db->commit();
 
@@ -78,7 +84,8 @@
                 $email,
                 hash('sha256', $password),
                 $birth_date, 
-                $gender
+                $gender,
+                $profile_photo
             );
 
             return $new_person;
@@ -104,7 +111,8 @@
                     $p['email'],
                     $p['password'],
                     $p['birth_date'],
-                    $p['gender']
+                    $p['gender'],
+                    $p['profile_photo']
                 ));
             }
 
@@ -114,7 +122,7 @@
         static function getPersonByUsername(string $username) : Person {
             $db = Database::getDatabase();
             $stmt = $db->prepare(
-                'SELECT id, username, first_name, surname, email, password, birth_date, gender
+                'SELECT id, username, first_name, surname, email, password, birth_date, gender, profile_photo
                 FROM Person
                 WHERE username = ?');
         
@@ -130,14 +138,15 @@
                 $person['email'],
                 $person['password'],
                 $person['birth_date'], 
-                $person['gender']
+                $person['gender'],
+                $person['profile_photo']
             );
         }
 
         static function getPersonById(int $user_id) : Person {
             $db = Database::getDatabase();
             $stmt = $db->prepare(
-                'SELECT id, username, first_name, surname, email, password, birth_date, gender
+                'SELECT id, username, first_name, surname, email, password, birth_date, gender, profile_photo
                 FROM Person
                 WHERE id = ?');
         
@@ -153,8 +162,27 @@
                 $person['email'],
                 $person['password'],
                 $person['birth_date'], 
-                $person['gender']
+                $person['gender'],
+                $person['profile_photo']
             );
+        }
+
+                /**
+         * Get the last person id from the database
+         */
+        static function getLastPersonId(): int
+        {
+            $db = Database::getDatabase();
+            $stmt = $db->prepare(
+            'SELECT id
+                FROM Person
+                ORDER BY id DESC
+                LIMIT 1'
+            );
+            $stmt->execute();
+            $result = $stmt->fetch();
+            return intval($result['id']);
+        
         }
 
         public static function getPeopleByOccupations($selectedOccupations) {
@@ -209,7 +237,8 @@
                     $person["email"],
                     $person["password"],
                     $person["birth_date"],
-                    $person["gender"]
+                    $person["gender"],
+                    $person["profile_photo"]
                 );
             }
 
@@ -234,7 +263,8 @@
                     $user['email'],
                     $user['password'],
                     $user['birth_date'],
-                    $user['gender']
+                    $user['gender'],
+                    $user['profile_photo']
                 );
             }
 

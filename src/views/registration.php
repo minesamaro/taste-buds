@@ -97,7 +97,13 @@ function registration($msg){ ?>
                    <!-- php: if (common user) ver como fazer --> 
 
              </fieldset>
-    </div>
+        </div>
+
+        <!-- Image -->
+        <div class="form-group">
+        <label for="image">Upload Profile Photo:</label>
+            <input type="file" name="profile_photo" id="profile_photo" accept="image/*">
+        </div>
 
         <button type="submit">Register</button>
     </form>
