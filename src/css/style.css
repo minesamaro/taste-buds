@@ -967,3 +967,9 @@ html::-webkit-scrollbar-thumb {
     max-height: 100px;
     border-radius: 50%;
 }
+
+
+/* Messages */
+.message-bold {
+    font-weight: bold;
+}

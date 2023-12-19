@@ -49,9 +49,14 @@ if ($selectedPersonId) {
         <ul>
             <?php   
                 if(!empty($peopleWithMessages)) {
-                    foreach ($peopleWithMessages as $person) { ?>
+                    foreach ($peopleWithMessages as $person) { 
+                        $lastMessage = Message::getLastMessageFromPerson($userId, $person->id);
+                        $isLastMessageReceived = Message::checkLastMsgWithPersonWasReceived($userId, $person->id);
+                        $isRead = $lastMessage && $isLastMessageReceived ? $lastMessage->is_read : true;
+                        $class = !$isRead ? 'message-bold' : ''; ?>
+                    
                         <li>
-                            <a href="?personId=<?php echo $person->id; ?>">
+                            <a class="<?php echo $class; ?>" href="?personId=<?php echo $person->id; ?>">
                                 <?php echo $person->first_name . " " .  $person->surname; ?>
                             </a>
                         </li>
