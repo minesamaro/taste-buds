@@ -47,7 +47,8 @@ function showPlanState($plan){ ?>
             <?php
         }
         
-    }
-    
+    }?>
+</div> 
+<?php 
 }?>
-</div>
+

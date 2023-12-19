@@ -23,6 +23,12 @@ function filters(){
         echo is_array($preferences) ? implode(', ', $preferences) : $preferences;
         echo "</p>";
     }
+    if (isset($_SESSION['selectedOccupations']) && !empty($_SESSION['selectedOccupations'])) {
+        $occupations = $_SESSION['selectedOccupations'];
+        echo  "<h4> >Occupations>   </h4> <p>";
+        echo is_array($occupations) ? implode(', ', $occupations) : $occupations;
+        echo "</p>";
+    }
     ?>
 </div>
 <?php } ?>

@@ -4,7 +4,7 @@ require_once(__DIR__ . '/../database/recipe_rating.class.php');
 require_once(__DIR__ . '/../database/person.class.php');
 require_once(__DIR__ . '/../database/recipe.class.php');
 
-
+// Everyone can see the ratings of a recipe, so no permissions are needed
 // Retrieve recipe ID from the URL
 $recipeId = $_GET['recipe_id'] ?? 1; //change this, is to choose a recipe for now
 $recipe = Recipe::getRecipeById($recipeId);

@@ -192,6 +192,38 @@ class WeeklyPlan
     $stmt->execute(array($totalKcal, $planId));
   }
   
+  static function getNutriFromPlanId(int $planId): int
+  {
+    $db = Database::getDatabase();
+    $stmt = $db->prepare(
+      'SELECT nutritionist_id
+        FROM WeeklyPlan
+        WHERE id = ?'
+    );
+
+    $stmt->execute(array($planId));
+
+    $weeklyPlan = $stmt->fetch();
+    return intval($weeklyPlan['nutritionist_id']);
+  }
+
+  /**
+   * Check if the user is the nutritionist or the common user of the plan
+   */
+  static function checkPlanUser(int $planId, int $userId): bool
+  {
+    $db = Database::getDatabase();
+    $stmt = $db->prepare(
+      'SELECT nutritionist_id, common_user_id
+        FROM WeeklyPlan
+        WHERE id = ?'
+    );
+
+    $stmt->execute(array($planId));
+
+    $weeklyPlan = $stmt->fetch();
+    return (intval($weeklyPlan['nutritionist_id']) == $userId || intval($weeklyPlan['common_user_id']) == $userId);
+  }
 }
 
 ?>

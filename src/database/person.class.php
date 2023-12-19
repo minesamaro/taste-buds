@@ -1,5 +1,8 @@
 <?php  
     require_once(__DIR__ . '/../database/connection.db.php');
+    require_once(__DIR__ . '/../database/chef.class.php');
+    require_once(__DIR__ . '/../database/nutritionist.class.php');
+    require_once(__DIR__ . '/../database/commonUser.class.php');
 
     class Person {
         public $id;
@@ -153,6 +156,41 @@
                 $person['gender']
             );
         }
+
+        public static function getPeopleByOccupations($selectedOccupations) {
+            $people_occupation = array();
+    
+            foreach ($selectedOccupations as $occupation) {
+                switch ($occupation) {
+                    case 'Chef':
+                        $chefPeople = Chef::getChefs();
+                        $people_occupation = array_merge($people_occupation, $chefPeople);
+                        break;
+    
+                    case 'Nutritionist':
+                        $nutritionistPeople = Nutritionist::getNutris();
+                        $people_occupation = array_merge($people_occupation, $nutritionistPeople);
+                        break;
+    
+                    case 'Common User':
+                        $commonUserPeople = CommonUser::getUsers();
+                        $people_occupation = array_merge($people_occupation, $commonUserPeople);
+                        break;
+                }
+            }
+
+            $people = array();
+
+            foreach ($people_occupation as $p) {
+                $person = self::getPersonById($p->id);
+                array_push ($people, $person);
+            }
+
+            return $people;
+        }
+
+
+
         
          # nao sei se isto deva ficar aqui ou no ficheiro das funcoes (o msm para as outras classes)
         static function checkPersonLogin(string $username, string $password) : Person {

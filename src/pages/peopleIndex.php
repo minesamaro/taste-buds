@@ -6,8 +6,8 @@ require_once(__DIR__ . '/../database/commonUser.class.php');
 require_once(__DIR__ . '/../database/nutritionist.class.php');
 require_once(__DIR__ . '/../views/header.php');
 require_once(__DIR__ . '/../views/footer.php');
-require_once(__DIR__ . '/../views/recipeIndex.php');
-require_once(__DIR__ . '/../views/sortRecipes.php');
+require_once(__DIR__ . '/../views/peopleIndex.php');
+require_once(__DIR__ . '/../views/sortPeople.php');
 require_once(__DIR__ . '/../views/filters.php');
 
 
@@ -16,7 +16,7 @@ require_once(__DIR__ . '/../views/filters.php');
 if (isset($_SESSION["people"])) {
     $people = $_SESSION["people"];
 } else {
-    $people = Person::getAllPeople();
+    $people = Person::getAllPersons();
 }
 
 head("All People");
@@ -26,8 +26,5 @@ head("All People");
 filters(); 
 sortRecipes();
 recipeIndex($recipes);
-?>
-</main>
-<?php
 footer();
 ?>

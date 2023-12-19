@@ -14,6 +14,7 @@ $peopleWithMessages = Message::getPeopleWithMessages($userId);
 
 // Get the ID of the person whose conversation to display (default to the most recent)
 $selectedPersonId = $_GET['person_id'] ?? null;
+var_dump($selectedPersonId);
 
 if ($selectedPersonId) {
     $selectedPerson = Person::getPersonById($selectedPersonId);

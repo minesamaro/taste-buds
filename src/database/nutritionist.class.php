@@ -2,7 +2,7 @@
     require_once(__DIR__ . '/../database/connection.db.php');
 
     class Nutritionist {
-        private $id;
+        public $id;
 
         /* Constructor */
         public function __construct($id) {
@@ -119,7 +119,7 @@
             $db = Database::getDatabase();
             $req = $db->query('SELECT Person.*, Nutritionist.* 
             FROM Person
-            JOIN Chef ON Person.id = Nutritionist.nutri_id');
+            JOIN Nutritionist ON Person.id = Nutritionist.nutri_id');
 
             // Include the Person attributes
             foreach($req->fetchAll() as $n) {
