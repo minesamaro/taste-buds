@@ -32,7 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {     # block will only be executed wh
     $occupation = $_POST['occupation'];
     // Get image and upload it to the server
     if (isset($_FILES['profile_photo']) && $_FILES['profile_photo']['error'] == UPLOAD_ERR_OK) {
-        $uploadDir = '../img/users/';
+        $uploadDir = '../img/users/'; 
         // Get last saved recipe id in database
         $lastPersonId = Person::getLastPersonId();
         $newId = $lastPersonId + 1;

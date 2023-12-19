@@ -396,6 +396,11 @@ input[type="radio"]:checked + label #ingredient-input-hidden {
     margin: 0;
 }
 
+.rating-profile_photo {
+    max-width: 100px;
+    max-height: 100px;
+}
+
 #rating-name:hover {
     font-style: italic;
 }

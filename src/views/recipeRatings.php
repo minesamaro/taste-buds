@@ -20,6 +20,9 @@ function recipeRatings($ratings, $all_ratings, $userId, $session_user, $recipeId
                     <div class="card">
                         <!-- meter aqui profile photo -->
                         <div class="rating-top">
+                            <img class="rating-profile_photo" src="<?php echo $rating_user->profile_photo; ?>" alt="<?php echo $rating_user->username; ?>'s profile photo">
+                            <?php var_dump($rating_user->profile_photo); ?>
+
                             <a id="rating-name" href="../pages/profile.php?person_id=<?php echo $rating_user->id; ?>"><? echo $rating_user->first_name . " " . $rating_user->surname; ?></a>
                             <div class="rating-stars">
                                 <?php for ($i = 0; $i < $rt->ratingValue; $i++) { ?>
