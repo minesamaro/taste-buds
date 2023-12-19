@@ -305,6 +305,29 @@
             }
         }
 
+        public static function changePassword( int $user_id, $password)
+        {
+            try {
+
+                #start transaction to the database
+                $db = Database::getDatabase();       
+            
+                $db->beginTransaction();
+        
+                # Change the information on the Person table in the Database
+                $stmt = $db->prepare(
+                    'UPDATE Person
+                    SET password=?
+                    WHERE id = ?');
+                $stmt->execute(array($password,$user_id));
+                $db->commit();
+            } catch (Exception $e) {
+                $db->rollBack();
+                echo "Error: " . $e->getMessage();
+            }
+        }
+
+
     }
 
 ?>
