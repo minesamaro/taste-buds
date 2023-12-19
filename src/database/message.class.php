@@ -194,7 +194,8 @@ class Message
                 $person->email,
                 $person->password,
                 $person->birth_date,
-                $person->gender
+                $person->gender,
+                $person->profile_photo
             ));
         }
 

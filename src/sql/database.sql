@@ -44,7 +44,8 @@ CREATE TABLE Person (
     email TEXT NOT NULL,
     password TEXT NOT NULL,
     birth_date TEXT,
-    gender TEXT
+    gender TEXT,
+    profile_photo TEXT
 );
 
 

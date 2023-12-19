@@ -8,7 +8,7 @@ require_once(__DIR__ . '/../database/weeklyPlan.class.php');
 
 function profilePlans()
 {
-    $user_id=6;
+    $user_id=$_SESSION['user_id'] ;
     $plan=CommonUser::getPlansByUserId($user_id); 
 ?>
     
@@ -18,7 +18,7 @@ function profilePlans()
         <section class="card">
                 <div class="card-header">
                     <h4>
-                        <a href="#">Weekly Plan <?php echo $plan->id ?></a>
+                        <a href="../pages/plan.php?id=<?php echo $plan->id ?>">Weekly Plan <?php echo $plan->id ?></a>
                     </h4>
                     
                     <h6><?php echo $plan->creationDate ?></h6>
