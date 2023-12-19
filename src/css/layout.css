@@ -150,6 +150,15 @@ footer > div {
   grid-column: 1 / span 2;
 }
 
+/* Add Recipe */
+.recipe-categories{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0.5rem 0.5rem;
+}
+
 
 /* Recipe Page */
 /* ver se na primeira part eé melhor usar grid ou blocks */ 

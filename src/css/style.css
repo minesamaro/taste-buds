@@ -543,6 +543,13 @@ input[type="radio"]:checked + label #ingredient-input-hidden {
     justify-content: space-between;
 }
 
+.checkbox-other {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
 
 #recipeState{
     border-left: 2px dashed var(--background-color-dark);
