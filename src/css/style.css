@@ -397,8 +397,9 @@ input[type="radio"]:checked + label #ingredient-input-hidden {
 }
 
 .rating-profile_photo {
-    max-width: 100px;
-    max-height: 100px;
+    max-width: 50px;
+    max-height: 50px;
+    border-radius: 50%;
 }
 
 #rating-name:hover {
@@ -955,3 +956,8 @@ html::-webkit-scrollbar-thumb {
  #label{
     font-weight: bold;
  }
+
+ .profile-profile_photo {
+    max-width: 100px;
+    max-height: 100px;
+}
