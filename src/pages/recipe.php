@@ -31,6 +31,8 @@
     // Will be used later for checking whether user (if logged in) has commented
     if ($userId) {
         $session_user = Person::getPersonById($userId);
+    } else {
+        $session_user = 0;
     }
 
     // Get recipe details

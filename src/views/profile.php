@@ -11,7 +11,8 @@ function Profile(){
     ?>
     <article class="center-content" id="profile">
         <div class="profile-photo">
-            <img src="profile.png" alt="Profle Picture" width=100px height=100px>
+            <img src="<?php echo $personUser->profile_photo; ?>"  alt="Profle Picture" width=100px height=100px>
+       
         </div>
         <div class="card profile-changepass">
             <a href="changePassword.php">Change Password</a>
