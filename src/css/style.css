@@ -396,11 +396,6 @@ input[type="radio"]:checked + label #ingredient-input-hidden {
     margin: 0;
 }
 
-.rating-profile_photo {
-    max-width: 60px;
-    max-height: 60px;
-    border-radius: 50%;
-}
 
 #rating-name:hover {
     font-style: italic;
@@ -409,7 +404,17 @@ input[type="radio"]:checked + label #ingredient-input-hidden {
 .rating-bottom{
     font-size: 0.9em;
     font-style: italic;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
+
+.rating-profile_photo {
+    max-width: 50px;
+    max-height: 50px;
+    border-radius: 50%;
+}
+    
 
 .rating-comment {
     margin-top: 1em;
