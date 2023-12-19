@@ -6,7 +6,7 @@ function sortPeople()
 {
     // Check if there are selected categories, techniques, and preferences
     $selectedOccupations = isset($_SESSION['selectedOccupations']) ? $_SESSION['selectedOccupations'] : [];?>
-<div item="sort">
+<div item="sort_people">
 
 <!-- Clear filters for people -->
 <form action="../actions/actionClearPeopleFilters.php" method="POST">
