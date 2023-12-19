@@ -10,9 +10,12 @@ function head($title)
 
 <head>
     <meta charset="UTF-8">
+    <meta name="description" content="Taste Buds is a website where you can find recipes and meal plans for your diet.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= $title ?></title>
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/layout.css">
+    <link rel="stylesheet" href="../css/responsive.css">
     <link rel="icon" href="../img/utils/favicon.icon">
     <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
