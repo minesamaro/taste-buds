@@ -12,7 +12,8 @@ function allrecipeRatings($all_ratings, $recipe) { ?>
             <?php foreach ($all_ratings as $rt) :
                 $rating_user=Person::getPersonById($rt->userId); ?>
                     <div class="card">
-                        <!-- meter aqui profile photo -->
+                        <img class="rating-profile_photo" src="<?php echo $rating_user->profile_photo; ?>" alt="<?php echo $rating_user->username; ?>'s profile photo">
+                       
                         <div class="rating-top">
                             <a id="rating-name" href="../pages/profile.php?person_id=<?php echo $rating_user->id; ?>"><? echo $rating_user->first_name . " " . $rating_user->surname; ?></a>
                             <div class="rating-stars">
