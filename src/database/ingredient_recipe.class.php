@@ -55,5 +55,19 @@ class IngredientRecipe
 
         return $ingredientRecipes;
     }
+
+    /**
+     * Add an ingredient to a recipe
+     */
+    public static function addIngredientToRecipe(int $recipeId, int $ingredientId, float $quantity, string $measurementUnit): void
+    {
+        $db = Database::getDatabase();
+        $stmt = $db->prepare(
+            'INSERT INTO IngredientRecipe (quantity, measurement_unit, ingredient_id, recipe_id) 
+            VALUES (?, ?, ?, ?)'
+        );
+        
+        $stmt->execute(array($quantity, $measurementUnit, $ingredientId, $recipeId));
+    }
 }
 ?>

@@ -23,10 +23,10 @@ class Recipe
   public float $energy;
   public float $protein;
   public float $fat;
-  public float $carbohydrates;
+  public float $carbohydrate;
   public int $idChef;
 
-  public function __construct(int $id, string $name, int $preparationTime, int $difficulty, int $numberOfServings, string $image, string $preparationMethod, string $submissionDate, float $energy, float $protein, float $fat, float $carbohydrates, int $idChef)
+  public function __construct(int $id, string $name, int $preparationTime, int $difficulty, int $numberOfServings, string $image, string $preparationMethod, string $submissionDate, float $energy, float $protein, float $fat, float $carbohydrate, int $idChef)
   {
     $this->id = $id;
     $this->name = $name;
@@ -39,7 +39,7 @@ class Recipe
     $this->energy = $energy;
     $this->protein = $protein;
     $this->fat = $fat;
-    $this->carbohydrates = $carbohydrates;
+    $this->carbohydrate = $carbohydrate;
     $this->idChef = $idChef;
   }
 
@@ -294,6 +294,95 @@ class Recipe
   
       return $stmt->execute($values);
     }
+
+  /**
+   * Add a new recipe to the database
+   */
+  static function addRecipe(string $name, int $preparationTime, int $difficulty, int $numberOfServings, string $image, string $preparationMethod, int $idChef): int
+  {
+    $db = Database::getDatabase();
+    $stmt = $db->prepare(
+      'INSERT INTO Recipe (name, preparation_time, difficulty, number_of_servings, image, preparation_method, chef)
+        VALUES (?, ?, ?, ?, ?, ?, ?)'
+    );
+    $stmt->execute(
+      array(
+        $name,
+        $preparationTime,
+        $difficulty,
+        $numberOfServings,
+        $image,
+        $preparationMethod,
+        $idChef
+      )
+    );
+    return intval($db->lastInsertId());
+  }
+
+  /**
+   * Get the last recipe id from the database
+   */
+  static function getLastRecipeId(): int
+  {
+    $db = Database::getDatabase();
+    $stmt = $db->prepare(
+      'SELECT id
+        FROM Recipe
+        ORDER BY id DESC
+        LIMIT 1'
+    );
+    $stmt->execute();
+    $result = $stmt->fetch();
+    return intval($result['id']);
   
   }
+
+  /**
+   * Check if user is the author of the recipe
+   */
+  static function isAuthor(int $recipeId, int $userId): bool
+  {
+    $db = Database::getDatabase();
+    $stmt = $db->prepare(
+      'SELECT chef
+        FROM Recipe
+        WHERE id = ?'
+    );
+    $stmt->execute(array($recipeId));
+    $result = $stmt->fetch();
+    return intval($result['chef']) === $userId;
+  }
+
+  /**
+   * Update the recipe in the database
+   */
+  public function updateRecipe(): bool
+  {
+    $db = Database::getDatabase();
+    $stmt = $db->prepare(
+      'UPDATE Recipe
+        SET name = ?, preparation_time = ?, difficulty = ?, number_of_servings = ?, image = ?, preparation_method = ?, submission_date = ?, energy = ?, protein = ?, fat = ?, carbohydrates = ?, chef = ?
+        WHERE id = ?'
+    );
+    return $stmt->execute(
+      array(
+        $this->name,
+        $this->preparationTime,
+        $this->difficulty,
+        $this->numberOfServings,
+        $this->image,
+        $this->preparationMethod,
+        $this->submissionDate,
+        $this->energy,
+        $this->protein,
+        $this->fat,
+        $this->carbohydrate,
+        $this->idChef,
+        $this->id
+      )
+    );
+  }
+
+}
+
 ?>

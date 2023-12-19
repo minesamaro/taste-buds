@@ -115,7 +115,7 @@ function recipeContent($msg, $recipe, $ingredients, $chef, $cooking_techniques, 
                     </div>
                     <div class="nutrient-item" id="recipe-carbs">
                         <span class="nutrient-label">Carbohydrates:</span>
-                        <span class="nutrient-value"><?php echo $recipe->carbohydrates; ?> g</span>
+                        <span class="nutrient-value"><?php echo $recipe->carbohydrate; ?> g</span>
                     </div>
                 </div>
             </div>

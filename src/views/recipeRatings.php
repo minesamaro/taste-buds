@@ -2,7 +2,7 @@
 require_once(__DIR__ . '/../database/recipe_rating.class.php');
 function recipeRatings($ratings, $all_ratings, $userId, $session_user, $recipeId){ ?>
     <!-- Ratings Section -->
-        <section class="recipe-ratings">
+        <section class="recipe-ratings" id="recipe-ratings">
             
             <h2 id="recipe-see_ratings_title">Ratings (<?php
                 if ($all_ratings) { 

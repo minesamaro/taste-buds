@@ -15,7 +15,7 @@
     require_once(__DIR__ . '/../database/nutritionist_approval.class.php');
     
     // messages - ex. when a person submits a rating
-    $msg = $null;
+    $msg = null;
     if (isset($_SESSION['msg'])){
         $msg = $_SESSION['msg'];
         unset($_SESSION['msg']);

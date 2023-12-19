@@ -24,10 +24,12 @@ function recipeForm(){
             <div>
             <!-- Difficulty Level -->
             <label for="difficulty">Difficulty Level:</label>
-            <select id="difficulty" name="difficulty" required>
-                <option value="1">Easy</option>
-                <option value="2">Moderate</option>
-                <option value="3">Difficult</option>
+            <select name="difficulty" id="difficulty" required>
+                <option value="1">1 - Very Easy</option>
+                <option value="2">2 - Easy</option>
+                <option value="3">3 - Medium</option>
+                <option value="4">4 - Hard</option>
+                <option value="5">5 - Very Hard</option>
             </select>
             </div>
 
@@ -44,8 +46,8 @@ function recipeForm(){
             </div>
 
             <!-- Image -->
-            <label for="file">Select Image:</label>
-            <input type="file" name="file" id="file" accept="image/*">
+            <label for="image">Select Image:</label>
+            <input type="file" name="image" id="image" accept="image/*">
             </div>
 
             <!-- Submit Button -->

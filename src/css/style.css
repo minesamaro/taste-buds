@@ -190,6 +190,15 @@ input[type="radio"]:checked + label .card, #planRecipeOptions{
     margin: 0.2em;
 }
 
+/* Ingredient Recipe */
+#ingredient-input-hidden {
+    display: none;
+}
+input[type="radio"]:checked + label #ingredient-input-hidden {
+    display: block;
+}
+
+
 /* Recipe */
 
 .alert {

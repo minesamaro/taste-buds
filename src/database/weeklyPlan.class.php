@@ -127,6 +127,28 @@ class WeeklyPlan
     }
     return $planRecipes;
   }
+
+  /**
+   * Get the energy by day of the week
+   */
+  function getEnergyByDay(string $dayWeek): float
+  {
+    $db = Database::getDatabase();
+    $stmt = $db->prepare(
+      'SELECT SUM(energy * portion) AS energy
+        FROM PlanRecipe
+        INNER JOIN Recipe ON PlanRecipe.recipe_id = Recipe.id
+        WHERE plan_id = ? AND day_week = ?'
+    );
+    $stmt->execute(
+      array(
+        $this->id,
+        $dayWeek
+      )
+    );
+    $energy = $stmt->fetch();
+    return floatval($energy['energy']);
+  }
   
 
   /**
