@@ -111,7 +111,33 @@
                 
             return $chefList;
         }
+        public static function changeChefInfo($user_id,$course_name,$school_name,$academic_level,$graduation_date){
+       
+            try {
+
+                #start transaction to the database
+                $db = Database::getDatabase();       
+            
+                $db->beginTransaction();
         
+                # insert Person - using post variables from forms (note that the id is automatically set with autoincremental)
+                $stmt = $db->prepare(
+                    'UPDATE Formation
+                    SET course_name = ? , school_name = ?,academic_level=?,graduation_date=?
+                    WHERE user_id = ?');
+                $stmt->execute(array($course_name, $school_name,$academic_level,$graduation_date,$user_id));
+                $db->commit();
+            } catch (Exception $e) {
+                $db->rollBack();
+                echo "Error: " . $e->getMessage();
+            }
+
+        
+        
+        
+        }
+
+
 
         
     }
