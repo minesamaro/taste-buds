@@ -1,14 +1,21 @@
 <?php 
 require_once(__DIR__ . '/../database/ingredient.class.php');
-function addRecipeIngredient($ingredients, $recipeId) { ?>
+function addRecipeIngredient($ingredients, $recipeId) { 
+    $ingredientsId = IngredientRecipe::getIngredientIdsinRecipe($recipeId);
+    ?>
 
-<div item="addRecipeIngredient">
+<div id="addRecipeIngredient">
 <article class="content">
 <h2>Add Ingredient</h2>
 <form method="POST" action="../actions/actionAddRecipeIngredient.php" >
     <input type="hidden" name="recipeId" value="<?= $recipeId ?>" />
     <?php
-    foreach ($ingredients as $ingredient) { ?>
+    foreach ($ingredients as $ingredient) { 
+        // Check if ingredient is already in recipe
+        if(in_array($ingredient->id, $ingredientsId)){
+            continue;
+        }
+        ?>
         <input type="radio" style="display:none" required="true" id="ingredient_<?= $ingredient->id ?>" name="ingredientId"
             value="<?= $ingredient->id ?>" />
         <label for="ingredient_<?= $ingredient->id ?>">
@@ -40,10 +47,6 @@ function addRecipeIngredient($ingredients, $recipeId) { ?>
         </label>
     <?php } ?>
     <button id="addIngredientBt" type="submit" name="addBt" value="true">Add Ingredient</button>
-</form>
-<form method="POST" action="../actions/actionAddRecipeIngredient.php">
-    <input type="hidden" name="recipeId" value="<?= $recipeId ?>" />
-    <button id="finishRecipeBt" type="submit" name="finishBt" value="true">Finish Recipe</button>
 </form>
 </article>
 </div>

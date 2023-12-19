@@ -69,5 +69,38 @@ class IngredientRecipe
         
         $stmt->execute(array($quantity, $measurementUnit, $ingredientId, $recipeId));
     }
+
+    /**
+     * Delete an ingredient from a recipe
+     */
+    public static function deleteIngredientFromRecipe(int $recipeId, int $ingredientId, string $measurementUnit, float $quantity): void
+    {
+        $db = Database::getDatabase();
+        $stmt = $db->prepare(
+            'DELETE FROM IngredientRecipe 
+            WHERE recipe_id = ? AND ingredient_id = ? AND measurement_unit = ? AND quantity = ?'
+        );
+        
+        $stmt->execute(array($recipeId, $ingredientId, $measurementUnit, $quantity));
+    }
+
+    /**
+     * Get the ids of the ingredients in a recipe
+     */
+    public static function getIngredientIdsinRecipe(int $recipeId): array
+    {
+        $db = Database::getDatabase();
+        $stmt = $db->prepare(
+            'SELECT ingredient_id 
+            FROM IngredientRecipe 
+            WHERE recipe_id = ?'
+        );
+        
+        $stmt->execute(array($recipeId));
+        $ingredientIds = $stmt->fetchAll();
+        $ingredientIds = array_column($ingredientIds,'ingredient_id');
+
+        return $ingredientIds;
+    }
 }
 ?>

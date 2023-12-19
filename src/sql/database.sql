@@ -230,7 +230,7 @@ CREATE TABLE RecipeDietaryPref (
 
 -- Create the Ingredient table
 CREATE TABLE Ingredient (
-    id INT PRIMARY KEY,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     name TEXT NOT NULL,
     UNIQUE (name)
 );

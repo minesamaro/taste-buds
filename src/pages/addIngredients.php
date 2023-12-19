@@ -2,6 +2,7 @@
 require_once(__DIR__ . '/../views/header.php');
 require_once(__DIR__ . '/../views/footer.php');
 require_once(__DIR__ . '/../views/addRecipeIngredient.php');
+require_once(__DIR__ . '/../views/addNewIngredient.php');
 require_once(__DIR__ . '/../views/recipeState.php');
 require_once(__DIR__ . '/../database/recipe.class.php');
 require_once(__DIR__ . '/../database/ingredient_recipe.class.php');
@@ -16,9 +17,10 @@ if (!isset($_SESSION['recipeId']) || !isset($_SESSION['user_id']) || !Recipe::is
 
     head("Add Ingredients");
     ?>
-    <main class="planBundle">
+    <main class="recipeBundle">
     <?php
         addRecipeIngredient($ingredients, $_SESSION['recipeId']);
+        addNewIngredient($_SESSION['recipeId']);
         showRecipeState($recipe);
     ?>
     </main>

@@ -80,6 +80,33 @@ footer > div {
   margin: 0.5rem 0;
 }
 
+/* Adding Ingredients to recipe */
+.recipeBundle {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  grid-template-rows: auto auto;
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.recipeBundle > #addRecipeIngredient {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.recipeBundle > #recipeState {
+  grid-column: 2;
+  grid-row: 1/ span 2;
+  overflow-y: auto;
+  margin-left: 1em;
+}
+
+.recipeBundle > #addNewIngredient {
+  grid-column: 1;
+  grid-row: 2;
+}
+
 /* Index */
 /* index with 2 columns (one just for the applied filters and 2 rows (filters occupy first row) */
 .indexBundle {

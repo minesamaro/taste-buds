@@ -514,6 +514,45 @@ input[type="radio"]:checked + label #ingredient-input-hidden {
     align-items: center;
     margin: 0.5em 0;
 }
+/* Add Ingredient Form */
+#addNewIngredient{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    margin: 1em 0;
+}
+.macronutrients {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: 0.5em 0;
+}
+
+#finishRecipe{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: right;
+    margin: 1em 0;
+}
+
+#recipeState{
+    border-left: 2px dashed var(--background-color-dark);
+    padding-left: 1em;
+}
+
+.quantity-recipe {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.quantity-recipe > input, .quantity-recipe>select {
+    margin: 0 0.5em;
+    min-height: 1rem
+}
+
+
 
 /* Login Form*/
 .login-container, .register-container {

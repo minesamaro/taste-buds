@@ -104,5 +104,53 @@ class Ingredient
         return floatval($kcal['kcal_per_gram']);
     }
 
+    /**
+     * Add an ingredient to the database
+     */
+     public static function addIngredient(string $name, float $carbohydrate, float $protein, float $fat): int
+     {
+        $db = Database::getDatabase();
+        $stmt = $db->prepare(
+            'INSERT INTO Ingredient (name) 
+            VALUES (?)'
+        );
+        $stmt->execute(array($name));
+
+        // Get the id of the ingredient that was just added
+        $ingredientId = Ingredient::getLastInsertedId($db);
+        
+        // Add the ingredient macronutrients to the database
+        if (isset($carbohydrate)){
+            $stmt = $db->prepare(
+                'INSERT INTO IngredientMacronutrient (quantity_g, macronutrient, ingredient_id) 
+                VALUES (?, ?, ?)'
+            );
+            $stmt->execute(array($carbohydrate, 'Carbohydrate', $ingredientId));
+        }
+        if (isset($protein)){
+            $stmt = $db->prepare(
+                'INSERT INTO IngredientMacronutrient (quantity_g, macronutrient, ingredient_id) 
+                VALUES (?, ?, ?)'
+            );
+            $stmt->execute(array($protein, 'Protein', $ingredientId));
+        }
+        if (isset($fat)){
+            $stmt = $db->prepare(
+                'INSERT INTO IngredientMacronutrient (quantity_g, macronutrient, ingredient_id)
+                VALUES (?, ?, ?)'
+            );
+            $stmt->execute(array($fat, 'Fat', $ingredientId));
+        }
+        return intval($ingredientId);
+     }
+
+     /**
+      * Get the id of the last inserted row
+      */
+      private static function getLastInsertedId($db): int
+      {
+        return intval($db->lastInsertId());
+      }
+
 }
 ?>
