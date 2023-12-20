@@ -36,6 +36,7 @@
         <input type="number" required="true" name="portion" step="any" placeholder="0.5" />
         </div>
     </div>
+    <div class ="scrollable-ingredient">
     <?php
     foreach ($recipes as $recipe) { ?>
         <input type="radio" style="display:none" required="true" id="recipe_<?= $recipe->id ?>" name="recipeId"
@@ -64,6 +65,7 @@
             </div>
         </label>
     <?php } ?>
+    </div>
     <button id="addRecipeBt" type="submit" name="addBt" value="true">Add Recipe</button>
 </form>
 </article>

@@ -10,6 +10,7 @@ $db = Database::getDatabase();
 if (!isset($_SESSION['prov_user_id'])) {
     // Handle the case where user_id or occupation is not set, maybe redirect to the registration page
     echo "Session data not set. Please go back to the registration page.";
+    
     exit();
 }
 

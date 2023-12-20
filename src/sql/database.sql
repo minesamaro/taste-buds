@@ -401,77 +401,76 @@ INSERT INTO UserDietPreference (pref, user) VALUES ('Paleo', 9);
 -- Insert Statements for Recipe Table
 INSERT INTO Recipe (id, name, preparation_time, difficulty, number_of_servings, image, preparation_method, submission_date, energy, carbohydrates, protein, fat, chef)
 VALUES (1, 'Spaghetti Bolognese', 60, 3, 6, '../img/recipes/1.jpg', '
-Put a large saucepan on a medium heat and add 1 tbsp olive oil.
-Add 4 finely chopped bacon rashers and fry for 10 mins until golden and crisp.
-Reduce the heat and add the 2 onions, 2 carrots, 2 celery sticks, 2 garlic cloves and the leaves from 2-3 sprigs rosemary, all finely chopped, then fry for 10 mins. Stir the veg often until it softens.
-Increase the heat to medium-high, add 500g beef mince and cook stirring for 3-4 mins until the meat is browned all over.
-Add 2 tins plum tomatoes, the finely chopped leaves from ¾ small pack basil, 1 tsp dried oregano, 2 bay leaves, 2 tbsp tomato purée, 1 beef stock cube, 1 deseeded and finely chopped red chilli (if using), 125ml red wine and 6 halved cherry tomatoes. Stir with a wooden spoon, breaking up the plum tomatoes.
-
+Put a large saucepan on a medium heat and add 1 tbsp olive oil. <br>
+Add 4 finely chopped bacon rashers and fry for 10 mins until golden and crisp.<br>
+Reduce the heat and add the 2 onions, 2 carrots, 2 celery sticks, 2 garlic cloves and the leaves from 2-3 sprigs rosemary, all finely chopped, then fry for 10 mins. Stir the veg often until it softens.<br>
+Increase the heat to medium-high, add 500g beef mince and cook stirring for 3-4 mins until the meat is browned all over.<br>
+Add 2 tins plum tomatoes, the finely chopped leaves from ¾ small pack basil, 1 tsp dried oregano, 2 bay leaves, 2 tbsp tomato purée, 1 beef stock cube, 1 deseeded and finely chopped red chilli (if using), 125ml red wine and 6 halved cherry tomatoes. Stir with a wooden spoon, breaking up the plum tomatoes.<br> <br>
 Bring to the boil, reduce to a gentle simmer and cover with a lid. Cook for 1 hr 15 mins stirring occasionally, until you have a rich, thick sauce.
-
-Add the 75g grated parmesan, check the seasoning and stir.
-
-When the bolognese is nearly finished, cook 400g spaghetti following the pack instructions.
-
+<br>
+Add the 75g grated parmesan, check the seasoning and stir. <br>
+<br>
+When the bolognese is nearly finished, cook 400g spaghetti following the pack instructions.<br>
+<br>
 Drain the spaghetti and either stir into the bolognese sauce, or serve the sauce on top. Serve with more grated parmesan, the remaining basil leaves and crusty bread, if you like.', '2023-06-15', 624.5, 65.2, 30.0, 15.8, 1);
 INSERT INTO Recipe 
 VALUES (2, 'Chicken Alfredo Pasta', 45, 2, 4, '../img/recipes/2.jpg', '
-Start by boiling a large pot of salted water for the pasta. Cook 400g of fettuccine according to the package instructions until al dente. Drain and set aside.
+Start by boiling a large pot of salted water for the pasta. Cook 400g of fettuccine according to the package instructions until al dente. Drain and set aside.<br>
 
-In a large skillet, heat 2 tbsp of olive oil over medium-high heat. Add 500g of boneless, skinless chicken breasts, cut into bite-sized pieces. Cook until browned and cooked through, about 5-7 minutes.
+In a large skillet, heat 2 tbsp of olive oil over medium-high heat. Add 500g of boneless, skinless chicken breasts, cut into bite-sized pieces. Cook until browned and cooked through, about 5-7 minutes.<br>
 
 Add 3 cloves of minced garlic and cook for 1 minute until fragrant. Pour in 1 cup of heavy cream, 1 cup of grated Parmesan cheese, and 1/2 cup of unsalted butter. Stir continuously until the cheese is melted and the sauce is smooth.
-
+<br>
 Season the sauce with salt, black pepper, and a pinch of nutmeg for flavor. If the sauce is too thick, you can add a little pasta cooking water to reach your desired consistency.
-
+<br>
 Add the cooked fettuccine to the skillet, tossing to coat the pasta evenly in the Alfredo sauce. Cook for an additional 2-3 minutes until everything is heated through.
-
+<br>
 Serve the Chicken Alfredo Pasta hot, garnished with chopped fresh parsley and extra Parmesan cheese.', '2023-06-20', 850.0, 45.5, 42.0, 60.2, 1);
 
 INSERT INTO Recipe (id, name, preparation_time, difficulty, number_of_servings, image, preparation_method, submission_date, energy, carbohydrates, protein, fat, chef)
 VALUES (3, 'Healthy Pancakes', 20, 2, 4, '../img/recipes/3.jpg', '
 In a mixing bowl, combine 1 cup of whole wheat flour, 1 tablespoon of baking powder, and a pinch of salt.
-
+<br>
 In a separate bowl, whisk together 1 cup of low-fat milk, 2 tablespoons of Greek yogurt, 1 tablespoon of honey, and 2 tablespoons of melted coconut oil.
-
+<br>
 Pour the wet ingredients into the dry ingredients and stir until just combined. Be careful not to overmix; a few lumps are okay.
-
+<br>
 Heat a non-stick griddle or skillet over medium heat. Lightly grease with cooking spray or a small amount of coconut oil.
-
+<br>
 For each pancake, pour 1/4 cup of batter onto the griddle. Cook until bubbles form on the surface, then flip and cook until golden brown on the other side.
-
+<br>
 Serve the pancakes with fresh berries, a drizzle of honey, and a sprinkle of chopped nuts for a delicious and healthy breakfast.', '2023-07-05', 300.0, 35.0, 10.0, 12.5, 1);
 INSERT INTO Recipe (id, name, preparation_time, difficulty, number_of_servings, image, preparation_method, submission_date, energy, carbohydrates, protein, fat, chef)
 VALUES (4, 'Greek Yogurt Parfait', 10, 1, 2, '../img/recipes/4.jpg', '
 In a glass or a bowl, layer 1 cup of Greek yogurt.
-
+<br>
 Add a layer of mixed berries (strawberries, blueberries, and raspberries).
-
+<br>
 Sprinkle 2 tablespoons of granola over the berries.
-
+<br>
 Repeat the layers until you reach the top, finishing with a dollop of Greek yogurt on top.
-
+<br>
 Drizzle 1 tablespoon of honey over the parfait for sweetness.
-
+<br>
 Optional: Garnish with a few mint leaves for freshness.
-
+<br>
 Serve immediately and enjoy this quick and healthy Greek Yogurt Parfait!', '2023-07-15', 250.0, 30.0, 15.0, 8.0, 1);
 INSERT INTO Recipe (id, name, preparation_time, difficulty, number_of_servings, image, preparation_method, submission_date, energy, carbohydrates, protein, fat, chef)
-VALUES (5, 'Grilled Salmon', 20, 2, 2, '../img/recipes/5.jpg', '1. Preheat the grill to medium-high heat.
-2. Pat the salmon fillet dry with paper towels and place it on a cutting board.
-3. Season both sides of the salmon with salt and black pepper.
-4. Brush olive oil over the salmon to prevent sticking.
-5. Place the salmon on the preheated grill grates, skin-side down.
-6. Grill for about 4-5 minutes per side or until the salmon is cooked to your desired level of doneness.
+VALUES (5, 'Grilled Salmon', 20, 2, 2, '../img/recipes/5.jpg', '1. Preheat the grill to medium-high heat.<br>
+2. Pat the salmon fillet dry with paper towels and place it on a cutting board.<br>
+3. Season both sides of the salmon with salt and black pepper.<br>
+4. Brush olive oil over the salmon to prevent sticking.<br>
+5. Place the salmon on the preheated grill grates, skin-side down.<br>
+6. Grill for about 4-5 minutes per side or until the salmon is cooked to your desired level of doneness.<br>
 7. Remove the salmon from the grill and let it rest for a few minutes before serving.', '2023-06-18', 350.2, 2.5, 40.8, 18.3, 2);
 
 INSERT INTO Recipe (id, name, preparation_time, difficulty, number_of_servings, image, preparation_method, submission_date, energy, carbohydrates, protein, fat, chef)
-VALUES (6, 'Vegetable Stir-Fry', 15, 1, 3, '../img/recipes/6.jpg', '1. Wash and prepare assorted vegetables such as bell peppers, broccoli, and carrots.
-2. Heat vegetable oil in a wok or large skillet over medium-high heat.
-3. Add minced ginger and garlic to the hot oil and sauté for about 30 seconds until fragrant.
-4. Add the prepared vegetables to the wok and stir-fry for 3-4 minutes until they are crisp-tender.
-5. Drizzle soy sauce over the vegetables and continue to stir-fry for an additional 2 minutes.
-6. Adjust the seasoning as needed and ensure all vegetables are evenly coated in the sauce.
+VALUES (6, 'Vegetable Stir-Fry', 15, 1, 3, '../img/recipes/6.jpg', '1. Wash and prepare assorted vegetables such as bell peppers, broccoli, and carrots. <br>
+2. Heat vegetable oil in a wok or large skillet over medium-high heat.<br>
+3. Add minced ginger and garlic to the hot oil and sauté for about 30 seconds until fragrant.<br>
+4. Add the prepared vegetables to the wok and stir-fry for 3-4 minutes until they are crisp-tender.<br>
+5. Drizzle soy sauce over the vegetables and continue to stir-fry for an additional 2 minutes.<br>
+6. Adjust the seasoning as needed and ensure all vegetables are evenly coated in the sauce.<br>
 7. Remove from heat and serve the vegetable stir-fry immediately. Optionally, garnish with chopped green onions or sesame seeds.', '2023-06-20', 180.7, 20.0, 8.9, 9.5, 3);
 
 
