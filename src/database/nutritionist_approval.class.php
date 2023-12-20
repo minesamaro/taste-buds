@@ -20,6 +20,24 @@ class NutritionistApproval
     }
 
     /**
+     * Add a new nutritionist approval
+     *
+     * @param int $recipe_id Recipe ID
+     * @param int $nutritionist_id Nutritionist ID
+     * @return bool True if the approval was added successfully, false otherwise
+     */
+    public static function addNutriApproval(int $recipe_id, int $nutritionist_id): bool {
+        $db = Database::getDatabase();
+        $stmt = $db->prepare(
+            'INSERT INTO NutritionistApproval (recipe_id, nutritionist_id)
+            VALUES (?, ?)'
+        );
+
+        $stmt->execute([$recipe_id, $nutritionist_id]);
+        return $stmt->rowCount() > 0; // True if the row was inserted, false otherwise
+    }
+
+    /**
      * Get nutritionist approval for a recipe by ID
      *
      * @param int $recipeId Recipe ID
@@ -47,6 +65,31 @@ class NutritionistApproval
         }
 
         return null; // No nutritionist approval found
+    }
+
+    /**
+     * Check if a recipe has been approved by a nutritionist
+     *
+     * @param int $recipe_id Recipe ID
+     * @return bool True if the recipe has been approved, false otherwise
+     */
+    public static function isApproved (int $recipe_id): bool {
+        $db = Database::getDatabase();
+        $stmt = $db->prepare(
+            'SELECT *
+            FROM NutritionistApproval
+            WHERE recipe_id = ?'
+        );
+        
+        $stmt->execute([$recipe_id]);
+        $approvalData = $stmt->fetch();
+
+        if ($approvalData) {
+            return true;
+        } else {
+            return false;
+        }
+
     }
 }
 ?>
