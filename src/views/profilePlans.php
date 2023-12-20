@@ -33,7 +33,10 @@ function profilePlans()
                         <a href="../pages/plan.php?id=<?php echo $plan->id ?>">Weekly Plan <?php echo $plan->id ?></a>
                     </h4>
                         
-                    <h6><?php echo $plan->creationDate ?></h6>
+                    <h6><?php 
+                    $date = new DateTime($plan->creationDate);
+                    echo $date->format('d-m-Y'); 
+                    ?></h6>
                     <h5> <?php echo $plan->totalKcal ?>kcal</h5>
                 </div>
 

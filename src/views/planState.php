@@ -9,7 +9,10 @@ function showPlanState($plan){ ?>
         </h2>
         <div class="plan-subtitle">
             <h5>Created on
-                <?php echo $plan->creationDate ?>
+                <?php 
+                $date = new DateTime($plan->creationDate);
+                echo $date->format('d-m-Y');
+                ?>
             </h5>
             <h5>Total kcal:
                 <?php echo $plan->totalKcal ?>
