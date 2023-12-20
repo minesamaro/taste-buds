@@ -640,7 +640,18 @@ input[type="radio"]:checked + label #ingredient-input-hidden {
     min-height: 1rem
 }
 
+/* Pagination */
+.page-number {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin: 1em 0;
+}
 
+.page-number * {
+    margin: 0 0.5em;
+}
 
 /* Login Form*/
 .login-container, .register-container {
