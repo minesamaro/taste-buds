@@ -54,6 +54,10 @@ function showPlanState($plan){ ?>
         }
         
     }?>
-</div> 
+    <form id="finishPlan" method="POST" action="../actions/actionAddPlanRecipe.php">
+        <input type="hidden" name="planId" value="<?= $plan->id ?>" />
+        <button id="finishPlanBt" type="submit" name="finishBt" value="true">Finish Plan</button>
+    </form>
+</div>
 <?php 
 }?>

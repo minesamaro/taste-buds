@@ -1,10 +1,7 @@
-
 <?php
 require_once(__DIR__ . '/../database/commonUser.class.php');
 require_once(__DIR__ . '/../database/person.class.php');
-
 require_once(__DIR__ . '/../database/weeklyPlan.class.php');
-
 
 function profilePlans()
 {
@@ -18,10 +15,7 @@ function profilePlans()
         $isNutri=false;
         
     }
-    
-
 ?>
-    
     <article class="content">
         <h2>My Plans</h2>
         <?php 
@@ -54,12 +48,7 @@ function profilePlans()
                     ?></h6>
                     <h5> <?php echo $plan->totalKcal ?>kcal</h5>
                 </div>
-
-
             </section>
-
-    
-
 <?php
 }} ?>
 </article>

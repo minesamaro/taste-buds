@@ -65,7 +65,6 @@
         </label>
     <?php } ?>
     <button id="addRecipeBt" type="submit" name="addBt" value="true">Add Recipe</button>
-    <button id="finishPlanBt" type="submit" name="finishBt" value="true">Add and Finish Plan</button>
 </form>
 </article>
 </div>
