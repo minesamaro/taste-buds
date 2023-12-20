@@ -349,8 +349,6 @@ input[type="radio"]:checked + label #ingredient-input-hidden {
 
 .nutrient-item {
     max-width: 100%;
-    margin-inline-start: 2em;
-    margin-inline-end: 2em;
 }
 
 #recipe-energy {
