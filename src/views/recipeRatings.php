@@ -71,7 +71,7 @@ function recipeRatings($ratings, $all_ratings, $userId, $session_user, $recipeId
                 <div class="recipe-write_rating">
                     <h2 id="recipe-write_rating_title">Rate this recipe</h2>
                     <div class="card">
-                        <form id="recipe_write_rating" action="../actions/action_write_recipe_rating.php" method="post"> 
+                        <form id="recipe_write_rating" action="../actions/actionWriteRecipeRating.php" method="post"> 
                             <div id="rating-name"> <? echo $session_user->first_name . " " . $session_user->surname; ?> </div>
                             <input type="hidden" name="recipe-write_rating_recipe_id" value="<?php echo $recipeId; ?>">
 

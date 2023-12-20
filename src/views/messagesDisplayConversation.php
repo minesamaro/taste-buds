@@ -98,4 +98,3 @@ function displayConversation($peopleWithMessages, $userId, $selectedPersonId, $s
 </body>
 
 <?php } ?>
-

@@ -7,7 +7,9 @@ require_once(__DIR__ . '/../views/messagesDisplayConversation.php');
 require_once(__DIR__ . '/../database/message.class.php');
 require_once(__DIR__ . '/../database/person.class.php');
 
-
+if (!isset($_SESSION['user_id'])) {
+    header("Location: ../pages/404.php");
+} else {
 $userId = $_SESSION['user_id']; // Retrieve user ID from the session
 $peopleWithMessages = Message::getPeopleWithMessages($userId); // Get a list of people with whom the logged-in person has messages
 $selectedPersonId = $_GET['personId'] ?? null; // Get the ID of the person whose conversation to display (if any)
@@ -29,15 +31,15 @@ if ($selectedPersonId) {
             Message::markMessagesWithPersonAsRead($userId, $selectedPersonId);
         }
     }
-    
-
     head("Messages: " . $selectedPerson_FullName);
 } else {
     $conversation = null;
     head("Messages");
 };
 
+
 showPeopleWithMessages($peopleWithMessages, $userId); 
 displayConversation($peopleWithMessages, $userId, $selectedPersonId, $selectedPerson_FullName, $conversation);
 footer();
+}
 ?>
