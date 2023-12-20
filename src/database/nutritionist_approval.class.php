@@ -109,7 +109,12 @@ class NutritionistApproval
         }
 
     }
-
+    /**
+    * Retrieve all recipe approvals made by a nutritionist.
+    *
+    * @param int $nutritionist_id Nutritionist ID
+    * @return array Array of NutritionistApproval objects containing recipe approvals
+    */
     public static function getAllApprovalsFromNutri(int $nutritionist_id)
     {
         $db = Database::getDatabase();

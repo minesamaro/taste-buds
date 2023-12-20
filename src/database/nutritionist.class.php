@@ -11,7 +11,16 @@
         public function getId() {
             return $this->id;
         }
-
+        /**
+        * Add a nutritionist to the database along with associated formation details.
+        *
+        * @param int $user_id User ID
+        * @param string $course_name Name of the course
+        * @param string $school_name Name of the school
+        * @param string $graduation_date Graduation date
+        * @param string $academic_level Academic level achieved
+        * @return void
+        */
         static function addNutritionist($user_id, $course_name, $school_name, $graduation_date, $academic_level) {
             $db = Database::getDatabase();
             
@@ -53,7 +62,12 @@
             }
         } 
 
-        
+        /**
+         * Retrieve formation details for a nutritionist by user ID.
+         *
+         * @param int $user_id User ID
+         * @return array Array containing graduation date, course name, school name, and academic level
+         */
         public static function getNutriFormation($user_id)
         {
             
@@ -83,6 +97,16 @@
             return $values;
           
         }
+        /**
+         * Update nutritionist information in the database.
+         *
+         * @param int $user_id User ID
+         * @param string $course_name Name of the course
+         * @param string $school_name Name of the school
+         * @param string $academic_level Academic level achieved
+         * @param string $graduation_date Graduation date
+         * @return void
+         */
         public static function changeNutriInfo($user_id,$course_name,$school_name,$academic_level,$graduation_date){
        
             try {
@@ -103,12 +127,7 @@
                 $db->rollBack();
                 echo "Error: " . $e->getMessage();
             }
-
-        
-        
-        
         }
-
 
          /* Get array of Nutritionists
         *
@@ -134,6 +153,12 @@
                 
             return $nutriList;
         }
+        /**
+         * Retrieve weekly plans associated with a nutritionist by user ID.
+         *
+         * @param int $user_id User ID
+         * @return array Array of WeeklyPlan objects
+         */
         public static function getPlansByNutriId($user_id):array
         {
             try {
