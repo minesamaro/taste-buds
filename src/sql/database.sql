@@ -179,7 +179,7 @@ CREATE TABLE Recipe (
 -- Create the NutritionistApproval table
 CREATE TABLE NutritionistApproval (
     recipe_id INT REFERENCES Recipe,
-    approval_date TEXT NOT NULL,
+    approval_date TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
     nutritionist_id INT REFERENCES Nutritionist,
     PRIMARY KEY (recipe_id, nutritionist_id)
     

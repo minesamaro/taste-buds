@@ -134,7 +134,8 @@
                 
             return $nutriList;
         }
-        public static function getPlansByNutriId($user_id){
+        public static function getPlansByNutriId($user_id):array
+        {
             try {
 
                 #start transaction to the database
@@ -149,18 +150,21 @@
                 $db->rollBack();
                 echo "Error: " . $e->getMessage();
             }
-            //acho q isto so da se so houver um plano, podem haver muitos
-            $weeklyPlan = $stmt->fetch();
-
-            $plan = new WeeklyPlan(
-              intval($weeklyPlan['id']),
-              $weeklyPlan['creation_date'],
-              floatval($weeklyPlan['total_kcal']),
-              $user_id,
-              intval($weeklyPlan['common_user_id'])
-            );
-
-            return $plan;
+            
+            $plans = $stmt->fetchAll();
+            $plansArray = array();
+            foreach ($plans as $plan) {
+              array_push($plansArray, new WeeklyPlan(
+                intval($plan['id']),
+                $plan['creation_date'],
+                floatval($plan['total_kcal']),
+                $user_id,
+                intval($plan['common_user_id'])
+              )
+              );
+            }
+            return $plansArray;
+            
         }
 
     }

@@ -46,8 +46,9 @@ function head($title)
                             echo '<li><a href="../pages/addRecipe.php">Create Recipe</a></li>';
                         } elseif (Person::isNutritionist($_SESSION['user_id'])) {
                             echo '<li><a href="../pages/addPlan.php">Add Plan </a></li>';
+                            echo '<li><a href="../pages/profilePlans.php">My Plans </a></li>';
                         } elseif (Person::isCommonUser($_SESSION['user_id'])) {
-                            echo '<li><a href="../pages/recipeIndex.php">My Plans </a></li>';
+                            echo '<li><a href="../pages/profilePlans.php">My Plans </a></li>';
                         }
                     }
                 ?> 
