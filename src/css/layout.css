@@ -33,10 +33,14 @@ header {
   justify-content: space-between;
 }
 
+main {
+  margin: 0 1em;
+}
 /* Create Flexbox layout for footer */
 
 footer {
   display: block;    
+  margin-top: 1em;
 }
 /* Display divs inside footer as flexbox */
 
@@ -62,6 +66,8 @@ footer > div {
   width: 100%;
   max-width: 1000px;
   margin: 0 auto;
+  padding-inline-start: 2em;
+  padding-inline-end: 2em;
 }
 
 .planBundle > #addPlanRecipe {
@@ -88,6 +94,8 @@ footer > div {
   width: 100%;
   max-width: 1000px;
   margin: 0 auto;
+  padding-inline-start: 2em;
+  padding-inline-end: 2em;
 }
 
 .recipeBundle > #addRecipeIngredient {
@@ -116,6 +124,8 @@ footer > div {
   width: 100%;
   max-width: 1000px;
   margin: 0 auto;
+  padding-inline-start: 2em;
+  padding-inline-end: 2em;
 }
 
 .indexBundle > #filters {

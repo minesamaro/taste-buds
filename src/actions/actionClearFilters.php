@@ -4,6 +4,7 @@ session_start();
 unset($_SESSION['selectedCategories']);
 unset($_SESSION['selectedTechniques']);
 unset($_SESSION['selectedPreferences']);
+unset($_SESSION['isRecipeSearch']);
 $_SESSION['orderBy'] = 'recent';
 unset($_SESSION['recipes']);
 

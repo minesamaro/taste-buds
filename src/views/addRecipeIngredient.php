@@ -33,7 +33,7 @@ function addRecipeIngredient($ingredients, $recipeId) {
                                 
                         <?php } ?>
                         <div id="ingredient-input-hidden">
-                            <input type="number" name="quantity[<?=$ingredient->id?>]" placeholder="Enter quantity" min="0" step="0.00001">
+                            <input type="number" name="quantity[<?=$ingredient->id?>]" placeholder="Enter quantity" min="0" step="any">
                             <select name="unit[<?=$ingredient->id?>]">
                                 <option value="g">g</option>
                                 <option value="kg">kg</option>

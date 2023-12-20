@@ -9,15 +9,15 @@ function addNewIngredient($recipeId){
             <input type="text" name="name" placeholder="Ingredient Name" required="true">
             <div class="macronutrients">
                 <label for="carbohydrate"> Carbohydrate g / 100g </label>
-                <input type="number" name="carbohydrate" placeholder="Carbohydrate" min="0" step="0.00001">
+                <input type="number" name="carbohydrate" placeholder="Carbohydrate" min="0" max="100" step="any">
                 <label for="protein"> Protein g / 100g </label>
-                <input type="number" name="protein" placeholder="Protein" min="0" step="0.00001">
+                <input type="number" name="protein" placeholder="Protein" min="0" max="100" step="any">
                 <label for="fat"> Fat g / 100g </label>
-                <input type="number" name="fat" placeholder="Fat" min="0" step="0.00001">
+                <input type="number" name="fat" placeholder="Fat" min="0" max="100" step="any">
             </div>
             <div class="quantity-recipe">
                 <label for="quantity"> Quantity in this recipe </label>
-                <input type="number" name="quantity" placeholder="Enter quantity" min="0" step="0.00001" required>
+                <input type="number" name="quantity" placeholder="Enter quantity" min="0" step="any" required>
                 <select name="unit">
                     <option value="g">g</option>
                     <option value="kg">kg</option>

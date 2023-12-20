@@ -10,7 +10,7 @@ function searchRecipes()
 
 <form action="../actions/actionSearchRecipes.php" method="GET">
     <label for="search">Search Recipes:</label>
-    <input type="text" name="search" id="search" value="<?php echo htmlspecialchars($searchQuery); ?>">
+    <input type="text" name="search" id="search" autocomplete="off" value="<?php echo htmlspecialchars($searchQuery); ?>">
     <button type="submit">Search</button>
 </form>
 

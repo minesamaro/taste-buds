@@ -54,7 +54,7 @@ font-family: 'Libre Franklin', sans-serif;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 1em;
+    padding: 2em;
     z-index: 5;
 }
   
@@ -349,8 +349,6 @@ input[type="radio"]:checked + label #ingredient-input-hidden {
 
 .nutrient-item {
     max-width: 100%;
-    margin-inline-start: 2em;
-    margin-inline-end: 2em;
 }
 
 #recipe-energy {
@@ -374,6 +372,12 @@ input[type="radio"]:checked + label #ingredient-input-hidden {
     padding-top: 0.5em;
 }
 
+.recipe-nutri_approval {
+    margin-top: 2em;
+    padding: 1.2em;
+    background-color: var(--background-color-light);
+}
+
 .recipe-ratings, .recipe-write_rating {
     margin-top: 3em;
 }
@@ -381,6 +385,24 @@ input[type="radio"]:checked + label #ingredient-input-hidden {
 .recipe-see_ratings {
     display: flex;
     flex-direction: column;
+}
+
+.recipe-see_ratings > .card  {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto;
+    gap: 0.5em;
+}
+
+.recipe-see_ratings > .card > img {
+    grid-row: 1;
+    grid-column: 1;
+    margin: 0.5em;
+}
+
+.recipe-see_ratings > .card > .rating-text {
+    grid-row: 1;
+    grid-column: 2;
 }
 
 .rating-delete {
@@ -450,6 +472,7 @@ input[type="radio"]:checked + label #ingredient-input-hidden {
     font-family: 'Helvetica', serif;
     min-height: 10em;
 }
+
 
 
 /* Rating Stars*/
@@ -705,6 +728,7 @@ a:hover {
 #filters{
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
 
 }
 /* Add Recipe Form */

@@ -20,8 +20,8 @@ head("Recipes");
 <main class="indexBundle">
 <?php 
 filters();
-searchRecipes(); 
-sortRecipes();
+searchRecipes();
+sortRecipes(); 
 recipeIndex($recipes);
 ?>
 </main>
