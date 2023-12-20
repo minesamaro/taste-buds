@@ -1,9 +1,7 @@
-
 <?php 
 require_once(__DIR__ . '/../database/person.class.php');
 require_once(__DIR__ . '/../database/recipe.class.php');
 require_once(__DIR__ . '/../database/nutritionist_approval.class.php');
-
 
 function profileApprovals()
 {
@@ -39,21 +37,44 @@ function profileApprovals()
             
             $recipe=Recipe::getRecipeById($recipeId);
         ?> 
-            <section class="card">
+        <div class="card card-with-img">
+            <img class="card-img" src="<?= $recipe->image ?>" alt="<?= $recipe->name ?>" />
+            <div>
                 <div class="card-header">
-                    <h4>
-                        <a href="../pages/recipe.php?id=<?php echo $recipeId?>"><? echo $recipe->name ?></a>
-
-                    </h4>
-                </div>
+                    <a href="../pages/recipe.php?recipe_id=<?php echo $recipe->id?>"><h4><?= $recipe->name ?></h4></a>
                     
-                        
-                    <h6><?php echo date("d-m-Y", strtotime($approval->approval_date));  ?></h6>
-        
                 </div>
-
-
-            </section>
+                <div class="card-body">
+                    <h6><?= $recipe->preparationTime ?> mins</h6>
+                    <h6>Difficulty: <?= $recipe->difficulty ?> /5</h6>
+                    <h6>Verified on <?php echo date("d-m-Y", strtotime($approval->approval_date));  ?></h6>
+                    <div class= "card-categories">
+                        <div class= "category">                             
+                            <?php foreach ($recipe->getCategories() as $category) {
+                                echo "<h6>";
+                                echo $category ;
+                                echo "</h6>";
+                            }?>                            
+                        </div>
+                        <div class= "technique">
+                            <?php foreach ($recipe->getTechniques() as $technique) {
+                                echo "<h6>";
+                                echo $technique ;
+                                echo "</h6>";
+                            }?>                            
+                        </div>
+                        <div class= "preference">                            
+                            <?php foreach ($recipe->getPreferences() as $preference) {
+                                echo "<h6>";
+                                echo $preference ;
+                                echo "</h6>";
+                            }?>                            
+                        
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <?php } 
         ?> 
         </article>

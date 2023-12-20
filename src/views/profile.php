@@ -50,14 +50,14 @@ function Profile(){
         if ($isChef){
             ?>
             <div class="card profile-recipes" id="card-profile_recipes">
-                <a href="profileRecipes.php?user_id=<?php echo $personUser->id ?>">All Recipes</a>
+                <a href="profileRecipes.php?user_id=<?php echo $personUser->id ?>"> All Recipes</a>
             </div>
             
         <?php } 
         elseif($isNutri){
             ?> 
-            <div class="card profile-approvals" id="card-profile_approvals">>
-                <a href="profileApprovals.php?user_id=<?php echo $personUser->id ?>">Approved Recipes</a>
+            <div class="card profile-approvals" id="card-profile_approvals">
+                <a href="profileApprovals.php?user_id=<?php echo $personUser->id ?>"> Approved Recipes</a>
             </div>
             
         <?php } 
