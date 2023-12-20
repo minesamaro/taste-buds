@@ -1,10 +1,9 @@
 <?php
-
 declare(strict_types=1);
 
 require_once(__DIR__ . '/../database/connection.db.php');
-require_once(__DIR__ . '/planRecipe.class.php');
-require_once(__DIR__ . '/recipe.class.php');
+require_once(__DIR__ . '/../database/planRecipe.class.php');
+require_once(__DIR__ . '/../database/recipe.class.php');
 
 class WeeklyPlan
 {
