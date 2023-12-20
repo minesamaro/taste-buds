@@ -109,5 +109,33 @@ class NutritionistApproval
         }
 
     }
+
+    public static function getAllApprovalsFromNutri(int $nutritionist_id)
+    {
+        $db = Database::getDatabase();
+        $stmt = $db->prepare(
+            'SELECT recipe_id, approval_date
+            FROM NutritionistApproval
+            WHERE nutritionist_id = ?'
+        );
+
+        $stmt->execute(array($nutritionist_id));
+        $approvals = $stmt->fetchAll();
+
+        $approvalsArray=array();
+        foreach ($approvals as $approval) {
+        
+            array_push($approvalsArray, new NutritionistApproval(
+                intval($approval['recipe_id']),
+                $approval['approval_date'],
+                $nutritionist_id
+            )
+            );
+        
+        }
+
+
+        return $approvalsArray; 
+    }
 }
 ?>

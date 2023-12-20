@@ -122,6 +122,7 @@ class Recipe
         return 'Unknown Chef';
       }
 
+      
     public static function getRecipesWithDetailsAndOrder($categories, $techniques, $preferences, $order)
       {
         if ($order == 'recent') {
@@ -186,8 +187,6 @@ class Recipe
       $stmt = $db->prepare($sql) ?? throw new Exception("Error Processing Request");
       $stmt->execute($params);
       $recipes = $stmt->fetchAll(); // this is returning less parametrs than it should
-      
-      
       //var_dump($recipes);
       $recipesArray = array();
       if (isset($recipes)){
@@ -478,6 +477,7 @@ class Recipe
             return $recipeList;
         }
 
+        
 }
 
 ?>

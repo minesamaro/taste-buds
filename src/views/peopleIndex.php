@@ -18,12 +18,12 @@ else{
 foreach ($people as $person) { 
     $personId = $person->id;
     ?>
-        <div class="card card-with-img">
-           <!-- <img class="card-img" src="--> <?#= $person->profile_photo ?><!--" alt="--><?#= $person->username . "profile photo" ?><!--" /> ATUALIZAR DEPOIS -->
+        <div class="card card-with-img" id = "car-with-img_people">
+            <img class="card-img" id="card-img_people" src="<?php echo $person->profile_photo; ?>" alt="<?php echo $person->username; ?>'s profile photo">
             <div>
                 <div class="card-header">
-                    <!-- <a href="../pages/profile.php?personId?<?php #$personId ?>"> ATUALIZAR--><h4><?= $person->first_name . " " . $person->surname; ?></h4><!--</a>-->
-                    <h5><?php 
+                    <a href="../pages/profile.php?person_id=<?php echo $personId; ?>"><h4 id="card-people_name"><?= $person->first_name . " " . $person->surname; ?></h4></a>
+                    <h5 id="card-people_occupation"><?php 
                         if(Person::isChef($personId)) {
                             echo "Chef";
                         }
@@ -37,24 +37,24 @@ foreach ($people as $person) {
                     </h5>
                 </div>
 
-                <div class="card-body">
+                <div class="card-body" id="card-body_people">
                     <h5>Username: <?= $person->username ?></h5>
                 </div>
 
+                <div class="card-footer" id="card-footer_people">
                 <forms class="card-button">
-                    <div class="card-footer">
-                        <h5><a href="../pages/profile.php?personId=<?php echo $personId; ?>">View Profile</a></h5>
-                    </div>
+                    <h5><a href="../pages/profile.php?person_id=<?php echo $personId; ?>">View Profile</a></h5>
                 </forms>
-
                 <forms class="card-button">
-                    <div class="card-footer">
-                        <h5><a href="../pages/messages.php?personId=<?php echo $personId; ?>">Send Message</a></h5>  
-                    </div>
+                    <h5><a href="../pages/messages.php?personId=<?php echo $personId; ?>">Send Message</a></h5>  
                 </forms>
-
             </div>
+            </div>
+
+            
+
         </div>
+        
 <?php } ?>
 </article>
 </div>

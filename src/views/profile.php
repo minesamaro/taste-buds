@@ -23,9 +23,18 @@ function Profile(){
 
     if (Person::isChef($user_id)){
         $isChef =True;
+        $isNutri=false;
+        $isCommon=false;
     }
-    else{
+    elseif(Person::isNutritionist($user_id)){
         $isChef=false;
+        $isNutri=true;
+        $isCommon=false;
+    }
+    elseif(Person::isCommonUser($user_id)){
+        $isChef=false;
+        $isNutri=false;
+        $isCommon=true;
         
     }
     ?>
@@ -43,20 +52,51 @@ function Profile(){
             <div class="card profile-update">
                 <a href="changeProfile.php">Update Profile</a>
             </div>
-        <?php } ?>
-        <?php if ($isChef){
-                ?>
-                <div class="card profile-recipes">
-                    <a href="profileRecipes.php?user_id=<?php echo $personUser->id ?>">Recipes</a>
+            <?php if ($isNutri){
+                ?> 
+                <div class="card profile-myplans">
+                    <a href="profilePlans.php">My plans</a>
                 </div>
+                <div class="card profile-approvals">
+                    <a href="profileApprovals.php?user_id=<?php echo $personUser->id ?>">Approvals</a>
+            </div>
+
                 
-        <?php } elseif($isChef==false and $isUser){
-            ?> 
-            <div class="card profile-myplans">
-                <a href="profilePlans.php">My plans</a>
+            <?php }if ($isCommon){
+                ?> 
+                <div class="card profile-myplans">
+                    <a href="profilePlans.php">My plans</a>
+                </div>
+                <div class="card profile-ratings">
+                    <a href="profileRatings.php?user_id=<?php echo $personUser->id ?>">Ratings</a>
             </div>
             
-        <?php } ?>
+                
+            <?php } ?>
+        <?php }
+        else {
+            if ($isChef){
+                ?>
+                <div class="card profile-recipes">
+                    <a href="profileRecipes.php?user_id=<?php echo $personUser->id ?>">All Recipes</a>
+                </div>
+                
+            <?php } 
+            if($isNutri){
+                ?> 
+                <div class="card profile-approvals">
+                    <a href="profileApprovals.php?user_id=<?php echo $personUser->id ?>">Approvals</a>
+                </div>
+                
+            <?php } 
+            if($isCommon){
+                ?> 
+                <div class="card profile-ratings">
+                <a href="profileRatings.php?user_id=<?php echo $personUser->id ?>">Ratings</a>
+                </div>
+            <?php } 
+        }?>
+
 
         <div class="card profile-info">
             <h2>Profile</h2>
