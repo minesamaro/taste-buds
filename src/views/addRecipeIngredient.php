@@ -9,6 +9,7 @@ function addRecipeIngredient($ingredients, $recipeId) {
 <h2>Add Ingredient</h2>
 <form method="POST" action="../actions/actionAddRecipeIngredient.php" >
     <input type="hidden" name="recipeId" value="<?= $recipeId ?>" />
+    <button id="addIngredientBt" type="submit" name="addBt" value="true">Add Ingredient</button>
     <?php
     foreach ($ingredients as $ingredient) { 
         // Check if ingredient is already in recipe
@@ -46,7 +47,6 @@ function addRecipeIngredient($ingredients, $recipeId) {
             </div>
         </label>
     <?php } ?>
-    <button id="addIngredientBt" type="submit" name="addBt" value="true">Add Ingredient</button>
 </form>
 </article>
 </div>
