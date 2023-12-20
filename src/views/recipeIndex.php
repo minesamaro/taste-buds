@@ -1,6 +1,6 @@
 <?php 
 require_once(__DIR__ . '/../database/recipe.class.php');
-function recipeIndex($recipes, $page) { 
+function recipeIndex($recipes, $page, $show) { 
     ?>
 <div item="recipeIndex">
 <article class="content">
@@ -49,7 +49,9 @@ foreach ($recipes as $recipe) {
                 </div>
             </div>
         </div>
-<?php } ?>
+<?php } 
+
+if ( $show) { ?>
 <div class="page-number">
     <?php if ($page > 1) { ?>
         <a href="../pages/recipeIndex.php?page=<?= $page - 1; ?>"> &#x2190; </a>
@@ -59,6 +61,7 @@ foreach ($recipes as $recipe) {
         <a href="../pages/recipeIndex.php?page=<?= $page + 1; ?>"> &#x2192; </a>
     <?php } ?>
 </div>
+<?php } ?>
 </article>
 </div>
 

@@ -60,7 +60,29 @@ class CookingTechnique
         return $stmt->fetchAll();
     }
 
+    /**
+     * Add a cooking technique to the database and to a recipe
+     */
+    static function addRecipeTechniques(int $recipeId, array $techniques) {
+        $db = Database::getDatabase();
+        foreach ($techniques as $techniqueName) {
+            $stmt = $db->prepare('INSERT INTO RecipeCookingTechnique (recipe_id, cooking_technique) VALUES (?, ?)');
+            $stmt->execute(array($recipeId, $techniqueName));
+        }
+    }
 
+    /**
+     * Add a New Cooking Technique to the database
+     */
+    static function addNewRecipeTechnique(int $recipeId, string $name) {
+        $db = Database::getDatabase();
+        $stmt = $db->prepare('INSERT INTO CookingTechnique (name) VALUES (?)');
+        $stmt->execute(array($name));
 
+        self::addRecipeTechniques($recipeId, array($name));
+
+    }
+
+    
 }
 ?>

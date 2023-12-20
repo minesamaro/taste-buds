@@ -25,7 +25,7 @@ class Recipe
   public float $fat;
   public float $carbohydrate;
   public int $idChef;
-  public static int $recipesPerPage = 2;
+  public static int $recipesPerPage = 5;
 
   public function __construct(int $id, string $name, int $preparationTime, int $difficulty, int $numberOfServings, string $image, string $preparationMethod, string $submissionDate, float $energy, float $protein, float $fat, float $carbohydrate, int $idChef)
   {

@@ -62,7 +62,7 @@ function recipeForm(){
                         foreach ($categories as $category) { ?>
                         <div class="category">
                             <div class="checkbox-wrapper-6">
-                                <input class="tgl tgl-light" id="cat-<?php echo $category ?>" type="checkbox" name="categories[]">
+                                <input class="tgl tgl-light" id="cat-<?php echo $category ?>" type="checkbox" name="categories[]" value="<?php echo $category ?>">
                                 <label class="tgl-btn" for="cat-<?php echo $category ?>"></label>
                             </div>
                             <p><?php echo $category ?></p>
@@ -71,7 +71,7 @@ function recipeForm(){
                         } ?>
                         <div class="category">
                             <div class="checkbox-wrapper-6 checkbox-other">
-                                <input class="tgl tgl-light" id="cat-other" type="checkbox" name="categories[]">
+                                <input class="tgl tgl-light" id="cat-other" type="checkbox" name="new-category[]">
                                 <label class="tgl-btn" for="cat-other"></label>
                                 <input type="text" name="other-cat">
                             </div>
@@ -87,7 +87,7 @@ function recipeForm(){
                     foreach ($categories as $category) { ?>
                         <div class="category">
                             <div class="checkbox-wrapper-6">
-                                <input class="tgl tgl-light" id="cat-<?php echo $category ?>" type="checkbox" name="techniques[]" >
+                                <input class="tgl tgl-light" id="cat-<?php echo $category ?>" type="checkbox" name="techniques[]" value="<?php echo $category ?>" >
                                 <label class="tgl-btn" for="cat-<?php echo $category ?>"></label>
                             </div>
                             <p><?php echo $category ?></p>
@@ -95,7 +95,7 @@ function recipeForm(){
                     <?php } ?>
                     <div class="category">
                             <div class="checkbox-wrapper-6 checkbox-other">
-                                <input class="tgl tgl-light" id="tech-other" type="checkbox" name="techniques[]">
+                                <input class="tgl tgl-light" id="tech-other" type="checkbox" name="new-technique[]">
                                 <label class="tgl-btn" for="tech-other"></label>
                                 <input type="text" name="other-tech">
                             </div>
@@ -113,7 +113,7 @@ function recipeForm(){
                         foreach ($categories as $category) { ?>
                             <div class="category">
                                 <div class="checkbox-wrapper-6">
-                                    <input class="tgl tgl-light" id="cat-<?php echo $category ?>" type="checkbox" name="preferences[]" >
+                                    <input class="tgl tgl-light" id="cat-<?php echo $category ?>" type="checkbox" name="preferences[]" value="<?php echo $category ?>" >
                                     <label class="tgl-btn" for="cat-<?php echo $category ?>"></label>
                                 </div>
                                 <p><?php echo $category ?></p>
@@ -121,7 +121,7 @@ function recipeForm(){
                         <?php } ?>
                         <div class="category">
                             <div class="checkbox-wrapper-6 checkbox-other">
-                                <input class="tgl tgl-light" id="pref-other" type="checkbox" name="techniques[]">
+                                <input class="tgl tgl-light" id="pref-other" type="checkbox" name="new-prefs[]">
                                 <label class="tgl-btn" for="pref-other"></label>
                                 <input type="text" name="other-pref">
                             </div>

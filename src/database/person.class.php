@@ -14,7 +14,7 @@
         public $birth_date;
         public $gender;
         public $profile_photo;
-        public static $people_per_page = 4;
+        public static $people_per_page = 5;
 
         /* Constructor */
         public function __construct($id, $username, $first_name, $surname, $email, $password, $birth_date, $gender, $profile_photo) {

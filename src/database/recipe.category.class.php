@@ -86,6 +86,31 @@ class RecipeCategory
         return $categoryNames;
     }
 
+    /**
+     * Add a category to the database and to a recipe
+     */
+    static function addRecipeCategories(int $recipeId, array $categories) {
+        $db = Database::getDatabase();
+        foreach ($categories as $categoryName) {
+            $stmt = $db->prepare('INSERT INTO RecipeCategory (recipe_id, category) VALUES (?, ?)');
+            $stmt->execute(array($recipeId, $categoryName));
+        }
+    }
+
+
+    /**
+     * Add a new category to the database and to a recipe
+     */
+    static function addNewRecipeCategories(int $recipeId, string $newCategory) {
+        $db = Database::getDatabase();
+        $stmt = $db->prepare('INSERT INTO FoodCategory (name) VALUES (?)');
+        $stmt->execute(array($newCategory));
+
+        self::addRecipeCategories($recipeId, array($newCategory));
+
+    }
+
+
          
     
 }

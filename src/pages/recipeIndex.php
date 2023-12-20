@@ -26,8 +26,10 @@ if (isset($_GET["page"])) {
 // If there is a cookie withthe recipes, use the recipes that match the filters
 if (isset($_SESSION["recipes"])) {
     $recipes = $_SESSION["recipes"];
+    $showPage = false;
 } else {
     $recipes = Recipe::getAllRecipes($page);
+    $showPage = true;
 }
 
 head("Recipes");
@@ -37,7 +39,7 @@ head("Recipes");
 filters();
 searchRecipes();
 sortRecipes(); 
-recipeIndex($recipes, $page);
+recipeIndex($recipes, $page, $showPage);
 ?>
 </main>
 <?php

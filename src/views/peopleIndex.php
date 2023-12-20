@@ -31,7 +31,7 @@ foreach ($people as $person) {
                             echo "Nutritionist";
                         }
                         elseif(Person::isCommonUser($personId)) {
-                            echo "Common User";
+                            echo "User";
                         }
                         ?>
                     </h5>
@@ -43,10 +43,7 @@ foreach ($people as $person) {
 
                 <div class="card-footer" id="card-footer_people">
                 <forms class="card-button">
-                    <h5><a href="../pages/profile.php?person_id=<?php echo $personId; ?>">View Profile</a></h5>
-                </forms>
-                <forms class="card-button">
-                    <h5><a href="../pages/messages.php?personId=<?php echo $personId; ?>">Send Message</a></h5>  
+                    <a href="../pages/messages.php?personId=<?php echo $personId; ?>"><button class="button-small"> Send Message</button></a> 
                 </forms>
             </div>
             </div>
@@ -55,16 +52,19 @@ foreach ($people as $person) {
 
         </div>
         
+<?php } 
+if (!isset($_SESSION['isPeopleSearch']) && !isset($_SESSION['isPeopleFiltered'])) {
+?>
+    <div class="page-number">
+        <?php if ($page > 1) { ?>
+            <a href="../pages/peopleIndex.php?page=<?= $page - 1; ?>"> &#x2190; </a>
+        <?php } ?>
+        <p> <?= $page; ?> / <?= Person::getNumberOfPages(); ?></p>
+        <?php if ($page < Person::getNumberOfPages()) { ?>
+            <a href="../pages/peopleIndex.php?page=<?= $page + 1; ?>"> &#x2192; </a>
+        <?php } ?>
+    </div>
 <?php } ?>
-<div class="page-number">
-    <?php if ($page > 1) { ?>
-        <a href="../pages/peopleIndex.php?page=<?= $page - 1; ?>"> &#x2190; </a>
-    <?php } ?>
-    <p> <?= $page; ?> / <?= Person::getNumberOfPages(); ?></p>
-    <?php if ($page < Person::getNumberOfPages()) { ?>
-        <a href="../pages/peopleIndex.php?page=<?= $page + 1; ?>"> &#x2192; </a>
-    <?php } ?>
-</div>
 </article>
 </div>
 
