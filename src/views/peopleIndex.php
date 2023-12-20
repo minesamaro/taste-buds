@@ -42,9 +42,11 @@ foreach ($people as $person) {
                 </div>
 
                 <div class="card-footer" id="card-footer_people">
-                <forms class="card-button">
-                    <a href="../pages/messages.php?personId=<?php echo $personId; ?>"><button class="button-small"> Send Message</button></a> 
-                </forms>
+                    <?php if(isset($_SESSION['user_id'])){ ?>
+                        <forms class="card-button">
+                            <a href="../pages/messages.php?personId=<?php echo $personId; ?>"><button class="button-small"> Send Message</button></a> 
+                        </forms>
+                <?php } ?>
             </div>
             </div>
 

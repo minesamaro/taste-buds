@@ -6,6 +6,7 @@ function addNutriApproval($recipe_id, $session_user)
 {
     $isRecipeApproved = NutritionistApproval::isApproved($recipe_id);
     // Check if the recipe has not been approved by anyone yet
+    if($session_user) {
     if (!$isRecipeApproved && $session_user->id) {
         // Show the approval form for nutri to fill when logged in
         
@@ -21,7 +22,7 @@ function addNutriApproval($recipe_id, $session_user)
             </div>
             <?php
         }
-        
+    }
     }
 }
 
