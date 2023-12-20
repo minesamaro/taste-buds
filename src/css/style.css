@@ -640,18 +640,7 @@ input[type="radio"]:checked + label #ingredient-input-hidden {
     min-height: 1rem
 }
 
-/* Pagination */
-.page-number {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    margin: 1em 0;
-}
 
-.page-number * {
-    margin: 0 0.5em;
-}
 
 /* Login Form*/
 .login-container, .register-container {
@@ -1061,6 +1050,8 @@ html::-webkit-scrollbar-thumb {
 }
 
 #messages-conversation_content {
+    display: flex;
+    flex-direction: column-reverse;
     height: 500px; /* adjust this value as needed */
     overflow-y: auto;
 }

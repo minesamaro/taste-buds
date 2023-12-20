@@ -46,8 +46,8 @@ if ($selectedPersonId) {
 
     <!-- Left side: List of people with whom the logged-in person has messages -->
     <div id="messages-peopleWithMessages">
-        <h2>Messages</h2>
-        <ul>
+        <h2 id="messages-main_title">Messages</h2>
+        <ul id="messages-people_cards">
             <?php   
                 if(!empty($peopleWithMessages)) {
                     foreach ($peopleWithMessages as $person) { 
@@ -57,7 +57,7 @@ if ($selectedPersonId) {
                         $class = !$isRead ? 'message-bold' : ''; ?>
                     
                 
-                        <div class="card-small">
+                        <div class="card-small" id="card-small_messages">
                             <div class="card-header" id="card-header_messages">
                                 <img class="message-profile_photo" src="<?php echo $profile_pic; ?>" alt="<?php echo $person->username; ?>'s profile photo">
                                 <a class="<?php echo $class; ?>" href="?personId=<?php echo $person->id; ?>">
@@ -92,7 +92,6 @@ if ($selectedPersonId) {
                             $formattedDate = date("d-m-Y", strtotime($message->sending_date));
                             
                             if ($formattedDate != $last_date) {
-                                $last_date = $formattedDate;
                                 $show_date = true;
                             }
                             else {
@@ -117,12 +116,7 @@ if ($selectedPersonId) {
                             $sender_FullName = $sender->first_name . " " . $sender->surname;
                         ?>
                         <div>
-                        <div id="message-date">
-                            <?php if ($show_date) { ?>
-                                <small><?php echo $formattedDate; ?></small>
-                                <br>
-                            <?php } ?>
-                            </div>
+                        
                             <div class="<?php echo $class;?>">
                             
                             <?php if ($show_sender) { ?>
@@ -135,10 +129,23 @@ if ($selectedPersonId) {
                             <br>
                             <small class="message-hours"><?php echo $formattedHour; ?></small>
                             </div>
+
+                            <div id="message-date">
+                            <?php if ($show_date && $last_date!=0) { ?>
+                                <small><?php echo $last_date; ?></small>
+                                <br>
+                            <?php } $last_date=$formattedDate; ?>
+                            </div>
+
                             
                         </div>
                         
                     <?php } ?>
+                        <div id="message-date">
+                            <small><?php echo $last_date; ?></small>
+                            <br>             
+                        </div>
+
                     <div style="clear: both;"></div> <!-- Clear the float -->
                 </div>
             <?php } else { ?>
