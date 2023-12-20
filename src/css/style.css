@@ -1039,6 +1039,12 @@ html::-webkit-scrollbar-thumb {
     border-radius: 50%;
 }
 
+#card-profile_recipes, #card-profile_approvals, #card-profile_ratings, #card-profile_update, #card_profile_changepass {
+    text-align: center;
+}
+
+
+
 
 /* Messages */
 .message-bold {
