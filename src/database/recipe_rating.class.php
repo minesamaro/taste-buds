@@ -190,7 +190,7 @@ class RecipeRating
 
 
 
-        if (empty($recentRatingsData) && !$userRating) {
+        if (empty($recentRatingsData) && !isset($userRating)) {
             return null; // No ratings for this recipe 
         }
 
