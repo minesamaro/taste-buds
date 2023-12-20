@@ -122,20 +122,6 @@ class Recipe
     return $recipesArray;
   }
 
-
-  static function getChefName(int $chef_id): string {
-        $chef = Chef::getId($this->id);
-
-        // Check if the chef was found
-        if ($chef) {
-            return $chef->name;
-        }
-
-        // Return a default value or handle the case where the chef is not found
-        return 'Unknown Chef';
-      }
-
-      
     public static function getRecipesWithDetailsAndOrder($categories, $techniques, $preferences, $order)
       {
         if ($order == 'recent') {

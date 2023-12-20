@@ -589,6 +589,12 @@ input[type="radio"]:checked + label #ingredient-input-hidden {
     align-items: center;
     margin: 0.5em 0;
 }
+
+.scrollable-ingredient{
+    overflow-y: auto;
+    max-height: 300px;
+}
+
 /* Add Ingredient Form */
 #addNewIngredient{
     display: flex;
