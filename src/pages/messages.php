@@ -50,16 +50,21 @@ if ($selectedPersonId) {
             <?php   
                 if(!empty($peopleWithMessages)) {
                     foreach ($peopleWithMessages as $person) { 
-                        $lastMessage = Message::getLastMessageFromPerson($userId, $person->id);
+                        $profile_pic = ltrim($person->profile_photo, '/');                        $lastMessage = Message::getLastMessageFromPerson($userId, $person->id);
                         $isLastMessageReceived = Message::checkLastMsgWithPersonWasReceived($userId, $person->id);
                         $isRead = $lastMessage && $isLastMessageReceived ? $lastMessage->is_read : true;
                         $class = !$isRead ? 'message-bold' : ''; ?>
                     
-                        <li>
-                            <a class="<?php echo $class; ?>" href="?personId=<?php echo $person->id; ?>">
-                                <?php echo $person->first_name . " " .  $person->surname; ?>
-                            </a>
-                        </li>
+                
+                        <div class="card-small">
+                            <div class="card-header" id="card-header_messages">
+                                <img class="message-profile_photo" src="<?php echo $profile_pic; ?>" alt="<?php echo $person->username; ?>'s profile photo">
+                                <a class="<?php echo $class; ?>" href="?personId=<?php echo $person->id; ?>">
+                                    <?php echo $person->first_name . " " .  $person->surname; ?>
+                                </a>
+                            </div>
+                        </div>
+                    
             <?php   } 
                 } else { ?>
                     <p>No messages yet.</p>

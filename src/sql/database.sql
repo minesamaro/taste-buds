@@ -403,13 +403,40 @@ INSERT INTO UserDietPreference (pref, user) VALUES ('Paleo', 9);
 
 -- Insert Statements for Recipe Table
 INSERT INTO Recipe (id, name, preparation_time, difficulty, number_of_servings, image, preparation_method, submission_date, energy, carbohydrates, protein, fat, chef)
-VALUES (1, 'Spaghetti Bolognese', 30, 3, 4, 'http://placekitten.com/201/300', 'Cook spaghetti and prepare Bolognese sauce.', '2023-06-15', 500.5, 65.2, 30.0, 15.8, 1);
+VALUES (1, 'Spaghetti Bolognese', 60, 3, 6, '../img/recipes/1.jpg', '
+Put a large saucepan on a medium heat and add 1 tbsp olive oil.
+Add 4 finely chopped bacon rashers and fry for 10 mins until golden and crisp.
+Reduce the heat and add the 2 onions, 2 carrots, 2 celery sticks, 2 garlic cloves and the leaves from 2-3 sprigs rosemary, all finely chopped, then fry for 10 mins. Stir the veg often until it softens.
+Increase the heat to medium-high, add 500g beef mince and cook stirring for 3-4 mins until the meat is browned all over.
+Add 2 tins plum tomatoes, the finely chopped leaves from ¾ small pack basil, 1 tsp dried oregano, 2 bay leaves, 2 tbsp tomato purée, 1 beef stock cube, 1 deseeded and finely chopped red chilli (if using), 125ml red wine and 6 halved cherry tomatoes. Stir with a wooden spoon, breaking up the plum tomatoes.
+
+Bring to the boil, reduce to a gentle simmer and cover with a lid. Cook for 1 hr 15 mins stirring occasionally, until you have a rich, thick sauce.
+
+Add the 75g grated parmesan, check the seasoning and stir.
+
+When the bolognese is nearly finished, cook 400g spaghetti following the pack instructions.
+
+Drain the spaghetti and either stir into the bolognese sauce, or serve the sauce on top. Serve with more grated parmesan, the remaining basil leaves and crusty bread, if you like.', '2023-06-15', 624.5, 65.2, 30.0, 15.8, 1);
+INSERT INTO Recipe 
+VALUES (2, 'Chicken Alfredo Pasta', 45, 2, 4, '../img/recipes/2.jpg', '
+Start by boiling a large pot of salted water for the pasta. Cook 400g of fettuccine according to the package instructions until al dente. Drain and set aside.
+
+In a large skillet, heat 2 tbsp of olive oil over medium-high heat. Add 500g of boneless, skinless chicken breasts, cut into bite-sized pieces. Cook until browned and cooked through, about 5-7 minutes.
+
+Add 3 cloves of minced garlic and cook for 1 minute until fragrant. Pour in 1 cup of heavy cream, 1 cup of grated Parmesan cheese, and 1/2 cup of unsalted butter. Stir continuously until the cheese is melted and the sauce is smooth.
+
+Season the sauce with salt, black pepper, and a pinch of nutmeg for flavor. If the sauce is too thick, you can add a little pasta cooking water to reach your desired consistency.
+
+Add the cooked fettuccine to the skillet, tossing to coat the pasta evenly in the Alfredo sauce. Cook for an additional 2-3 minutes until everything is heated through.
+
+Serve the Chicken Alfredo Pasta hot, garnished with chopped fresh parsley and extra Parmesan cheese.', '2023-06-20', 850.0, 45.5, 42.0, 60.2, 1);
+
 
 INSERT INTO Recipe (id, name, preparation_time, difficulty, number_of_servings, image, preparation_method, submission_date, energy, carbohydrates, protein, fat, chef)
-VALUES (2, 'Grilled Salmon', 20, 2, 2, 'http://placekitten.com/201/300', 'Season salmon and grill until cooked.', '2023-06-18', 350.2, 2.5, 40.8, 18.3, 2);
+VALUES (3, 'Grilled Salmon', 20, 2, 2, 'http://placekitten.com/201/300', 'Season salmon and grill until cooked.', '2023-06-18', 350.2, 2.5, 40.8, 18.3, 2);
 
 INSERT INTO Recipe (id, name, preparation_time, difficulty, number_of_servings, image, preparation_method, submission_date, energy, carbohydrates, protein, fat, chef)
-VALUES (3, 'Vegetable Stir-Fry', 15, 1, 3, 'http://placekitten.com/200/301', 'Stir-fry assorted vegetables in a wok.', '2023-06-20', 180.7, 20.0, 8.9, 9.5, 3);
+VALUES (4, 'Vegetable Stir-Fry', 15, 1, 3, 'http://placekitten.com/200/301', 'Stir-fry assorted vegetables in a wok.', '2023-06-20', 180.7, 20.0, 8.9, 9.5, 3);
 
 -- Insert Statements for NutritionistApproval Table
 INSERT INTO NutritionistApproval (recipe_id, approval_date, nutritionist_id) VALUES (1, '2023-06-16', 4);
@@ -438,7 +465,7 @@ VALUES ('Braising', 4, 'Cooking food slowly in a covered pot with added liquid.'
 
 -- Insert Statements for RecipeCookingTechnique Table
 INSERT INTO RecipeCookingTechnique (recipe_id, cooking_technique)
-VALUES (1, 'Grilling');
+VALUES (1, 'Sautéing');
 
 INSERT INTO RecipeCookingTechnique (recipe_id, cooking_technique)
 VALUES (2, 'Sautéing');
@@ -447,26 +474,44 @@ INSERT INTO RecipeCookingTechnique (recipe_id, cooking_technique)
 VALUES (3, 'Braising');
 
 -- Insert Statements for FoodCategory Table
-INSERT INTO FoodCategory (name) VALUES ('Vegetables');
+INSERT INTO FoodCategory (name) VALUES ('Meat');
 INSERT INTO FoodCategory (name) VALUES ('Protein');
 INSERT INTO FoodCategory (name) VALUES ('Dairy');
 
 -- Insert Statements for RecipeCategory Table
-INSERT INTO RecipeCategory (category, recipe_id) VALUES ('Vegetables', 1);
+INSERT INTO RecipeCategory (category, recipe_id) VALUES ('Pasta', 1);
 INSERT INTO RecipeCategory (category, recipe_id) VALUES ('Protein', 2);
 INSERT INTO RecipeCategory (category, recipe_id) VALUES ('Dairy', 3);
 INSERT INTO RecipeCategory (category, recipe_id) VALUES ('Dairy', 2);
 
 
 -- Insert Statements for RecipeDietaryPref Table
-INSERT INTO RecipeDietaryPref (dietary_pref, recipe_id) VALUES ('Vegetarian', 1);
-INSERT INTO RecipeDietaryPref (dietary_pref, recipe_id) VALUES ('Vegan', 2);
+INSERT INTO RecipeDietaryPref (dietary_pref, recipe_id) VALUES ('Mediterranean', 1);
+INSERT INTO RecipeDietaryPref (dietary_pref, recipe_id) VALUES ('Keto', 2);
 INSERT INTO RecipeDietaryPref (dietary_pref, recipe_id) VALUES ('Paleo', 3);
 
 -- Insert Statements for Ingredient Table
-INSERT INTO Ingredient (id, name) VALUES (1, 'Tomato');
-INSERT INTO Ingredient (id, name) VALUES (2, 'Chicken Breast');
-INSERT INTO Ingredient (id, name) VALUES (3, 'Quinoa');
+
+INSERT INTO Ingredient (id, name) VALUES 
+(1, 'Tomato'),
+(2, 'Chicken Breast'),
+(3, 'Olive oil'),
+(4, 'Bacon'),
+(5, 'Onions'),
+(6, 'Carrots'),
+(7, 'Celery sticks'),
+(8, 'Garlic cloves'),
+(9, 'Beef'),
+(10, 'Tomato purée'),
+(11, 'Beef stock cube'),
+(12, 'Red chilli'),
+(13, 'Red wine'),
+(14, 'Fettuccine'),
+(15, 'Heavy cream'),
+(16, 'Parmesan cheese'),
+(17, 'Unsalted butter'),
+(18, 'Nutmeg');
+
 
 -- Insert Statements for Macronutrient Table
 INSERT INTO Macronutrient (name, kcal_per_gram) VALUES ('Protein', 4.0);
@@ -480,7 +525,27 @@ INSERT INTO IngredientMacronutrient (quantity_g, ingredient_id, macronutrient) V
 INSERT INTO IngredientMacronutrient (quantity_g, ingredient_id, macronutrient) VALUES (15, 3, 'Protein');
 
 -- Insert Statements for IngredientRecipe Table
-INSERT INTO IngredientRecipe (quantity, measurement_unit, ingredient_id, recipe_id) VALUES (200, 'grams', 1, 1);
+INSERT INTO IngredientRecipe VALUES 
+(200, 'grams', 1, 1),
+(10, 'ml', 3, 1),
+(40, 'grams', 4, 1),
+(38, 'grams', 5, 1),
+(200, 'grams', 6, 1),
+(50, 'grams', 7, 1),
+(10, 'grams', 8, 1),
+(300, 'grams', 9, 1),
+(10, 'ml', 10, 1),
+(100, 'grams', 11, 1),
+(300, 'grams', 12, 1),
+(200, 'ml', 13, 1),
+(300, 'grams', 2, 2),
+(10, 'ml', 3, 2),
+(200, 'grams', 14, 2),
+(200, 'ml', 15, 2),
+(50, 'grams', 16, 2),
+(50, 'grams', 17, 2),
+(10, 'grams', 18, 2);
+
 INSERT INTO IngredientRecipe (quantity, measurement_unit, ingredient_id, recipe_id) VALUES (300, 'grams', 2, 2);
 INSERT INTO IngredientRecipe (quantity, measurement_unit, ingredient_id, recipe_id) VALUES (150, 'grams', 3, 3);
 
