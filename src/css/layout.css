@@ -447,21 +447,34 @@ form.profile-info > div{
 .messages {
   display: grid;
   grid-template-columns: 0.8fr 1.2fr;
-  grid-template-rows: auto auto;
+  grid-template-rows: 0.2fr 1fr;
   width: 100%;
-  max-width: 1000px;
-  margin: 0;
-  padding-inline-end: 2em;
+  max-width: 80%;
+  margin: 0 auto;
 }
 
-#messages-peopleWithMessages {
+#messages-main_title {
   grid-column: 1;
   grid-row: 1;
 }
 
-#messages-conversation  {
+#messages-people_cards {
+  grid-column: 1;
+  grid-row: 2;
+  overflow-y: auto;
+}
+
+#messages-conversation-header  {
   grid-column: 2;
   grid-row: 1;
   overflow-y: auto;
   margin-left: 1em;
+}
+
+#messages-conversation_content {
+  grid-column: 2;
+  grid-row: 2;
+  overflow-y: auto;
+  margin-left: 1em;
+  margin-top:0;
 }
