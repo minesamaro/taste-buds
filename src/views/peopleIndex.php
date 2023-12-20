@@ -22,7 +22,8 @@ foreach ($people as $person) {
            <!-- <img class="card-img" src="--> <?#= $person->profile_photo ?><!--" alt="--><?#= $person->username . "profile photo" ?><!--" /> ATUALIZAR DEPOIS -->
             <div>
                 <div class="card-header">
-                    <!-- <a href="../pages/profile.php?personId?<?php #$personId ?>"> ATUALIZAR--><h4><?= $person->first_name . " " . $person->surname; ?></h4><!--</a>-->
+                    <img class="peopleIndex-profile_photo" src="<?php echo $person->profile_photo; ?>" alt="<?php echo $person->username; ?>'s profile photo">
+                    <a href="../pages/profile.php?person_id=<?php echo $personId; ?>"><h4><?= $person->first_name . " " . $person->surname; ?></h4><!--</a>-->
                     <h5><?php 
                         if(Person::isChef($personId)) {
                             echo "Chef";
