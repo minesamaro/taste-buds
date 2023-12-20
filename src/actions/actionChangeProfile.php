@@ -18,9 +18,31 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_SESSION['user_id'])) {     #
     if (empty($surname)){  
         $surname=$person->surname;
     }
-    Person::changePersonInfo($firstName,$surname,$user_id);
+    
 
-
+    // Get image and upload it to the server
+    if (isset($_FILES['profile_photo']) && $_FILES['profile_photo']['error'] == UPLOAD_ERR_OK) {
+        $uploadDir = '../img/users/'; 
+        // Get last saved recipe id in database
+        $lastPersonId = Person::getLastPersonId();
+        $newId = $lastPersonId + 1;
+        // Get the file extension
+        $extension = pathinfo($_FILES['profile_photo']['name'], PATHINFO_EXTENSION);
+        $uploadFile = $uploadDir . $newId . '.' . $extension;
+        
+        if (move_uploaded_file($_FILES['profile_photo']['tmp_name'], $uploadFile)) {
+            // File was successfully uploaded
+            $profile_photo = $uploadFile;
+        } else {
+            // Handle file upload error
+            $profile_photo = '../img/users/profile.png';
+        }
+    } else {
+        // Handle file upload error by using a default image
+        $profile_photo = '../img/users/profile.png';
+        echo 'here';
+    }
+    Person::changePersonInfo($firstName,$surname,$profile_photo,$user_id);
 
 
     //Check user type and get for each

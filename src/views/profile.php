@@ -18,6 +18,7 @@ function Profile(){
         $user_id=$_SESSION['user_id'] ;
         $isUser=TRUE;
     }
+    
 
     $personUser = Person::getPersonById($user_id);
 
@@ -37,7 +38,9 @@ function Profile(){
         $isCommon=true;
         
     }
+    var_dump($personUser->profile_photo)
     ?>
+    
     <article class="center-content" id="profile">
         <div class="profile-photo">
             <img class="profile-profile_photo card-img" src="<?php echo $personUser->profile_photo; ?>"  alt="Profle Picture" width=100px height=100px>

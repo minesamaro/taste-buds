@@ -186,7 +186,7 @@ footer > div {
 .recipe-initial_info {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: 0.5fr 0.5fr 3fr 0.5fr;
+  grid-template-rows: 0.5fr 0.5fr auto 0.5fr;
   grid-column-gap: 0px;
   grid-row-gap: 0px;
   grid-template-areas: 
@@ -238,6 +238,7 @@ footer > div {
 
 .recipe-photo {
   grid-area: recipe-photo;
+
 }
 
 .recipe-photo img {
@@ -439,4 +440,41 @@ footer > div {
 form.profile-info > div{
 
   margin-bottom: 10px;
+}
+
+
+/* Messages */
+.messages {
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  grid-template-rows: 0.2fr 1fr;
+  width: 100%;
+  max-width: 80%;
+  margin: 0 auto;
+}
+
+#messages-main_title {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+#messages-people_cards {
+  grid-column: 1;
+  grid-row: 2;
+  overflow-y: auto;
+}
+
+#messages-conversation-header  {
+  grid-column: 2;
+  grid-row: 1;
+  overflow-y: auto;
+  margin-left: 1em;
+}
+
+#messages-conversation_content {
+  grid-column: 2;
+  grid-row: 2;
+  overflow-y: auto;
+  margin-left: 1em;
+  margin-top:0;
 }

@@ -11,7 +11,7 @@ $user_id = $_SESSION['user_id'] ?? 1;
 # turn inputs into variables
 if ($_SERVER["REQUEST_METHOD"] == "POST") {     # block will only be executed when the form is submitted using the POST method -> for security
     
-    $content = $_POST['message_content'];
+    $content = nl2br($_POST['message_content']);
     $receiver_id = $_POST['receiver_id'];
 
     Message::addMessage($content, $user_id, $receiver_id);

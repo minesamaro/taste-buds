@@ -640,18 +640,7 @@ input[type="radio"]:checked + label #ingredient-input-hidden {
     min-height: 1rem
 }
 
-/* Pagination */
-.page-number {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    margin: 1em 0;
-}
 
-.page-number * {
-    margin: 0 0.5em;
-}
 
 /* Login Form*/
 .login-container, .register-container {
@@ -1055,8 +1044,99 @@ html::-webkit-scrollbar-thumb {
     font-weight: bold;
 }
 
+#messages-main_title {
+    font-size: 2em;
+    font-weight: bold;
+    color: var(--primary-color);
+    background-color: var(--background-color-light);
+    padding: 0.5em;
+}
+
+#message-person_name_card {
+    color: var(--background-color-dark);
+    font-size: 1.2em;
+}
+
+#messages-people_cards {
+    width: 100%;
+}
+
 .message-profile_photo {
-    max-width: 150px;
-    max-height: 150px;
+    max-width: 75px;
+    max-height: 75px;
     border-radius: 50%;
 }
+
+#messages-peopleWithMessages {
+    padding-right:1em;
+}
+
+
+#messages-conversation {
+    border-left: 2px dashed var(--contrast-color);
+    padding-left: 0.5em;
+    margin-top: 2em;
+}
+
+#messages-conversation_person_name {
+    color: var(--contrast-color);
+    font-size: 1.5em;
+    padding: 1.2em;
+    padding-bottom: 0;
+    margin-bottom: 0.6em;
+}
+
+#messages-conversation_content {
+    display: flex;
+    flex-direction: column-reverse;
+    height: 500px; /* adjust this value as needed */
+    overflow-y: auto;
+}
+
+.message-content_individual_message {
+    display:flex;
+    appearance: button;
+    background-color: var(--primary-color);
+    border: solid transparent;
+    border-radius: 16px;
+    border-width: 0 0 2px;
+    box-sizing: border-box;
+    color: #FFFFFF;
+    padding: 10px 13px;
+    display: inline-block;
+}
+
+.message-sent {
+    float: right; /* aligns this element to the right */
+    clear: both; /* ensures this element clears previous floats */
+    margin-right: 0;
+    text-align: right; /* overrides parent alignment and aligns this element to the right */
+    display: inline-block; /* makes the element only as wide as its content */
+}
+
+.message-received {
+    float: left; /* aligns the div to the left */
+    clear: both; /* ensures this element clears previous floats */
+    margin-left:0;
+    display: inline-block; /* makes the element only as wide as its content */
+    text-align: left; /* overrides parent alignment and aligns this element to the left */
+}
+
+.message-hours {
+    font-size: 0.7em;
+}
+
+#message-date {
+    float: center;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    font-style: italic; /* makes the text italic */
+    clear: both; /* ensures this element clears previous floats */
+}
+
+#message-write_message {
+    width:95%;
+    margin: 0 auto;
+}
+

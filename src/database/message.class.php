@@ -57,7 +57,7 @@ class Message
             'SELECT * FROM Messages 
             WHERE (sender_id = :userId AND receiver_id = :personId2)
             OR (sender_id = :personId2 AND receiver_id = :userId)
-            ORDER BY sending_date ASC'
+            ORDER BY sending_date DESC'
         );
 
         $stmt->bindParam(':userId', $userId, PDO::PARAM_INT);
