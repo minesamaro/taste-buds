@@ -122,6 +122,7 @@ class Recipe
         return 'Unknown Chef';
       }
 
+      
     public static function getRecipesWithDetailsAndOrder($categories, $techniques, $preferences, $order)
       {
         if ($order == 'recent') {
@@ -170,7 +171,7 @@ class Recipe
       }
       $stmt->execute();
       $recipes = $stmt->fetchAll(); // this is returning less parametrs than it should
-      var_dump($recipes);
+      var_dump($recipes);//?
       $recipesArray = array();
       if (isset($recipes)){
       foreach ($recipes as $recipe) {
@@ -458,6 +459,7 @@ class Recipe
             return $recipeList;
         }
 
+        
 }
 
 ?>

@@ -21,7 +21,7 @@ function profilePlans()
         <h2>My Plans</h2>
         <?php 
         if (count($plans) == 0) { ?>
-            <h4>No plans found</h4>
+            <h4>No plans found</h4></article>
         <?php }
         else{
         foreach ($plans as $plan) { 

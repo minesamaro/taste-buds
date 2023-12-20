@@ -25,7 +25,7 @@ function profileRecipes()
 <article class='content'>
     <h2> <?php echo $chef->first_name ?>'s Recipes</h2>
 <?php if (count($recipes) == 0) { ?>
-    <h4>No recipes found</h4>
+    <h4>No recipes found</h4></article>
 <?php }
 else{
 foreach ($recipes as $recipe) { 

@@ -282,7 +282,44 @@ class RecipeRating
         $db = Database::getDatabase();
         $stmt = $db->prepare('DELETE FROM RecipeRating WHERE user_id = ? AND recipe_id = ?');
         $stmt->execute(array($userId, $recipeId));
+    
     }
+    /**
+     * Get all ratings submitted by a user
+     * 
+     * @param int $userId
+     */
+
+
+    static function getAllRatingsByUser(int $userId)
+    {
+        $db = Database::getDatabase();
+        $stmt = $db->prepare('SELECT * FROM RecipeRating WHERE user_id = ?');
+        
+        $stmt->execute(array($userId));
+        $ratings = $stmt->fetchAll();
+        $ratingsArray=array();
+ 
+        foreach ($ratings as $rating) {
+          array_push($ratingsArray, new RecipeRating(
+            $rating['rating_date'],
+            intval($rating['rating_value']),
+            $rating['comment'],
+            intval($rating['user_id']),
+            intval($rating['recipe_id'])
+          ));
+        }
+        return $ratingsArray;
+
+    }
+
+
+     /**
+     * Get the three most recent ratings for a specific recipe
+     *
+     * @param int $recipeId
+     * @return array
+     */
 }
 
 ?>
