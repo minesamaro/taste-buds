@@ -79,17 +79,26 @@ class Recipe
     );
   }
 
-  static function getAllRecipes(int $page): array
+  static function getAllRecipes(int $page=0): array
   {
+    if ($page == 0) {
+      ;
+    }
     $db = Database::getDatabase();
-    $stmt = $db->prepare(
-      'SELECT id, name, preparation_time, difficulty, number_of_servings, image, preparation_method, submission_date, energy, protein, fat, carbohydrates, chef
+    $sql= 'SELECT id, name, preparation_time, difficulty, number_of_servings, image, preparation_method, submission_date, energy, protein, fat, carbohydrates, chef
         FROM Recipe
-        ORDER BY submission_date DESC
-        LIMIT ?
-        OFFSET ?'
-    );
-    $stmt->execute(array(self::$recipesPerPage, ($page - 1) * self::$recipesPerPage));
+        ORDER BY submission_date DESC';
+
+    if ($page != 0) {
+      $sql .= ' LIMIT ? OFFSET ?';
+      $stmt = $db->prepare($sql) ?? throw new Exception("Error Processing Request");
+      $stmt->execute(array(self::$recipesPerPage, ($page - 1) * self::$recipesPerPage));
+    }
+    else {
+      $stmt = $db->prepare($sql) ?? throw new Exception("Error Processing Request");
+      $stmt->execute();
+    }
+
     $recipes = $stmt->fetchAll();
     $recipesArray = array();
     foreach ($recipes as $recipe) {

@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Get last saved recipe id in database
     $lastRecipeId = Recipe::getLastRecipeId();
     // Get the file extension
-    $extension = '.jpg';
+    $extension = 'jpg';
 
     if (isset($_FILES['image']) && $_FILES['image']['error'] == UPLOAD_ERR_OK) {
         $uploadDir = '../img/recipes/';
