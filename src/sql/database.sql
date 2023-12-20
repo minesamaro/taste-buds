@@ -403,7 +403,7 @@ INSERT INTO UserDietPreference (pref, user) VALUES ('Paleo', 9);
 
 -- Insert Statements for Recipe Table
 INSERT INTO Recipe (id, name, preparation_time, difficulty, number_of_servings, image, preparation_method, submission_date, energy, carbohydrates, protein, fat, chef)
-VALUES (1, 'Spaghetti Bolognese', 30, 3, 4, 'http://placekitten.com/200/200', 'Cook spaghetti and prepare Bolognese sauce.', '2023-06-15', 500.5, 65.2, 30.0, 15.8, 1);
+VALUES (1, 'Spaghetti Bolognese', 30, 3, 4, 'http://placekitten.com/201/300', 'Cook spaghetti and prepare Bolognese sauce.', '2023-06-15', 500.5, 65.2, 30.0, 15.8, 1);
 
 INSERT INTO Recipe (id, name, preparation_time, difficulty, number_of_servings, image, preparation_method, submission_date, energy, carbohydrates, protein, fat, chef)
 VALUES (2, 'Grilled Salmon', 20, 2, 2, 'http://placekitten.com/201/300', 'Season salmon and grill until cooked.', '2023-06-18', 350.2, 2.5, 40.8, 18.3, 2);

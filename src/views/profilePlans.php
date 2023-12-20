@@ -40,8 +40,11 @@ function profilePlans()
 
             </section>
 
-    </article>
+    
 
 <?php
-}}}
+}} ?>
+</article>
+<?php
+}
 ?>
