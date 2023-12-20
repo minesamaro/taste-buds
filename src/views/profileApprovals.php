@@ -48,7 +48,7 @@ function profileApprovals()
                 </div>
                     
                         
-                    <h6><?php echo $approval->approval_date ?></h6>
+                    <h6><?php echo date("d-m-Y", strtotime($approval->approval_date));  ?></h6>
         
                 </div>
 
