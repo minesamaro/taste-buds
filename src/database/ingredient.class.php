@@ -48,7 +48,8 @@ class Ingredient
         $db = Database::getDatabase();
         $stmt = $db->prepare(
             'SELECT id, name
-            FROM Ingredient'
+            FROM Ingredient
+            ORDER BY name ASC'
         );
 
         $stmt->execute();

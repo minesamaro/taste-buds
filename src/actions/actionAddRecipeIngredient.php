@@ -37,15 +37,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         switch ($macronutrient['name']) {
             case 'Carbohydrate':
                 $recipe->carbohydrate += $macronutrient['quantity']/100 * $quantity;
-                $recipe->energy += $macronutrient['quantity'] * $quantity * $kcalPerGram; // Change for value in database
+                $recipe->energy += $macronutrient['quantity']/100 * $quantity * $kcalPerGram; // Change for value in database
                 break;
             case 'Protein':
                 $recipe->protein += $macronutrient['quantity']/ 100 * $quantity;
-                $recipe->energy += $macronutrient['quantity'] * $quantity * $kcalPerGram;
+                $recipe->energy += $macronutrient['quantity']/100 * $quantity * $kcalPerGram;
                 break;
             case 'Fat':
                 $recipe->fat += $macronutrient['quantity'] / 100 * $quantity;
-                $recipe->energy += $macronutrient['quantity'] * $quantity * $kcalPerGram;
+                $recipe->energy += $macronutrient['quantity']/100 * $quantity * $kcalPerGram;
                 break;
         }
         $kcalPerGram = 0;
