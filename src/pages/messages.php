@@ -61,7 +61,9 @@ if ($selectedPersonId) {
                             <div class="card-header" id="card-header_messages">
                                 <img class="message-profile_photo" src="<?php echo $profile_pic; ?>" alt="<?php echo $person->username; ?>'s profile photo">
                                 <a class="<?php echo $class; ?>" id="message-person_name_card" href="?personId=<?php echo $person->id; ?>">
-                                    <?php echo $person->first_name . " " .  $person->surname; ?>
+                                    <?php 
+                                    if ($class) { echo "> "; }
+                                    echo $person->first_name . " " .  $person->surname; ?>
                                 </a>
                             </div>
                         </div>
