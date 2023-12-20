@@ -152,5 +152,44 @@ class Ingredient
         return intval($db->lastInsertId());
       }
 
+    /**
+     * Check if an ingredient exists in the database
+     */
+    public static function ingredientExists(string $name): bool
+    {
+        $db = Database::getDatabase();
+        $stmt = $db->prepare(
+            'SELECT id
+            FROM Ingredient
+            WHERE name = ?'
+        );
+
+        $stmt->execute(array($name));
+        $ingredient = $stmt->fetch();
+
+        if ($ingredient === false) {
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * Get the id of an ingredient
+     */
+    public static function getIngredientId(string $name): int
+    {
+        $db = Database::getDatabase();
+        $stmt = $db->prepare(
+            'SELECT id
+            FROM Ingredient
+            WHERE name = ?'
+        );
+
+        $stmt->execute(array($name));
+        $ingredient = $stmt->fetch();
+
+        return intval($ingredient['id']);
+    }
+
 }
 ?>

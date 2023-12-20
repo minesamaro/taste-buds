@@ -13,10 +13,53 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $quantity = floatval($_POST["quantity"]);
     $unit = $_POST["unit"];
 
-    // Add Ingredient to database
+    if (Ingredient::ingredientExists($name)) {
+        // Ingredient already exists in database
+        $ingredientId = Ingredient::getIngredientId($name);
+        IngredientRecipe::addIngredientToRecipe($recipeId, $ingredientId, $quantity, $unit);
+        // Redirect to addIngredients.php
+        header("Location: ../pages/addIngredients.php");
+        exit();
+    }else {
+        // Add Ingredient to database
     $ingredientId = Ingredient::addIngredient($name, $carbohydrate, $protein, $fat);
     IngredientRecipe::addIngredientToRecipe($recipeId, $ingredientId, $quantity, $unit);
+        // Update recipe energy, carbohydrates, proteins and fats
+    // - Get the macronutrients of the ingredient and multiply by the quantity
+    // - Add the macronutrients to the recipe
+    if ($unit == "kg") {
+        $quantity *= 1000;
+    } else if ($unit == "L") {
+        $quantity *= 1000;
+    }
+
+    $ingredient = Ingredient::getIngredientById($ingredientId);
+    $ingredientMacronutrients = Ingredient::getIngredientMacronutrients($ingredientId);
+    $recipe = Recipe::getRecipeById($recipeId);
+
+    foreach ($ingredientMacronutrients as $macronutrient) {
+        $kcalPerGram = Ingredient::getMacronutrientKcalPerGram($macronutrient['name']);
+        switch ($macronutrient['name']) {
+            case 'Carbohydrate':
+                $recipe->carbohydrate += $macronutrient['quantity']/100 * $quantity;
+                $recipe->energy += $macronutrient['quantity'] * $quantity * $kcalPerGram; // Change for value in database
+                break;
+            case 'Protein':
+                $recipe->protein += $macronutrient['quantity']/ 100 * $quantity;
+                $recipe->energy += $macronutrient['quantity'] * $quantity * $kcalPerGram;
+                break;
+            case 'Fat':
+                $recipe->fat += $macronutrient['quantity'] / 100 * $quantity;
+                $recipe->energy += $macronutrient['quantity'] * $quantity * $kcalPerGram;
+                break;
+        }
+        $kcalPerGram = 0;
+    }
+
+    $recipe->updateRecipe();
+
+
     // Redirect to addIngredients.php
     header("Location: ../pages/addIngredients.php");
-
+    }
 }?>
