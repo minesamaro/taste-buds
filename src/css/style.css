@@ -383,6 +383,24 @@ input[type="radio"]:checked + label #ingredient-input-hidden {
     flex-direction: column;
 }
 
+.recipe-see_ratings > .card  {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto;
+    gap: 0.5em;
+}
+
+.recipe-see_ratings > .card > img {
+    grid-row: 1;
+    grid-column: 1;
+    margin: 0.5em;
+}
+
+.recipe-see_ratings > .card > .rating-text {
+    grid-row: 1;
+    grid-column: 2;
+}
+
 .rating-delete {
     display: flex;
     flex-direction: row;
