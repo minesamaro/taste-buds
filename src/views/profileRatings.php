@@ -38,12 +38,13 @@ function profileRatings()
         foreach ($ratings as $rating) { 
             $recipeId = $rating->recipeId;
             
+            
             $recipe=Recipe::getRecipeById($recipeId);
         ?> 
             <section class="card">
                 <div class="card-header">
                     <h4>
-                        <a href="../pages/recipe.php?id=<?php echo $recipeId?>"><? echo $recipe->name ?></a>
+                        <a href="../pages/recipe.php?recipe_id=<?php echo $recipeId?>"><? echo $recipe->name ?></a>
 
                     </h4>
                 </div>

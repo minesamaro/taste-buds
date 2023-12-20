@@ -51,7 +51,7 @@ function displayConversation($peopleWithMessages, $userId, $selectedPersonId, $s
                         
                             <div class="<?php echo $class;?>">
                             
-                            <?php if ($show_sender && $last_message_sender) { ?>
+                            <?php if (($show_sender && $last_message_sender) || $message==$conversation[0]) { ?>
                                 <small><?php echo $sender_FullName; ?></small>
                                 <?php } $last_message_sender = $message->sender_id;?>
                             <br>
