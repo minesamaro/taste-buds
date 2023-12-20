@@ -16,7 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
     $recipes = Recipe::getRecipesWithDetailsAndOrder($selectedCategories, $selectedTechniques, $selectedPreferences, $orderBy);
     $_SESSION['recipes'] = $recipes;
-    var_dump($recipes);
+    //var_dump($recipes);
 
     // Set the selected categories, techniques, and preferences in the session
     $_SESSION['selectedCategories'] = $selectedCategories;

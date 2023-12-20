@@ -21,7 +21,7 @@ function recipeForm(){
             <div>
             <!-- Preparation Time (in minutes) -->
             <label for="preparationTime">Preparation Time (minutes):</label>
-            <input type="number" id="preparationTime" name="preparationTime" required>
+            <input type="number" id="preparationTime" name="preparationTime" step="any" required>
             </div>
 
             <div>
@@ -39,7 +39,7 @@ function recipeForm(){
             <div>
             <!-- Number of Servings -->
             <label for="numberOfServings">Number of Servings:</label>
-            <input type="number" id="numberOfServings" name="numberOfServings" required>
+            <input type="number" id="numberOfServings" name="numberOfServings" step="any" required>
             </div>
             
             <div id="preparation-method">
