@@ -800,6 +800,18 @@ a:hover {
     align-items: flex-start;
 }
 
+/** Pagination */
+.page-number {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.page-number * {
+    margin: 0.5em;
+}
+
 textarea {
     width: 100%;
     min-height: 20em;
