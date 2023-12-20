@@ -16,7 +16,7 @@ function login(){ ?>
     <h2>Log in to your account</h2>
 
     
-    <form class="login-form" action="../actions/action_login.php" method="post">
+    <form class="login-form" action="../actions/actionLogin.php" method="post">
         <div class="form-group">
             <label>Username:
                 <input type="text" id="username" name="username" required>      
@@ -35,7 +35,7 @@ function login(){ ?>
     </form>
     <?php } else { ?>
         <h2>You are already signed as </h2><?php echo " ".$_SESSION['username'];?>
-        <form id="logout" action="../actions/action_logout.php"> <!-- fazemos um mini form que é só o botão para log out, vamos ter que criar o ficheiro action_logout.php -->
+        <form id="logout" action="../actions/actionLogout.php"> <!-- fazemos um mini form que é só o botão para log out, vamos ter que criar o ficheiro action_logout.php -->
           <button>Logout</button>
         </form>
         <form id="homepage-redirect" action="../actions/action_homepage.php"> <!-- fazemos um mini form que é só o botão para log out, vamos ter que criar o ficheiro action_logout.php -->

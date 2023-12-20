@@ -64,7 +64,7 @@ function head($title)
         <?php
             // Check if the username is set in the session
             if (isset($_SESSION['user_id'])) {
-                echo '<a href="../actions/action_logout.php">Log out</a>';
+                echo '<a href="../actions/actionLogout.php">Log out</a>';
             } else {
                 echo '<a href="../pages/login.php">Log in</a>';
                 echo '<a href="../pages/registration.php">Sign up</a>';
