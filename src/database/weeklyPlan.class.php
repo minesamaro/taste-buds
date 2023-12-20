@@ -181,16 +181,17 @@ class WeeklyPlan
 
   /**
    * Delete a Recipe from the WeeklyPlan
+   * To be improved - needs a more efficient primary key
    */
-  static function deleteRecipeFromWeeklyPlan(int $planId, int $recipeId)
+  static function deleteRecipeFromWeeklyPlan(int $planId, int $recipeId, string $dayWeek, string $timeMeal, float $portion)
   {
     $db = Database::getDatabase();
     $stmt = $db->prepare(
       'DELETE FROM PlanRecipe
-        WHERE plan_id = ? AND recipe_id = ?'
+        WHERE plan_id = ? AND recipe_id = ? AND day_week = ? AND time_meal = ? AND portion = ?'
     );
 
-    $stmt->execute(array($planId, $recipeId));
+    $stmt->execute(array($planId, $recipeId, $dayWeek, $timeMeal, $portion));
   }
 
   /**

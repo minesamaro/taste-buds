@@ -270,6 +270,19 @@ class RecipeRating
 
         return $count > 0;
     }
+
+    /**
+     * Delete a rating from a user for a specific recipe
+     * 
+     * @param int $userId
+     * @param int $recipeId
+     */
+    static function deleteRating(int $userId, int $recipeId): void
+    {
+        $db = Database::getDatabase();
+        $stmt = $db->prepare('DELETE FROM RecipeRating WHERE user_id = ? AND recipe_id = ?');
+        $stmt->execute(array($userId, $recipeId));
+    }
 }
 
 ?>

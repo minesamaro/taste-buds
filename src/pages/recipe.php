@@ -47,6 +47,9 @@
     if($nutritionist_approval) {
         $nutritionist=Person::getPersonById($nutritionist_approval->nutritionist_id);
     }
+    else {
+        $nutritionist = null;
+    }
 
     // Get most recent ratings and count all the ratings for the specific recipe
     $ratings=RecipeRating::getRecentRatingsForRecipe($recipeId, $userId);

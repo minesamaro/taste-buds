@@ -182,8 +182,15 @@ input[type="radio"]:checked + label .card, #planRecipeOptions{
     color: var(--contrast-color);
 }
 
-.card-header *, .card-body * {
+.card-header *, .card-body *, .card-side * {
     margin: 0.4em;
+}
+
+.card-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
 }
 
 .card-small {
@@ -375,6 +382,14 @@ input[type="radio"]:checked + label #ingredient-input-hidden {
     display: flex;
     flex-direction: column;
 }
+
+.rating-delete {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+}
+
 .rating-top, .rating-bottom {
     display: flex;
     flex-direction: row;

@@ -14,8 +14,10 @@ function recipeRatings($ratings, $all_ratings, $userId, $session_user, $recipeId
             <?php if($userId) { ?>
 
                 <div class="recipe-see_ratings">
-                                
-                <?php foreach ($ratings as $rt) { 
+                                    
+                <?php 
+                if ($ratings) {                
+                    foreach ($ratings as $rt) { 
                     $rating_user=Person::getPersonById($rt->userId); ?>
                     <div class="card">
                         <div class="rating-top">
@@ -42,9 +44,18 @@ function recipeRatings($ratings, $all_ratings, $userId, $session_user, $recipeId
                         <div class="rating-comment">
                             <span class="recipe-rating_comment"> <? echo $rt->comment; ?> </span>
                         </div>
+                        <?php if ($session_user->id == $rating_user->id) { ?>
+                        <div class="rating-delete">
+                            <form action="../actions/actionDeleteRecipeRating.php" method="post">
+                                <input type="hidden" name="recipeId" value="<?php echo $recipeId; ?>">
+                                <input type="hidden" name="ratingId" value="<?php echo $rt->userId; ?>">
+                                <button type="submit" class="deleteBt">Delete</button>
+                            </form>
+                        </div>
+                        <?php } ?>
                     </div>
                 <? } 
-                if ($ratings) {?>
+                ?>
                 <a id="recipe_all_ratings" href="../pages/allRecipeRatings.php"><button>See all ratings</button></a> 
                 <?php }
 
