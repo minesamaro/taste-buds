@@ -31,7 +31,7 @@ function head($title)
             <ul>
                 <li><a href="../pages/peopleIndex.php">People</a></li>
                 <li><a href="../pages/recipeIndex.php">Recipes</a></li>
-                <li><a href="#">About</a></li>
+                <li><a href="../pages/aboutUs.php">About us</a></li>
             </ul>
         </div>
 

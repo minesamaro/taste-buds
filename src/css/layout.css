@@ -369,7 +369,7 @@ footer > div {
 /** Profile layout*/
 #profile{
   display: grid;
-  grid-template-rows: max-content 0.1fr 0.1fr 0.1fr auto;
+  grid-template-rows: max-content 0.1fr 0.1fr 0.1fr 0.1fr 0.1fr auto;
   grid-template-columns: 0.2fr 0.6fr;
   width: 100%;
   max-width: 1000px;
@@ -410,16 +410,26 @@ footer > div {
   align-items: center;
   justify-content: center;
 }
+.profile-ratings{
+  grid-column: 1;
+  grid-row-start: 5;
+  grid-row-end: 6 ;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 
 .profile-info{
 
   grid-column: 2;
   grid-row-start: 1;
-  grid-row-end: 6;
+  grid-row-end: 8;
   padding-left: 30px;
   display: flex;
   flex-direction: column;
   justify-content: start;
+
   
 }
 #label{
@@ -478,3 +488,42 @@ form.profile-info > div{
   margin-left: 1em;
   margin-top:0;
 }
+
+/* About us*/
+/* Apply styles to the section */
+section.about {
+  max-width: 800px;
+  margin: 0 auto;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Style headers */
+.about>h2 {
+  color: var(--contrast-color);
+  border-bottom: 2px solid var(--contrast-color);
+  padding-bottom: 5px;
+  margin-bottom: 15px;
+}
+
+/* Style paragraphs */
+.about>p {
+  line-height: 1.6;
+  color: #333;
+}
+
+/* Style unordered list */
+.about>ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+/* Style list items */
+.about>ul>li {
+  margin-bottom: 10px;
+}
+
+
+

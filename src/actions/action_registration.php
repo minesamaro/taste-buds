@@ -45,11 +45,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {     # block will only be executed wh
             $profile_photo = $uploadFile;
         } else {
             // Handle file upload error
-            $profile_photo = '../pages/profile.png';
+            $profile_photo = '../img/users/profile.png';
         }
     } else {
         // Handle file upload error by using a default image
-        $profile_photo = '../pages/profile.png';
+        $profile_photo = '../img/users/profile.png';
     }
 
     $db=Database::getDatabase(); 

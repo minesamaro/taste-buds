@@ -11,7 +11,8 @@
             <a href="mailto:taste@buds.com">taste@buds.com</a>
         </div>
         <div class="footer__copyright">
-            <p>© 2023 Taste Buds</p>
+            <p>© 2023 Taste Buds. All rights reserved.</p>
+
         </div>
     </div>
 </footer>
