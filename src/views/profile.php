@@ -9,14 +9,12 @@ function Profile(){
  
         $user_id = $_GET['person_id'];
         $isUser=FALSE;
-
-        if ($user_id==$_SESSION['user_id']){
-
-        $isUser=TRUE;
-        }
-  
+        if(isset($_SESSION['user_id']) and $_SESSION['user_id']==$user_id) {
+        
+            $isUser=TRUE;}
     }
-    else {
+    else{
+        
         $user_id=$_SESSION['user_id'] ;
         $isUser=TRUE;
     }
