@@ -1036,3 +1036,9 @@ html::-webkit-scrollbar-thumb {
 .message-bold {
     font-weight: bold;
 }
+
+.message-profile_photo {
+    max-width: 150px;
+    max-height: 150px;
+    border-radius: 50%;
+}
