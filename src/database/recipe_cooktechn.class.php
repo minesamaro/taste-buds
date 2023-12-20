@@ -35,7 +35,6 @@ class RecipeCookingTechnique {
     return $result;
   }
 }
-
 ?>
 
 

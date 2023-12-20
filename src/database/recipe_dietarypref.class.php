@@ -36,6 +36,39 @@ class RecipeDietaryPref {
     return $result;
   }    
 
+    static function addRecipePreferences(int $recipeId, array $preferences) {
+        $db = Database::getDatabase();
+        $stmt = $db->prepare('INSERT INTO RecipeDietaryPref (dietary_pref, recipe_id) VALUES (?, ?)');
+        foreach ($preferences as $preference) {
+            $stmt->execute(array($preference, $recipeId));
+        }
+    }
+
+    static function addNewRecipePreference(int $recipeId, string $newPreference) {
+        $db = Database::getDatabase();
+        $stmt = $db->prepare('INSERT INTO DietaryPreference (name) VALUES (?)');
+        $stmt->execute(array($newPreference));
+
+        self::addRecipePreferences($recipeId, array($newPreference));
+    }
+
+    /**
+     * Get all dietary preferences
+     * @return array
+     */
+    static function getAllDietaryPreferences(): array {
+        $db = Database::getDatabase();
+        $stmt = $db->prepare('SELECT name FROM DietaryPreference');
+        $stmt->execute();
+        $preferences = $stmt->fetchAll();
+
+        $prefName = array();
+        foreach ($preferences as $preference) {
+            array_push($prefName, $preference['name']);
+        }
+        return $prefName;
+    }
+
 }
 
 ?>

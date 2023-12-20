@@ -197,10 +197,7 @@ CREATE TABLE RecipeRating (
 
 -- Create the CookingTechnique table
 CREATE TABLE CookingTechnique (
-    name TEXT PRIMARY KEY,
-    difficulty INT NOT NULL,
-    method_description TEXT NOT NULL,
-    CHECK (difficulty >= 0 AND difficulty <= 5)
+    name TEXT PRIMARY KEY
 );
 
 -- Create the RecipeCookingTechnique table
@@ -494,14 +491,14 @@ INSERT INTO RecipeRating (rating_date, rating_value, comment, user_id, recipe_id
 VALUES ('2023-06-27', 3, 'Good, but could use more seasoning.', 10, 3);
 
 -- Insert Statements for CookingTechnique Table
-INSERT INTO CookingTechnique (name, difficulty, method_description)
-VALUES ('Grilling', 2, 'Cooking food directly over an open flame or heat source.');
+INSERT INTO CookingTechnique (name)
+VALUES ('Grilling');
 
-INSERT INTO CookingTechnique (name, difficulty, method_description)
-VALUES ('Sautéing', 3, 'Cooking food quickly in a small amount of oil over medium-high heat.');
+INSERT INTO CookingTechnique (name)
+VALUES ('Sautéing');
 
-INSERT INTO CookingTechnique (name, difficulty, method_description)
-VALUES ('Braising', 4, 'Cooking food slowly in a covered pot with added liquid.');
+INSERT INTO CookingTechnique (name)
+VALUES ('Braising');
 
 -- Insert Statements for RecipeCookingTechnique Table
 INSERT INTO RecipeCookingTechnique (recipe_id, cooking_technique)
