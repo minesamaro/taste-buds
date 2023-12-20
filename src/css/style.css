@@ -144,6 +144,13 @@ footer, .footer_contacts > a {
     border-radius: 0.5em 0 0 0.5em;
 }
 
+#card-img_people {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin: 0.5em;
+}
+
 .card-with-img > div {
     flex-grow: 1;
 }
@@ -186,11 +193,28 @@ input[type="radio"]:checked + label .card, #planRecipeOptions{
     margin: 0.4em;
 }
 
+#card-people_name {
+    font-size:1.2em;
+}
+
 .card-content {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: flex-start;
+}
+
+#card-people_occupation {
+    margin-right: 1em;
+    font-size: 0.85em;
+}
+#card-body_people {
+    margin-left: 1em;
+}
+
+#card-footer_people{
+    margin-left: 1.5em;
+    font-size: 0.9em;
 }
 
 .card-small {
