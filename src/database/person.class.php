@@ -455,7 +455,7 @@
                     'UPDATE Person
                     SET password=?
                     WHERE id = ?');
-                $stmt->execute(array($user_id, $password));
+                $stmt->execute(array($password, $user_id));
                 $db->commit();
             } catch (Exception $e) {
                 $db->rollBack();
