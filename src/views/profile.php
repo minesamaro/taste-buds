@@ -5,27 +5,63 @@ require_once(__DIR__ . '/../database/chef.class.php');
 require_once(__DIR__ . '/../database/nutritionist.class.php');
 
 function Profile(){ 
-    $user_id=$_SESSION['user_id'] ;
-    
+    if(isset($_GET['person_id'])) {
+ 
+        $user_id = $_GET['person_id'];
+        $isUser=FALSE;
+
+        if ($user_id==$_SESSION['user_id']){
+
+        $isUser=TRUE;
+        }
+  
+    }
+    else {
+        $user_id=$_SESSION['user_id'] ;
+        $isUser=TRUE;
+    }
+
     $personUser = Person::getPersonById($user_id);
+
+    if (Person::isChef($user_id)){
+        $isChef =True;
+    }
+    else{
+        $isChef=false;
+        
+    }
     ?>
     <article class="center-content" id="profile">
         <div class="profile-photo">
             <img src="<?php echo $personUser->profile_photo; ?>"  alt="Profle Picture" width=100px height=100px>
        
         </div>
-        <div class="card profile-changepass">
-            <a href="changePassword.php">Change Password</a>
-        </div>
-        <div class="card profile-myplans">
-         <a href="profilePlans.php">My plans</a>
-        </div>
-        <div class="card profile-update">
-            <a href="changeProfile.php">Update Profile</a>
-        </div>
+        <?php 
+        if ($isUser){ ?>
+            <div class="card profile-changepass">
+                <a href="changePassword.php">Change Password</a>
+            </div>
+            
+            <div class="card profile-update">
+                <a href="changeProfile.php">Update Profile</a>
+            </div>
+        <?php } ?>
+        <?php if ($isChef){
+                ?>
+                <div class="card profile-recipes">
+                    <a href="profileRecipes.php?user_id=<?php echo $personUser->id ?>">Recipes</a>
+                </div>
+                
+        <?php } elseif($isChef==false and $isUser){
+            ?> 
+            <div class="card profile-myplans">
+                <a href="profilePlans.php">My plans</a>
+            </div>
+            
+        <?php } ?>
 
         <div class="card profile-info">
-            <h2>My Profile</h2>
+            <h2>Profile</h2>
             <div class="username">
                 <p id="label">Username:</p>
                 <p> <?php echo $personUser->username ?></p>

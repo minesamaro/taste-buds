@@ -9,7 +9,13 @@ require_once(__DIR__ . '/../database/weeklyPlan.class.php');
 function profilePlans()
 {
     $user_id=$_SESSION['user_id'] ;
-    $plan=CommonUser::getPlansByUserId($user_id); 
+    if (Person::isNutritionist($user_id)){
+        $plan=Nutritionist::getPlansByNutriId($user_id); 
+    }
+    elseif(Person::isCommonUser($user_id)){
+        $plan=CommonUser::getPlansByUserId($user_id); 
+    }
+
 ?>
     
     <article class="content">

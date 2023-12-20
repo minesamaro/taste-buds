@@ -134,6 +134,34 @@
                 
             return $nutriList;
         }
+        public static function getPlansByNutriId($user_id){
+            try {
+
+                #start transaction to the database
+                $db = Database::getDatabase();       
+                $stmt = $db->prepare(
+                    'SELECT id, creation_date, total_kcal, common_user_id
+                    FROM WeeklyPlan
+                    WHERE nutritionist_id = ?');
+                $stmt->execute(array($user_id));
+     
+            } catch (Exception $e) {
+                $db->rollBack();
+                echo "Error: " . $e->getMessage();
+            }
+            //acho q isto so da se so houver um plano, podem haver muitos
+            $weeklyPlan = $stmt->fetch();
+
+            $plan = new WeeklyPlan(
+              intval($weeklyPlan['id']),
+              $weeklyPlan['creation_date'],
+              floatval($weeklyPlan['total_kcal']),
+              $user_id,
+              intval($weeklyPlan['common_user_id'])
+            );
+
+            return $plan;
+        }
 
     }
 

@@ -14,12 +14,12 @@ function changePassword($msg){
             <?php } ?>
 
             <div class="new_pass">
-                <label for="new_pass">New password:</label>
-                <input type="text" id="new_pass" name="new_pass" required>
+                <label for="new_pass">New password (min 8 characters):</label>
+                <input type="password" id="new_pass" name="new_pass" required>
             </div>
             <div class="check_pass">
                 <label for="check_pass">Confirm new password:</label>
-                <input type="text" id="check_pass" name="check_pass" required>
+                <input type="password" id="check_pass" name="check_pass" required>
             </div>
             <div>
                 <button  type="submit">Change Password</button>

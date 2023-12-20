@@ -382,6 +382,38 @@ class Recipe
       )
     );
   }
+  public static function getAllRecipesFromChef($user_id): array
+  {
+    $db = Database::getDatabase();
+    $stmt = $db->prepare(
+      'SELECT id, name, preparation_time, difficulty, number_of_servings, image, preparation_method, submission_date, energy, protein, fat, carbohydrates
+        FROM Recipe
+        WHERE chef=?'
+    );
+    $stmt->execute(array($user_id));
+    $recipes = $stmt->fetchAll();
+    $recipesArray = array();
+    foreach ($recipes as $recipe) {
+      array_push($recipesArray, new Recipe(
+        intval($recipe['id']),
+        $recipe['name'],
+        intval($recipe['preparation_time']),
+        intval($recipe['difficulty']),
+        intval($recipe['number_of_servings']),
+        $recipe['image'],
+        $recipe['preparation_method'],
+        $recipe['submission_date'],
+        floatval($recipe['energy']),
+        floatval($recipe['protein']),
+        floatval($recipe['fat']),
+        floatval($recipe['carbohydrates']),
+        $user_id
+      )
+      );
+    }
+    return $recipesArray;
+  }
+
 
 }
 

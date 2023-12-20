@@ -11,7 +11,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_SESSION['user_id'])) {     #
 
     $password = $_POST["new_pass"];
     $checkPassword=$_POST["check_pass"];
-    if ($password !== $checkPassword){
+
+    if (strlen($password) < 8) {
+        $_SESSION['msg'] = 'Password must have at least 8 characters.';
+        header('Location: ../pages/changePassword.php');
+        die();
+    }
+    elseif ($password !== $checkPassword){
         $_SESSION['msg'] = "Passwords don't match!";
         header('Location: ../pages/changePassword.php');
         die();
