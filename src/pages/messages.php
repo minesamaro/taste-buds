@@ -40,11 +40,12 @@ if ($selectedPersonId) {
 ?>
 
 
-
+<body>
+<main>
 <div class="messages">
 
     <!-- Left side: List of people with whom the logged-in person has messages -->
-    <div class="messages-peopleWithMessages">
+    <div id="messages-peopleWithMessages">
         <h2>Messages</h2>
         <ul>
             <?php   
@@ -73,26 +74,73 @@ if ($selectedPersonId) {
     </div>
 
     <!-- Right side: Display messages for the selected person -->
-    <div class="messages-conversation">
+    <div id="messages-conversation">
         <?php if ($selectedPersonId) { ?>
-            <a href="profile.php?user_id=<?php echo $selectedPersonId; ?>"><?php echo $selectedPerson_FullName; ?> </a>
+            <div id="messages-conversation-header">
+                <a href="profile.php?user_id=<?php echo $selectedPersonId; ?>"><h3 id="messages-conversation_person_name"> <?php echo $selectedPerson_FullName; ?></h3> </a>
+            </div>
        
             <?php if ($conversation) { ?>
-                <ul>
+                <div class="card" id="messages-conversation_content">
+                    <?php 
+                    $last_date = 0;
+                    $last_message_sender = 0;
+                    
+                     ?>
                     <?php foreach ($conversation as $message) { ?>
-                        <?php 
-                            $formattedDate = date("d-m-Y", strtotime($message->sending_date)); 
+                        <?php
+                            $formattedDate = date("d-m-Y", strtotime($message->sending_date));
+                            
+                            if ($formattedDate != $last_date) {
+                                $last_date = $formattedDate;
+                                $show_date = true;
+                            }
+                            else {
+                                $show_date = false;
+                            }
+
+                            if ($message->sender_id != $last_message_sender) {
+                                $last_message_sender = $message->sender_id;
+                                $show_sender = true;
+                            } else {
+                                $show_sender = false;
+                            }
+
+                            if($userId == $message->sender_id) {
+                                $class = 'message-sent';
+                            } else {
+                                $class = 'message-received';
+                            }
+
                             $formattedHour = date("H:i", strtotime($message->sending_date));
                             $sender = Person::getPersonById($message->sender_id);
                             $sender_FullName = $sender->first_name . " " . $sender->surname;
                         ?>
-                        <li>
-                            <?php echo $message->content; ?>
+                        <div>
+                        <div id="message-date">
+                            <?php if ($show_date) { ?>
+                                <small><?php echo $formattedDate; ?></small>
+                                <br>
+                            <?php } ?>
+                            </div>
+                            <div class="<?php echo $class;?>">
+                            
+                            <?php if ($show_sender) { ?>
+                                <small><?php echo $sender_FullName; ?></small>
+                                <?php } ?>
                             <br>
-                            <small><?php echo $formattedDate . ", " . $formattedHour; ?> - by <?php echo $sender_FullName; ?></small>
-                        </li>
+                                <div class="message-content_individual_message">
+                                <?php echo $message->content; ?>
+                                </div>
+                            <br>
+                            <small class="message-hours"><?php echo $formattedHour; ?></small>
+                            </div>
+                            
+                        </div>
+                        
                     <?php } ?>
-                </ul>
+                    <div style="clear: both;"></div> <!-- Clear the float -->
+                </div>
             <?php } else { ?>
                 <p>No messages with this person yet. Be the first to send a message.</p>
             <?php } ?>
@@ -116,5 +164,10 @@ if ($selectedPersonId) {
 
 </div>
 
+</main>
 </body>
 </html>
+
+<?php
+footer();
+?>
