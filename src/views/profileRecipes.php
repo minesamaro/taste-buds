@@ -22,6 +22,7 @@ function profileRecipes()
     $recipes=Recipe::getAllRecipesFromChef(intval($user_id));
 
 ?>
+<article class='content'>
 <?php if (count($recipes) == 0) { ?>
     <h4>No recipes found</h4>
 <?php }
@@ -66,7 +67,7 @@ foreach ($recipes as $recipe) {
         </div>
 <?php } ?>
 </article>
-</div>
+
 
 <?php } }?>
     
