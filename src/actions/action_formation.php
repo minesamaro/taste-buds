@@ -1,6 +1,6 @@
 <?php
 session_start(); 
-
+require_once(__DIR__ . '/../database/person.class.php');
 require_once(__DIR__ . '/../database/chef.class.php');
 require_once(__DIR__ . '/../database/nutritionist.class.php');
 require_once(__DIR__ . '/../database/connection.db.php');
@@ -18,6 +18,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_SESSION['user_id']) && isset
     $graduation_date = $_POST['graduation_date'];
     $academic_level = $_POST['academic_level'];
 
+
+
     switch ($occupation) {
         case 'chef':
             Chef::addChef($user_id, $course_name, $school_name, $graduation_date, $academic_level);
@@ -26,8 +28,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_SESSION['user_id']) && isset
             Nutritionist::addNutritionist($user_id, $course_name, $school_name, $graduation_date, $academic_level);
             break;
     }
-            
-    header('Location: ../index.php');
+
+        header('Location: ../index.php');
+   
+
+   
+
+    
 }
 
 ?>

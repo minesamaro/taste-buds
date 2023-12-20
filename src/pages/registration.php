@@ -26,6 +26,10 @@ if (isset($_SESSION['user_id']) && !isset($_SESSION['reg_page'])){
         formation();
     }
 
+    
+
+    
+
     $_SESSION['reg_page'] = null;
     footer();
 }
