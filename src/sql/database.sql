@@ -431,12 +431,52 @@ Add the cooked fettuccine to the skillet, tossing to coat the pasta evenly in th
 
 Serve the Chicken Alfredo Pasta hot, garnished with chopped fresh parsley and extra Parmesan cheese.', '2023-06-20', 850.0, 45.5, 42.0, 60.2, 1);
 
+INSERT INTO Recipe (id, name, preparation_time, difficulty, number_of_servings, image, preparation_method, submission_date, energy, carbohydrates, protein, fat, chef)
+VALUES (3, 'Healthy Pancakes', 20, 2, 4, '../img/recipes/3.jpg', '
+In a mixing bowl, combine 1 cup of whole wheat flour, 1 tablespoon of baking powder, and a pinch of salt.
+
+In a separate bowl, whisk together 1 cup of low-fat milk, 2 tablespoons of Greek yogurt, 1 tablespoon of honey, and 2 tablespoons of melted coconut oil.
+
+Pour the wet ingredients into the dry ingredients and stir until just combined. Be careful not to overmix; a few lumps are okay.
+
+Heat a non-stick griddle or skillet over medium heat. Lightly grease with cooking spray or a small amount of coconut oil.
+
+For each pancake, pour 1/4 cup of batter onto the griddle. Cook until bubbles form on the surface, then flip and cook until golden brown on the other side.
+
+Serve the pancakes with fresh berries, a drizzle of honey, and a sprinkle of chopped nuts for a delicious and healthy breakfast.', '2023-07-05', 300.0, 35.0, 10.0, 12.5, 1);
+INSERT INTO Recipe (id, name, preparation_time, difficulty, number_of_servings, image, preparation_method, submission_date, energy, carbohydrates, protein, fat, chef)
+VALUES (4, 'Greek Yogurt Parfait', 10, 1, 2, '../img/recipes/4.jpg', '
+In a glass or a bowl, layer 1 cup of Greek yogurt.
+
+Add a layer of mixed berries (strawberries, blueberries, and raspberries).
+
+Sprinkle 2 tablespoons of granola over the berries.
+
+Repeat the layers until you reach the top, finishing with a dollop of Greek yogurt on top.
+
+Drizzle 1 tablespoon of honey over the parfait for sweetness.
+
+Optional: Garnish with a few mint leaves for freshness.
+
+Serve immediately and enjoy this quick and healthy Greek Yogurt Parfait!', '2023-07-15', 250.0, 30.0, 15.0, 8.0, 1);
+INSERT INTO Recipe (id, name, preparation_time, difficulty, number_of_servings, image, preparation_method, submission_date, energy, carbohydrates, protein, fat, chef)
+VALUES (5, 'Grilled Salmon', 20, 2, 2, '../img/recipes/5.jpg', '1. Preheat the grill to medium-high heat.
+2. Pat the salmon fillet dry with paper towels and place it on a cutting board.
+3. Season both sides of the salmon with salt and black pepper.
+4. Brush olive oil over the salmon to prevent sticking.
+5. Place the salmon on the preheated grill grates, skin-side down.
+6. Grill for about 4-5 minutes per side or until the salmon is cooked to your desired level of doneness.
+7. Remove the salmon from the grill and let it rest for a few minutes before serving.', '2023-06-18', 350.2, 2.5, 40.8, 18.3, 2);
 
 INSERT INTO Recipe (id, name, preparation_time, difficulty, number_of_servings, image, preparation_method, submission_date, energy, carbohydrates, protein, fat, chef)
-VALUES (3, 'Grilled Salmon', 20, 2, 2, 'http://placekitten.com/201/300', 'Season salmon and grill until cooked.', '2023-06-18', 350.2, 2.5, 40.8, 18.3, 2);
+VALUES (6, 'Vegetable Stir-Fry', 15, 1, 3, '../img/recipes/6.jpg', '1. Wash and prepare assorted vegetables such as bell peppers, broccoli, and carrots.
+2. Heat vegetable oil in a wok or large skillet over medium-high heat.
+3. Add minced ginger and garlic to the hot oil and sauté for about 30 seconds until fragrant.
+4. Add the prepared vegetables to the wok and stir-fry for 3-4 minutes until they are crisp-tender.
+5. Drizzle soy sauce over the vegetables and continue to stir-fry for an additional 2 minutes.
+6. Adjust the seasoning as needed and ensure all vegetables are evenly coated in the sauce.
+7. Remove from heat and serve the vegetable stir-fry immediately. Optionally, garnish with chopped green onions or sesame seeds.', '2023-06-20', 180.7, 20.0, 8.9, 9.5, 3);
 
-INSERT INTO Recipe (id, name, preparation_time, difficulty, number_of_servings, image, preparation_method, submission_date, energy, carbohydrates, protein, fat, chef)
-VALUES (4, 'Vegetable Stir-Fry', 15, 1, 3, 'http://placekitten.com/200/301', 'Stir-fry assorted vegetables in a wok.', '2023-06-20', 180.7, 20.0, 8.9, 9.5, 3);
 
 -- Insert Statements for NutritionistApproval Table
 INSERT INTO NutritionistApproval (recipe_id, approval_date, nutritionist_id) VALUES (1, '2023-06-16', 4);
@@ -510,7 +550,22 @@ INSERT INTO Ingredient (id, name) VALUES
 (15, 'Heavy cream'),
 (16, 'Parmesan cheese'),
 (17, 'Unsalted butter'),
-(18, 'Nutmeg');
+(18, 'Nutmeg'),
+(19, 'Whole wheat flour'),
+(20, 'Baking powder'),
+(21, 'Low-fat milk'),
+(22, 'Greek yogurt'),
+(23, 'Honey'),
+(24, 'Coconut oil'),
+(25, 'Fresh berries'),
+(26, 'Chopped nuts'),
+(27, 'Granola'),
+(28, 'Salmon fillet'),
+(29, 'Bell peppers'),
+(30, 'Soy sauce'),
+(31, 'Brocolli');
+
+
 
 
 -- Insert Statements for Macronutrient Table
@@ -519,10 +574,38 @@ INSERT INTO Macronutrient (name, kcal_per_gram) VALUES ('Carbohydrate', 4.0);
 INSERT INTO Macronutrient (name, kcal_per_gram) VALUES ('Fat', 9.0);
 
 -- Insert Statements for IngredientMacronutrient Table
-INSERT INTO IngredientMacronutrient (quantity_g, ingredient_id, macronutrient) VALUES (10, 1, 'Carbohydrate');
-INSERT INTO IngredientMacronutrient (quantity_g, ingredient_id, macronutrient) VALUES (150, 2, 'Protein');
-INSERT INTO IngredientMacronutrient (quantity_g, ingredient_id, macronutrient) VALUES (20, 3, 'Fat');
-INSERT INTO IngredientMacronutrient (quantity_g, ingredient_id, macronutrient) VALUES (15, 3, 'Protein');
+INSERT INTO IngredientMacronutrient (quantity_g, ingredient_id, macronutrient) VALUES 
+(10, 1, 'Carbohydrate'), (2, 1, 'Protein'), (0.5, 1, 'Fat'),
+(0, 2, 'Carbohydrate'), (31, 2, 'Protein'), (3.6, 2, 'Fat'),
+(0, 3, 'Carbohydrate'), (0, 3, 'Protein'), (13.5, 3, 'Fat'),
+(0, 4, 'Carbohydrate'), (3, 4, 'Protein'), (6.3, 4, 'Fat'),
+(14, 5, 'Carbohydrate'), (1, 5, 'Protein'), (0.1, 5, 'Fat'),
+(12, 6, 'Carbohydrate'), (1, 6, 'Protein'), (0.3, 6, 'Fat'),
+(3, 7, 'Carbohydrate'), (0, 7, 'Protein'), (0.1, 7, 'Fat'),
+(15, 8, 'Carbohydrate'), (3, 8, 'Protein'), (0.5, 8, 'Fat'),
+(0, 9, 'Carbohydrate'), (20, 9, 'Protein'), (20, 9, 'Fat'),
+(30, 10, 'Carbohydrate'), (3, 10, 'Protein'), (0.5, 10, 'Fat'),
+(0, 11, 'Carbohydrate'), (0, 11, 'Protein'), (0, 11, 'Fat'),
+(3, 12, 'Carbohydrate'), (1, 12, 'Protein'), (0.1, 12, 'Fat'),
+(3, 13, 'Carbohydrate'), (0, 13, 'Protein'), (0, 13, 'Fat'),
+(75, 14, 'Carbohydrate'), (8, 14, 'Protein'), (1, 14, 'Fat'),
+(3, 15, 'Carbohydrate'), (2, 15, 'Protein'), (50, 15, 'Fat'),
+(2, 16, 'Carbohydrate'), (20, 16, 'Protein'), (15, 16, 'Fat'),
+(0, 17, 'Carbohydrate'), (0, 17, 'Protein'), (82, 17, 'Fat'),
+(2, 18, 'Carbohydrate'), (0, 18, 'Protein'), (1, 18, 'Fat'),
+(86, 19, 'Carbohydrate'), (16, 19, 'Protein'), (1.6, 19, 'Fat'),
+(48, 20, 'Carbohydrate'), (1, 20, 'Protein'), (0, 20, 'Fat'),
+(12, 21, 'Carbohydrate'), (8, 21, 'Protein'), (0.4, 21, 'Fat'),
+(6, 22, 'Carbohydrate'), (4, 22, 'Protein'), (10, 22, 'Fat'),
+(17, 23, 'Carbohydrate'), (0.1, 23, 'Protein'), (0, 23, 'Fat'),
+(0, 24, 'Carbohydrate'), (0, 24, 'Protein'), (14, 24, 'Fat'),
+(5, 25, 'Carbohydrate'), (0.5, 25, 'Protein'), (0.5, 25, 'Fat'),
+(3, 26, 'Carbohydrate'), (1, 26, 'Protein'), (6, 26, 'Fat'),
+(30, 27, 'Carbohydrate'), (3, 27, 'Protein'), (3, 27, 'Fat'),
+(0, 28, 'Carbohydrate'), (22, 28, 'Protein'), (13, 28, 'Fat'),
+(6, 29, 'Carbohydrate'), (1, 29, 'Protein'), (0.3, 29, 'Fat'),
+(3, 30, 'Carbohydrate'), (2, 30, 'Protein'), (0, 30, 'Fat'),
+(12, 31, 'Carbohydrate'), (3, 31, 'Protein'), (0.3, 31, 'Fat');
 
 -- Insert Statements for IngredientRecipe Table
 INSERT INTO IngredientRecipe VALUES 
@@ -544,10 +627,24 @@ INSERT INTO IngredientRecipe VALUES
 (200, 'ml', 15, 2),
 (50, 'grams', 16, 2),
 (50, 'grams', 17, 2),
-(10, 'grams', 18, 2);
+(10, 'grams', 18, 2),
 
-INSERT INTO IngredientRecipe (quantity, measurement_unit, ingredient_id, recipe_id) VALUES (300, 'grams', 2, 2);
-INSERT INTO IngredientRecipe (quantity, measurement_unit, ingredient_id, recipe_id) VALUES (150, 'grams', 3, 3);
+(150, 'grams', 19, 3),
+(1, 'teaspoon', 20, 3),
+(150, 'ml', 21, 3),
+(100, 'grams', 22, 3),
+(20, 'ml', 23, 3),
+(5, 'grams', 24, 3),
+(50, 'grams', 25, 3),
+(20, 'grams', 26, 3),
+(30, 'grams', 27, 3),
+
+(200, 'grams', 28, 4),
+(100, 'grams', 29, 4),
+(10, 'ml', 30, 4),
+(300, 'grams', 29, 5),
+(20, 'ml', 31, 5);
+
 
 -- Insert Statements for IngredientAllergyIntolerance Table
 INSERT INTO IngredientAllergyIntolerance (ingredient_id, allergy_intolerance) VALUES (1, 'Peanuts');

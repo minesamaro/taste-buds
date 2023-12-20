@@ -186,7 +186,7 @@ footer > div {
 .recipe-initial_info {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: 0.5fr 0.5fr 3fr 0.5fr;
+  grid-template-rows: 0.5fr 0.5fr auto 0.5fr;
   grid-column-gap: 0px;
   grid-row-gap: 0px;
   grid-template-areas: 
@@ -238,6 +238,7 @@ footer > div {
 
 .recipe-photo {
   grid-area: recipe-photo;
+
 }
 
 .recipe-photo img {

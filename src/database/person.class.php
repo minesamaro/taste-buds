@@ -348,7 +348,7 @@
             }
         }
 
-        public static function changePersonInfo( $firstName, $surname, int $user_id)
+        public static function changePersonInfo( $firstName, $surname, $profile_photo, int $user_id)
         {
             try {
 
@@ -360,9 +360,9 @@
                 # Change the information on the Person table in the Database
                 $stmt = $db->prepare(
                     'UPDATE Person
-                    SET first_name=?,surname=?
+                    SET first_name=?,surname=?, profile_photo=?
                     WHERE id = ?');
-                $stmt->execute(array($firstName, $surname,$user_id));
+                $stmt->execute(array($firstName, $surname,$profile_photo, $user_id));
                 $db->commit();
             } catch (Exception $e) {
                 $db->rollBack();
@@ -384,7 +384,7 @@
                     'UPDATE Person
                     SET password=?
                     WHERE id = ?');
-                $stmt->execute(array($password,$user_id));
+                $stmt->execute(array(hash('sha256',$password),$user_id));
                 $db->commit();
             } catch (Exception $e) {
                 $db->rollBack();

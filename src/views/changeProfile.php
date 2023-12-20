@@ -10,7 +10,8 @@ function changeProfile(){
     ?>
     <article class="center-content" id="profile">
         <div class="profile-photo">
-            <img src="profile.png" alt="Profle Picture" width=100px height=100px>
+        <img class="profile-profile_photo card-img" src="<?php echo $personUser->profile_photo; ?>"  alt="Profle Picture" width=100px height=100px>
+       
         </div>
         <div class="card profile-changepass">
             <a href="changePassword.php">Change Password</a>
@@ -66,6 +67,10 @@ function changeProfile(){
                         <label for="ideal_weight" id="label">Ideal Weight:</label>
                         <input type="number" placeholder="<?php echo $commonUser->ideal_weight?>" id="ideal_weight" name="ideal_weight" step="any" >
                     </div> 
+                    <div class="form-group">
+                        <label for="image">Upload Profile Photo:</label>
+                            <input type="file" name="profile_photo" id="profile_photo" accept="image/*">
+                        </div>
                     <button type="submit">Change Profile</button>
                 <?php
                     //
@@ -87,12 +92,16 @@ function changeProfile(){
                         <label for="graduation_date" id="label">Graduation date:</label>
                         <input type="date" placeholder="<?php echo $values[0] ?> " id="graduation_date" name="graduation_date" >
                     </div> 
+                    <div class="form-group">
+                        <label for="image">Upload Profile Photo:</label>
+                            <input type="file" name="profile_photo" id="profile_photo" accept="image/*">
+                        </div>
                     <button type="submit">Change Profile</button>
                     
                 <?php } elseif( Person::isNutritionist($user_id)){
                     $values= Nutritionist::getNutriFormation($user_id);
                     ?>
-                <div class="course">
+                    <div class="course">
                         <label for="course_name" id="label">Course name:</label>
                         <input type="text" placeholder="<?php echo $values[1] ?> " id="course_name" name="course_name" >
                     </div> 
@@ -106,6 +115,10 @@ function changeProfile(){
                         <label for="graduation_date" id="label">Graduation date:</label>
                         <input type="date" placeholder="<?php echo $values[0] ?> " id="graduation_date" name="graduation_date" >
                     </div> 
+                    <div class="form-group">
+                        <label for="image">Upload Profile Photo:</label>
+                            <input type="file" name="profile_photo" id="profile_photo" accept="image/*">
+                        </div>
                     <button type="submit">Submit changes</button>
                     
                 <?php 
