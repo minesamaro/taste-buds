@@ -488,6 +488,17 @@ VALUES ('2023-06-26', 5, 'Amazing recipe!', 9, 2);
 
 INSERT INTO RecipeRating (rating_date, rating_value, comment, user_id, recipe_id)
 VALUES ('2023-06-27', 3, 'Good, but could use more seasoning.', 10, 3);
+INSERT INTO RecipeRating (rating_date, rating_value, comment, user_id, recipe_id)
+VALUES ('2023-06-25', 4, 'This dish was absolutely delicious! The combination of flavors and textures was a delight to my taste buds. I especially loved the use of fresh herbs, which added a burst of freshness to every bite.', 8, 1);
+
+-- Insert Statement 2
+INSERT INTO RecipeRating (rating_date, rating_value, comment, user_id, recipe_id)
+VALUES ('2023-06-26', 5, 'I tried this recipe for a family dinner, and it was a huge hit! The flavors were well-balanced, and the presentation was stunning. The instructions were easy to follow, making the cooking process enjoyable. My family insisted that I add it to our regular dinner rotation.', 10, 3);
+
+-- Insert Statement 3
+INSERT INTO RecipeRating (rating_date, rating_value, comment, user_id, recipe_id)
+VALUES ('2023-06-27', 3, 'While this recipe was good, I felt it could use a bit more spice to suit my taste preferences. The cooking instructions were clear, and the final result was satisfying. I might experiment with additional seasonings next time. Overall, a decent dish.', 6, 5);
+
 
 -- Insert Statements for CookingTechnique Table
 INSERT INTO CookingTechnique (name)
@@ -619,7 +630,7 @@ INSERT INTO IngredientRecipe VALUES
 (200, 'ml', 13, 1),
 (300, 'grams', 2, 2),
 (10, 'ml', 3, 2),
-(200, 'grams', 14, 2),
+(400, 'grams', 14, 2),
 (200, 'ml', 15, 2),
 (50, 'grams', 16, 2),
 (50, 'grams', 17, 2),
@@ -639,8 +650,13 @@ INSERT INTO IngredientRecipe VALUES
 (100, 'grams', 29, 4),
 (10, 'ml', 30, 4),
 (300, 'grams', 29, 5),
-(20, 'ml', 31, 5);
-
+(20, 'ml', 31, 5),
+(15, 'ml', 3, 6),
+(100, 'grams', 5,6),
+(200, 'grams', 6,6),
+(50, 'grams', 29,6),
+(20, 'ml', 30,6),
+(200, 'ml', 31,6);
 
 -- Insert Statements for IngredientAllergyIntolerance Table
 INSERT INTO IngredientAllergyIntolerance (ingredient_id, allergy_intolerance) VALUES (1, 'Peanuts');
