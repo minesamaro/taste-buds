@@ -6,7 +6,7 @@ require_once(__DIR__ . '/../database/message.class.php');
 
 $db=Database::getDatabase();
 
-$user_id = $_SESSION['user_id'] ?? 1;
+$user_id = $_SESSION['user_id'];
 
 # turn inputs into variables
 if ($_SERVER["REQUEST_METHOD"] == "POST") {     # block will only be executed when the form is submitted using the POST method -> for security

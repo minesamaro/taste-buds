@@ -449,7 +449,7 @@ form.profile-info > div{
 .messages {
   display: grid;
   grid-template-columns: 0.8fr 1.2fr;
-  grid-template-rows: 0.2fr 1fr;
+  grid-template-rows: 0.2fr auto;
   width: 100%;
   max-width: 80%;
   margin: 0 auto;
