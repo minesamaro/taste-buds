@@ -191,12 +191,10 @@ class Recipe
       $stmt = $db->prepare($sql) ?? throw new Exception("Error Processing Request");
       $stmt->execute($params);
       $recipes = $stmt->fetchAll(); // this is returning less parametrs than it should
-      //var_dump($recipes);
       $recipesArray = array();
       if (isset($recipes)){
       foreach ($recipes as $recipe) {
-        //var_dump($recipe);
-        //echo "<br>";
+
         if (isset($recipe['recipe_id'])){
         array_push($recipesArray, new Recipe(
           intval($recipe['recipe_id']),

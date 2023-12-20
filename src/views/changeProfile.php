@@ -48,10 +48,6 @@ function changeProfile(){
                 </div>
 
                 <?php
-                //var_dump(Person::isCommonUser($user_id));
-                //var_dump($user_id);
-                //var_dump(Person::isChef($user_id));
-                //var_dump(Person::isNutritionist($user_id));
                 // if user is common_user show info, if user is chef or nutri, show formation
                 if (Person::isCommonUser($user_id)){
                     $commonUser = CommonUser::getCommonUserById($user_id);?>

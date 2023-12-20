@@ -39,7 +39,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $_SESSION['selectedOccupations'] = $selectedOccupations;
 
     
-    //var_dump($_SESSION['selectedPreferences']);
     header("Location: ../pages/peopleIndex.php");
     exit();
 
