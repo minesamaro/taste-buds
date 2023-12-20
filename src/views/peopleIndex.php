@@ -4,7 +4,7 @@ require_once(__DIR__ . '/../database/chef.class.php');
 require_once(__DIR__ . '/../database/commonUser.class.php');
 require_once(__DIR__ . '/../database/nutritionist.class.php');
 
-function peopleIndex($people) { 
+function peopleIndex($people, $page) { 
     ?>
 <div id="peopleIndex">
 <article class="content">
@@ -56,6 +56,15 @@ foreach ($people as $person) {
         </div>
         
 <?php } ?>
+<div class="page-number">
+    <?php if ($page > 1) { ?>
+        <a href="../pages/peopleIndex.php?page=<?= $page - 1; ?>"> &#x2190; </a>
+    <?php } ?>
+    <p> <?= $page; ?> / <?= Person::getNumberOfPages(); ?></p>
+    <?php if ($page < Person::getNumberOfPages()) { ?>
+        <a href="../pages/peopleIndex.php?page=<?= $page + 1; ?>"> &#x2192; </a>
+    <?php } ?>
+</div>
 </article>
 </div>
 

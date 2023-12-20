@@ -1,6 +1,6 @@
 <?php 
 require_once(__DIR__ . '/../database/recipe.class.php');
-function recipeIndex($recipes) { 
+function recipeIndex($recipes, $page) { 
     ?>
 <div item="recipeIndex">
 <article class="content">
@@ -50,6 +50,15 @@ foreach ($recipes as $recipe) {
             </div>
         </div>
 <?php } ?>
+<div class="page-number">
+    <?php if ($page > 1) { ?>
+        <a href="../pages/recipeIndex.php?page=<?= $page - 1; ?>"> &#x2190; </a>
+    <?php } ?>
+    <p> <?= $page; ?> / <?= Recipe::getNumberOfPages(); ?></p>
+    <?php if ($page < Recipe::getNumberOfPages()) { ?>
+        <a href="../pages/recipeIndex.php?page=<?= $page + 1; ?>"> &#x2192; </a>
+    <?php } ?>
+</div>
 </article>
 </div>
 
