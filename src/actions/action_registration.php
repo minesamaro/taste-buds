@@ -108,7 +108,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {     # block will only be executed wh
 
 
     $person=Person::addPerson($username, $first_name, $surname, $email, $password, $birth_date, $gender, $occupation, $profile_photo);
-    $_SESSION['user_id'] = $person->id;
+    $_SESSION['prov_user_id'] = $person->id;
     $_SESSION['username'] = $person->username;
     $_SESSION['occupation'] = $occupation;
 

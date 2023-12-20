@@ -3,9 +3,11 @@
   require_once(__DIR__ . '/../views/profile.php');
   require_once(__DIR__ . '/../views/header.php');
 
- //
-
-  head("Profile");
-  Profile();
-  footer();
+ if (!isset($_SESSION['user_id'])) {
+    header('Location: ../pages/login.php');
+  }else{  
+    head("Profile");
+    Profile();
+    footer();
+  }
 ?>

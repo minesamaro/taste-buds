@@ -12,7 +12,7 @@ function login(){ ?>
         $msg = null;
     } 
 
-    if (!isset($_SESSION['username'])) { ?>
+    if (!isset($_SESSION['user_id'])) { ?>
     <h2>Log in to your account</h2>
 
     

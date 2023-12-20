@@ -39,10 +39,10 @@ function head($title)
             <ul>
                 <?php
                     // Check if the username is set in the session
-                    if (isset($_SESSION['username'])) {
+                    if (isset($_SESSION['user_id'])) {
                         echo '<li><a href="../pages/messages.php">Messages</a></li>';
                     }
-                    if (isset($_SESSION['username'])) {
+                    if (isset($_SESSION['user_id'])) {
                         echo '<li><a href="../pages/profile.php">Profile</a></li>';
                     }
                     if (isset($_SESSION['user_id'])) {

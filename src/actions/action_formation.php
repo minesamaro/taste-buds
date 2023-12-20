@@ -7,12 +7,13 @@ require_once(__DIR__ . '/../database/connection.db.php');
 
 $db=Database::getDatabase();
 
-$user_id = $_SESSION['user_id'];
+$user_id = $_SESSION['prov_user_id'];
 $occupation = $_SESSION['occupation'];
 
 # turn inputs into variables
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_SESSION['user_id']) && isset($_SESSION['occupation'])) {     # block will only be executed when the form is submitted using the POST method -> for security
-    
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_SESSION['prov_user_id']) && isset($_SESSION['occupation'])) {     # block will only be executed when the form is submitted using the POST method -> for security
+    $_SESSION['user_id'] = $_SESSION['prov_user_id'];
+    unset($_SESSION['prov_user_id']);
     $course_name = $_POST['course_name'];
     $school_name = $_POST['school_name'];
     $graduation_date = $_POST['graduation_date'];
@@ -31,10 +32,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_SESSION['user_id']) && isset
 
         header('Location: ../index.php');
    
-
-   
-
-    
 }
 
 ?>

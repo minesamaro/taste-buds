@@ -6,18 +6,20 @@ session_start();
 
 $db = Database::getDatabase();
 
-# Ensure $_SESSION['user_id'] is available
-if (!isset($_SESSION['user_id'])) {
+# Ensure $_SESSION['prov_user_id'] is available
+if (!isset($_SESSION['prov_user_id'])) {
     // Handle the case where user_id or occupation is not set, maybe redirect to the registration page
     echo "Session data not set. Please go back to the registration page.";
     exit();
 }
 
-$user_id = $_SESSION['user_id'];
+$user_id = $_SESSION['prov_user_id'];
+
 
 # turn inputs into variables
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_SESSION['user_id'])) {     # block will only be executed when the form is submitted using the POST method -> for security
-    
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_SESSION['prov_user_id'])) {     # block will only be executed when the form is submitted using the POST method -> for security
+    $_SESSION['user_id'] = $_SESSION['prov_user_id'];
+    unset($_SESSION['prov_user_id']);
     $height = $_POST['height'];
     $current_weight = $_POST['current_weight'];
     $ideal_weight = $_POST['ideal_weight'];
