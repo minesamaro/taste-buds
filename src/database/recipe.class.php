@@ -132,13 +132,33 @@ class Recipe
           $order = 'submission_date'; 
         }
 
-        $sql = 'SELECT r.*, AVG(rr.rating_value) AS average_rating
-        FROM Recipe r
-        JOIN RecipeCategory rc ON r.id = rc.recipe_id
-        JOIN RecipeDietaryPref rdp ON r.id = rdp.recipe_id
-        JOIN RecipeCookingTechnique rct ON r.id = rct.recipe_id
-        JOIN RecipeRating rr ON r.id = rr.recipe_id
-        WHERE 1 ';
+        $sql = 'SELECT
+              r.id AS recipe_id,
+              r.name AS recipe_name,
+              r.preparation_time,
+              r.difficulty,
+              r.number_of_servings,
+              r.image,
+              r.preparation_method,
+              r.submission_date,
+              r.energy,
+              r.carbohydrates,
+              r.protein,
+              r.fat,
+              r.chef,
+              rc.category,
+              rdp.dietary_pref,
+              rct.cooking_technique,
+              AVG(rr.rating_value) AS average_rating
+          FROM
+              Recipe r
+          LEFT JOIN RecipeCategory rc ON r.id = rc.recipe_id
+          LEFT JOIN RecipeDietaryPref rdp ON r.id = rdp.recipe_id
+          LEFT JOIN RecipeCookingTechnique rct ON r.id = rct.recipe_id
+          LEFT JOIN RecipeRating rr ON r.id= rr.recipe_id
+          WHERE 1 ';
+
+        
 
         $params = array();
 
@@ -158,26 +178,26 @@ class Recipe
           $params = array_merge($params, $preferences);
       }
 
+      $sql .= 'GROUP BY r.id ';
       $sql .= 'ORDER BY ' . $order . ' DESC';
-      var_dump($sql);
-      var_dump($params);
 
       $db = Database::getDatabase();
       // Run the query with binded parameters
-      $stmt = $db->prepare($sql);
-      for ($i = 0; $i < count($params); $i++) {
-        $stmt->bindParam($i + 1, $params[$i]);
-      }
-      $stmt->execute();
+      $stmt = $db->prepare($sql) ?? throw new Exception("Error Processing Request");
+      $stmt->execute($params);
       $recipes = $stmt->fetchAll(); // this is returning less parametrs than it should
-      var_dump($recipes);
+      
+      
+      //var_dump($recipes);
       $recipesArray = array();
       if (isset($recipes)){
       foreach ($recipes as $recipe) {
-        if (isset($recipe['id'])){
+        //var_dump($recipe);
+        //echo "<br>";
+        if (isset($recipe['recipe_id'])){
         array_push($recipesArray, new Recipe(
-          intval($recipe['id']),
-          $recipe['name'],
+          intval($recipe['recipe_id']),
+          $recipe['recipe_name'],
           intval($recipe['preparation_time']),
           intval($recipe['difficulty']),
           intval($recipe['number_of_servings']),
