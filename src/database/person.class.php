@@ -384,7 +384,7 @@
                     'UPDATE Person
                     SET password=?
                     WHERE id = ?');
-                $stmt->execute(array(hash('sha256',$password),$user_id));
+                $stmt->execute(array($user_id, $password));
                 $db->commit();
             } catch (Exception $e) {
                 $db->rollBack();

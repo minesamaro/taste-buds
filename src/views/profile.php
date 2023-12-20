@@ -54,18 +54,18 @@ function Profile(){
             </div>
             
         <?php } 
-        if($isNutri){
+        elseif($isNutri){
             ?> 
             <div class="card profile-approvals" id="card-profile_approvals">>
                 <a href="profileApprovals.php?user_id=<?php echo $personUser->id ?>">Approved Recipes</a>
             </div>
             
         <?php } 
-        if($isCommon){
+        elseif($isCommon){
             ?> 
             <div class="card profile-ratings" id="card-profile_ratings">
             <a href="profileRatings.php?user_id=<?php echo $personUser->id ?>">Ratings</a>
-            </div>
+        </div>
         <?php } 
 
         if ($isUser){ ?>

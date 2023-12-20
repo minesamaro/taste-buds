@@ -93,15 +93,20 @@
             }
             return $userList;
         }
-        
-        static function getCommonUserById($user_id): CommonUser {
+        /**
+        * Retrieve common user information by user ID.
+        *
+        * @param int $userId User ID
+        * @return CommonUser CommonUser object with user details (id, height, current weight, ideal weight)
+        */
+        static function getCommonUserById($userId): CommonUser {
             $db = Database::getDatabase();
             $stmt = $db->prepare(
                 'SELECT id, height, current_weight, ideal_weight
                 FROM CommonUser
                 WHERE id = ?');
         
-            $stmt->execute(array($user_id));
+            $stmt->execute(array($userId));
         
             $commonUser = $stmt->fetch();
         
@@ -115,7 +120,16 @@
             );
 
         }
-        public static function changeUserInfo($user_id,$height,$currentWeight,$idealWeight){
+        /**
+        * Update common user information in the database.
+        *
+        * @param int $userId User ID
+        * @param int $height Height of the user
+        * @param float $currentWeight Current weight of the user
+        * @param float $idealWeight Ideal weight of the user
+        * @return void
+        */
+        public static function changeUserInfo($userId,$height,$currentWeight,$idealWeight){
        
             try {
 
@@ -129,7 +143,7 @@
                     'UPDATE CommonUser
                     SET height = ? , current_weight = ?,ideal_weight=?
                     WHERE id = ?');
-                $stmt->execute(array($height, $currentWeight,$idealWeight,$user_id));
+                $stmt->execute(array($height, $currentWeight,$idealWeight,$userId));
                 $db->commit();
             } catch (Exception $e) {
                 $db->rollBack();
@@ -137,7 +151,13 @@
             }
         
         }
-        public static function getPlansByUserId($user_id):array
+        /**
+        * Retrieve weekly plans associated with a common user by user ID.
+        *
+        * @param int $userId User ID
+        * @return array Array of WeeklyPlan objects
+        */
+        public static function getPlansByUserId($userId):array
         {
             try {
 
@@ -147,7 +167,7 @@
                     'SELECT id, creation_date, total_kcal, nutritionist_id
                     FROM WeeklyPlan
                     WHERE common_user_id = ?');
-                $stmt->execute(array($user_id));
+                $stmt->execute(array($userId));
      
             } catch (Exception $e) {
                 $db->rollBack();
@@ -162,7 +182,7 @@
                 $plan['creation_date'],
                 floatval($plan['total_kcal']),
                 intval($plan['nutritionist_id']),
-                $user_id
+                $userId
               )
               );
             }
