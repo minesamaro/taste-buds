@@ -28,7 +28,7 @@ function changeProfile(){
         <div class="card profile-update">
             <a href="changeProfile.php">Update Profile</a>
         </div>
-        <form  class="card profile-info" method="POST" action="../actions/actionChangeProfile.php" id="changeProfile">
+        <form  class="card profile-info" method="POST" action="../actions/actionChangeProfile.php" id="changeProfile" enctype="multipart/form-data">
             
 
             
