@@ -47,37 +47,6 @@ function Profile(){
        
         </div>
         <?php 
-        if ($isUser){ ?>
-            <div class="card profile-changepass">
-                <a href="changePassword.php">Change Password</a>
-            </div>
-            
-            <div class="card profile-update">
-                <a href="changeProfile.php">Update Profile</a>
-            </div>
-            <?php if ($isNutri){
-                ?> 
-                <div class="card profile-myplans">
-                    <a href="profilePlans.php">My plans</a>
-                </div>
-                <div class="card profile-approvals">
-                    <a href="profileApprovals.php?user_id=<?php echo $personUser->id ?>">Approvals</a>
-            </div>
-
-                
-            <?php }if ($isCommon){
-                ?> 
-                <div class="card profile-myplans">
-                    <a href="profilePlans.php">My plans</a>
-                </div>
-                <div class="card profile-ratings">
-                    <a href="profileRatings.php?user_id=<?php echo $personUser->id ?>">Ratings</a>
-            </div>
-            
-                
-            <?php } ?>
-        <?php }
-        else {
             if ($isChef){
                 ?>
                 <div class="card profile-recipes">
