@@ -4,6 +4,7 @@
     require_once(__DIR__ . '/../views/footer.php');
     require_once (__DIR__ . '/../views/recipeContent.php');
     require_once (__DIR__ . '/../views/recipeRatings.php');
+    require_once (__DIR__ . '/../views/recipeNutriApproval.php');
     require_once (__DIR__ . '/../database/recipe.class.php');
     require_once (__DIR__ . '/../database/person.class.php');
     require_once (__DIR__ . '/../database/nutritionist.class.php');
@@ -59,6 +60,8 @@
 
     head($recipe->name);
     recipeContent($msg, $recipe, $ingredients, $chef, $cooking_techniques, $food_categories, $dietary_prefs, $recipe_mean_rating, $nutritionist_approval, $nutritionist);
+    addNutriApproval($recipeId, $session_user);
+    deleteNutriApproval($recipeId, $session_user);
     recipeRatings($ratings, $all_ratings, $userId, $session_user, $recipeId);
     footer();
 ?> 

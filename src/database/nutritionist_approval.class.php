@@ -38,6 +38,24 @@ class NutritionistApproval
     }
 
     /**
+     * Delete a nutritionist approval
+     *
+     * @param int $recipe_id Recipe ID
+     * @param int $nutritionist_id Nutritionist ID
+     * @return bool True if the approval was deleted successfully, false otherwise
+     */
+    public static function deleteNutriApproval(int $recipe_id, int $nutritionist_id): bool {
+        $db = Database::getDatabase();
+        $stmt = $db->prepare(
+            'DELETE FROM NutritionistApproval
+            WHERE recipe_id = ? AND nutritionist_id = ?'
+        );
+
+        $stmt->execute([$recipe_id, $nutritionist_id]);
+        return $stmt->rowCount() > 0; // True if the row was deleted, false otherwise
+    }
+
+    /**
      * Get nutritionist approval for a recipe by ID
      *
      * @param int $recipeId Recipe ID
