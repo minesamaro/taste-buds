@@ -7,7 +7,7 @@ require_once(__DIR__ . '/../database/person.class.php');
 
 
 // Retrieve user ID from the session
-$userId = $_SESSION['user_id'] ?? 1;
+$userId = $_SESSION['user_id'];
 
 // Get a list of people with whom the logged-in person has messages
 $peopleWithMessages = Message::getPeopleWithMessages($userId);
