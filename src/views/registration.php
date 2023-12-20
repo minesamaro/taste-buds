@@ -93,9 +93,6 @@ function registration($msg){ ?>
                     </label>
 
 
-                   <!-- php: if (chef or nutritionist) ver como fazer --> 
-                   <!-- php: if (common user) ver como fazer --> 
-
              </fieldset>
         </div>
 

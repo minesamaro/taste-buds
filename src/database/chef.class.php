@@ -61,6 +61,7 @@
                 $db->rollBack();
                 echo "Error: " . $e->getMessage();
             }
+            
         } 
         /**
         * Get chef's formation by ID

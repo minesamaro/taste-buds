@@ -108,6 +108,26 @@
             return $new_person;
 
         }
+
+        public static function deletePerson($user_id) {
+            try {
+
+                #start transaction to the database
+                $db = Database::getDatabase();       
+            
+                $db->beginTransaction();
+
+                # delete from Person
+                $stmt = $db->prepare('DELETE FROM Person WHERE id = ?');
+                $stmt->execute(array($user_id));
+
+            } catch (Exception $e) {
+                $db->rollBack();
+                echo "Error: " . $e->getMessage();
+            }
+        }
+        
+                
         /**
          * Get a paginated list of all persons from the database.
          *

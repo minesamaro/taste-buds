@@ -25,6 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_SESSION['user_id'])) {     #
 
     CommonUser::addCommonUser($user_id, $height, $current_weight, $ideal_weight, $health_goal);
 
+
     header('Location: ../index.php');
 }
 ?>
