@@ -59,9 +59,7 @@
     // Display the page
 
     head($recipe->name);
-    recipeContent($msg, $recipe, $ingredients, $chef, $cooking_techniques, $food_categories, $dietary_prefs, $recipe_mean_rating, $nutritionist_approval, $nutritionist);
-    addNutriApproval($recipeId, $session_user);
-    deleteNutriApproval($recipeId, $session_user);
+    recipeContent($msg, $recipe, $ingredients, $chef, $cooking_techniques, $food_categories, $dietary_prefs, $recipe_mean_rating, $nutritionist_approval, $nutritionist, $session_user);
     recipeRatings($ratings, $all_ratings, $userId, $session_user, $recipeId);
     footer();
 ?> 

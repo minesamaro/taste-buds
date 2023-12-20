@@ -374,6 +374,12 @@ input[type="radio"]:checked + label #ingredient-input-hidden {
     padding-top: 0.5em;
 }
 
+.recipe-nutri_approval {
+    margin-top: 2em;
+    padding: 1.2em;
+    background-color: var(--background-color-light);
+}
+
 .recipe-ratings, .recipe-write_rating {
     margin-top: 3em;
 }
@@ -468,6 +474,7 @@ input[type="radio"]:checked + label #ingredient-input-hidden {
     font-family: 'Helvetica', serif;
     min-height: 10em;
 }
+
 
 
 /* Rating Stars*/
