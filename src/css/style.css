@@ -409,6 +409,7 @@ input[type="radio"]:checked + label #ingredient-input-hidden {
 .recipe-see_ratings {
     display: flex;
     flex-direction: column;
+    margin-top: 1em;
 }
 
 .recipe-see_ratings > .card  {
