@@ -49,32 +49,32 @@ function Profile(){
         <?php 
         if ($isChef){
             ?>
-            <div class="card profile-recipes">
-                <a href="profileRecipes.php?user_id=<?php echo $personUser->id ?>">All Recipes</a>
-            </div>
+        <div class="card profile-recipes">
+            <a href="profileRecipes.php?user_id=<?php echo $personUser->id ?>">All Recipes</a>
+        </div>
             
         <?php } 
-        if($isNutri){
+        elseif($isNutri){
             ?> 
-            <div class="card profile-approvals">
-                <a href="profileApprovals.php?user_id=<?php echo $personUser->id ?>">Approved Recipes</a>
-            </div>
+        <div class="card profile-approvals">
+            <a href="profileApprovals.php?user_id=<?php echo $personUser->id ?>">Approved Recipes</a>
+        </div>
             
         <?php } 
-        if($isCommon){
+        elseif($isCommon){
             ?> 
-            <div class="card profile-ratings">
+        <div class="card profile-ratings">
             <a href="profileRatings.php?user_id=<?php echo $personUser->id ?>">Ratings</a>
-            </div>
+        </div>
         <?php } 
 
         if ($isUser){ ?>
         <div class="card profile-update">
-                <a href="changeProfile.php">Update Profile</a>
-            </div>
-            <div class="card profile-changepass">
-                <a href="changePassword.php">Change Password</a>
-            </div>
+            <a href="changeProfile.php">Update Profile</a>
+        </div>
+        <div class="card profile-changepass">
+            <a href="changePassword.php">Change Password</a>
+        </div>
             <?php } ?>
 
         <div class="card profile-info">

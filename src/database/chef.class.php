@@ -62,8 +62,13 @@
                 echo "Error: " . $e->getMessage();
             }
         } 
-
-        public static function getChefFormation($user_id)
+        /**
+        * Get chef's formation by ID
+        *
+        * @param int $userId user ID
+        * @return array Array of formation values
+        */
+        public static function getChefFormation($userId)
         {
             $db = Database::getDatabase();
             $query = 'SELECT course_name, school_name, academic_level , graduation_date
@@ -71,10 +76,8 @@
             WHERE user_id = ?';
 
             $stmt = $db->prepare($query);
-    
-            //$stmt->execute([$user_id]);
-            $stmt->execute([$user_id]);
 
+            $stmt->execute([$userId]);
 
             while ($nutriform = $stmt->fetch()) {
                 $values = [$nutriform['graduation_date'],
@@ -111,6 +114,18 @@
                 
             return $chefList;
         }
+
+        /**
+        * Update profile data to the database
+        *
+        * @param int $user_id User ID
+        * @param string $course_name Name of the course
+        * @param string $school_name Name of the school
+        * @param string $academic_level Academic level achieved
+        * @param string $graduation_date Graduation date
+        * @return void
+        */
+
         public static function changeChefInfo($user_id,$course_name,$school_name,$academic_level,$graduation_date){
        
             try {
@@ -131,14 +146,7 @@
                 $db->rollBack();
                 echo "Error: " . $e->getMessage();
             }
-
-        
-        
-        
         }
-
-
-
         
     }
 

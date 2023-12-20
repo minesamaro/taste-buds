@@ -8,8 +8,9 @@ require_once(__DIR__ . '/../database/nutritionist.class.php');
 session_start();
 $user_id=$_SESSION['user_id'];
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_SESSION['user_id'])) {     # block will only be executed when the form is submitted using the POST method -> for security
-    $person = Person::getPersonById($user_id);
     // retrieve person data
+    $person = Person::getPersonById($user_id);
+    
     $firstName = $_POST["firstName"];
     if (empty($firstName)){  
         $firstName=$person->first_name;
@@ -18,7 +19,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_SESSION['user_id'])) {     #
     if (empty($surname)){  
         $surname=$person->surname;
     }
-    
 
     // Get image and upload it to the server
     if (isset($_FILES['profile_photo']) && $_FILES['profile_photo']['error'] == UPLOAD_ERR_OK) {
@@ -58,8 +58,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_SESSION['user_id'])) {     #
         if (empty($idealWeight)){  
             $idealWeight=$commonUser->ideal_weight;
         }
+        //change the updated information in the database
         CommonUser::changeUserInfo($user_id,$height,$currentWeight,$idealWeight);
-
 
     }elseif(Person::isChef($user_id)){
         $values= Chef::getChefFormation($user_id);
@@ -80,11 +80,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_SESSION['user_id'])) {     #
         if (empty($graduation_date)){  
             $graduation_date=$values[0];
         }
-        
-        
-
+        //change the updated information in the database
         Chef::changeChefInfo($user_id,$course_name,$school_name,$academic_level,$graduation_date);
-
 
     }elseif(Person::isNutritionist($user_id)){
         $values= Nutritionist::getNutriFormation($user_id);
@@ -105,12 +102,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_SESSION['user_id'])) {     #
         if (empty($graduation_date)){  
             $graduation_date=$values[0];
         }
-        
-        
-
+        //change the updated information in the database
         Nutritionist::changeNutriInfo($user_id,$course_name,$school_name,$academic_level,$graduation_date);
-
-
     }
     header("Location: ../pages/profile.php");
 }
