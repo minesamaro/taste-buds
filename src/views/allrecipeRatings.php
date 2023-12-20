@@ -4,8 +4,7 @@ require_once(__DIR__ . '/../database/person.class.php');
 
 function allrecipeRatings($all_ratings, $recipe) { ?>
 <main>
-    <body>
-
+    <article class="content">
     <h2><?php echo $recipe->name . ': All Ratings (' . count($all_ratings) . ')'; ?></h2>
 
         <section class="recipe-all_ratings">
@@ -39,5 +38,6 @@ function allrecipeRatings($all_ratings, $recipe) { ?>
                 </div>
             <?php endforeach; ?>
         </section>
+    </article>
     
 <?php } ?>
