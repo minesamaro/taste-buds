@@ -349,8 +349,6 @@ input[type="radio"]:checked + label #ingredient-input-hidden {
 
 .nutrient-item {
     max-width: 100%;
-    margin-inline-start: 2em;
-    margin-inline-end: 2em;
 }
 
 #recipe-energy {
@@ -372,6 +370,12 @@ input[type="radio"]:checked + label #ingredient-input-hidden {
     border-right: 2px groove var(--primary-color);
     border-top: 1px groove var(--primary-color);
     padding-top: 0.5em;
+}
+
+.recipe-nutri_approval {
+    margin-top: 2em;
+    padding: 1.2em;
+    background-color: var(--background-color-light);
 }
 
 .recipe-ratings, .recipe-write_rating {
@@ -468,6 +472,7 @@ input[type="radio"]:checked + label #ingredient-input-hidden {
     font-family: 'Helvetica', serif;
     min-height: 10em;
 }
+
 
 
 /* Rating Stars*/
