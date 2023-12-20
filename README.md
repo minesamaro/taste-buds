@@ -50,18 +50,18 @@ pasword: 12345678
 | Page                     | Permission                                                    | Done |
 | ------------------------ | ------------------------------------------------------------- | ---- |
 | 404                      | Everyone                                                      | &check; |
-| Profile                  | Session User                                                  |   |
-| User Profile             | Logged In User                                                |      |
-| Chef Profile             | Logged In User                                                |      |
-| Nutritionist Profile     | Logged In User                                                |      |
+| Profile                  | Session User                                                  |  &check; |
+| User Profile             | Logged In User                                                |  &check;    |
+| Chef Profile             | Logged In User                                                |   &check;   |
+| Nutritionist Profile     | Logged In User                                                |   &check;   |
 | Recipe Index             | Everyone                                                      | &check;  |
 | Recipe Description       | Everyone                                                      | &check; |
 | Add Plan                 | Nutritionist                                                  | &check;  |
 | Add Plan Recipe          | Nutritionist                                                  | &check; |
 | Add Recipe               | Chef                                                          | &check;  |
 | All Recipe Ratings       | Everyone                                                      | &check;  |
-| Change Password          | Own User                                                      |   |
-| Change Profile           | Own User                                                      |  |
+| Change Password          | Own User                                                      |  &check; |
+| Change Profile           | Own User                                                      | &check; |
 | Register Common User     | Not logged in user that selected Common User on Registration   | &check;  |
 | Formation                | Not logged in user that selected Chef or Nutritionist on Registration | &check;  |
 | Login                    | Not logged in user                                            | &check;  |
