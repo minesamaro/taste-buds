@@ -34,6 +34,9 @@ function showPlanState($plan){ ?>
                         <form action="../actions/actionDeletePlanRecipe.php" method="post">
                             <input type="hidden" name="planId" value="<?php echo $plan->id ?>">
                             <input type="hidden" name="recipeId" value="<?php echo $planRecipe->recipeId ?>">
+                            <input type="hidden" name="dayWeek" value="<?php echo $planRecipe->dayWeek ?>">
+                            <input type="hidden" name="timeMeal" value="<?php echo $planRecipe->timeMeal ?>">
+                            <input type="hidden" name="portion" value="<?php echo $planRecipe->portion ?>">
                             <button type="submit" class="deleteBt">Delete</button>
                         </form>
                     </h5>

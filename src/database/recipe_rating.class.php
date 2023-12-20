@@ -243,19 +243,13 @@ class RecipeRating
         $stmt = $db->prepare(
             'INSERT INTO RecipeRating 
             (rating_value, comment, user_id, recipe_id)
-            VALUES (:rating_value, :comment, :user_id, :recipe_id)'
+            VALUES (?,?,?,?)'
         );
         // without the bindParams
-        $stmt->execute(array($ratingData['rating_value'], $ratingData['comment'], $ratingData['user_id'], $ratingData['recipe_id']));
-    
-        // Bind parameters
-        $stmt->bindParam(':rating_value', $ratingData['rating_value'], PDO::PARAM_INT);
-        $stmt->bindParam(':comment', $ratingData['comment'], PDO::PARAM_STR);
-        $stmt->bindParam(':user_id', $ratingData['user_id'], PDO::PARAM_INT);
-        $stmt->bindParam(':recipe_id', $ratingData['recipe_id'], PDO::PARAM_INT);
+        $result=$stmt->execute(array($ratingData['rating_value'], $ratingData['comment'], $ratingData['user_id'], $ratingData['recipe_id']));
     
         // Execute the query
-        return $stmt->execute();
+        return $result;
     }
 
     /**
@@ -275,6 +269,19 @@ class RecipeRating
         $count = $stmt->fetchColumn();
 
         return $count > 0;
+    }
+
+    /**
+     * Delete a rating from a user for a specific recipe
+     * 
+     * @param int $userId
+     * @param int $recipeId
+     */
+    static function deleteRating(int $userId, int $recipeId): void
+    {
+        $db = Database::getDatabase();
+        $stmt = $db->prepare('DELETE FROM RecipeRating WHERE user_id = ? AND recipe_id = ?');
+        $stmt->execute(array($userId, $recipeId));
     }
 }
 

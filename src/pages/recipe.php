@@ -31,6 +31,8 @@
     // Will be used later for checking whether user (if logged in) has commented
     if ($userId) {
         $session_user = Person::getPersonById($userId);
+    } else {
+        $session_user = 0;
     }
 
     // Get recipe details
@@ -44,6 +46,9 @@
     $nutritionist_approval = NutritionistApproval::getNutritionistApprovalForRecipe($recipeId);
     if($nutritionist_approval) {
         $nutritionist=Person::getPersonById($nutritionist_approval->nutritionist_id);
+    }
+    else {
+        $nutritionist = null;
     }
 
     // Get most recent ratings and count all the ratings for the specific recipe

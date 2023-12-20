@@ -33,7 +33,7 @@ function Profile(){
     ?>
     <article class="center-content" id="profile">
         <div class="profile-photo">
-            <img src="<?php echo $personUser->profile_photo; ?>"  alt="Profle Picture" width=100px height=100px>
+            <img class="profile-profile_photo" src="<?php echo $personUser->profile_photo; ?>"  alt="Profle Picture" width=100px height=100px>
        
         </div>
         <?php 

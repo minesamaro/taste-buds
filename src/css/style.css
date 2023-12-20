@@ -182,8 +182,15 @@ input[type="radio"]:checked + label .card, #planRecipeOptions{
     color: var(--contrast-color);
 }
 
-.card-header *, .card-body * {
+.card-header *, .card-body *, .card-side * {
     margin: 0.4em;
+}
+
+.card-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
 }
 
 .card-small {
@@ -375,6 +382,14 @@ input[type="radio"]:checked + label #ingredient-input-hidden {
     display: flex;
     flex-direction: column;
 }
+
+.rating-delete {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+}
+
 .rating-top, .rating-bottom {
     display: flex;
     flex-direction: row;
@@ -396,6 +411,7 @@ input[type="radio"]:checked + label #ingredient-input-hidden {
     margin: 0;
 }
 
+
 #rating-name:hover {
     font-style: italic;
 }
@@ -403,7 +419,17 @@ input[type="radio"]:checked + label #ingredient-input-hidden {
 .rating-bottom{
     font-size: 0.9em;
     font-style: italic;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
+
+.rating-profile_photo {
+    max-width: 50px;
+    max-height: 50px;
+    border-radius: 50%;
+}
+    
 
 .rating-comment {
     margin-top: 1em;
@@ -950,3 +976,15 @@ html::-webkit-scrollbar-thumb {
  #label{
     font-weight: bold;
  }
+
+ .profile-profile_photo {
+    max-width: 100px;
+    max-height: 100px;
+    border-radius: 50%;
+}
+
+
+/* Messages */
+.message-bold {
+    font-weight: bold;
+}

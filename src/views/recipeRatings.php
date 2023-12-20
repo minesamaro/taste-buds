@@ -14,12 +14,14 @@ function recipeRatings($ratings, $all_ratings, $userId, $session_user, $recipeId
             <?php if($userId) { ?>
 
                 <div class="recipe-see_ratings">
-                                
-                <?php foreach ($ratings as $rt) { 
+                                    
+                <?php 
+                if ($ratings) {                
+                    foreach ($ratings as $rt) { 
                     $rating_user=Person::getPersonById($rt->userId); ?>
                     <div class="card">
-                        <!-- meter aqui profile photo -->
                         <div class="rating-top">
+
                             <a id="rating-name" href="../pages/profile.php?person_id=<?php echo $rating_user->id; ?>"><? echo $rating_user->first_name . " " . $rating_user->surname; ?></a>
                             <div class="rating-stars">
                                 <?php for ($i = 0; $i < $rt->ratingValue; $i++) { ?>
@@ -31,15 +33,29 @@ function recipeRatings($ratings, $all_ratings, $userId, $session_user, $recipeId
                             </div>
                         </div>
                         <div class="rating-bottom">
+                            <div>
+                            <img class="rating-profile_photo" src="<?php echo $rating_user->profile_photo; ?>" alt="<?php echo $rating_user->username; ?>'s profile photo">
                             <span class="recipe-rating_username"> <? echo $rating_user->username; ?> </span>
+                            </div>
+                            <div>
                             <span class="recipe-rating_date"> <? echo date("d-m-Y", strtotime($rt->ratingDate)); ?> </span>
+                            </div>
                         </div>
                         <div class="rating-comment">
                             <span class="recipe-rating_comment"> <? echo $rt->comment; ?> </span>
                         </div>
+                        <?php if ($session_user->id == $rating_user->id) { ?>
+                        <div class="rating-delete">
+                            <form action="../actions/actionDeleteRecipeRating.php" method="post">
+                                <input type="hidden" name="recipeId" value="<?php echo $recipeId; ?>">
+                                <input type="hidden" name="ratingId" value="<?php echo $rt->userId; ?>">
+                                <button type="submit" class="deleteBt">Delete</button>
+                            </form>
+                        </div>
+                        <?php } ?>
                     </div>
                 <? } 
-                if ($ratings) {?>
+                ?>
                 <a id="recipe_all_ratings" href="../pages/allRecipeRatings.php"><button>See all ratings</button></a> 
                 <?php }
 
@@ -106,7 +122,7 @@ function recipeRatings($ratings, $all_ratings, $userId, $session_user, $recipeId
                     </div>
                 </div>
             <?php }} else {
-                echo "Log in to rate this recipe";
+                echo "Log in to see the ratings of this recipe";
             }
 
            /*  else { ?>

@@ -47,9 +47,18 @@
                     <div class="card-header">
                         <h4><?= $recipe->name ?></h4>
                     </div>
-                    <div class="card-body">
-                        <h6><?= $recipe->preparationTime ?> mins</h6>
-
+                    <div class='card-content'>
+                        <div class="card-body">
+                            <h6><?= $recipe->preparationTime ?> mins</h6>
+                            <h6>Difficulty: <?= $recipe->difficulty ?> / 5</h6>
+                            <h6><?= $recipe->numberOfServings ?> Servings </h6>
+                        </div>
+                        <div class="card-side">
+                            <h6>Total kcal: <?= $recipe->energy ?></h6>
+                            <h6>Protein: <?= $recipe->protein ?> g</h6>
+                            <h6>Carbohydrates: <?= $recipe->carbohydrate ?> g</h6>
+                            <h6>Fat: <?= $recipe->fat ?> g</h6>
+                        </div>
                     </div>
                 </div>
             </div>

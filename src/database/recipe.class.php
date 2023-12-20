@@ -415,6 +415,49 @@ class Recipe
   }
 
 
+  /**
+   * Search in the recipes table for recipes that match the search query either on chef or nutri or technique or category or preference
+   */
+  public static function searchRecipes($searchQuery): array
+        {
+          $searchQuery = '%' . $searchQuery . '%';  
+          $recipeList = array();
+            $db = Database::getDatabase();
+
+            // Use prepared statements to prevent SQL injection
+            // Make the like use the % % wildcard
+            $stmt = $db->prepare(
+                'SELECT DISTINCT r.*
+                FROM Recipe r
+                JOIN RecipeCategory rc ON r.id = rc.recipe_id
+                JOIN RecipeDietaryPref rdp ON r.id = rdp.recipe_id
+                JOIN RecipeCookingTechnique rct ON r.id = rct.recipe_id
+                WHERE r.name LIKE ? OR r.preparation_method LIKE ? OR rc.category LIKE ?  OR rdp.dietary_pref LIKE ? OR rct.cooking_technique LIKE ?'
+            );
+            $stmt->execute(array($searchQuery));
+
+            // Fetch the results
+            foreach ($stmt->fetchAll() as $recipe) {
+                array_push($recipeList, new Recipe(
+                    intval($recipe['id']),
+                    $recipe['name'],
+                    intval($recipe['preparation_time']),
+                    intval($recipe['difficulty']),
+                    intval($recipe['number_of_servings']),
+                    $recipe['image'],
+                    $recipe['preparation_method'],
+                    $recipe['submission_date'],
+                    floatval($recipe['energy']),
+                    floatval($recipe['protein']),
+                    floatval($recipe['fat']),
+                    floatval($recipe['carbohydrates']),
+                    intval($recipe['chef'])
+                ));
+            }
+
+            return $recipeList;
+        }
+
 }
 
 ?>

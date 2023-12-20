@@ -59,7 +59,7 @@ function recipeContent($msg, $recipe, $ingredients, $chef, $cooking_techniques, 
             <?php
                 if ($nutritionist_approval) {
                     $nutritionist_profile_link = '../pages/profile.php?person_id=' . $nutritionist->id;
-                    echo 'Verified by <a href="' . $nutritionist_profile_link . '">  Nutritionist '.  $nutritionist->first_name. ' ' . $nutritionist->surname . '</a>';
+                    echo 'Verified by: <a href="' . $nutritionist_profile_link . '"> Nutritionist ' . $nutritionist->first_name . ' ' . $nutritionist->surname . '</a>';
                 } else {
                     echo 'Not Nutritionist Verified';
                 }

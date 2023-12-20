@@ -24,8 +24,12 @@
             $this->email = $email;
             $this->password = $password;
             $this->birth_date = $birth_date;
-            $this->gender = $gender;    
-            $this->profile_photo = $profile_photo;        
+            $this->gender = $gender;   
+            if ($profile_photo == null) {
+                $this->profile_photo = '/../img/users/profile.png';
+            } else {
+            $this->profile_photo = "/" . $profile_photo;
+            }
         }
         public function getId() {
             return $this->id;
