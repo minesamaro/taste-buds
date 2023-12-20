@@ -446,7 +446,7 @@ form.profile-info > div{
 .messages {
   display: grid;
   grid-template-columns: 0.8fr 1.2fr;
-  grid-template-rows: auto auto auto;
+  grid-template-rows: 0.2fr 1fr;
   width: 100%;
   max-width: 80%;
   margin: 0 auto;
@@ -461,11 +461,6 @@ form.profile-info > div{
   grid-column: 1;
   grid-row: 2;
   overflow-y: auto;
-}
-
-#card-small_messages {
-  width: 100%;
-  height: 50%;
 }
 
 #messages-conversation-header  {

@@ -1038,15 +1038,46 @@ html::-webkit-scrollbar-thumb {
     font-weight: bold;
 }
 
+#messages-main_title {
+    font-size: 2em;
+    font-weight: bold;
+    color: var(--primary-color);
+    background-color: var(--background-color-light);
+    padding: 0.5em;
+}
+
+#message-person_name_card {
+    color: var(--background-color-dark);
+    font-size: 1.2em;
+}
+
+#messages-people_cards {
+    width: 100%;
+}
+
 .message-profile_photo {
-    max-width: 150px;
-    max-height: 150px;
+    max-width: 75px;
+    max-height: 75px;
     border-radius: 50%;
+}
+
+#messages-peopleWithMessages {
+    padding-right:1em;
+}
+
+
+#messages-conversation {
+    border-left: 2px dashed var(--contrast-color);
+    padding-left: 0.5em;
+    margin-top: 2em;
 }
 
 #messages-conversation_person_name {
     color: var(--contrast-color);
     font-size: 1.5em;
+    padding: 1.2em;
+    padding-bottom: 0;
+    margin-bottom: 0.6em;
 }
 
 #messages-conversation_content {
@@ -1097,3 +1128,9 @@ html::-webkit-scrollbar-thumb {
     font-style: italic; /* makes the text italic */
     clear: both; /* ensures this element clears previous floats */
 }
+
+#message-write_message {
+    width:95%;
+    margin: 0 auto;
+}
+

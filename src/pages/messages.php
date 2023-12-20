@@ -47,7 +47,7 @@ if ($selectedPersonId) {
     <!-- Left side: List of people with whom the logged-in person has messages -->
     <div id="messages-peopleWithMessages">
         <h2 id="messages-main_title">Messages</h2>
-        <ul id="messages-people_cards">
+        <div id="messages-people_cards">
             <?php   
                 if(!empty($peopleWithMessages)) {
                     foreach ($peopleWithMessages as $person) { 
@@ -60,7 +60,7 @@ if ($selectedPersonId) {
                         <div class="card-small" id="card-small_messages">
                             <div class="card-header" id="card-header_messages">
                                 <img class="message-profile_photo" src="<?php echo $profile_pic; ?>" alt="<?php echo $person->username; ?>'s profile photo">
-                                <a class="<?php echo $class; ?>" href="?personId=<?php echo $person->id; ?>">
+                                <a class="<?php echo $class; ?>" id="message-person_name_card" href="?personId=<?php echo $person->id; ?>">
                                     <?php echo $person->first_name . " " .  $person->surname; ?>
                                 </a>
                             </div>
@@ -70,7 +70,7 @@ if ($selectedPersonId) {
                 } else { ?>
                     <p>No messages yet.</p>
             <?php } ?>
-        </ul>
+                </div>
     </div>
 
     <!-- Right side: Display messages for the selected person -->
@@ -99,7 +99,6 @@ if ($selectedPersonId) {
                             }
 
                             if ($message->sender_id != $last_message_sender) {
-                                $last_message_sender = $message->sender_id;
                                 $show_sender = true;
                             } else {
                                 $show_sender = false;
@@ -119,9 +118,9 @@ if ($selectedPersonId) {
                         
                             <div class="<?php echo $class;?>">
                             
-                            <?php if ($show_sender) { ?>
+                            <?php if ($show_sender && $last_message_sender) { ?>
                                 <small><?php echo $sender_FullName; ?></small>
-                                <?php } ?>
+                                <?php } $last_message_sender = $message->sender_id;?>
                             <br>
                                 <div class="message-content_individual_message">
                                 <?php echo $message->content; ?>
@@ -153,11 +152,11 @@ if ($selectedPersonId) {
             <?php } ?>
 
             <!-- Form to write and send a message to the selected person -->
-            <form action="../actions/action_sendMessage.php" method="post">
+            <form id="message-write_message" action="../actions/action_sendMessage.php" method="post">
 
                 <input type="hidden" name="receiver_id" value="<?php echo $selectedPersonId; ?>">
                 <label for="message_content">Write a message:</label>
-                <textarea name="message_content" id="message_content" rows="3" required></textarea>
+                <textarea name="message_content" id="message-write_textarea" rows="3" required></textarea>
                 <br>
                 <button type="submit">Send</button>
 
