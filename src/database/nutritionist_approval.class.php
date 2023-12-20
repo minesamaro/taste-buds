@@ -138,8 +138,6 @@ class NutritionistApproval
             );
         
         }
-
-
         return $approvalsArray; 
     }
 }

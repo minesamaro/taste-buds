@@ -3,23 +3,11 @@
 
     class Chef {
         public $id;
-        /* public $course_name;
-        public $school_name;
-        public $graduation_date;
-        public $academic_level; */
-
-
+        
         /* Constructor */
         public function __construct($id) {
             $this->id = $id;
-            /* $this->course_name;
-            $this->$school_name;
-            $this->$graduation_date;
-            $this->$academic_level; */
 
-        }
-        public function getId() {
-            return $this->id;
         }
 
         static function addChef($user_id, $course_name, $school_name, $graduation_date, $academic_level) {

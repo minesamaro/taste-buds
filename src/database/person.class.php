@@ -32,34 +32,7 @@
             $this->profile_photo = "/" . $profile_photo;
             }
         }
-        public function getId() {
-            return $this->id;
-        }
-        public function getUsername() {
-            return $this->username;
-        }
-        public function getFirstName() {
-            return $this->first_name;
-        }
-        public function getSurname() {
-            return $this->surname;
-        }
-        public function getEmail() {
-            return $this->email;
-        }
-        public function getPassword() {
-            return $this->password;
-        }
-        public function getBirthDate() {
-            return $this->birth_date;
-        }
-        public function getGender() {
-            return $this->gender;
-        }
-
-        public function getProfilePhoto() {
-            return $this->profile_photo;
-        }
+        
         /**
          * Add a new person to the database.
          *

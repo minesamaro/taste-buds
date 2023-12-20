@@ -21,20 +21,6 @@
             $this->person =parent::getPersonById($id);
         }
 
-        public function getId() {
-            return $this->id;
-        }
-        public function getHeight() {
-            return $this->height;
-        }
-        public function getCurrentWeight() {
-            return $this->current_weight;
-        }
-        public function getIdealWeight() {
-            return $this->ideal_weight;
-        }
-
-        # nao sei se isto deva ficar aqui ou no ficheiro das funcoes (o msm para as outras classes)
         static function addCommonUser($user_id, $height, $currentWeight, $idealWeight, $healthGoal) {
             $db = Database::getDatabase();
             
@@ -190,5 +176,4 @@
             
         }
     }
-
     ?>

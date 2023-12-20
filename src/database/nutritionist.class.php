@@ -8,9 +8,7 @@
         public function __construct($id) {
             $this->id = $id;          
         }
-        public function getId() {
-            return $this->id;
-        }
+        
         /**
         * Add a nutritionist to the database along with associated formation details.
         *
