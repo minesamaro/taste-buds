@@ -25,6 +25,7 @@ class Recipe
   public float $fat;
   public float $carbohydrate;
   public int $idChef;
+  public static int $recipesPerPage = 2;
 
   public function __construct(int $id, string $name, int $preparationTime, int $difficulty, int $numberOfServings, string $image, string $preparationMethod, string $submissionDate, float $energy, float $protein, float $fat, float $carbohydrate, int $idChef)
   {
@@ -78,14 +79,17 @@ class Recipe
     );
   }
 
-  static function getAllRecipes(): array
+  static function getAllRecipes(int $page): array
   {
     $db = Database::getDatabase();
     $stmt = $db->prepare(
       'SELECT id, name, preparation_time, difficulty, number_of_servings, image, preparation_method, submission_date, energy, protein, fat, carbohydrates, chef
-        FROM Recipe'
+        FROM Recipe
+        ORDER BY submission_date DESC
+        LIMIT ?
+        OFFSET ?'
     );
-    $stmt->execute();
+    $stmt->execute(array(self::$recipesPerPage, ($page - 1) * self::$recipesPerPage));
     $recipes = $stmt->fetchAll();
     $recipesArray = array();
     foreach ($recipes as $recipe) {
@@ -475,6 +479,20 @@ class Recipe
             }
 
             return $recipeList;
+        }
+
+        /**
+         * Get the number of pages for the recipes
+         */
+        public static function getNumberOfPages(): int {
+            $db = Database::getDatabase();
+            $stmt = $db->prepare(
+                'SELECT COUNT(*) AS number_of_recipes
+                FROM Recipe'
+            );
+            $stmt->execute();
+            $result = $stmt->fetch();
+            return intval(ceil($result['number_of_recipes'] / self::$recipesPerPage));
         }
 
         

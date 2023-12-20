@@ -14,6 +14,7 @@
         public $birth_date;
         public $gender;
         public $profile_photo;
+        public static $people_per_page = 4;
 
         /* Constructor */
         public function __construct($id, $username, $first_name, $surname, $email, $password, $birth_date, $gender, $profile_photo) {
@@ -96,14 +97,17 @@
 
         }
 
-        static function getAllPersons() {
+        static function getAllPersons(int $page) : array {
             $db = Database::getDatabase();
 
             $persons = array();
             $stmt = $db->prepare(
                 'SELECT *
-                FROM Person');
-            $stmt->execute();
+                FROM Person
+                ORDER BY id
+                LIMIT ?
+                OFFSET ?');
+            $stmt->execute(array( self::$people_per_page, ($page - 1) * self::$people_per_page));
 
             $personsData = $stmt->fetchAll();
             foreach ($personsData as $p) {
@@ -388,6 +392,19 @@
             }
         }
 
+        /**
+         * Get the number of pages needed to display all the people
+         */
+        static function getNumberOfPages(): int {
+            $db = Database::getDatabase();
+            $stmt = $db->prepare(
+                'SELECT COUNT(*) AS count
+                FROM Person'
+            );
+            $stmt->execute();
+            $result = $stmt->fetch();
+            return intval(ceil($result['count'] / Person::$people_per_page));
+        }
 
     }
 
