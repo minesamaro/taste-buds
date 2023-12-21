@@ -294,6 +294,15 @@ INSERT INTO Person (username, first_name, surname, email, password, birth_date, 
 INSERT INTO Messages (id, sending_date, content, is_read, sender_id, receiver_id) VALUES (1, '2023-01-15 08:30:00', 'Just tried a new recipe for pasta carbonara - it was delicious!', 0, 2, 3);
 INSERT INTO Messages (id, sending_date, content, is_read, sender_id, receiver_id)VALUES (2, '2023-02-20 14:45:00', 'Thank you great sushi recipe', 1, 4, 1);
 INSERT INTO Messages (id, sending_date, content, is_read, sender_id, receiver_id) VALUES (3, '2023-03-10 18:20:00', 'Thinking of making homemade pizza tonight. Any toppings suggestions?', 0, 1, 5);
+INSERT INTO Messages (id, sending_date, content, is_read, sender_id, receiver_id) VALUES (4, '2023-03-10 18:20:00', 'Hello! I am looking for a plan that will help me improve my overall fitness and health. Can you help me?', 1, 9, 4);
+INSERT INTO Messages (id, sending_date, content, is_read, sender_id, receiver_id) VALUES (5, '2023-03-11 17:34:00', 'Sure! Do you have any allergy or dietary preference?', 1, 4, 9);
+INSERT INTO Messages (id, sending_date, content, is_read, sender_id, receiver_id) VALUES (6, '2023-03-11 18:10:00', 'No, I can eat anything. I am only allergic to peanuts.', 1, 9, 4);
+INSERT INTO Messages (id, sending_date, content, is_read, sender_id, receiver_id) VALUES (7, '2023-03-11 18:11:00', 'I also like a treat or a comfort meal once in a while.', 1, 9, 4);
+INSERT INTO Messages (id, sending_date, content, is_read, sender_id, receiver_id) VALUES (8, '2023-03-12 10:53:00', 'I got you! I will make you a plan. Please give me some feedback afterwards.', 1, 4, 9);
+INSERT INTO Messages (id, sending_date, content, is_read, sender_id, receiver_id) VALUES (9, '2023-03-12 12:30:00', 'Sure! Thank you for your help.', 0, 9, 4);
+INSERT INTO Messages (id, sending_date, content, is_read, sender_id, receiver_id) VALUES (10, '2023-03-12 12:32:00', 'Looking forward to starting my new plan!', 0, 9, 4);
+INSERT INTO Messages (id, sending_date, content, is_read, sender_id, receiver_id) VALUES (11, '2023-12-12 12:32:00', 'You are welcome!', 1, 1, 4);
+
 
 -- Chefs
 INSERT INTO Chef VALUES (1);
