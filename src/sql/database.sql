@@ -307,7 +307,10 @@ INSERT INTO Nutritionist VALUES (5);
 -- Weekly Plan
 INSERT INTO WeeklyPlan (id, creation_date, total_kcal, nutritionist_id, common_user_id) VALUES (1, '2023-01-15', 2123, 4, 6);
 INSERT INTO WeeklyPlan (id, creation_date, total_kcal, nutritionist_id, common_user_id) VALUES (2, '2023-01-20', 1800, 4, 7);
-INSERT INTO WeeklyPlan (id, creation_date, total_kcal, nutritionist_id, common_user_id) VALUES (3, '2023-01-25', 2200,5, 8);
+INSERT INTO WeeklyPlan (id, creation_date, total_kcal, nutritionist_id, common_user_id) VALUES 
+(3, '2023-01-25', 2200,5, 8),
+(4, '2023-01-25', 2500,4, 9);
+
 
 -- Plan Recipe
 INSERT INTO PlanRecipe (day_week, portion, time_meal, plan_id, recipe_id) VALUES ('Monday', 1.0, 'Breakfast', 1, 1);
@@ -666,4 +669,43 @@ INSERT INTO IngredientAllergyIntolerance (ingredient_id, allergy_intolerance) VA
 -- Insert Statements for PlanRecipe Table
 INSERT INTO PlanRecipe (day_week, portion, time_meal, plan_id, recipe_id) VALUES ('Monday', 1.5, 'Lunch', 1, 1);
 INSERT INTO PlanRecipe (day_week, portion, time_meal, plan_id, recipe_id) VALUES ('Wednesday', 2.0, 'Dinner', 2, 2);
-INSERT INTO PlanRecipe (day_week, portion, time_meal, plan_id, recipe_id) VALUES ('Friday', 1.0, 'Breakfast', 3, 3);
+INSERT INTO PlanRecipe (day_week, portion, time_meal, plan_id, recipe_id) VALUES 
+('Friday', 1.0, 'Breakfast', 3, 3),
+('Monday', 1.0, 'Breakfast', 4, 4),
+('Tuesday', 1.0, 'Breakfast', 4, 3),
+('Wednesday', 1.0, 'Breakfast', 4, 4),
+('Thursday', 1.0, 'Breakfast', 4, 3),
+('Friday', 1.0, 'Breakfast', 4, 3),
+('Saturday', 1.0, 'Breakfast', 4, 4),
+('Sunday', 1.0, 'Breakfast', 4, 4),
+
+ ('Monday', 1.0, 'Lunch', 4, 1),
+ ('Tuesday', 1.0, 'Lunch', 4, 2),
+('Wednesday', 1.0, 'Lunch', 4, 5),
+('Thursday', 2, 'Lunch', 4, 6),
+ ('Friday', 0.5, 'Lunch', 4, 2),
+('Saturday', 1.0, 'Lunch', 4, 5),
+('Sunday', 1.0, 'Lunch', 4, 6),
+
+
+-- Insert Statement 1
+('Monday', 1.0, 'Dinner', 4, 5),
+
+-- Insert Statement 2
+('Tuesday', 1.0, 'Dinner', 4, 6),
+
+-- Insert Statement 3
+('Wednesday', 1.0, 'Dinner', 4, 1),
+
+-- Insert Statement 4
+('Thursday', 2, 'Dinner', 4, 2),
+
+-- Insert Statement 5
+('Friday', 0.5, 'Dinner', 4, 5),
+
+-- Insert Statement 6
+('Saturday', 1.0, 'Dinner', 4, 6),
+
+-- Insert Statement 7
+('Sunday', 1.0, 'Dinner', 4, 1);
+
