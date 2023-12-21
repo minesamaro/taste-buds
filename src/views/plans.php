@@ -19,7 +19,7 @@ function viewPlan($plan)
             <h5>Created by:
                 <?php 
                 $nutritionist = Person::getPersonById($plan->idNutritionist);?>
-                <a href="../pages/profile.php?id=<?php echo $plan->idNutritionist ?>">
+                <a href="../pages/profile.php?person_id=<?php echo $plan->idNutritionist ?>">
                     <?php echo $nutritionist->first_name . " " . $nutritionist->surname ?>
                 </a>
             </h5>
